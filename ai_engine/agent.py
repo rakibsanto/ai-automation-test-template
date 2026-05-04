@@ -194,8 +194,7 @@ def ai_call(system: str, user: str, max_tokens: int = 4096) -> str:
                 {"temperature": temp, "num_predict": effective},
             )
             if resp is None:
-                _CONFIRMED_UNAVAILABLE.add(model)
-                continue
+                continue  # timeout — try next model but don't permanently blacklist
             text = resp["message"]["content"].strip()
             if len(text) > 50:
                 log(f"  [AI] ✅ {model} → {len(text)} chars")
@@ -248,6 +247,11 @@ def ensure_imports(code: str) -> str:
     return _HDR + "\n".join(clean_lines).lstrip()
 
 # ── Template engine ───────────────────────────────────────────────────────────
+
+def _safe_doc(s: str) -> str:
+    """Strip characters that break Python triple-quoted docstrings."""
+    return s.replace("\\", "").replace('"""', "'''").replace("`", "'")
+
 
 def template_tests(spec: ParsedSpec, compiled: dict | None = None) -> str:
     """
@@ -309,6 +313,7 @@ def template_tests(spec: ParsedSpec, compiled: dict | None = None) -> str:
             f'    """Submit valid credentials — expect redirect."""',
             f'    # TEST_DATA: valid email + TEST_PASSWORD env var',
             f'    page.goto("{url}", {NAV})',
+            f'    page.locator("{email_sel}").wait_for(state="visible", timeout=10000)',
             f'    page.locator("{email_sel}").fill(f"qa_{{int(time.time())}}@mailinator.com")',
             f'    page.locator("{pass_sel}").fill(os.getenv("TEST_PASSWORD", "Test@1234!"))',
             f'    page.locator("{submit_sel}").click()',
@@ -336,6 +341,7 @@ def template_tests(spec: ParsedSpec, compiled: dict | None = None) -> str:
             f'    """Submit invalid email — expect validation error."""',
             f'    # TEST_DATA: invalid email: notanemail',
             f'    page.goto("{url}", {NAV})',
+            f'    page.locator("{email_sel}").wait_for(state="visible", timeout=10000)',
             f'    page.locator("{email_sel}").fill("notanemail")',
             f'    if page.locator("{pass_sel}").count() > 0:',
             f'        page.locator("{pass_sel}").fill("Test@1234!")',
@@ -362,7 +368,7 @@ def template_tests(spec: ParsedSpec, compiled: dict | None = None) -> str:
         fname = re.sub(r"\W+", "_", flow["name"].lower())[:40]
         lines += [
             f"def test_{slug}_flow_{i}_{fname}(page: Page):",
-            f'    """Flow {i}: {flow["name"]}"""',
+            f'    """Flow {i}: {_safe_doc(flow["name"])}"""',
             f'    # TEST_DATA: flow navigation',
             f'    page.goto("{url}", {NAV})',
             f'    assert "{spec.path.rstrip("/")}" in page.url or page.url.startswith(BASE_URL), \\',
@@ -372,8 +378,8 @@ def template_tests(spec: ParsedSpec, compiled: dict | None = None) -> str:
 
     # 6. Edge cases
     for ec in spec.edge_cases[:5]:
-        eid     = ec["id"].lower().replace("-", "_")
-        scenario = ec["scenario"][:80]
+        eid      = ec["id"].lower().replace("-", "_")
+        scenario = _safe_doc(ec["scenario"][:80])
         lines += [
             f"def test_{eid}(page: Page):",
             f'    """{ec["id"]}: {scenario}"""',
@@ -415,6 +421,7 @@ def template_tests(spec: ParsedSpec, compiled: dict | None = None) -> str:
             f'    """Basic XSS — script tag should not execute."""',
             f'    # TEST_DATA: XSS payload <script>alert(1)</script>',
             f'    page.goto("{url}", {NAV})',
+            f'    page.locator("{email_sel}").wait_for(state="visible", timeout=10000)',
             f'    page.locator("{email_sel}").fill("<script>alert(1)</script>")',
             f'    if page.locator("{submit_sel}").count() > 0:',
             f'        page.locator("{submit_sel}").click()',
@@ -554,7 +561,8 @@ def run_tests(test_file: Path) -> dict:
     log(f"  [COLLECT] Discovering tests in {test_file.name}...")
     _rc, cout = _stream([sys.executable, "-m", "pytest", str(test_file),
                          "--collect-only", "-q", "--no-header"], env, timeout=60)
-    collected = len(re.findall(r"<Function test_", cout))
+    m = re.search(r"(\d+) tests? collected", cout)
+    collected = int(m.group(1)) if m else len(re.findall(r"::test_\w+", cout))
     log(f"  [COLLECT] {collected} test function(s) found")
     if collected == 0:
         log("  [COLLECT] ⚠️  0 tests — file content:")
