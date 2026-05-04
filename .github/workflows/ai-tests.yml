@@ -55,10 +55,14 @@ jobs:
             sleep 2
           done
 
-      # ── 8. Pull model ────────────────────────────────────────────────────
-      - name: Pull AI model
+      # ── 8. Pull primary + backup models ──────────────────────────────────
+      - name: Pull AI models
         run: |
+          echo "=== Primary model ==="
           ollama pull qwen2.5-coder:1.5b
+          echo "=== Backup model (llama3.2:1b, 1.3GB) ==="
+          ollama pull llama3.2:1b || echo "Backup unavailable, primary only"
+          echo "=== Available models ==="
           ollama list
 
       # ── 9. Verify everything is installed ────────────────────────────────
@@ -68,7 +72,9 @@ jobs:
           python -c "import ollama; print('ollama OK')"
           python -c "import playwright; print('playwright OK')"
           python -c "import pytest; print('pytest OK')"
+          python -c "from ai_engine.spec_parser import parse; print('spec_parser OK')"
           python -c "from ai_engine.reporter import generate_report; print('reporter OK')"
+          python -c "from ai_engine.agent import template_tests; print('template_engine OK')"
         env:
           PYTHONPATH: ${{ github.workspace }}
 
