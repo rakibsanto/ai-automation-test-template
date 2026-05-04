@@ -1,15 +1,13 @@
-name: 🤖 Markopolo Autonomous AI Testing
+name: Markopolo Autonomous AI Testing
 
 on:
   push:
-    paths:
-      - "specs/**"       # re-test when any spec changes
-      - "ai_engine/**"   # re-test when the AI engine changes
+    branches: [main]        # trigger on every push to main
   pull_request:
     branches: [main]
   schedule:
-    - cron: "0 2 * * *"  # every night at 2 AM UTC
-  workflow_dispatch:      # manual trigger from GitHub UI
+    - cron: "0 2 * * *"    # nightly at 2 AM UTC
+  workflow_dispatch:         # manual run from GitHub UI → Actions tab → Run workflow
 
 jobs:
   autonomous-ai-test:
@@ -34,22 +32,21 @@ jobs:
         run: pip install -r requirements.txt
 
       # ── 4. Playwright browser ─────────────────────────────────────────────
-      - name: Install Playwright + Chromium
+      - name: Install Playwright and Chromium
         run: playwright install chromium --with-deps
 
-      # ── 5. Install Ollama (local AI, no API key needed) ──────────────────
+      # ── 5. Install Ollama ─────────────────────────────────────────────────
       - name: Install Ollama
         run: curl -fsSL https://ollama.ai/install.sh | sh
 
-      # ── 6. Cache AI model (avoid re-downloading 1GB every run) ───────────
+      # ── 6. Cache AI model to avoid re-downloading 1GB every run ──────────
       - name: Cache Ollama model
-        id: cache-ollama-model
         uses: actions/cache@v4
         with:
           path: ~/.ollama/models
-          key: ollama-model-qwen2.5-coder-1.5b-v1
+          key: ollama-qwen2.5-coder-1.5b-v1
 
-      # ── 7. Start Ollama background service ────────────────────────────────
+      # ── 7. Start Ollama service ───────────────────────────────────────────
       - name: Start Ollama service
         run: |
           ollama serve &
@@ -62,17 +59,15 @@ jobs:
             sleep 2
           done
 
-      # ── 8. Pull AI model (uses cache if available) ────────────────────────
-      - name: Pull AI model — qwen2.5-coder:1.5b
+      # ── 8. Pull the AI model ──────────────────────────────────────────────
+      - name: Pull AI model
         run: |
-          echo "Pulling qwen2.5-coder:1.5b (fast code generation, fits in 7GB RAM)..."
           ollama pull qwen2.5-coder:1.5b
-          echo "Model ready:"
           ollama list
 
-      # ── 9. Create output directories ──────────────────────────────────────
+      # ── 9. Prepare output directories ─────────────────────────────────────
       - name: Prepare directories
-        run: mkdir -p tests reports
+        run: mkdir -p tests reports reports/screenshots
 
       # ── 10. Run the autonomous AI test agent ──────────────────────────────
       - name: Run AI Test Agent
@@ -80,9 +75,10 @@ jobs:
           BASE_URL: https://beta-stg.markopolo.ai
           AI_MODEL: qwen2.5-coder:1.5b
           TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          PYTHONPATH: ${{ github.workspace }}
         run: python ai_engine/agent.py
 
-      # ── 11. Upload the HTML bug report (main deliverable) ────────────────
+      # ── 11. Upload HTML bug report ────────────────────────────────────────
       - name: Upload HTML bug report
         uses: actions/upload-artifact@v4
         if: always()
@@ -91,8 +87,8 @@ jobs:
           path: reports/bug-report.html
           retention-days: 30
 
-      # ── 12. Upload screenshots / POC evidence ─────────────────────────────
-      - name: Upload screenshots (POC evidence)
+      # ── 12. Upload screenshots (POC evidence) ─────────────────────────────
+      - name: Upload screenshots
         uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -100,8 +96,8 @@ jobs:
           path: reports/screenshots/
           retention-days: 30
 
-      # ── 13. Upload all other reports ──────────────────────────────────────
-      - name: Upload full report bundle
+      # ── 13. Upload full reports bundle ────────────────────────────────────
+      - name: Upload full reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -109,8 +105,8 @@ jobs:
           path: reports/
           retention-days: 30
 
-      # ── 14. Upload AI-generated test code ─────────────────────────────────
-      - name: Upload generated test code
+      # ── 14. Upload AI-generated test files ───────────────────────────────
+      - name: Upload generated tests
         uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -118,7 +114,7 @@ jobs:
           path: tests/
           retention-days: 30
 
-      # ── 15. Write GitHub Actions job summary ──────────────────────────────
+      # ── 15. Write job summary ─────────────────────────────────────────────
       - name: Write job summary
         if: always()
         run: |
@@ -126,7 +122,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Field | Value |" >> $GITHUB_STEP_SUMMARY
           echo "|-------|-------|" >> $GITHUB_STEP_SUMMARY
-          echo "| AI Model | qwen2.5-coder:1.5b (local Ollama — no API key) |" >> $GITHUB_STEP_SUMMARY
+          echo "| AI Model | qwen2.5-coder:1.5b (Ollama — no API key) |" >> $GITHUB_STEP_SUMMARY
           echo "| Target | https://beta-stg.markopolo.ai |" >> $GITHUB_STEP_SUMMARY
           echo "| Trigger | ${{ github.event_name }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Run | #${{ github.run_number }} |" >> $GITHUB_STEP_SUMMARY
@@ -138,8 +134,8 @@ jobs:
           print('| Passed | ' + str(d['total_passed']) + ' |')
           print('| Failed | ' + str(d['total_failed']) + ' |')
           print('| Total Tests | ' + str(d['total_tests']) + ' |')
-          print('| Bug Tickets | ' + str(d.get('total_bugs', '?')) + ' |')
+          print('| Bug Tickets | ' + str(d.get('total_bugs', 0)) + ' |')
           " >> $GITHUB_STEP_SUMMARY
           fi
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Download \`bug-report-${{ github.run_number }}\` from Artifacts to see the full HTML report with screenshots.**" >> $GITHUB_STEP_SUMMARY
+          echo "Download **bug-report-${{ github.run_number }}** from Artifacts for the full HTML report with screenshots." >> $GITHUB_STEP_SUMMARY

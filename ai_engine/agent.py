@@ -18,7 +18,12 @@ from pathlib import Path
 from datetime import datetime
 
 import ollama
-from ai_engine.reporter import generate_report
+
+# Support both `python ai_engine/agent.py` and `python -m ai_engine.agent`
+try:
+    from ai_engine.reporter import generate_report
+except ImportError:
+    from reporter import generate_report
 
 # ── Config ────────────────────────────────────────────────────────────────────
 BASE_URL     = os.getenv("BASE_URL",  "https://beta-stg.markopolo.ai")
