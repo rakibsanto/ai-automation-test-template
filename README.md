@@ -1,6 +1,6 @@
 # Markopolo Autonomous AI Testing
 
-> **Intent-based autonomous QA system** — describe the system in Markdown, let AI handle everything else.
+> **Intent-based autonomous QA system** — describe your app in Markdown, AI handles everything else.
 
 **Zero API keys. Zero hardcoded scripts. Zero manual maintenance. 100% free and open source.**
 
@@ -12,7 +12,7 @@ A self-writing, self-healing QA automation system that:
 
 1. **Reads** your Markdown spec files (written by a human QA)
 2. **Compiles** them into deterministic JSON (no AI guessing structure)
-3. **Generates** Playwright tests across all 15 testing types
+3. **Generates** Playwright tests across all **22 testing types**
 4. **Validates** the generated code before execution (AST gate)
 5. **Runs** tests against your staging environment
 6. **Heals** failures automatically (3 rounds of AI self-fix)
@@ -20,7 +20,7 @@ A self-writing, self-healing QA automation system that:
 8. **Learns** from failures via persistent memory between runs
 
 ```
-specs/*.md → Spec Compiler → JSON → AI → 15 Test Types → Validate → Execute
+specs/*.md → Spec Compiler → JSON → AI → 22 Test Types → Validate → Execute
            → Self-Heal → Bug Tickets (with POC) → Gap Analysis → HTML Report
 ```
 
@@ -28,93 +28,217 @@ Push a change → GitHub Actions runs the full pipeline automatically.
 
 ---
 
-## v2 Architecture (Production-Grade)
+## Architecture (v5)
 
 ```
-login.md
+your-page.md
    ↓
-spec_compiler.py  ← converts MD to structured JSON (no AI interpretation)
+spec_compiler.py  ← converts MD to structured JSON (deterministic, no AI)
    ↓
-login.spec.json   ← deterministic selector map + flows + edge cases
+your-page.spec.json  ← selector map + flows + edge cases + test data
    ↓
-test_generator.py ← generates all 15 test types (AI + template fallback)
+test_generator.py  ← 22 test types, real test data injected from spec
    ↓
-test_validator.py ← AST gate (blocks syntax errors, missing assertions, dangerous code)
+test_validator.py  ← AST gate (blocks syntax errors, missing assertions)
    ↓
-pytest execution  ← with conftest.py evidence capture (network + console + performance)
+pytest execution   ← conftest.py captures network + console + performance
    ↓
-memory.py         ← records failures, persists selector fixes between runs
+memory.py          ← records failures, persists selector fixes between runs
    ↓
-self-healing loop ← AI rewrites failing tests (max 3 rounds)
+self-heal loop     ← AI rewrites failing tests (max 3 rounds)
    ↓
-bug_builder.py    ← per-failure AI bug tickets with POC screenshots
+bug_builder.py     ← per-failure AI bug tickets with POC screenshots
    ↓
-gap_checker.py    ← coverage gap analysis against spec requirements
+gap_checker.py     ← coverage gap analysis against spec requirements
    ↓
-reporter.py       ← full HTML report (dark theme, screenshots, network logs)
+reporter.py        ← full HTML report (screenshots, network logs, evidence)
+   ↓
+generate_ci_summary.py  ← GitHub Step Summary: test data per type, pass/fail per test
 ```
 
-### Why This Architecture?
+### Old vs New
 
-| Old Approach (v1)               | This Approach (v2)                          |
-|---------------------------------|---------------------------------------------|
-| AI interprets raw Markdown      | Compiler extracts structure first           |
-| AI guesses selectors            | Selector map built from UI element table    |
-| Same spec → different tests     | Same spec → same JSON → deterministic tests |
-| One giant AI prompt             | 15 focused prompts (no token overflow)      |
-| No validation before execution  | AST validator blocks broken code            |
-| Starts fresh every run          | Memory persists fixes between runs          |
+| Old Approach (v1)               | This Approach (v5)                              |
+|---------------------------------|-------------------------------------------------|
+| AI interprets raw Markdown      | Compiler extracts structure first               |
+| AI guesses selectors            | Selector map built from UI element table        |
+| Same spec → different tests     | Same spec → same JSON → deterministic tests     |
+| One giant AI prompt             | 22 focused prompts, real test data injected     |
+| No validation before execution  | AST validator blocks broken code                |
+| Starts fresh every run          | Memory persists fixes between runs              |
+| 5-model fallback chain          | 14-model fallback chain (all free/open-source)  |
+| `assert page.url` only          | Real fill + click + assert using compiled selectors |
+| CI shows pass/fail only         | CI shows per-type test data, failure messages   |
 
 ---
 
-## AI Stack (all free, all local)
+## Quick Start (One Command)
 
-| Tool | Role | Cost |
-|------|------|------|
-| **Ollama** | Local AI inference (no cloud, no API key) | Free |
-| **qwen2.5-coder:1.5b** | Primary model — generates test code | Free |
-| **llama3.2:1b** | Fallback model 1 | Free |
-| **phi3.5** | Fallback model 2 | Free |
-| **qwen2.5:0.5b** | Fallback model 3 (tiny last resort) | Free |
-| **Playwright** | Browser automation | Free / Open source |
-| **pytest** | Test execution framework | Free / Open source |
-| **GitHub Actions** | CI/CD runner (2000 min/month free) | Free |
+```bash
+git clone https://github.com/mejbaur-markopolo/Markopolo-Automation-Testing.git
+cd Markopolo-Automation-Testing
+bash setup.sh
+```
 
-5-model fallback chain. If the primary model fails or runs out of tokens, the next model takes over automatically. If ALL models fail, a template engine generates valid (but simpler) tests.
+`setup.sh` installs Ollama, pulls models interactively, installs Python deps, verifies all modules, and creates a `.env` file.
+
+Then run:
+
+```bash
+source .env
+python ai_engine/agent.py
+```
 
 ---
 
-## 15 Test Types Covered
+## AI Stack (all free, all local, no API keys)
 
-| # | Type | What it tests |
+### 14-Model Fallback Chain
+
+If the primary model fails, the next is tried automatically. No intervention needed.
+
+| # | Model | Size | Notes |
+|---|-------|------|-------|
+| 1 | `qwen2.5-coder:7b` | 4.7 GB | Best code quality — use locally |
+| 2 | `deepseek-coder:6.7b` | 3.8 GB | Excellent code model |
+| 3 | `codellama:7b` | 3.8 GB | Meta code model |
+| 4 | `mistral:7b` | 4.1 GB | Strong general model |
+| 5 | `phi4:3.8b` | 2.3 GB | Microsoft Phi-4 |
+| 6 | `llama3.2:3b` | 2.0 GB | Meta 3B |
+| 7 | `phi3.5` | 2.2 GB | Microsoft Phi-3.5 |
+| 8 | `gemma2:2b` | 1.6 GB | Google Gemma2 |
+| 9 | `llama3.2:1b` | 1.3 GB | Meta 1B |
+| 10 | `qwen2.5-coder:1.5b` | 986 MB | **Default CI model** |
+| 11 | `tinyllama:1.1b` | 637 MB | Ultra-tiny fallback |
+| 12 | `qwen2.5:0.5b` | 395 MB | Smallest possible fallback |
+
+> Set a different primary with `AI_MODEL=qwen2.5-coder:7b python ai_engine/agent.py`
+
+**Template fallback**: if every AI model fails, a deterministic template engine generates valid tests using the compiled spec's CSS selectors — tests always run, even with zero AI.
+
+---
+
+## 22 Test Types
+
+| # | Type | What It Tests |
 |---|------|---------------|
-| 1 | **Functional** | Every user flow in the spec |
-| 2 | **Validation** | Form field rules (valid/invalid inputs) |
-| 3 | **Negative** | Wrong credentials, empty fields, rejected inputs |
-| 4 | **Boundary** | Min/max length, 255 chars, overflow, empty strings |
-| 5 | **Security** | XSS payloads, SQL injection (OWASP standard vectors) |
-| 6 | **API/Network** | Request method, response status, response body |
-| 7 | **Accessibility** | axe-core violations, ARIA labels, keyboard nav |
-| 8 | **Responsive** | 375px mobile, 768px tablet, 1280px desktop |
-| 9 | **Navigation** | Internal links (forgot password, sign up, back) |
-| 10 | **Session/Auth** | Token persistence, redirect when authenticated |
-| 11 | **Performance** | Page load < 3s, DOMContentLoaded, large resources |
-| 12 | **Console Errors** | No JS errors on page load or form interaction |
-| 13 | **Error States** | No stack traces exposed, network error handling |
-| 14 | **Visual/Layout** | Elements within viewport, title set, favicon loads |
-| 15 | **Cross-browser** | Smoke tests tagged for Chromium/Firefox/WebKit |
+| 1 | **Smoke** | 4 critical-path checks in under 60s each |
+| 2 | **Functional** | Every user flow defined in the spec |
+| 3 | **Validation** | Form field rules (valid/invalid inputs + error messages) |
+| 4 | **Negative** | Wrong credentials, rejected inputs, unexpected states |
+| 5 | **Boundary** | Min/max length, 255 chars, overflow, empty strings |
+| 6 | **Data Driven** | `@pytest.mark.parametrize` with spec test data table |
+| 7 | **Deep Form** | Tab order, paste, password masking, autocomplete, required marks |
+| 8 | **API/Network** | Request method, response status, response body structure |
+| 9 | **Accessibility** | axe-core violations, ARIA labels, keyboard navigation |
+| 10 | **Responsive** | 6 viewports: 375px → 1920px (parametrized) |
+| 11 | **Navigation** | Internal links (forgot password, sign up, back, etc.) |
+| 12 | **Session/Auth** | Token persistence, redirect when authenticated |
+| 13 | **Performance** | Page load < 3s, DOMContentLoaded, Web Vitals |
+| 14 | **Console Errors** | No JS errors on load or form interaction |
+| 15 | **Error States** | No stack traces exposed, network error handling |
+| 16 | **Visual/Layout** | Elements within viewport, title set, favicon loads |
+| 17 | **Cross-browser** | Smoke tests tagged for Chromium / Firefox / WebKit |
+| 18 | **i18n** | Arabic RTL, Chinese, emoji, accented chars, zero-width |
+| 19 | **Rate Limiting** | Rapid submission, brute force, double-click |
+| 20 | **Cookie/Storage** | localStorage no passwords, session cookies, storage isolation |
+| 21 | **Security** | 16 XSS + 13 SQLi OWASP vectors via `@pytest.mark.parametrize` |
+
+Each type generates **4–8 test functions** with:
+- Real test data from your spec injected into prompts
+- `# TEST_DATA: <value>` comments for CI traceability
+- Assertion messages that show actual vs expected values
 
 ---
 
-## Local Setup (Step by Step)
+## Adapt to ANY Project
+
+This system works with any web application. To test a different project:
+
+### Option A — Use the template (fastest)
+
+```bash
+cp specs/TEMPLATE.md specs/your-page.md
+# Edit specs/your-page.md — fill in URL, selectors, flows, validations
+python ai_engine/agent.py
+```
+
+`specs/TEMPLATE.md` is a fully documented template with examples for every section.
+
+### Option B — Write from scratch
+
+Create `specs/your-page.md` with these sections:
+
+```markdown
+# Page Name: Checkout
+
+## URL
+/checkout
+
+## UI Elements
+| Element          | Selector / Hint              | Notes     |
+|------------------|------------------------------|-----------|
+| Email field      | input[type='email']          | Required  |
+| Card number      | input[name='cardNumber']     | Required  |
+| Pay button       | button[type='submit']        | Text: Pay |
+
+## Requirements
+- REQ-001: User can complete checkout with valid card
+- REQ-002: Invalid card shows error message
+
+## User Flows
+### Flow 1: Successful Checkout
+1. Navigate to /checkout
+2. Fill in email
+3. Fill in card details
+4. Click Pay
+5. Expect redirect to /order-confirmation
+
+## Validation Rules
+| Field  | Rule              | Error Message              |
+|--------|-------------------|----------------------------|
+| Email  | Valid email format | Please enter a valid email |
+| Card   | 16 digits          | Invalid card number        |
+
+## Edge Cases
+| ID    | Scenario                      | Expected                  |
+|-------|-------------------------------|---------------------------|
+| EC-001 | Submit with empty card       | Show validation error     |
+| EC-002 | SQL injection in email field | Error, no SQL execution   |
+
+## Test Data
+| Category      | Value                    |
+|---------------|--------------------------|
+| Valid email   | test@mailinator.com      |
+| Valid card    | 4111111111111111         |
+| Invalid card  | 1234                     |
+```
+
+### Step 3: Run
+
+```bash
+BASE_URL=https://your-staging.com python ai_engine/agent.py
+```
+
+### Step 4: Push to CI
+
+```bash
+git add specs/your-page.md
+git commit -m "Add checkout spec"
+git push
+```
+
+GitHub Actions runs all 22 test types automatically.
+
+---
+
+## Manual Setup (step by step)
 
 ### Prerequisites
 
-- macOS or Linux
-- Python 3.10+
-- Git
+- macOS or Linux, Python 3.10+
 
-### 1. Clone the repo
+### 1. Clone
 
 ```bash
 git clone https://github.com/mejbaur-markopolo/Markopolo-Automation-Testing.git
@@ -125,167 +249,51 @@ cd Markopolo-Automation-Testing
 
 ```bash
 # macOS
-brew install ollama
-brew services start ollama   # run as background service
+brew install ollama && brew services start ollama
 
 # Linux
-curl -fsSL https://ollama.ai/install.sh | sh
-ollama serve &
+curl -fsSL https://ollama.ai/install.sh | sh && ollama serve &
 ```
 
-### 3. Pull AI models
+### 3. Pull models
 
 ```bash
-# Minimum (CI-grade, 1GB):
+# Minimum — CI grade (986 MB):
 ollama pull qwen2.5-coder:1.5b
 
-# Recommended for local (better quality, 4GB):
+# Recommended for local — best quality (4.7 GB):
 ollama pull qwen2.5-coder:7b
 
-# Backup models (pulled automatically in CI):
+# Optional extra backups:
 ollama pull llama3.2:1b
+ollama pull phi3.5
 ```
 
-### 4. Install Python dependencies
+### 4. Install Python deps
 
 ```bash
-# macOS with Homebrew Python
-pip3 install -r requirements.txt
-playwright install chromium
-
-# Or with pip
 pip install -r requirements.txt
 playwright install chromium
 ```
 
-### 5. Run the agent
+### 5. Run
 
 ```bash
-# Basic run (uses default staging URL)
+# Default staging URL
 python ai_engine/agent.py
 
-# Custom URL
-BASE_URL=https://your-staging-url.com python ai_engine/agent.py
+# Custom URL + better model
+BASE_URL=https://your-app.com AI_MODEL=qwen2.5-coder:7b python ai_engine/agent.py
 
-# Better AI quality locally
-AI_MODEL=qwen2.5-coder:7b python ai_engine/agent.py
-
-# With test password for login tests
+# With test password
 TEST_PASSWORD=YourPass python ai_engine/agent.py
 ```
 
-### 6. View the report
+### 6. View report
 
 ```bash
 open reports/bug-report.html
 ```
-
----
-
-## Adapt to ANY Project (Just Change the MD Files)
-
-This system is designed to work with any web application. To test a different project:
-
-### Step 1: Delete the existing specs
-
-```bash
-rm specs/*.md
-```
-
-### Step 2: Create your own spec file
-
-Use this structure for each page:
-
-```markdown
-# Page: Login
-
-**URL:** `https://your-app.com/login`
-**Priority:** P0
-
-## UI Elements
-
-| Element | Type / Hint | Description |
-|---------|-------------|-------------|
-| Email input | email, type="email" | Primary email field |
-| Password input | password, type="password" | Password field |
-| Login button | submit, CTA button | Primary submit button |
-
-## Requirements
-
-| ID | Requirement |
-|----|-------------|
-| REQ-L-01 | User can log in with valid credentials |
-| REQ-L-02 | Invalid credentials show error message |
-
-## User Flows
-
-### Flow 1 — Happy Path Login
-1. Navigate to /login
-2. Enter valid email
-3. Enter valid password
-4. Click login button
-5. Redirects to dashboard
-
-### Flow 2 — Invalid Login
-1. Navigate to /login
-2. Enter invalid email
-3. Enter wrong password
-4. Click login button
-5. Error message displayed
-
-## Validation Rules
-
-- Email must be valid format
-- Password minimum 8 characters
-- Both fields required
-
-## Edge Cases
-
-| ID | Scenario | Expected |
-|----|----------|----------|
-| EC-L-01 | SQL injection in email | Login fails safely |
-| EC-L-02 | XSS in password field | Sanitized, no alert |
-
-## API Contract
-
-POST /api/auth/login
-- 200 on success
-- 401 on invalid credentials
-
-## Test Data
-
-### Valid
-| Field | Value |
-|-------|-------|
-| email | testuser@example.com |
-| password | Test@1234! |
-
-### Invalid
-| Field | Value |
-|-------|-------|
-| email | notanemail |
-| password | 123 |
-```
-
-### Step 3: Change the BASE_URL
-
-```bash
-# In the run command:
-BASE_URL=https://your-staging.com python ai_engine/agent.py
-
-# Or set it permanently in .env:
-echo "BASE_URL=https://your-staging.com" >> .env
-```
-
-### Step 4: Push and watch it run
-
-```bash
-git add specs/
-git commit -m "Add specs for my project"
-git push
-```
-
-GitHub Actions picks it up automatically.
 
 ---
 
@@ -298,79 +306,146 @@ Markopolo-Automation-Testing/
 │   ├── login.md                  ← Login page spec
 │   ├── reset-password.md         ← Password reset spec
 │   ├── signup.md                 ← Registration spec
+│   ├── TEMPLATE.md               ← Copy this to add new pages
 │   └── *.spec.json               ← Auto-compiled (do not edit)
 │
-├── ai_engine/                    ← Core system (no need to edit)
-│   ├── agent.py                  ← Main orchestrator (ReAct loop)
+├── ai_engine/                    ← Core system
+│   ├── agent.py                  ← Main orchestrator + 14-model chain
 │   ├── spec_parser.py            ← Parses MD into ParsedSpec dataclass
-│   ├── spec_compiler.py          ← MD → structured JSON (v2 deterministic layer)
-│   ├── test_generator.py         ← Generates all 15 test types
-│   ├── test_validator.py         ← AST validation gate
-│   ├── evidence.py               ← Loads network/console/performance evidence
+│   ├── spec_compiler.py          ← MD → structured JSON (deterministic)
+│   ├── test_generator.py         ← 22 test types with real test data
+│   ├── test_validator.py         ← AST gate (syntax + assertions)
+│   ├── evidence.py               ← Network/console/performance capture
 │   ├── bug_builder.py            ← AI bug ticket writer
 │   ├── gap_checker.py            ← Coverage gap analysis
-│   ├── memory.py                 ← Persistent memory (learns between runs)
+│   ├── memory.py                 ← Persistent learning between runs
 │   └── reporter.py               ← HTML report generator
 │
-├── payloads/                     ← Security test payloads (OWASP standard)
-│   ├── xss.txt                   ← XSS vectors
-│   ├── sqli.txt                  ← SQL injection vectors
-│   ├── boundary.txt              ← Boundary test strings
-│   └── __init__.py               ← Payload loader
+├── scripts/
+│   └── generate_ci_summary.py   ← Writes detailed GitHub Step Summary
+│                                    (test data per type, pass/fail per test)
 │
-├── tests/                        ← AI-generated (runtime, gitignored)
-├── reports/                      ← Results (runtime, gitignored)
-│   ├── bug-report.html           ← Main HTML report
+├── payloads/                     ← OWASP security vectors
+│   ├── xss.txt                   ← 16 XSS vectors
+│   ├── sqli.txt                  ← 13 SQL injection vectors
+│   ├── boundary.txt              ← 9 boundary strings
+│   └── __init__.py
+│
+├── tests/                        ← AI-generated tests (runtime)
+├── reports/                      ← Test results (runtime)
+│   ├── bug-report.html           ← Main HTML report (dark theme)
 │   ├── screenshots/              ← Failure screenshots (POC)
 │   ├── evidence/                 ← Per-test network/console/perf data
-│   ├── gaps_*.md                 ← Coverage gap reports
-│   └── summary.json              ← Machine-readable summary
+│   ├── test_data_log.json        ← What test data AI used per type
+│   ├── ci_summary.md             ← GitHub Step Summary source
+│   ├── gaps_*.txt                ← Coverage gap reports
+│   └── summary.json              ← Machine-readable totals
 │
+├── setup.sh                      ← One-command setup (macOS/Linux)
 ├── conftest.py                   ← pytest config + evidence capture
 ├── pytest.ini                    ← pytest settings
-├── requirements.txt              ← Python dependencies
-├── memory_store.json             ← Persistent memory (learns from failures)
-│
+├── requirements.txt
 └── .github/workflows/
-    └── ai-tests.yml              ← Full CI/CD pipeline
+    └── ai-tests.yml              ← Full CI/CD pipeline (19 steps)
 ```
 
 ---
 
 ## CI/CD
 
-Every push to `main` triggers the full pipeline:
+Every push to `main` triggers the full pipeline automatically.
 
 ```
-checkout → install deps → install Ollama → cache models → pull models
-→ verify all modules → compile specs → run AI agent → upload artifacts
+checkout → python 3.12 → deps → playwright → ollama → cache models
+→ pull 4 models → verify 11 modules → compile specs → run AI agent
+→ generate CI summary → upload 5 artifacts
 ```
 
-### Artifacts produced per run
+### Artifacts per run
 
 | Artifact | Contents |
 |----------|----------|
 | `bug-report-N` | Self-contained HTML report with screenshots |
 | `screenshots-N` | PNG failure screenshots (POC evidence) |
 | `full-reports-N` | All reports + evidence + JSON data |
-| `ai-generated-tests-N` | The generated Playwright test files |
+| `ai-generated-tests-N` | The 22-type generated Playwright test files |
 | `compiled-specs-N` | Compiled JSON spec files |
 
-### Manual trigger
+### GitHub Step Summary (per run)
+
+The Actions summary tab shows:
+- AI model used + full model chain
+- Per-type breakdown with collapsible test tables
+- Test data used for each test case (`# TEST_DATA:` annotations)
+- Pass/fail status per test function
+- Failure messages inline (no digging into logs needed)
+- Coverage gaps detected
+- Links to all artifacts
+
+### Manual trigger with custom settings
 
 Go to: **Actions → Markopolo Autonomous AI Testing → Run workflow**
 
+You can override:
+- **AI model** — e.g. `qwen2.5-coder:7b` for better quality
+- **Target URL** — test against a different environment
+
+### CI model caching
+
+Models are cached between runs using `actions/cache@v4`. After the first run (~15 min), subsequent runs skip the download and start in ~2 min.
+
 ---
 
-## Model Recommendations
+## How It Works: Fallback Chain
 
-| Model | RAM | Use Case | Command |
-|-------|-----|----------|---------|
-| `qwen2.5-coder:1.5b` | 1GB | GitHub Actions CI | Default |
-| `qwen2.5-coder:7b` | 4GB | Local development | `AI_MODEL=qwen2.5-coder:7b` |
-| `llama3.2:1b` | 1.3GB | Fast fallback | Auto |
-| `phi3.5` | 2.2GB | General reasoning fallback | Auto |
-| `deepseek-coder-v2:16b` | 10GB | Best quality locally | `AI_MODEL=deepseek-coder-v2:16b` |
+```
+AI call attempt
+   ↓
+qwen2.5-coder:1.5b (primary)    ← try
+   ↓ fails
+llama3.2:1b                     ← try
+   ↓ fails
+phi3.5                          ← try
+   ↓ fails
+qwen2.5:0.5b                    ← try
+   ↓ all fail
+Template engine (zero-AI)       ← always works
+   Uses compiled spec selectors:
+   - fills input[type='email']
+   - fills input[type='password']
+   - clicks button[type='submit']
+   - asserts no 500/404, console errors, load time < 5s
+```
+
+The template engine is not a "dummy" — it uses the CSS selectors compiled from your spec to generate tests that actually interact with your page's form fields.
+
+---
+
+## Spec Format Reference
+
+```markdown
+## UI Elements       ← table: Element | Selector/Hint | Notes
+## Requirements      ← bullet list or table: REQ-X-NN description
+## User Flows        ← ### Flow N — Name, then numbered steps
+## Validation Rules  ← table: Field | Rule | Error Message
+## Edge Cases        ← table: EC-X-NN | Scenario | Expected
+## API Contract      ← METHOD /api/endpoint table
+## Test Data         ← table: Category | Value
+```
+
+The Spec Compiler reads these headings and builds the JSON deterministically. AI never guesses the structure — it only generates test code once the structure is already known.
+
+---
+
+## Security Payloads
+
+OWASP-standard vectors for authorized security testing:
+
+- `payloads/xss.txt` — 16 XSS vectors (script tags, event handlers, data URIs, etc.)
+- `payloads/sqli.txt` — 13 SQL injection vectors (UNION, OR 1=1, blind, etc.)
+- `payloads/boundary.txt` — 9 boundary strings (empty, max-length, null, whitespace)
+
+Tests verify your app handles malicious input safely — they assert the payload is **not executed**, not that it causes an error. Use only on applications you own or have permission to test.
 
 ---
 
@@ -388,11 +463,44 @@ ollama serve &
 
 ### "0 tests collected"
 
-The generated file might be in `tests/`. Check:
+Check the generated file directly:
 
 ```bash
-python ai_engine/test_validator.py tests/
 cat tests/test_login.py
+python ai_engine/test_validator.py tests/
+```
+
+If the file is empty, all AI models failed and the template engine also failed (rare). Check Ollama is running: `ollama list`.
+
+### "No module named 'ollama'"
+
+```bash
+pip install ollama
+# or
+pip3 install ollama --break-system-packages
+```
+
+### AI model not downloaded (404 errors in logs)
+
+```bash
+ollama pull qwen2.5-coder:1.5b
+ollama list   # verify it shows
+```
+
+After 2 consecutive 404s the agent fast-fails to the template engine to avoid log spam.
+
+### Tests pass but all use `assert page.url`
+
+This means the template engine ran (AI unavailable). Pull a model:
+
+```bash
+ollama pull qwen2.5-coder:1.5b
+```
+
+Or use a larger model for better quality:
+
+```bash
+AI_MODEL=qwen2.5-coder:7b python ai_engine/agent.py
 ```
 
 ### "pip not found" on macOS
@@ -401,54 +509,12 @@ cat tests/test_login.py
 pip3 install -r requirements.txt
 ```
 
-### Tests pass but report is empty
-
-Check that `reports/` directory exists:
+### Reports directory missing
 
 ```bash
 mkdir -p reports reports/screenshots reports/evidence
 ```
 
-### AI keeps producing syntax errors
-
-The template engine handles this. If you see "using template fallback", it means all AI models failed. Try a larger model:
-
-```bash
-AI_MODEL=qwen2.5-coder:7b python ai_engine/agent.py
-```
-
 ---
 
-## Spec File Format Reference
-
-Your Markdown spec must use these exact section headings:
-
-```markdown
-## UI Elements       ← table of form fields and elements
-## Requirements      ← REQ-X-NN: requirement text
-## User Flows        ← ### Flow N — Name, then numbered steps
-## Validation        ← bullet list of validation rules
-## Edge Cases        ← table with EC-X-NN | scenario | expected
-## API Contract      ← METHOD /api/endpoint
-## Test Data         ← ### Valid / ### Invalid tables
-```
-
-The Spec Compiler reads these headings to build the JSON. Any heading not listed above is ignored.
-
----
-
-## Security Payloads
-
-This system uses **OWASP standard security vectors** for authorized testing:
-
-- `payloads/xss.txt` — XSS injection attempts
-- `payloads/sqli.txt` — SQL injection attempts
-- `payloads/boundary.txt` — Boundary value strings
-
-These test that your application handles malicious input safely — they verify that your app **does not** execute the payloads, showing logs them, shows an error, or ignores them gracefully.
-
-**Use only on applications you own or have permission to test.**
-
----
-
-*Built with Ollama + Playwright + pytest + GitHub Actions. Zero cloud cost.*
+*Built with Ollama + Playwright + pytest + GitHub Actions — zero cloud cost, zero API keys, fully open source.*
