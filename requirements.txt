@@ -6,3 +6,9 @@ pytest-json-report>=1.5.0
 pytest-html>=4.1.0
 pytest-timeout>=2.3.1
 Jinja2>=3.1.4
+
+# browser-use — autonomous browser AI agent (local Ollama, no API key)
+# Enables: selector discovery, exploratory testing, flow validation
+# Activate: BROWSER_USE_ENABLED=true BROWSER_USE_MODEL=qwen2.5:7b
+browser-use>=0.1.0
+langchain-ollama>=0.2.0

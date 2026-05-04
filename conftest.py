@@ -38,6 +38,22 @@ def browser_type_launch_args(browser_type_launch_args):
     }
 
 
+@pytest.fixture(autouse=True)
+def _set_page_timeouts(request):
+    """
+    Set a 15-second default timeout on every page operation.
+    Prevents tests from hanging indefinitely on slow/broken staging pages.
+    Without this, page.wait_for_load_state("networkidle") can block forever.
+    """
+    if "page" not in request.fixturenames:
+        yield
+        return
+    page = request.getfixturevalue("page")
+    page.set_default_timeout(15000)           # 15s for all page operations
+    page.set_default_navigation_timeout(15000) # 15s for goto/navigation
+    yield
+
+
 # ── Per-test evidence capture ─────────────────────────────────────────────────
 
 @pytest.fixture(autouse=True)

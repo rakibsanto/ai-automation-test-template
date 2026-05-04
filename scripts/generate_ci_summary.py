@@ -282,20 +282,15 @@ def generate_summary() -> str:
 def main():
     summary_text = generate_summary()
 
-    # Write to GitHub Step Summary if available
-    step_summary = os.getenv("GITHUB_STEP_SUMMARY")
-    if step_summary:
-        Path(step_summary).open("a", encoding="utf-8").write(summary_text + "\n")
-        print(f"[CI SUMMARY] Written to $GITHUB_STEP_SUMMARY ({len(summary_text)} chars)")
-    else:
-        # Local run — print to stdout
-        print(summary_text)
-
-    # Also save locally for debugging
+    # Always save to ci_summary.md — the workflow reads this and appends to GITHUB_STEP_SUMMARY
     out_path = Path("reports") / "ci_summary.md"
     out_path.parent.mkdir(exist_ok=True)
     out_path.write_text(summary_text, encoding="utf-8")
-    print(f"[CI SUMMARY] Saved to {out_path}", file=sys.stderr)
+    print(f"[CI SUMMARY] Saved to {out_path} ({len(summary_text)} chars)")
+
+    # Local run (no CI env) — print to stdout so user can see it
+    if not os.getenv("GITHUB_STEP_SUMMARY") and not os.getenv("CI"):
+        print(summary_text)
 
 
 if __name__ == "__main__":

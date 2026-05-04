@@ -18,10 +18,13 @@ A self-writing, self-healing QA automation system that:
 6. **Heals** failures automatically (3 rounds of AI self-fix)
 7. **Reports** a professional HTML bug report with POC screenshots
 8. **Learns** from failures via persistent memory between runs
+9. **Browses** autonomously via [browser-use](https://github.com/browser-use/browser-use) + local Ollama (no API key)
 
 ```
 specs/*.md → Spec Compiler → JSON → AI → 22 Test Types → Validate → Execute
            → Self-Heal → Bug Tickets (with POC) → Gap Analysis → HTML Report
+           ↑
+       browser-use (optional) — autonomously discovers selectors + explores pages
 ```
 
 Push a change → GitHub Actions runs the full pipeline automatically.
@@ -115,6 +118,67 @@ If the primary model fails, the next is tried automatically. No intervention nee
 > Set a different primary with `AI_MODEL=qwen2.5-coder:7b python ai_engine/agent.py`
 
 **Template fallback**: if every AI model fails, a deterministic template engine generates valid tests using the compiled spec's CSS selectors — tests always run, even with zero AI.
+
+---
+
+## browser-use Integration (Autonomous Browser AI)
+
+This system integrates [browser-use](https://github.com/browser-use/browser-use) — an open-source library that lets an AI agent control a real browser autonomously. Used here with **local Ollama models only** — zero API keys, zero cost.
+
+### What browser-use adds
+
+| Feature | Without browser-use | With browser-use |
+|---------|---------------------|------------------|
+| Selector discovery | Compiled from spec file | AI visits page, finds real selectors automatically |
+| Exploratory testing | Spec-driven only | AI browses page, finds unexpected issues |
+| Flow validation | Generated test script | AI actually performs the flow like a real user |
+
+### Enable browser-use
+
+```bash
+# Install dependencies
+pip install browser-use langchain-ollama
+
+# Pull a model that supports tool calling (needed by browser-use)
+ollama pull qwen2.5:7b     # recommended — best local quality
+# or
+ollama pull llama3.2:3b    # lighter option
+
+# Run with browser-use enabled
+BROWSER_USE_ENABLED=true BROWSER_USE_MODEL=qwen2.5:7b python ai_engine/agent.py
+```
+
+### Which models work with browser-use
+
+browser-use requires a model that supports **tool/function calling**. Small models (1.5b, 1b) usually don't work well.
+
+| Model | Size | Works? | Notes |
+|-------|------|--------|-------|
+| `qwen2.5:7b` | 4.7 GB | ✅ Best | Recommended |
+| `qwen2.5-coder:7b` | 4.7 GB | ✅ Good | Strong for forms/buttons |
+| `llama3.2:3b` | 2.0 GB | ⚠️ Basic | Limited tool calling |
+| `mistral:7b` | 4.1 GB | ✅ Good | Strong reasoning |
+| `qwen2.5-coder:1.5b` | 986 MB | ❌ Poor | Too small for reliable tool calling |
+
+### What it does in the pipeline
+
+When `BROWSER_USE_ENABLED=true`, after compiling the spec to JSON, the browser agent:
+
+1. **Visits the real page** — navigates to the actual URL
+2. **Discovers selectors** — finds real CSS selectors for each UI element and enriches the spec
+3. **Reports issues** — any visible errors, broken images, or JS console issues
+
+All discovered selectors are passed into the test generator so tests use real, working selectors instead of guesses.
+
+### In CI (GitHub Actions)
+
+browser-use is **disabled by default** in CI to keep runs fast. Enable it via `workflow_dispatch`:
+
+```
+Actions → Markopolo Autonomous AI Testing → Run workflow → browser_use: true
+```
+
+Note: browser-use needs a larger model (7b+) which isn't pulled by default in CI. If enabled without the right model, it falls back gracefully.
 
 ---
 
@@ -446,6 +510,30 @@ OWASP-standard vectors for authorized security testing:
 - `payloads/boundary.txt` — 9 boundary strings (empty, max-length, null, whitespace)
 
 Tests verify your app handles malicious input safely — they assert the payload is **not executed**, not that it causes an error. Use only on applications you own or have permission to test.
+
+---
+
+## CI Behaviour Notes
+
+### TEMPLATE.md is automatically skipped
+
+`specs/TEMPLATE.md` is never processed as a test spec — the agent skips it automatically. Only your real spec files (login.md, signup.md, etc.) are tested.
+
+### CI job timeout (60 minutes)
+
+The CI job is capped at 60 minutes. Model pulls are limited to three small models (`qwen2.5-coder:1.5b`, `tinyllama:1.1b`, `qwen2.5:0.5b`) to keep CI fast. Larger models (7b+) are for local use.
+
+### Partial results on cancellation
+
+If the CI job is cancelled mid-run, `reports/summary.json` and `reports/test_data_log.json` are still written with whatever completed (marked `"partial": true`). The GitHub Step Summary will show partial results.
+
+### ollama.chat() has a 90-second timeout
+
+Each AI call has a `AI_TIMEOUT=90s` hard limit. If a model hangs (slow cold start, partial download), it is skipped after 90 seconds and the next model in the chain is tried.
+
+### Each Playwright operation has a 15-second timeout
+
+`conftest.py` sets `page.set_default_timeout(15000)` on every test page. Navigation uses `wait_until="domcontentloaded"` instead of `"networkidle"` to avoid hanging on pages with long-polling or websockets.
 
 ---
 
