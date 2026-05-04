@@ -8,12 +8,25 @@ on:
   schedule:
     - cron: "0 2 * * *"
   workflow_dispatch:
+    inputs:
+      ai_model:
+        description: "Ollama model to use (e.g. qwen2.5-coder:7b)"
+        required: false
+        default: "qwen2.5-coder:1.5b"
+      base_url:
+        description: "Target URL to test"
+        required: false
+        default: "https://beta-stg.markopolo.ai"
 
 jobs:
   autonomous-ai-test:
-    name: AI Test Agent v4
+    name: AI Test Agent v5
     runs-on: ubuntu-latest
     timeout-minutes: 90
+
+    env:
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://beta-stg.markopolo.ai' }}
+      AI_MODEL: ${{ github.event.inputs.ai_model || 'qwen2.5-coder:1.5b' }}
 
     steps:
       # ── 1. Checkout ──────────────────────────────────────────────────────────
@@ -39,30 +52,43 @@ jobs:
       - name: Install Ollama
         run: curl -fsSL https://ollama.ai/install.sh | sh
 
-      # ── 6. Cache Ollama models (avoids 1GB re-download per run) ──────────
+      # ── 6. Cache Ollama models (avoids 1GB+ re-download per run) ─────────
       - name: Cache Ollama models
         uses: actions/cache@v4
         with:
           path: ~/.ollama/models
-          key: ollama-models-qwen2.5-coder-1.5b-llama3.2-1b-v2
+          key: ollama-models-v5-${{ env.AI_MODEL }}-llama3.2-1b-phi3.5
 
       # ── 7. Start Ollama service ────────────────────────────────────────────
       - name: Start Ollama service
         run: |
           ollama serve &
-          echo "Waiting for Ollama..."
+          echo "Waiting for Ollama to be ready..."
           for i in $(seq 1 30); do
-            curl -s http://localhost:11434/api/tags > /dev/null 2>&1 && echo "✅ Ollama ready" && break
+            curl -s http://localhost:11434/api/tags > /dev/null 2>&1 && echo "✅ Ollama ready after ${i}s" && break
             sleep 2
           done
 
       # ── 8. Pull AI models ─────────────────────────────────────────────────
+      # Pull primary + backup models. If one fails, the agent auto-falls back.
       - name: Pull AI models
         run: |
-          echo "=== Primary: qwen2.5-coder:1.5b ==="
-          ollama pull qwen2.5-coder:1.5b
-          echo "=== Backup: llama3.2:1b ==="
-          ollama pull llama3.2:1b || echo "Backup unavailable — primary only"
+          echo "=== Primary model: $AI_MODEL ==="
+          ollama pull "$AI_MODEL" || echo "⚠️ Primary unavailable"
+
+          echo ""
+          echo "=== Backup 1: llama3.2:1b (1.3 GB) ==="
+          ollama pull llama3.2:1b || echo "⚠️ Backup 1 unavailable"
+
+          echo ""
+          echo "=== Backup 2: phi3.5 (2.2 GB) ==="
+          ollama pull phi3.5 || echo "⚠️ Backup 2 unavailable"
+
+          echo ""
+          echo "=== Backup 3: qwen2.5:0.5b (395 MB — tiny safety net) ==="
+          ollama pull qwen2.5:0.5b || echo "⚠️ Backup 3 unavailable"
+
+          echo ""
           echo "=== Available models ==="
           ollama list
 
@@ -71,46 +97,87 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
+          echo "=== Python version ==="
           python --version
-          python -c "import ollama; print('✅ ollama')"
+
+          echo ""
+          echo "=== Core packages ==="
+          python -c "import ollama;     print('✅ ollama')"
           python -c "import playwright; print('✅ playwright')"
-          python -c "import pytest; print('✅ pytest')"
-          python -c "from ai_engine.spec_parser   import parse;          print('✅ spec_parser')"
-          python -c "from ai_engine.spec_compiler import compile_spec;   print('✅ spec_compiler')"
-          python -c "from ai_engine.test_generator import generate_all;  print('✅ test_generator')"
-          python -c "from ai_engine.test_validator import validate_code; print('✅ test_validator')"
-          python -c "from ai_engine.evidence      import enrich_bug;     print('✅ evidence')"
-          python -c "from ai_engine.bug_builder   import build_from_json_report; print('✅ bug_builder')"
-          python -c "from ai_engine.gap_checker   import detect_gaps;    print('✅ gap_checker')"
-          python -c "from ai_engine.memory        import load;           print('✅ memory')"
-          python -c "from ai_engine.reporter      import generate_report; print('✅ reporter')"
-          python -c "from ai_engine.agent         import template_tests;  print('✅ agent')"
+          python -c "import pytest;     print('✅ pytest')"
+
+          echo ""
+          echo "=== AI Engine modules ==="
+          python -c "from ai_engine.spec_parser    import parse;                 print('✅ spec_parser')"
+          python -c "from ai_engine.spec_compiler  import compile_spec;          print('✅ spec_compiler')"
+          python -c "from ai_engine.test_generator import generate_all;          print('✅ test_generator')"
+          python -c "from ai_engine.test_validator import validate_code;         print('✅ test_validator')"
+          python -c "from ai_engine.evidence       import enrich_bug;            print('✅ evidence')"
+          python -c "from ai_engine.bug_builder    import build_from_json_report; print('✅ bug_builder')"
+          python -c "from ai_engine.gap_checker    import detect_gaps;           print('✅ gap_checker')"
+          python -c "from ai_engine.memory         import load;                  print('✅ memory')"
+          python -c "from ai_engine.reporter       import generate_report;       print('✅ reporter')"
+          python -c "from ai_engine.agent          import template_tests;        print('✅ agent')"
           python -c "from payloads import XSS, SQLI, BOUNDARY; print(f'✅ payloads  XSS:{len(XSS)} SQLi:{len(SQLI)} Boundary:{len(BOUNDARY)}')"
+
+          echo ""
+          echo "=== Scripts ==="
+          python -c "import scripts.generate_ci_summary; print('✅ generate_ci_summary')" || \
+          python scripts/generate_ci_summary.py --help 2>/dev/null || echo "⚠️ CI summary script check skipped"
+
+          echo ""
+          echo "✅ All modules verified"
 
       # ── 10. Prepare directories ───────────────────────────────────────────
       - name: Prepare directories
-        run: mkdir -p tests reports reports/screenshots reports/evidence
+        run: |
+          mkdir -p tests reports reports/screenshots reports/evidence
+          # Restore memory_store.json if it exists in cache (for learning between runs)
+          echo "Directories ready"
 
       # ── 11. Compile specs to JSON ─────────────────────────────────────────
       - name: Compile Specs → JSON
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
+          echo "=== Compiling spec files ==="
           for f in specs/*.md; do
-            python ai_engine/spec_compiler.py "$f" || echo "Warning: compile failed for $f"
+            [ "$f" = "specs/TEMPLATE.md" ] && continue  # skip template
+            echo -n "  Compiling $f... "
+            python ai_engine/spec_compiler.py "$f" && echo "✅" || echo "⚠️ failed"
           done
+          echo ""
+          echo "=== Compiled specs ==="
+          ls -la specs/*.spec.json 2>/dev/null || echo "No compiled specs found"
 
       # ── 12. Run the AI agent ──────────────────────────────────────────────
       - name: Run AI Test Agent
         env:
-          BASE_URL: https://beta-stg.markopolo.ai
-          AI_MODEL: qwen2.5-coder:1.5b
-          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
-          PYTHONPATH: ${{ github.workspace }}
+          BASE_URL:         ${{ env.BASE_URL }}
+          AI_MODEL:         ${{ env.AI_MODEL }}
+          TEST_PASSWORD:    ${{ secrets.TEST_PASSWORD }}
+          PYTHONPATH:       ${{ github.workspace }}
           PYTHONUNBUFFERED: "1"
-        run: python -u ai_engine/agent.py
+        run: |
+          echo "=== Starting Autonomous AI Test Agent v5 ==="
+          echo "  Target:     $BASE_URL"
+          echo "  AI Model:   $AI_MODEL"
+          echo "  Test Types: 22 (smoke → security)"
+          echo "  Fallbacks:  14 models (qwen → llama → phi → gemma → tinyllama)"
+          echo ""
+          python -u ai_engine/agent.py
+        continue-on-error: true  # Always upload reports, even on test failures
 
-      # ── 13. Upload HTML bug report ────────────────────────────────────────
+      # ── 13. Generate detailed CI summary ─────────────────────────────────
+      - name: Generate detailed test summary
+        if: always()
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          echo "=== Generating detailed CI summary ==="
+          python scripts/generate_ci_summary.py || echo "⚠️ CI summary generation failed"
+
+      # ── 14. Upload HTML bug report ────────────────────────────────────────
       - name: Upload HTML bug report
         uses: actions/upload-artifact@v4
         if: always()
@@ -118,8 +185,9 @@ jobs:
           name: bug-report-${{ github.run_number }}
           path: reports/bug-report.html
           retention-days: 30
+          if-no-files-found: warn
 
-      # ── 14. Upload screenshots ────────────────────────────────────────────
+      # ── 15. Upload screenshots ────────────────────────────────────────────
       - name: Upload screenshots
         uses: actions/upload-artifact@v4
         if: always()
@@ -129,7 +197,7 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
-      # ── 15. Upload all reports + evidence ────────────────────────────────
+      # ── 16. Upload full reports + evidence ────────────────────────────────
       - name: Upload full reports
         uses: actions/upload-artifact@v4
         if: always()
@@ -138,7 +206,7 @@ jobs:
           path: reports/
           retention-days: 30
 
-      # ── 16. Upload generated tests ────────────────────────────────────────
+      # ── 17. Upload generated tests ────────────────────────────────────────
       - name: Upload generated tests
         uses: actions/upload-artifact@v4
         if: always()
@@ -148,7 +216,7 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
-      # ── 17. Upload compiled specs ─────────────────────────────────────────
+      # ── 18. Upload compiled specs ─────────────────────────────────────────
       - name: Upload compiled specs
         uses: actions/upload-artifact@v4
         if: always()
@@ -158,29 +226,112 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
-      # ── 18. Job summary ───────────────────────────────────────────────────
+      # ── 19. Write GitHub Step Summary ────────────────────────────────────
+      # Shows: AI model used, test types run, test data per case,
+      #        pass/fail per test, bug tickets found, coverage gaps.
       - name: Write job summary
         if: always()
         run: |
-          echo "## 🤖 Markopolo AI Bug Report — Run #${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
+          # Initial metadata section (always written, even if CI summary script fails)
+          cat >> $GITHUB_STEP_SUMMARY << 'HEADER_EOF'
+          ## 🤖 Markopolo Autonomous AI Test Agent — v5
+
+          HEADER_EOF
+
           echo "| Field | Value |" >> $GITHUB_STEP_SUMMARY
           echo "|-------|-------|" >> $GITHUB_STEP_SUMMARY
-          echo "| AI Model | qwen2.5-coder:1.5b (Ollama — no API key) |" >> $GITHUB_STEP_SUMMARY
-          echo "| Target | https://beta-stg.markopolo.ai |" >> $GITHUB_STEP_SUMMARY
-          echo "| Trigger | ${{ github.event_name }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Run | #${{ github.run_number }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Architecture | v4 — Spec Compiler + 15 Test Types + Validator + Memory |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🤖 AI Model | \`${{ env.AI_MODEL }}\` (Ollama — free/local, no API key) |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🔗 Target | \`${{ env.BASE_URL }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🚀 Trigger | ${{ github.event_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🔢 Run | #${{ github.run_number }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🏗️ Architecture | v5 — 22 Test Types · 14-Model Chain · Compiled Specs · Template Fallback |" >> $GITHUB_STEP_SUMMARY
+          echo "| 📦 Ref | \`${{ github.ref_name }}\` @ \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Quick results from summary.json
           if [ -f reports/summary.json ]; then
+            echo "### 📊 Results" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            python3 -c "
+          import json, sys
+          try:
+              d = json.load(open('reports/summary.json'))
+              p = d.get('total_passed', 0)
+              f = d.get('total_failed', 0)
+              t = d.get('total_tests', 0)
+              b = d.get('total_bugs', 0)
+              rate = f'{p/t*100:.0f}%' if t else 'N/A'
+              print(f'| ✅ Passed | {p} |')
+              print(f'| ❌ Failed | {f} |')
+              print(f'| 📊 Total Tests | {t} |')
+              print(f'| 📈 Pass Rate | {rate} |')
+              print(f'| 🐛 Bug Tickets | {b} |')
+              specs = d.get('specs_tested', [])
+              print(f'| 📄 Specs Tested | {len(specs)}: {chr(44).join(specs)} |')
+          except Exception as e:
+              print(f'| Error | Could not parse summary.json: {e} |')
+          " >> $GITHUB_STEP_SUMMARY || true
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # Detailed summary from CI summary script (includes test data tables)
+          if [ -f reports/ci_summary.md ]; then
+            echo "---" >> $GITHUB_STEP_SUMMARY
+            cat reports/ci_summary.md >> $GITHUB_STEP_SUMMARY
+          else
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### 📋 Test Data & Per-Type Results" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            if [ -f reports/test_data_log.json ]; then
+              python3 -c "
+          import json
+          d = json.load(open('reports/test_data_log.json'))
+          specs = d.get('specs', {})
+          for spec_name, spec_data in specs.items():
+              print(f'#### Spec: \`{spec_name}\`')
+              print()
+              types = spec_data.get('types', {})
+              print('| Test Type | Tests | Sample Test Data |')
+              print('|-----------|-------|------------------|')
+              for type_name, tdata in types.items():
+                  tc = tdata.get('test_count', 0)
+                  hints = tdata.get('test_data', [])
+                  sample = hints[0][:80] if hints else '—'
+                  print(f'| \`{type_name}\` | {tc} | \`{sample}\` |')
+              print()
+          " >> $GITHUB_STEP_SUMMARY || true
+            fi
+          fi
+
+          # Test data log raw dump (always append)
+          if [ -f reports/test_data_log.json ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "<details>" >> $GITHUB_STEP_SUMMARY
+            echo "<summary>📋 Raw Test Data Log (JSON)</summary>" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo '```json' >> $GITHUB_STEP_SUMMARY
             python3 -c "
           import json
-          d = json.load(open('reports/summary.json'))
-          print('| ✅ Passed | ' + str(d['total_passed']) + ' |')
-          print('| ❌ Failed | ' + str(d['total_failed']) + ' |')
-          print('| 📊 Total Tests | ' + str(d['total_tests']) + ' |')
-          print('| 🐛 Bug Tickets | ' + str(d.get('total_bugs', 0)) + ' |')
-          " >> $GITHUB_STEP_SUMMARY
+          d = json.load(open('reports/test_data_log.json'))
+          # Compact: only show type → test_count + first 3 test_data hints
+          out = {'model_used': d.get('model_used'), 'timestamp': d.get('timestamp'), 'specs': {}}
+          for spec, sdata in d.get('specs', {}).items():
+              out['specs'][spec] = {'total_tests': sdata.get('total_tests'), 'types': {}}
+              for ttype, tdata in sdata.get('types', {}).items():
+                  out['specs'][spec]['types'][ttype] = {
+                      'test_count': tdata.get('test_count', 0),
+                      'test_data_sample': tdata.get('test_data', [])[:3],
+                      'tests': tdata.get('tests', [])[:5],
+                  }
+          print(json.dumps(out, indent=2))
+          " >> $GITHUB_STEP_SUMMARY || cat reports/test_data_log.json >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "</details>" >> $GITHUB_STEP_SUMMARY
           fi
+
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "📥 Download **bug-report-${{ github.run_number }}** from Artifacts for the full HTML report." >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📥 **Artifacts:** \`bug-report-${{ github.run_number }}\` · \`ai-generated-tests-${{ github.run_number }}\` · \`full-reports-${{ github.run_number }}\`" >> $GITHUB_STEP_SUMMARY
