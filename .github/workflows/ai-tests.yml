@@ -37,8 +37,9 @@ jobs:
       AI_MODEL:              ${{ github.event.inputs.ai_model  || 'qwen2.5-coder:7b' }}
       AI_TIMEOUT:            "120"      # seconds per ollama.chat() call before giving up (7b needs more time)
       MAX_FIX_RETRIES:       "1"        # self-heal rounds in CI (reduce from 3 to save time)
-      BROWSER_USE_ENABLED:   "false"
+      BROWSER_USE_ENABLED:   "true"
       BROWSER_USE_MODEL:     "qwen2.5-coder:7b"
+      BROWSER_USE_TIMEOUT:   "90"
       OPENAI_API_KEY:        "ollama"
       OPENAI_BASE_URL:       "http://localhost:11434/v1"
 
@@ -180,6 +181,7 @@ jobs:
           TEST_PASSWORD:         ${{ secrets.TEST_PASSWORD }}
           BROWSER_USE_ENABLED:   ${{ env.BROWSER_USE_ENABLED }}
           BROWSER_USE_MODEL:     ${{ env.BROWSER_USE_MODEL }}
+          BROWSER_USE_TIMEOUT:   ${{ env.BROWSER_USE_TIMEOUT }}
           OPENAI_API_KEY:        ${{ env.OPENAI_API_KEY }}
           OPENAI_BASE_URL:       ${{ env.OPENAI_BASE_URL }}
           PYTHONPATH:            ${{ github.workspace }}
@@ -206,6 +208,16 @@ jobs:
           echo "=== Generating CI summary ==="
           python scripts/generate_ci_summary.py || echo "⚠️ CI summary generation failed"
           ls -la reports/ 2>/dev/null || echo "No reports directory"
+
+      # ── 13b. Generate HTML bug report (always — even on timeout/cancel) ────
+      - name: Generate HTML bug report
+        if: always()
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          echo "=== Generating HTML bug report from partial/complete data ==="
+          python scripts/generate_html_report.py || echo "⚠️ HTML report generation failed"
+          ls -la reports/bug-report.html 2>/dev/null && echo "✅ bug-report.html ready" || echo "❌ bug-report.html missing"
 
       # ── 14. Upload HTML bug report ────────────────────────────────────────
       - name: Upload HTML bug report
