@@ -16,7 +16,7 @@ on:
       base_url:
         description: "Target URL to test"
         required: false
-        default: "https://beta-stg.fagun.ai"
+        default: "https://dev.mehadedu.com/en"
       browser_use:
         description: "Enable browser-use agent? (true/false)"
         required: false
@@ -33,7 +33,7 @@ jobs:
     timeout-minutes: 90   # 7b model needs more time
 
     env:
-      BASE_URL:              ${{ github.event.inputs.base_url  || 'https://beta-stg.fagun.ai' }}
+      BASE_URL:              ${{ github.event.inputs.base_url  || 'https://dev.mehadedu.com/en' }}
       AI_MODEL:              ${{ github.event.inputs.ai_model  || 'qwen2.5-coder:7b' }}
       AI_TIMEOUT:            "120"      # seconds per ollama.chat() call before giving up (7b needs more time)
       MAX_FIX_RETRIES:       "1"        # self-heal rounds in CI (reduce from 3 to save time)
@@ -353,3 +353,161 @@ jobs:
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "---" >> "$GITHUB_STEP_SUMMARY"
           echo "📥 **Artifacts:** \`bug-report-${{ github.run_number }}\` · \`ai-generated-tests-${{ github.run_number }}\` · \`full-reports-${{ github.run_number }}\`" >> "$GITHUB_STEP_SUMMARY"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # QA AGENT 1 — Functional + Edge Cases (QA-01, QA-02)
+  # Runs the hand-crafted Playwright tests — no Ollama / AI required.
+  # ─────────────────────────────────────────────────────────────────────────────
+  qa-agent-1-functional:
+    name: "QA Agent 1 — Functional & Edge Cases"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install Python dependencies
+        run: |
+          pip install playwright pytest pytest-playwright pytest-html pytest-timeout
+
+      - name: Install Playwright Chromium
+        run: playwright install chromium --with-deps
+
+      - name: Verify syntax of test file
+        run: python3 -m py_compile tests/test_qa_comprehensive.py && echo "✅ Syntax OK"
+
+      - name: Run QA-01 Functional Tests
+        continue-on-error: true
+        run: |
+          BASE_URL=${{ env.BASE_URL }} python3 -m pytest \
+            tests/test_qa_comprehensive.py::TestQA01Functional \
+            --timeout=60 --timeout-method=thread \
+            --tb=short -v -p no:warnings \
+            --html=reports/qa01-functional.html --self-contained-html \
+            -p no:cacheprovider 2>&1 | tee reports/qa01-functional.txt
+
+      - name: Run QA-02 Edge Case Tests
+        continue-on-error: true
+        run: |
+          BASE_URL=${{ env.BASE_URL }} python3 -m pytest \
+            tests/test_qa_comprehensive.py::TestQA02EdgeCaseBoundary \
+            --timeout=60 --timeout-method=thread \
+            --tb=short -v -p no:warnings \
+            --html=reports/qa02-edge.html --self-contained-html \
+            -p no:cacheprovider 2>&1 | tee reports/qa02-edge.txt
+
+      - name: Write QA Agent 1 Summary
+        if: always()
+        run: |
+          echo "## QA Agent 1 — Functional & Edge Cases" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Group | Report |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|-------|--------|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| QA-01 Functional | qa01-functional.html |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| QA-02 Edge Cases | qa02-edge.html |" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          for f in reports/qa01-functional.txt reports/qa02-edge.txt; do
+            [ -f "$f" ] && grep -E "^(PASSED|FAILED|ERROR|tests ran|passed|failed)" "$f" | tail -5 >> "$GITHUB_STEP_SUMMARY" || true
+          done
+
+      - name: Upload QA Agent 1 Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-agent-1-reports-${{ github.run_number }}
+          path: reports/qa0[12]*
+          retention-days: 30
+          if-no-files-found: warn
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # QA AGENT 2 — Security + Performance + Hallucination (QA-03, QA-04, QA-05)
+  # Runs the hand-crafted Playwright tests — no Ollama / AI required.
+  # ─────────────────────────────────────────────────────────────────────────────
+  qa-agent-2-security-perf:
+    name: "QA Agent 2 — Security, Performance & Hallucination"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install Python dependencies
+        run: |
+          pip install playwright pytest pytest-playwright pytest-html pytest-timeout
+
+      - name: Install Playwright Chromium
+        run: playwright install chromium --with-deps
+
+      - name: Run QA-03 Security Tests
+        continue-on-error: true
+        run: |
+          BASE_URL=${{ env.BASE_URL }} python3 -m pytest \
+            tests/test_qa_comprehensive.py::TestQA03Security \
+            --timeout=60 --timeout-method=thread \
+            --tb=short -v -p no:warnings \
+            --html=reports/qa03-security.html --self-contained-html \
+            -p no:cacheprovider 2>&1 | tee reports/qa03-security.txt
+
+      - name: Run QA-04 Performance Tests
+        continue-on-error: true
+        run: |
+          BASE_URL=${{ env.BASE_URL }} python3 -m pytest \
+            tests/test_qa_comprehensive.py::TestQA04PerformanceAndJSErrors \
+            --timeout=60 --timeout-method=thread \
+            --tb=short -v -p no:warnings \
+            --html=reports/qa04-performance.html --self-contained-html \
+            -p no:cacheprovider 2>&1 | tee reports/qa04-performance.txt
+
+      - name: Run QA-05 Hallucination & Data Integrity Tests
+        continue-on-error: true
+        run: |
+          BASE_URL=${{ env.BASE_URL }} python3 -m pytest \
+            tests/test_qa_comprehensive.py::TestQA05HallucinationDataIntegrity \
+            --timeout=60 --timeout-method=thread \
+            --tb=short -v -p no:warnings \
+            --html=reports/qa05-hallucination.html --self-contained-html \
+            -p no:cacheprovider 2>&1 | tee reports/qa05-hallucination.txt
+
+      - name: Write QA Agent 2 Summary
+        if: always()
+        run: |
+          echo "## QA Agent 2 — Security, Performance & Hallucination" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Group | Report |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|-------|--------|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| QA-03 Security | qa03-security.html |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| QA-04 Performance | qa04-performance.html |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| QA-05 Hallucination | qa05-hallucination.html |" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          for f in reports/qa03-security.txt reports/qa04-performance.txt reports/qa05-hallucination.txt; do
+            [ -f "$f" ] && grep -E "^(PASSED|FAILED|ERROR|tests ran|passed|failed)" "$f" | tail -5 >> "$GITHUB_STEP_SUMMARY" || true
+          done
+
+      - name: Upload QA Agent 2 Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-agent-2-reports-${{ github.run_number }}
+          path: reports/qa0[345]*
+          retention-days: 30
+          if-no-files-found: warn

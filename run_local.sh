@@ -23,7 +23,7 @@
 set -e
 
 # ── Defaults ─────────────────────────────────────────────────────────────────
-BASE_URL="${BASE_URL:-https://beta-stg.fagun.ai}"
+BASE_URL="${BASE_URL:-https://dev.mehadedu.com/en}"
 SLOW_MO="${SLOW_MO:-800}"          # ms between each Playwright action
 HEADED=1                           # always open browser window
 

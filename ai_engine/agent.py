@@ -1339,7 +1339,7 @@ def _save_partial_state(agent):
             "total_tests":  total_t,
             "total_bugs":   len(all_bugs),
             "specs_tested": list(agent.all_results.keys()),
-            "model_chain":  [m for m, _, _ in MODEL_CHAIN],
+            "model_chain":  [mc[0] for mc in MODEL_CHAIN],
             "partial":      True,
         }, indent=2))
 
@@ -1553,7 +1553,7 @@ class AutonomousTestAgent:
             "total_tests":  total_t,
             "total_bugs":   len(all_bugs),
             "specs_tested": list(self.all_results.keys()),
-            "model_chain":  [m for m, _, _ in MODEL_CHAIN],
+            "model_chain":  [mc[0] for mc in MODEL_CHAIN],
         }, indent=2))
 
         (REPORTS_DIR / "test_data_log.json").write_text(json.dumps({
