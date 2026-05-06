@@ -4,9 +4,14 @@ Captures: screenshots (on failure), network log, console errors, performance.
 All evidence saved to reports/evidence/ and indexed for the HTML bug report.
 """
 
-import re, json, pytest
+import os, re, json, pytest
 from pathlib import Path
 from datetime import datetime
+
+# Set HEADED=1 (or --headed flag) to watch tests in a real browser window.
+# Set SLOW_MO=800 to add millisecond delay between actions (default 800 in headed mode).
+_HEADED  = os.getenv("HEADED",   "0").strip() in ("1", "true", "yes")
+_SLOW_MO = int(os.getenv("SLOW_MO", "800" if _HEADED else "0"))
 
 # ── Directories ───────────────────────────────────────────────────────────────
 SCREENSHOTS_DIR = Path("reports/screenshots")
@@ -33,8 +38,8 @@ def browser_context_args(browser_context_args):
 def browser_type_launch_args(browser_type_launch_args):
     return {
         **browser_type_launch_args,
-        "headless": True,
-        "slow_mo": 0,
+        "headless": not _HEADED,   # HEADED=1 → open real browser window
+        "slow_mo":  _SLOW_MO,      # SLOW_MO=800 → 800ms delay per action
     }
 
 
