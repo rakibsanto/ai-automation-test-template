@@ -167,6 +167,8 @@ def build_consolidated_results(base_url: str) -> dict:
         "qa06_api":           ("QA-06 API & Network",    "QA06"),
         "qa07_accessibility": ("QA-07 Accessibility",    "QA07"),
         "qa08_mobile":        ("QA-08 Mobile/Viewport",  "QA08"),
+        "qa09_seo":           ("QA-09 SEO & Meta",       "QA09"),
+        "qa10_i18n":          ("QA-10 i18n & RTL",       "QA10"),
     }
 
     for file_stem, (group_name, prefix) in qa_groups.items():
