@@ -1,5 +1,5 @@
 """
-Markopolo Autonomous AI Test Agent  —  v5
+Fagun Autonomous AI Test Agent  —  v5
 ------------------------------------------
 v2 architecture: MD → Spec Compiler → JSON → 22 test types → Validator → Execute
                  → Memory → Self-Heal → Bug Tickets → Gap Analysis → HTML Report
@@ -84,7 +84,7 @@ def log(msg=""):
     _real_print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
 
 # ── Config ────────────────────────────────────────────────────────────────────
-BASE_URL         = os.getenv("BASE_URL",  "https://beta-stg.markopolo.ai")
+BASE_URL         = os.getenv("BASE_URL",  "https://beta-stg.fagun.ai")
 AI_MODEL         = os.getenv("AI_MODEL",  "qwen2.5-coder:1.5b")
 AI_TIMEOUT       = int(os.getenv("AI_TIMEOUT", "90"))    # seconds per ollama call
 BROWSER_USE_ON   = os.getenv("BROWSER_USE_ENABLED", "false").lower() == "true"
@@ -1572,7 +1572,7 @@ class AutonomousTestAgent:
 
     def _banner(self):
         log("═"*64)
-        log("  Markopolo Autonomous AI Test Agent  v5")
+        log("  Fagun Autonomous AI Test Agent  v5")
         log(f"  Primary model  : {AI_MODEL}")
         log(f"  Model chain    : {len(MODEL_CHAIN)} models (all free/open-source)")
         log(f"  AI timeout     : {AI_TIMEOUT}s per call")

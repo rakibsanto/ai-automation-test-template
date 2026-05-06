@@ -18,7 +18,7 @@ _PAGE = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Markopolo QA Bug Report — {run_date}</title>
+<title>Fagun QA Bug Report — {run_date}</title>
 <style>
 /* ── Reset & base ── */
 *,*::before,*::after{{box-sizing:border-box;margin:0;padding:0}}
@@ -251,7 +251,7 @@ tr:hover td{{background:#1c2333}}
 <div class="hdr">
   <div class="hdr-inner">
     <div class="hdr-left">
-      <h1>Markopolo <span>QA</span> Bug Report</h1>
+      <h1>Fagun <span>QA</span> Bug Report</h1>
       <div style="font-size:13px;color:var(--muted);margin-top:4px">
         AI-generated · autonomous · intent-based testing
       </div>
@@ -312,7 +312,7 @@ tr:hover td{{background:#1c2333}}
 
 <!-- Footer -->
 <div style="text-align:center;color:var(--muted);font-size:12px;margin-top:60px;padding-top:20px;border-top:1px solid var(--border)">
-  Markopolo Autonomous Testing &nbsp;·&nbsp; Powered by Ollama + Playwright + pytest &nbsp;·&nbsp; Zero API keys
+  Fagun Autonomous Testing &nbsp;·&nbsp; Powered by Ollama + Playwright + pytest &nbsp;·&nbsp; Zero API keys
 </div>
 
 </div><!-- /wrap -->

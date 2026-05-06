@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────────────────────
-# Markopolo Autonomous AI Test Agent — One-command setup
+# Fagun Autonomous AI Test Agent — One-command setup
 # Works on macOS and Linux. Run: bash setup.sh
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -14,7 +14,7 @@ info() { echo -e "   $*"; }
 
 echo ""
 echo "═══════════════════════════════════════════════════════════════"
-echo "  Markopolo Autonomous AI Test Agent — Setup"
+echo "  Fagun Autonomous AI Test Agent — Setup"
 echo "═══════════════════════════════════════════════════════════════"
 echo ""
 
@@ -188,8 +188,8 @@ else:
 echo ""
 echo "── 9. Configuration..."
 echo ""
-read -r -p "   Target URL (default: https://beta-stg.markopolo.ai): " INPUT_URL
-BASE_URL="${INPUT_URL:-https://beta-stg.markopolo.ai}"
+read -r -p "   Target URL (default: https://beta-stg.fagun.ai): " INPUT_URL
+BASE_URL="${INPUT_URL:-https://beta-stg.fagun.ai}"
 echo "   BASE_URL=$BASE_URL"
 echo ""
 

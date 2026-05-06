@@ -1,4 +1,4 @@
-# Markopolo Autonomous AI Testing
+# Fagun Autonomous AI Testing
 
 > **Intent-based autonomous QA system** — describe your app in Markdown, AI handles everything else.
 
@@ -78,8 +78,8 @@ generate_ci_summary.py  ← GitHub Step Summary: test data per type, pass/fail p
 ## Quick Start (One Command)
 
 ```bash
-git clone https://github.com/mejbaur-markopolo/Markopolo-Automation-Testing.git
-cd Markopolo-Automation-Testing
+git clone https://github.com/mejbaur-fagun/Fagun-Automation-Testing.git
+cd Fagun-Automation-Testing
 bash setup.sh
 ```
 
@@ -175,7 +175,7 @@ All discovered selectors are passed into the test generator so tests use real, w
 browser-use is **disabled by default** in CI to keep runs fast. Enable it via `workflow_dispatch`:
 
 ```
-Actions → Markopolo Autonomous AI Testing → Run workflow → browser_use: true
+Actions → Fagun Autonomous AI Testing → Run workflow → browser_use: true
 ```
 
 Note: browser-use needs a larger model (7b+) which isn't pulled by default in CI. If enabled without the right model, it falls back gracefully.
@@ -305,8 +305,8 @@ GitHub Actions runs all 22 test types automatically.
 ### 1. Clone
 
 ```bash
-git clone https://github.com/mejbaur-markopolo/Markopolo-Automation-Testing.git
-cd Markopolo-Automation-Testing
+git clone https://github.com/mejbaur-fagun/Fagun-Automation-Testing.git
+cd Fagun-Automation-Testing
 ```
 
 ### 2. Install Ollama
@@ -364,7 +364,7 @@ open reports/bug-report.html
 ## Project Structure
 
 ```
-Markopolo-Automation-Testing/
+Fagun-Automation-Testing/
 │
 ├── specs/                        ← YOUR INPUT (edit these)
 │   ├── login.md                  ← Login page spec
@@ -448,7 +448,7 @@ The Actions summary tab shows:
 
 ### Manual trigger with custom settings
 
-Go to: **Actions → Markopolo Autonomous AI Testing → Run workflow**
+Go to: **Actions → Fagun Autonomous AI Testing → Run workflow**
 
 You can override:
 - **AI model** — e.g. `qwen2.5-coder:7b` for better quality

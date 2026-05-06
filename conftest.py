@@ -152,7 +152,9 @@ def pytest_runtest_makereport(item, call):
                 "url":       page.url,
                 "timestamp": datetime.now().isoformat(),
             }
-        except Exception as exc:
+        except BaseException as exc:
+            # Catch BaseException so pytest-timeout's Failed (not Exception subclass)
+            # raised inside SIGALRM doesn't re-propagate from this hook.
             print(f"  [SCREENSHOT] Failed for {item.nodeid}: {exc}", flush=True)
 
 

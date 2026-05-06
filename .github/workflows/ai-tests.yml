@@ -1,4 +1,4 @@
-name: Markopolo Autonomous AI Testing
+name: Fagun Autonomous AI Testing
 
 on:
   push:
@@ -16,7 +16,7 @@ on:
       base_url:
         description: "Target URL to test"
         required: false
-        default: "https://beta-stg.markopolo.ai"
+        default: "https://beta-stg.fagun.ai"
       browser_use:
         description: "Enable browser-use agent? (true/false)"
         required: false
@@ -33,7 +33,7 @@ jobs:
     timeout-minutes: 90   # 7b model needs more time
 
     env:
-      BASE_URL:              ${{ github.event.inputs.base_url  || 'https://beta-stg.markopolo.ai' }}
+      BASE_URL:              ${{ github.event.inputs.base_url  || 'https://beta-stg.fagun.ai' }}
       AI_MODEL:              ${{ github.event.inputs.ai_model  || 'qwen2.5-coder:7b' }}
       AI_TIMEOUT:            "120"      # seconds per ollama.chat() call before giving up (7b needs more time)
       MAX_FIX_RETRIES:       "1"        # self-heal rounds in CI (reduce from 3 to save time)
@@ -275,7 +275,7 @@ jobs:
         run: |
           # ── Header (always written) ─────────────────────────────────────
           cat >> "$GITHUB_STEP_SUMMARY" << 'HEADER'
-          ## 🤖 Markopolo Autonomous AI Test Agent — v5
+          ## 🤖 Fagun Autonomous AI Test Agent — v5
           HEADER
           echo "" >> "$GITHUB_STEP_SUMMARY"
 

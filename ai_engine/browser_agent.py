@@ -57,7 +57,7 @@ try:
 except ImportError:
     _LANGCHAIN_OLLAMA_INSTALLED = False
 
-BASE_URL          = os.getenv("BASE_URL",           "https://beta-stg.markopolo.ai")
+BASE_URL          = os.getenv("BASE_URL",           "https://beta-stg.fagun.ai")
 BROWSER_USE_MODEL = os.getenv("BROWSER_USE_MODEL",  "qwen2.5:7b")
 _BU_TIMEOUT       = int(os.getenv("BROWSER_USE_TIMEOUT", "120"))  # seconds per task
 
