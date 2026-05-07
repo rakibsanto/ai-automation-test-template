@@ -3613,3 +3613,70 @@ class TestQA22VisionUIValidation:
         assert sev_by_cat["BROKEN_IMAGE"]   == "HIGH"
         assert sev_by_cat["CROPPED_TEXT"]   == "MEDIUM"
         assert sev_by_cat["ALIGNMENT"]      == "LOW"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Phase 4.4 — TEST QUALITY AUDIT
+# Verifications for scripts/test_quality_audit.py
+# ─────────────────────────────────────────────────────────────────────────────
+
+class TestPhase44TestQualityAudit:
+    """System self-tests for the test-quality auditor."""
+
+    @pytest.mark.system_selftest
+    def test_phase44_verification_detects_assert_true(self, tmp_path: Path):
+        """A test with literal `assert True` MUST be flagged HIGH severity."""
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
+        from test_quality_audit import audit_test_file
+
+        test_file = tmp_path / "test_synthetic.py"
+        test_file.write_text("""
+def test_lazy_dummy():
+    assert True
+""")
+        findings = audit_test_file(test_file)
+        assert any(f.severity == "HIGH" and "tautology" in f.issue.lower()
+                    for f in findings), (
+            f"verification failed — `assert True` not flagged. findings: {findings}"
+        )
+
+    @pytest.mark.system_selftest
+    def test_phase44_verification_detects_no_assert(self, tmp_path: Path):
+        """A test function with NO assertion of any kind MUST be flagged."""
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
+        from test_quality_audit import audit_test_file
+
+        test_file = tmp_path / "test_synthetic.py"
+        test_file.write_text("""
+def test_no_check():
+    x = 1
+    y = 2
+    z = x + y
+""")
+        findings = audit_test_file(test_file)
+        assert any("vacuously" in f.issue or "no assert" in f.issue.lower()
+                    for f in findings), (
+            f"verification failed — assertion-less test not flagged. "
+            f"findings: {findings}"
+        )
+
+    @pytest.mark.system_selftest
+    def test_phase44_verification_passes_clean_test(self, tmp_path: Path):
+        """A test with proper specific assertions must NOT be flagged."""
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
+        from test_quality_audit import audit_test_file
+
+        test_file = tmp_path / "test_synthetic.py"
+        test_file.write_text("""
+def test_real_check():
+    title = 'Mehad'
+    assert title == 'Mehad'
+    assert len(title) == 5
+""")
+        findings = audit_test_file(test_file)
+        assert findings == [], (
+            f"verification failed — clean test was incorrectly flagged: {findings}"
+        )

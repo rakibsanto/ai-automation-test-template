@@ -157,6 +157,22 @@ pre{{background:#0d1117;border:1px solid var(--border);border-radius:6px;
               background:#0d1117;color:#a371f7;border:1px solid var(--border);
               border-radius:4px;padding:2px 6px;margin:2px 3px}}
 
+/* ── Test quality audit section ─────────────────────────────────────────── */
+.tq-summary{{margin:24px 0 16px}}
+.tq-headline{{font-size:13px;color:var(--muted);margin-bottom:14px}}
+.tq-headline strong{{color:var(--c-medium)}}
+.tq-table{{width:100%;border-collapse:collapse;font-size:12px;
+          background:var(--surface);border:1px solid var(--border);
+          border-radius:8px;overflow:hidden}}
+.tq-table th{{background:#0d1117;color:var(--muted);font-size:10px;
+             text-transform:uppercase;letter-spacing:.5px;
+             padding:10px 14px;text-align:left}}
+.tq-table td{{padding:9px 14px;border-top:1px solid var(--border)}}
+.tq-table tr:hover td{{background:#1c2333}}
+.tq-help{{font-size:11px;color:var(--muted);margin-top:12px;
+         padding:8px 12px;background:#0d1117;border-radius:6px;
+         border-left:3px solid var(--c-medium)}}
+
 /* ── Section titles ── */
 .sec-title{{font-size:16px;font-weight:600;border-bottom:1px solid var(--border);
            padding-bottom:10px;margin:40px 0 20px}}

@@ -29,6 +29,9 @@ from bug_clustering import (
     load_trends, update_trends, fingerprint_recurrence_count,
 )
 from spec_consistency import detect_inconsistencies, render_html_section
+from test_quality_audit import (
+    audit_all_tests, render_audit_html as render_quality_audit_html,
+)
 
 REPORTS_DIR = ROOT / "reports"
 
@@ -365,6 +368,10 @@ SYSTEM_SELFTEST_NAMES = {
     # Phase 4.5 — vision-LLM verifications
     "test_phase45_verification_parser_handles_clean_response",
     "test_phase45_verification_parser_categorises_severity",
+    # Phase 4.4 — test-quality auditor verifications
+    "test_phase44_verification_detects_assert_true",
+    "test_phase44_verification_detects_no_assert",
+    "test_phase44_verification_passes_clean_test",
 }
 
 
@@ -759,10 +766,27 @@ def main():
         print("[CONSOLIDATE] no cross-spec contradictions found")
     inconsistencies_html = render_html_section(spec_inconsistencies)
 
+    # ── Test-quality audit (Phase 4.4) ─────────────────────────────────
+    # Find weak/vacuous tests in our own suite — `assert True`,
+    # `assert ... or True`, missing-assert-altogether, etc. Catches test
+    # theatre that wastes report space.
+    quality_findings = audit_all_tests("tests")
+    if quality_findings:
+        print(f"[CONSOLIDATE] {len(quality_findings)} weak test(s) detected:")
+        for f in quality_findings:
+            print(f"  • [{f.severity}] {f.test_class}::{f.test_name} — {f.issue}")
+    else:
+        print("[CONSOLIDATE] no weak tests detected")
+    quality_html = render_quality_audit_html(quality_findings)
+
+    # Combine extra sections (concatenated, in order). The reporter
+    # injects this above the bug-tickets list.
+    extra_sections = inconsistencies_html + quality_html
+
     # Generate the consolidated HTML bug report (full master report)
     from ai_engine.reporter import generate_report
     out = generate_report(all_results, base_url, model,
-                          extra_section_html=inconsistencies_html)
+                          extra_section_html=extra_sections)
     print(f"[CONSOLIDATE] ✅ Master report → {out}")
     print(f"[CONSOLIDATE] ✅ Summary       → {cons_path}")
 
