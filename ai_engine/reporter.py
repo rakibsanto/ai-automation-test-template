@@ -493,14 +493,8 @@ tr:hover td{{background:#1c2333}}
     <div class="name">Mejbaur Bahar Fagun</div>
     <div class="title">Senior Software Engineer QA (IV) · Markopolo.ai</div>
     <div class="links">
-      <a href="mailto:r@markopolo.ai">📧 r@markopolo.ai</a>
-      <a href="https://markopolo.ai" target="_blank" rel="noopener">🌐 markopolo.ai</a>
-      <a href="https://www.linkedin.com/in/mejbaur" target="_blank" rel="noopener">💼 LinkedIn</a>
-      <a href="https://github.com/mejbaur-markopolo" target="_blank" rel="noopener">🐙 GitHub</a>
+      <a href="https://www.linkedin.com/in/mejbaur/" target="_blank" rel="noopener">💼 LinkedIn</a>
     </div>
-  </div>
-  <div style="color:var(--muted);font-size:11px;margin-top:8px">
-    Powered by Ollama · Playwright · pytest · LangGraph
   </div>
 </div>
 
