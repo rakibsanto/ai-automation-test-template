@@ -3032,3 +3032,66 @@ class TestQA18NetworkResilience:
             f"verification failed — heap detector did NOT flag {growth_mb}MB "
             f"growth as over the {budget}MB budget"
         )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PHASE 4.1 — CAUSAL BUG CLUSTERING + CROSS-RUN FINGERPRINTING
+# ─────────────────────────────────────────────────────────────────────────────
+# Verifications for the clustering layer. SYSTEM SELF-TESTS — they validate
+# our reporting code, not the user's app, so they're filtered from
+# user-facing counts via the system_selftest marker.
+
+class TestPhase4ClusteringVerification:
+    """Verify the clustering + fingerprinting code works correctly."""
+
+    @pytest.mark.system_selftest
+    def test_phase4_verification_navigation_bugs_cluster_together(self):
+        """Two bugs both reporting 'did not navigate to find-tutors' MUST
+        cluster into 1 group, even though they came from different test
+        classes. This is the whole point of clustering."""
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
+        from bug_clustering import cluster_bugs
+
+        bugs = [
+            {"id": "QA01-001", "test_name": "test_qa01_find_teacher_navigates",
+             "severity": "HIGH", "priority": "P1",
+             "error_message": "AssertionError: Find a Teacher did not navigate to find-tutors"},
+            {"id": "QA02-001", "test_name": "test_qa02_ec_tutor_search_no_filters_navigates",
+             "severity": "MEDIUM", "priority": "P2",
+             "error_message": "EC-M-17: No-filter search did not navigate to find-tutors"},
+        ]
+        clusters = cluster_bugs(bugs)
+        assert len(clusters) == 1, (
+            f"verification failed — 2 navigation bugs should cluster as 1, "
+            f"got {len(clusters)}: {[c.title for c in clusters]}"
+        )
+        c = clusters[0]
+        assert c.affected_count() == 2
+        assert c.severity == "HIGH"
+
+    @pytest.mark.system_selftest
+    def test_phase4_verification_fingerprint_stable_across_runs(self):
+        """Same underlying error must produce the same fingerprint regardless
+        of which page / random timing data appears in the message. Otherwise
+        cross-run trend tracking is broken."""
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
+        from bug_clustering import compute_fingerprint
+
+        bug_a = {"test_name": "test_qa16_core_web_vitals",
+                  "error_message": "find_tutors: TTFB 1774ms > budget 1500ms"}
+        bug_b = {"test_name": "test_qa16_core_web_vitals",
+                  "error_message": "homepage_en: TTFB 2103ms > budget 1500ms"}
+        bug_c = {"test_name": "test_qa16_core_web_vitals",
+                  "error_message": "become_tutor: TTFB 1612ms > budget 1500ms"}
+        fp_a = compute_fingerprint(bug_a)
+        fp_b = compute_fingerprint(bug_b)
+        fp_c = compute_fingerprint(bug_c)
+        assert fp_a == fp_b == fp_c, (
+            f"verification failed — same TTFB-over-budget issue produced "
+            f"different fingerprints: a={fp_a}, b={fp_b}, c={fp_c}"
+        )
+        bug_d = {"test_name": "test_qa01_login",
+                  "error_message": "AssertionError: login flow broken"}
+        assert compute_fingerprint(bug_d) != fp_a

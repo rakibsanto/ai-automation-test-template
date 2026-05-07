@@ -111,6 +111,34 @@ pre{{background:#0d1117;border:1px solid var(--border);border-radius:6px;
 .spec-blk[data-hidden="1"]{{display:none}}
 .trow[data-hidden="1"]{{display:none}}
 
+/* ── Root-cause cluster summary banner ──────────────────────────────────── */
+.cluster-summary{{margin:24px 0 16px}}
+.cluster-headline{{font-size:14px;color:var(--muted);margin-bottom:14px}}
+.cluster-headline strong{{color:#a371f7}}
+.cluster-list{{display:flex;flex-direction:column;gap:8px}}
+.cluster-row{{background:var(--surface);border:1px solid var(--border);
+             border-radius:8px;padding:14px 18px;
+             display:grid;grid-template-columns:auto 1fr auto;
+             gap:14px;align-items:center}}
+.cluster-row:hover{{border-color:#58a6ff}}
+.cluster-meta{{display:flex;gap:6px;align-items:center;flex-wrap:wrap}}
+.cluster-count{{font-size:11px;color:var(--muted);background:#0d1117;
+               border:1px solid var(--border);border-radius:4px;
+               padding:3px 8px;font-weight:600}}
+.cluster-title{{font-size:13px;color:var(--text);font-weight:600}}
+.cluster-tickets{{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;
+                 max-width:300px}}
+.cluster-bug-link{{font-size:10px;font-family:'SF Mono',monospace;color:#58a6ff;
+                  text-decoration:none;background:#0d1117;border:1px solid var(--border);
+                  padding:2px 6px;border-radius:4px}}
+.cluster-bug-link:hover{{border-color:#58a6ff;background:#1c2333}}
+.recurrence-badge{{background:#2d1b1b;color:#f85149;border:1px solid #f85149;
+                  border-radius:4px;padding:2px 8px;font-size:10px;
+                  font-weight:700;text-transform:uppercase;letter-spacing:.4px}}
+.cluster-help{{font-size:11px;color:var(--muted);margin-top:12px;
+              padding:8px 12px;background:#0d1117;border-radius:6px;
+              border-left:3px solid #a371f7}}
+
 /* ── Section titles ── */
 .sec-title{{font-size:16px;font-weight:600;border-bottom:1px solid var(--border);
            padding-bottom:10px;margin:40px 0 20px}}
@@ -429,6 +457,10 @@ tr:hover td{{background:#1c2333}}
   <a href="#tests"       class="stat fail"     data-filter="failed"   title="Show only FAILED tests"><div class="label">Failed</div>  <div class="val">{total_failed}</div></a>
   <a href="#tests"       class="stat total"    data-filter="all"      title="Show all tests"><div class="label">Total Tests</div><div class="val">{total_tests}</div></a>
 </div>
+
+<!-- Cluster summary — groups bugs by root cause (e.g. 6 missing-headers
+     finding share '1 root cause: security headers') -->
+{cluster_summary}
 
 <!-- Bug Tickets -->
 <div class="sec-title" id="bugs">
@@ -1174,6 +1206,95 @@ def _spec_detail_block(spec_name: str, result: dict, block_idx: int) -> str:
 # Public entry point
 # ─────────────────────────────────────────────────────────────────────────────
 
+def _build_cluster_summary(all_bugs: list[dict]) -> str:
+    """Render a top-of-report banner showing root-cause clusters.
+
+    Each bug is expected to have `fingerprint` + `category_title` keys
+    (set by scripts/consolidate_reports.py via cluster_bugs()). This
+    function aggregates them into a clickable summary that links to
+    the individual bug tickets below."""
+    if not all_bugs:
+        return ""
+    # Group by fingerprint
+    by_fp: dict[str, dict] = {}
+    for bug in all_bugs:
+        fp = bug.get("fingerprint", "")
+        if not fp:
+            continue
+        if fp not in by_fp:
+            by_fp[fp] = {
+                "title":    bug.get("category_title", "(uncategorized)"),
+                "severity": bug.get("severity", "MEDIUM"),
+                "priority": bug.get("priority", "P2"),
+                "bugs":     [],
+                "recurrence": bug.get("recurrence_count", 1),
+            }
+        by_fp[fp]["bugs"].append(bug)
+        # Promote to most-severe in cluster
+        sev_order = {"CRITICAL": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 3}
+        if sev_order.get(bug.get("severity", "MEDIUM"), 9) < \
+           sev_order.get(by_fp[fp]["severity"], 9):
+            by_fp[fp]["severity"] = bug.get("severity")
+            by_fp[fp]["priority"] = bug.get("priority", "P2")
+
+    if not by_fp:
+        return ""
+
+    # Sort: severity desc → cluster size desc
+    sev_order = {"CRITICAL": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 3}
+    sorted_clusters = sorted(
+        by_fp.items(),
+        key=lambda kv: (sev_order.get(kv[1]["severity"], 9), -len(kv[1]["bugs"]))
+    )
+
+    rows_html = []
+    for fp, c in sorted_clusters:
+        bugs   = c["bugs"]
+        sev    = c["severity"]
+        pri    = c["priority"]
+        n      = len(bugs)
+        recur  = c["recurrence"]
+        title  = _esc(c["title"])
+        # Anchors to the affected bug tickets
+        bug_links = " ".join(
+            f'<a href="#{_esc(b.get("id",""))}" class="cluster-bug-link">'
+            f'{_esc(b.get("id",""))}</a>'
+            for b in bugs
+        )
+        recur_badge = (f'<span class="recurrence-badge">'
+                       f'{recur}× consecutive runs</span>'
+                       if recur >= 3 else "")
+        rows_html.append(f"""
+<div class="cluster-row">
+  <div class="cluster-meta">
+    <span class="badge {sev}">{sev}</span>
+    <span class="badge {pri}">{pri}</span>
+    <span class="cluster-count">{n}× affected</span>
+    {recur_badge}
+  </div>
+  <div class="cluster-title">{title}</div>
+  <div class="cluster-tickets">{bug_links}</div>
+</div>""")
+
+    n_clusters = len(by_fp)
+    n_bugs     = sum(len(c["bugs"]) for c in by_fp.values())
+    headline = (f"{n_bugs} bug ticket(s) → "
+                f"<strong>{n_clusters} unique root cause(s)</strong>")
+
+    return f"""
+<div class="cluster-summary" id="clusters">
+  <div class="sec-title" style="margin:24px 0 12px">
+    🎯 Root-Cause Summary <span class="count">{n_clusters} clusters</span>
+  </div>
+  <div class="cluster-headline">{headline}</div>
+  <div class="cluster-list">{"".join(rows_html)}</div>
+  <div class="cluster-help">
+    Bugs sharing a root cause are grouped here so you fix one thing
+    instead of N. Click any ticket ID to jump to its full bug card below.
+  </div>
+</div>"""
+
+
 def generate_report(all_results: dict, base_url: str, model: str,
                     output_filename: str = "bug-report.html") -> Path:
     all_bugs = [b for r in all_results.values() for b in r.get("bugs", [])]
@@ -1186,6 +1307,12 @@ def generate_report(all_results: dict, base_url: str, model: str,
     for b in all_bugs:
         sev = b.get("severity", "MEDIUM").upper()
         cnt[sev] = cnt.get(sev, 0) + 1
+
+    # ── Cluster summary banner ─────────────────────────────────────────────
+    # consolidate-reports.py adds 'fingerprint' + 'category_title' to each
+    # bug. Aggregate them into a top-of-report summary so users can grok
+    # the report at a glance: "8 bugs, 4 unique root causes".
+    cluster_summary = _build_cluster_summary(all_bugs)
 
     bug_tickets_html = "".join(
         _bug_ticket(b, i + 1) for i, b in enumerate(all_bugs)
@@ -1215,6 +1342,7 @@ def generate_report(all_results: dict, base_url: str, model: str,
         total_failed = total_failed,
         total_tests  = total_tests,
         total_bugs       = len(all_bugs),
+        cluster_summary  = cluster_summary,
         bug_tickets_html = bug_tickets_html,
         results_rows     = results_rows,
         spec_details_html= spec_details_html,

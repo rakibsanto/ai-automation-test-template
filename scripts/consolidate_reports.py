@@ -12,7 +12,7 @@ Writes:
   reports/consolidated_summary.json     — Machine-readable merged summary
 """
 from __future__ import annotations
-import base64, json, re, sys
+import base64, json, os, re, sys
 from pathlib import Path
 from datetime import datetime
 
@@ -23,6 +23,10 @@ sys.path.insert(0, str(Path(__file__).parent))
 from friendly import (
     friendly_actual, friendly_expected, friendly_description, friendly_steps,
     extract_docstrings, parse_parametrize_id, build_passed_test_entry,
+)
+from bug_clustering import (
+    cluster_bugs, compute_fingerprint, compute_category_title,
+    load_trends, update_trends, fingerprint_recurrence_count,
 )
 
 REPORTS_DIR = ROOT / "reports"
@@ -345,13 +349,17 @@ SYSTEM_SELFTEST_NAMES = {
     "test_qa15_phase2_verification_detects_synthetic_leak",
     "test_qa18_phase3_verification_synthetic_budget_violation",
     "test_qa18_phase3_verification_synthetic_heap_growth_caught",
+    # Phase 4.1 — clustering / fingerprinting
+    "test_phase4_verification_navigation_bugs_cluster_together",
+    "test_phase4_verification_fingerprint_stable_across_runs",
 }
 
 
 def _is_system_selftest(nodeid: str, fn_name: str) -> bool:
     """Tests in SYSTEM_SELFTEST_NAMES verify our own logic, not the user's app.
     Also any test with `@pytest.mark.system_selftest` reports keywords in pytest
-    JSON — but the simplest discriminator is the function name match."""
+    JSON — but the simplest discriminator is the function name match.
+    Also: any test starting with 'test_phase' + '_verification_' substring."""
     if fn_name in SYSTEM_SELFTEST_NAMES:
         return True
     return "_phase" in fn_name and "_verification_" in fn_name
@@ -641,6 +649,34 @@ def main():
 
     totals = compute_totals(all_results)
 
+    # ── Causal bug clustering + cross-run trends ────────────────────────────
+    all_bugs = [b for r in all_results.values() for b in r.get("bugs", [])]
+    clusters = cluster_bugs(all_bugs)  # mutates each bug to add 'fingerprint'
+    print(f"[CONSOLIDATE] Clustered {len(all_bugs)} bug(s) into {len(clusters)} "
+          f"causal cluster(s)")
+    for c in clusters:
+        print(f"  • {c.cluster_id()} [{c.severity}/{c.priority}] "
+              f"{c.affected_count()}× — {c.title}")
+
+    # Update trends file (read previous trends, append this run, write back)
+    trends_path = REPORTS_DIR / "trends.json"
+    trends      = load_trends(trends_path)
+    run_number  = os.getenv("GITHUB_RUN_NUMBER", str(int(datetime.now().timestamp())))
+    run_url     = (f"https://github.com/{os.getenv('GITHUB_REPOSITORY','')}/"
+                   f"actions/runs/{os.getenv('GITHUB_RUN_ID','')}")
+    fps_seen    = [c.fingerprint for c in clusters]
+    trends      = update_trends(trends, run_number=run_number, run_url=run_url,
+                                  totals={**totals, "total_bugs": len(all_bugs)},
+                                  fingerprints_seen=fps_seen)
+    trends_path.write_text(json.dumps(trends, indent=2), encoding="utf-8")
+
+    # Annotate each bug with recurrence count from trends — surfaces
+    # "this bug has been failing for 3 runs in a row" in the report.
+    for bug in all_bugs:
+        fp = bug.get("fingerprint", "")
+        if fp:
+            bug["recurrence_count"] = fingerprint_recurrence_count(trends, fp)
+
     print("[CONSOLIDATE] Results:")
     print(f"  {'Group':<30} {'Pass':>5} {'Fail':>5} {'Total':>6}")
     print(f"  {'-'*50}")
@@ -650,7 +686,7 @@ def main():
     print(f"  {'TOTAL':<30} {totals['total_passed']:>5} {totals['total_failed']:>5} "
           f"{totals['total_tests']:>6}  (pass rate: {totals['pass_rate']})")
 
-    # Write consolidated summary JSON
+    # Write consolidated summary JSON (with cluster summary appended)
     cons_path = REPORTS_DIR / "consolidated_summary.json"
     cons_path.write_text(json.dumps({
         "timestamp": datetime.now().isoformat(),
@@ -658,6 +694,18 @@ def main():
         "engine":    "consolidated",
         "sources":   list(all_results.keys()),
         **totals,
+        "clusters": [
+            {
+                "id":             c.cluster_id(),
+                "fingerprint":    c.fingerprint,
+                "title":          c.title,
+                "severity":       c.severity,
+                "priority":       c.priority,
+                "affected_count": c.affected_count(),
+                "affected_tests": c.affected_tests(),
+            }
+            for c in clusters
+        ],
     }, indent=2), encoding="utf-8")
 
     # Update main summary.json so the existing HTML generator also works
