@@ -32,6 +32,7 @@ from spec_consistency import detect_inconsistencies, render_html_section
 from test_quality_audit import (
     audit_all_tests, render_audit_html as render_quality_audit_html,
 )
+from test_data_viewer import render_test_data_section
 
 REPORTS_DIR = ROOT / "reports"
 
@@ -779,9 +780,15 @@ def main():
         print("[CONSOLIDATE] no weak tests detected")
     quality_html = render_quality_audit_html(quality_findings)
 
+    # ── Test-data viewer (Phase 4 — user request) ──────────────────────
+    # Surface every distinct test data value used during the run so the
+    # team can quickly audit "what did we actually test?". Pulls from
+    # both the AI agent's test_data_log.json AND _testdata() AST output.
+    test_data_html = render_test_data_section(extra_test_data=_testdata())
+
     # Combine extra sections (concatenated, in order). The reporter
     # injects this above the bug-tickets list.
-    extra_sections = inconsistencies_html + quality_html
+    extra_sections = inconsistencies_html + quality_html + test_data_html
 
     # Generate the consolidated HTML bug report (full master report)
     from ai_engine.reporter import generate_report

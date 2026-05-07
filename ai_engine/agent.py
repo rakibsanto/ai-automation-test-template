@@ -42,6 +42,7 @@ try:
     from ai_engine.evidence       import load_screenshot_index, load_evidence_index, enrich_bug
     from ai_engine.memory         import (record_failure, update_selector, get_all_selectors,
                                           mark_flaky, summary as mem_summary)
+    from ai_engine.test_memory    import TestMemory
     from ai_engine.reporter       import generate_report
 except ImportError:
     sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -58,7 +59,13 @@ except ImportError:
     from evidence       import load_screenshot_index, load_evidence_index, enrich_bug
     from memory         import (record_failure, update_selector, get_all_selectors,
                                 mark_flaky, summary as mem_summary)
+    from test_memory    import TestMemory
     from reporter       import generate_report
+
+# Cross-run cache for AI-generated test code. Hashes spec content + base URL,
+# so unchanged specs reuse last run's tests; new/modified specs trigger fresh
+# generation. Persisted to gh-pages so stateless CI runners benefit.
+MEMORY = TestMemory()
 
 try:
     from payloads import XSS_QUICK as _XSS, SQLI_QUICK as _SQLI
@@ -1687,10 +1694,60 @@ class AutonomousTestAgent:
         if ms["fixed_selectors"] or ms["failure_records"]:
             log(f"  [MEMORY] {ms['fixed_selectors']} selector fix(es), "
                 f"{ms['failure_records']} failure record(s)")
+        # ── Fetch prior cached test code from gh-pages so we can skip AI
+        # generation on specs whose content hasn't changed. CI runners
+        # are stateless — without this fetch, every run regenerates
+        # from scratch and the AI bottleneck never improves.
+        self._restore_cache_from_gh_pages()
+        cache_stats = MEMORY.stats()
+        if cache_stats["total_cached_specs"]:
+            log(f"  [CACHE] Loaded {cache_stats['total_cached_specs']} cached spec(s) "
+                f"({cache_stats['total_cached_tests']} tests). New AI calls only "
+                f"for specs that have changed.")
+        else:
+            log("  [CACHE] Empty (first run, or all specs new) — full AI generation")
         if BROWSER_USE_ON and _BROWSER_USE_AVAILABLE:
             log(f"  [BROWSER-USE] Enabled — model: {BROWSER_USE_MDL}")
         elif BROWSER_USE_ON:
             log("  [BROWSER-USE] Requested but not installed (pip install browser-use langchain-ollama)")
+
+    def _restore_cache_from_gh_pages(self) -> None:
+        """Pull the previous run's cache from the deployed gh-pages so
+        unchanged specs reuse already-generated tests. The cache index
+        lives at /cache-index.json; per-spec tests at /cache/tests/<slug>.json."""
+        try:
+            from urllib.request import urlopen
+            from urllib.error import URLError, HTTPError
+        except ImportError:
+            return
+        repo = os.getenv("GITHUB_REPOSITORY", "")
+        if not repo:
+            return
+        owner = repo.split("/")[0]
+        name  = repo.split("/")[-1]
+        base  = f"https://{owner}.github.io/{name}/cache"
+        idx_url = f"{base}/_index.json"
+        try:
+            with urlopen(idx_url, timeout=12) as resp:
+                idx = json.loads(resp.read().decode("utf-8"))
+        except (URLError, HTTPError, json.JSONDecodeError, Exception) as e:
+            log(f"  [CACHE] No prior cache at {idx_url} ({e}) — starting fresh")
+            return
+        slugs = idx.get("slugs", [])
+        if not slugs:
+            return
+        cache_dir = MEMORY.cache_dir
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        loaded = 0
+        for slug in slugs:
+            try:
+                with urlopen(f"{base}/tests/{slug}.json", timeout=10) as resp:
+                    blob = resp.read()
+                (cache_dir / f"{slug}.json").write_bytes(blob)
+                loaded += 1
+            except Exception:
+                continue
+        log(f"  [CACHE] Restored {loaded}/{len(slugs)} cached spec(s) from gh-pages")
 
     def run(self):
         self._banner()
@@ -1741,22 +1798,44 @@ class AutonomousTestAgent:
 
         test_file = TESTS_DIR / f"test_{name.replace('-','_')}.py"
 
-        # 3. Generate
-        log("\n  [THINK] Generating tests (22 types)...")
-        type_log: dict = {}
-        code, type_log = generate_all_22_types(spec)
-
-        if not code:
-            log("  [FALLBACK] Using template engine (zero-AI, compiled selectors)...")
-            code = template_tests(spec, compiled)
+        # 2c. ── AI cache check ──────────────────────────────────────────
+        # If we previously generated tests for THIS spec+URL combo and they
+        # passed (or had acceptable failure count), reuse the cached code
+        # and skip the slow AI generation entirely. The cache key is
+        # sha256(spec_md + base_url) so any spec edit invalidates it.
+        spec_md = spec_path.read_text(encoding="utf-8")
+        cached  = MEMORY.get(name, spec_md, BASE_URL)
+        if cached and cached.get("code"):
+            code     = cached["code"]
             type_log = {
-                "template": {
-                    "test_count": code.count("def test_"),
-                    "tests":      re.findall(r"def (test_\w+)", code),
-                    "test_data":  re.findall(r"# TEST_DATA:\s*(.+)", code),
+                "cached_from_prior_run": {
+                    "test_count":  cached.get("test_count", 0),
+                    "tests":       cached.get("tests", []),
+                    "saved_at":    cached.get("saved_at", ""),
+                    "test_data":   ["(reused from cache — see saved_at "
+                                     f"{cached.get('saved_at','')})"],
                 }
             }
-            log(f"  [FALLBACK] Template: {code.count('def test_')} tests")
+            log(f"  [CACHE-HIT] {name}: reusing {cached.get('test_count', 0)} "
+                f"tests from {cached.get('saved_at','prior run')} "
+                f"(spec hash unchanged)")
+        else:
+            # 3. Generate (no cache hit OR spec changed)
+            log("\n  [THINK] Generating tests (22 types)...")
+            type_log: dict = {}
+            code, type_log = generate_all_22_types(spec)
+
+            if not code:
+                log("  [FALLBACK] Using template engine (zero-AI, compiled selectors)...")
+                code = template_tests(spec, compiled)
+                type_log = {
+                    "template": {
+                        "test_count": code.count("def test_"),
+                        "tests":      re.findall(r"def (test_\w+)", code),
+                        "test_data":  re.findall(r"# TEST_DATA:\s*(.+)", code),
+                    }
+                }
+                log(f"  [FALLBACK] Template: {code.count('def test_')} tests")
 
         code = ensure_imports(code)
 
@@ -1835,6 +1914,23 @@ class AutonomousTestAgent:
         results.update({"bugs": bugs, "gaps": gaps, "spec_name": name, "compiled": compiled})
         self.all_results[name] = results
 
+        # ── Save to cache ───────────────────────────────────────────────
+        # If we just generated tests AND the result quality is acceptable
+        # (≥75% pass rate), persist the code so the next run skips AI.
+        # We re-save even on cache-hit (cheap) so the saved_at timestamp
+        # bumps and we have a confirmation the cached code still works.
+        try:
+            total = results.get("total", 0)
+            failed = results.get("failed", 0)
+            if total > 0 and (failed / total) <= 0.25:
+                MEMORY.save(name, spec_md, BASE_URL, code, results)
+                log(f"  [CACHE-SAVE] {name}: {total} tests cached for next run")
+            elif total > 0:
+                log(f"  [CACHE-SKIP] {name}: too many failures ({failed}/{total}) "
+                    f"— not caching (will regenerate next run)")
+        except Exception as e:
+            log(f"  [CACHE-SAVE] failed (non-fatal): {e}")
+
         # Write partial state after each spec (CI always has latest data)
         _save_partial_state(self)
 
@@ -1881,6 +1977,24 @@ class AutonomousTestAgent:
             "base_url":   BASE_URL,
             "specs":      self._test_data_log,
         }, indent=2))
+
+        # ── Emit cache index so gh-pages can serve the cache directory.
+        # build_pages_site.py reads this and copies cache/tests/*.json to
+        # gh-pages-site/cache/tests/. Next CI run fetches them via URL.
+        try:
+            cache_dir = MEMORY.cache_dir
+            slugs = sorted(p.stem for p in cache_dir.glob("*.json")
+                           if p.name != "_index.json")
+            (cache_dir / "_index.json").write_text(json.dumps({
+                "generated_at": datetime.now().isoformat(),
+                "base_url":     BASE_URL,
+                "slugs":        slugs,
+                "count":        len(slugs),
+            }, indent=2), encoding="utf-8")
+            log(f"  [CACHE] Index emitted with {len(slugs)} entries → "
+                f"{cache_dir}/_index.json")
+        except Exception as e:
+            log(f"  [CACHE] Index emit failed: {e}")
 
         if total_f > 0:
             sys.exit(1)

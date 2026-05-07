@@ -173,6 +173,52 @@ pre{{background:#0d1117;border:1px solid var(--border);border-radius:6px;
          padding:8px 12px;background:#0d1117;border-radius:6px;
          border-left:3px solid var(--c-medium)}}
 
+/* ── Test data viewer (expandable) ──────────────────────────────────────── */
+.td-summary{{margin:24px 0 16px}}
+.td-headline{{font-size:13px;color:var(--muted);margin-bottom:14px}}
+.td-list{{display:flex;flex-direction:column;gap:8px}}
+.td-spec-row, .td-type-row{{
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  overflow:hidden
+}}
+.td-type-row{{margin-top:6px;background:#0d1117}}
+.td-spec-row > summary, .td-type-row > summary{{
+  list-style:none;cursor:pointer;padding:11px 16px;
+  display:flex;align-items:center;gap:14px;font-size:13px;
+  user-select:none;transition:background .12s
+}}
+.td-spec-row > summary::-webkit-details-marker,
+.td-type-row > summary::-webkit-details-marker{{display:none}}
+.td-spec-row > summary::before, .td-type-row > summary::before{{
+  content:"▶";color:var(--muted);font-size:9px;width:12px;flex-shrink:0
+}}
+.td-spec-row[open] > summary::before, .td-type-row[open] > summary::before{{
+  content:"▼"
+}}
+.td-spec-row > summary:hover, .td-type-row > summary:hover{{background:#1c2333}}
+.td-spec-name{{font-weight:600;color:var(--text);flex:1}}
+.td-type-name{{font-family:'SF Mono',monospace;color:var(--c-low);
+              font-size:12px;flex:1}}
+.td-count{{font-size:11px;color:var(--muted);background:#0d1117;
+          border:1px solid var(--border);border-radius:4px;padding:2px 8px}}
+.td-data-count{{font-size:11px;color:#a371f7;background:rgba(163,113,247,.10);
+               border-radius:4px;padding:2px 8px;font-weight:600}}
+.td-spec-body, .td-type-body{{
+  padding:12px 18px;border-top:1px solid var(--border)
+}}
+.td-help{{font-size:11px;color:var(--muted);margin-bottom:10px;
+         padding:6px 10px;background:#0d1117;border-radius:5px;
+         border-left:3px solid #a371f7}}
+.td-data-list{{margin:8px 0;padding-left:20px;color:var(--text);font-size:12px}}
+.td-data-list li{{padding:3px 0;line-height:1.5}}
+.td-data-list code{{background:#0d1117;border:1px solid var(--border);
+                    border-radius:3px;padding:1px 6px;font-size:11px;
+                    color:#a371f7}}
+.td-src{{color:#58a6ff;font-family:'SF Mono',monospace;font-size:11px}}
+.td-empty{{color:var(--muted);font-style:italic;font-size:12px;padding:8px 0}}
+.td-truncated{{font-size:11px;color:var(--muted);margin-top:6px;
+              padding:6px 10px;background:#0d1117;border-radius:4px}}
+
 /* ── Section titles ── */
 .sec-title{{font-size:16px;font-weight:600;border-bottom:1px solid var(--border);
            padding-bottom:10px;margin:40px 0 20px}}

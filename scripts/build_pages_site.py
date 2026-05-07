@@ -568,6 +568,20 @@ def main() -> None:
         shutil.copy(trends_src, archive / "trends.json")
         print(f"  ✅ trends.json published to site root")
 
+    # 1d. Publish AI test-code cache so the next CI run can reuse generated
+    # tests for unchanged specs (skips slow Ollama calls). cache/tests/<slug>.json
+    # is fetched at the start of the next run via _restore_cache_from_gh_pages.
+    cache_dir = ROOT / "cache" / "tests"
+    if cache_dir.exists() and any(cache_dir.iterdir()):
+        dest_cache = SITE_DIR / "cache" / "tests"
+        if dest_cache.exists():
+            shutil.rmtree(dest_cache)
+        dest_cache.mkdir(parents=True, exist_ok=True)
+        for f in cache_dir.glob("*.json"):
+            shutil.copy(f, dest_cache / f.name)
+        n = sum(1 for _ in dest_cache.glob("*.json"))
+        print(f"  ✅ AI test cache published ({n} spec(s) cached)")
+
     # 2. Per-agent reports under /agents/ (and archived copy). Prefer the
     #    custom Fagun-styled `agent-<src>.html` over the default pytest-html
     #    output. Fall back to pytest-html only if no custom report exists.
