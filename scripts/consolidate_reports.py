@@ -352,6 +352,9 @@ SYSTEM_SELFTEST_NAMES = {
     # Phase 4.1 — clustering / fingerprinting
     "test_phase4_verification_navigation_bugs_cluster_together",
     "test_phase4_verification_fingerprint_stable_across_runs",
+    # Phase 4.2 — autonomous exploratory verifications
+    "test_phase4_verification_walker_captures_synthetic_js_error",
+    "test_phase4_verification_walker_categorises_severity",
 }
 
 
@@ -587,6 +590,7 @@ def build_consolidated_results(base_url: str) -> dict:
         "qa16_lighthouse":       ("QA-16 Core Web Vitals",     "QA16"),
         "qa17_memory":           ("QA-17 Memory Leak",         "QA17"),
         "qa18_network":          ("QA-18 Network Resilience",  "QA18"),
+        "qa19_exploratory":      ("QA-19 Autonomous Exploratory","QA19"),
     }
 
     for file_stem, (group_name, prefix) in qa_groups.items():

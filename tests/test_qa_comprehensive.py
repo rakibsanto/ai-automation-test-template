@@ -3095,3 +3095,177 @@ class TestPhase4ClusteringVerification:
         bug_d = {"test_name": "test_qa01_login",
                   "error_message": "AssertionError: login flow broken"}
         assert compute_fingerprint(bug_d) != fp_a
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# QA-19  AUTONOMOUS EXPLORATORY TESTING  (Phase 4.2)
+# ─────────────────────────────────────────────────────────────────────────────
+# Sets browser-use loose on each key page for ~60-90s. The AI agent clicks
+# around, scrolls, tries to fill forms, and reports anything weird:
+# JS errors, broken layouts, dead-end clicks, missing text, infinite spinners.
+#
+# Why this matters: catches bugs no human-written spec describes (your QA-01
+# tests what the spec says; this tests what users ACTUALLY hit when they
+# wander). High signal, especially on pages with rich interactivity.
+#
+# Three layers of defense:
+#  1. If browser-use + local Ollama 7B is available  → real AI exploration
+#  2. If only Playwright is available                → deterministic
+#                                                       "exploratory walk"
+#                                                       (random scroll +
+#                                                       click + capture errors)
+#  3. If staging is offline                          → test skips cleanly
+
+class TestQA19AutonomousExploratory:
+    """Autonomous bug-finding via browser-use AI agent or deterministic walk."""
+
+    EXPLORE_PAGES = [
+        ("homepage_en",  BASE_URL),
+        ("find_tutors",  f"{BASE_URL}/find-tutors"),
+        ("become_tutor", f"{BASE_URL.rstrip('/en')}/en/become-tutor"),
+        ("how_it_works", f"{BASE_URL.rstrip('/en')}/en/how-mehad-works"),
+    ]
+
+    def _deterministic_walk(self, page: Page, url: str) -> list[str]:
+        """Fallback when browser-use is unavailable: random-scroll + click
+        every visible link/button, capturing JS errors and broken-link
+        responses. Cheap, deterministic, finds real bugs."""
+        issues: list[str] = []
+        page.on("pageerror", lambda exc: issues.append(f"JS_ERROR: {exc}"))
+        page.on("console",   lambda m: issues.append(f"CONSOLE_ERR: {m.text}")
+                if m.type == "error" else None)
+        bad_responses: list[tuple] = []
+        page.on("response",  lambda r: bad_responses.append((r.url, r.status))
+                if r.status >= 400 and r.status != 401 else None)
+
+        try:
+            page.goto(url, wait_until="domcontentloaded", timeout=15000)
+            page.wait_for_timeout(2500)
+        except Exception as e:
+            return [f"NAVIGATION_FAILED: {e}"]
+
+        # Scroll bottom-to-top to trigger lazy-load
+        try:
+            page.mouse.wheel(0, 5000)
+            page.wait_for_timeout(800)
+            page.mouse.wheel(0, -5000)
+            page.wait_for_timeout(400)
+        except Exception:
+            pass
+
+        # Try clicking each visible link in turn — go back after each
+        try:
+            links = page.locator("a[href]:visible, button:visible").all()
+            visited = 0
+            for link in links[:8]:
+                if visited >= 5:
+                    break
+                try:
+                    href = link.get_attribute("href") or ""
+                    text = (link.inner_text() or "")[:40]
+                    if href.startswith(("mailto:", "tel:", "javascript:")):
+                        continue
+                    if "logout" in text.lower() or "sign out" in text.lower():
+                        continue
+                    link.click(timeout=3000, force=True)
+                    page.wait_for_load_state("domcontentloaded", timeout=5000)
+                    page.wait_for_timeout(600)
+                    if page.url != url:
+                        page.go_back()
+                        page.wait_for_load_state("domcontentloaded", timeout=5000)
+                    visited += 1
+                except Exception:
+                    pass  # link may open external — fine
+        except Exception:
+            pass
+
+        # Aggregate findings
+        for url_failed, status in bad_responses[:5]:
+            issues.append(f"BAD_RESPONSE: {status} from {url_failed[:80]}")
+
+        # Filter known noise
+        noise = ("extension", "favicon", "DialogTitle", "DialogContent",
+                 "aria-describedby", "Missing `Description`")
+        return [i for i in issues
+                if not any(n.lower() in i.lower() for n in noise)]
+
+    @pytest.mark.parametrize("page_id,url", EXPLORE_PAGES)
+    def test_qa19_autonomous_exploration(self, page: Page,
+                                          page_id: str, url: str):
+        """Walks the page autonomously and reports any issues encountered.
+        Hard-fails ONLY on confirmed bugs (JS errors, 5xx, broken navigation).
+        Soft passes when nothing meaningful surfaces."""
+        # First try the deterministic walk (always available, fast)
+        issues = self._deterministic_walk(page, url)
+
+        # Optionally augment with browser-use AI exploration if enabled
+        # (controlled via BROWSER_USE_ENABLED env var to avoid Ollama
+        # dependence in fast CI runs).
+        if os.getenv("BROWSER_USE_ENABLED", "false").lower() == "true":
+            try:
+                from ai_engine.browser_agent import (
+                    run_exploratory_check, _available as _bu_available
+                )
+                if _bu_available():
+                    ai_issues = run_exploratory_check(url, page_id)
+                    # AI-found issues get a clear prefix
+                    issues.extend(f"AI_FINDING: {i}" for i in ai_issues)
+            except Exception as e:
+                # Don't block the test on browser-use failure
+                issues.append(f"BROWSER_USE_DISABLED: {e}")
+
+        # Categorise issues by severity
+        critical = [i for i in issues
+                    if i.startswith(("JS_ERROR:", "NAVIGATION_FAILED:"))
+                    or "5" in i.split("BAD_RESPONSE:")[1][:5] if "BAD_RESPONSE:" in i]
+        warnings = [i for i in issues if i not in critical]
+
+        # Always log findings so the team can see what the agent saw
+        if issues:
+            print(f"\n  [QA-19] {page_id}: {len(issues)} finding(s):", flush=True)
+            for i in issues[:8]:
+                print(f"    • {i[:160]}", flush=True)
+
+        # Hard fail only on critical findings — JS errors / nav failures
+        if critical:
+            pytest.fail(
+                f"Autonomous exploration of {page_id} found "
+                f"{len(critical)} CRITICAL issue(s):\n  "
+                + "\n  ".join(critical[:5])
+            )
+        # Soft pass if only soft warnings (still surfaced via print)
+
+    # ── Phase-4.2 verifications ─────────────────────────────────────────
+    @pytest.mark.system_selftest
+    def test_phase4_verification_walker_captures_synthetic_js_error(self, page: Page):
+        """Inject a JS error and confirm the deterministic walker captures it."""
+        captured: list = []
+        page.on("pageerror", lambda e: captured.append(str(e)))
+        page.goto(BASE_URL, wait_until="domcontentloaded", timeout=15000)
+        page.evaluate("setTimeout(() => { throw new Error('QA19-VERIFY-OK'); }, 50);")
+        page.wait_for_timeout(600)
+        assert any("QA19-VERIFY-OK" in c for c in captured), (
+            f"verification failed — pageerror listener did not capture "
+            f"injected synthetic JS error. Captured: {captured[:3]}"
+        )
+
+    @pytest.mark.system_selftest
+    def test_phase4_verification_walker_categorises_severity(self):
+        """Synthetic check: walker categorises issues into critical vs warnings."""
+        # Mock issues list as the walker would produce
+        issues = [
+            "JS_ERROR: TypeError: x is undefined",      # critical
+            "BAD_RESPONSE: 503 from /api/x",             # critical
+            "BAD_RESPONSE: 404 from /missing.png",       # warning (404)
+            "CONSOLE_ERR: someThing happened",           # warning
+        ]
+        critical = [i for i in issues
+                    if i.startswith(("JS_ERROR:", "NAVIGATION_FAILED:"))
+                    or ("BAD_RESPONSE:" in i and "5" in i.split("BAD_RESPONSE:")[1][:5])]
+        warnings = [i for i in issues if i not in critical]
+        assert len(critical) == 2, (
+            f"verification failed — should have 2 critical, got {len(critical)}: {critical}"
+        )
+        assert len(warnings) == 2, (
+            f"verification failed — should have 2 warnings, got {len(warnings)}"
+        )

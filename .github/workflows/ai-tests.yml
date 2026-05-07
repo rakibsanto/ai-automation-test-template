@@ -1151,6 +1151,49 @@ jobs:
           if-no-files-found: warn
 
   # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 4.2 — AUTONOMOUS EXPLORATORY TESTING (QA-19)
+  # ─────────────────────────────────────────────────────────────────────────────
+  qa-agent-16-exploratory:
+    name: "QA Agent 16 — Autonomous Explorer"
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      BASE_URL:                ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BROWSER_USE_ENABLED:     "false"   # set true once Ollama is hooked
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: "pip" }
+      - name: Install dependencies
+        run: pip install playwright pytest pytest-playwright pytest-html pytest-timeout pytest-json-report Pillow
+      - name: Install Playwright Chromium
+        run: playwright install chromium --with-deps
+      - name: Prepare reports directory
+        run: mkdir -p reports reports/screenshots reports/evidence
+      - name: Run QA-19 Autonomous Exploratory Tests
+        continue-on-error: true
+        run: |
+          BASE_URL=${{ env.BASE_URL }} BROWSER_USE_ENABLED=${{ env.BROWSER_USE_ENABLED }} \
+            python3 -m pytest \
+            tests/test_qa_comprehensive.py::TestQA19AutonomousExploratory \
+            --timeout=180 --timeout-method=thread --tb=short -v -p no:warnings \
+            --html=reports/qa19-exploratory.html --self-contained-html \
+            --json-report --json-report-file=reports/qa19_exploratory_results.json \
+            -p no:cacheprovider 2>&1 | tee reports/qa19-exploratory.txt
+      - name: Upload QA Agent 16 Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-agent-16-reports-${{ github.run_number }}
+          path: |
+            reports/qa19*
+            reports/screenshots/
+            reports/videos/
+            reports/evidence/
+          retention-days: 30
+          if-no-files-found: warn
+
+  # ─────────────────────────────────────────────────────────────────────────────
   # CONSOLIDATE — Merges ALL QA agent results into one master bug-report.html
   # Runs after every other job completes (pass or fail).
   # ─────────────────────────────────────────────────────────────────────────────
@@ -1176,6 +1219,7 @@ jobs:
       - qa-agent-13-lighthouse
       - qa-agent-14-memory-leak
       - qa-agent-15-network-resilience
+      - qa-agent-16-exploratory
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -1282,6 +1326,12 @@ jobs:
         with:
           name: qa-agent-15-reports-${{ github.run_number }}
           path: reports/agent-15/
+      - name: Download QA Agent 16 artifacts (autonomous exploratory)
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: qa-agent-16-reports-${{ github.run_number }}
+          path: reports/agent-16/
       - name: Download screenshots (for embedding in master report)
         uses: actions/download-artifact@v4
         continue-on-error: true
