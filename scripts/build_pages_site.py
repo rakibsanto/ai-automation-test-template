@@ -475,7 +475,7 @@ def _build_index_html(summary: dict, history: list[tuple[int, Path]]) -> str:
 <div class="hero">
   <div class="hero-inner">
     <h1>🤖 Fagun Autonomous QA Report</h1>
-    <div class="sub">9 AI agents · 240+ tests · auto-generated bug tickets · zero API cost</div>
+    <div class="sub">{len(AGENT_REPORTS)} AI agents · {t or '—'} tests · auto-generated bug tickets · zero API cost</div>
     <div class="meta">
       <span><b>Run:</b> #{RUN_NUMBER}</span>
       <span><b>Commit:</b> <a href="https://github.com/{os.getenv('GITHUB_REPOSITORY','')}/commit/{os.getenv('GITHUB_SHA','')}">{COMMIT_SHA}</a></span>
