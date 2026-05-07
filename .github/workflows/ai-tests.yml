@@ -253,13 +253,27 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
 
+      # ── 16a. Belt-and-braces: nuke any raw playwright temp videos that
+      # snuck past conftest's session_finish cleanup. The artifact uploader
+      # otherwise hits ENOENT mid-zip when these files vanish between
+      # the file-list scan and the byte-read (TOCTOU race seen in run #43).
+      - name: Clean Playwright raw videos before artifact upload
+        if: always()
+        run: |
+          find reports/videos -name 'page@*.webm' -delete 2>/dev/null || true
+          find reports -name 'page@*.webm' -delete 2>/dev/null || true
+          echo "Remaining videos:"
+          ls -la reports/videos/ 2>/dev/null | head -10 || true
+
       # ── 16. Upload full reports + evidence ────────────────────────────────
       - name: Upload full reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: full-reports-${{ github.run_number }}
-          path: reports/
+          path: |
+            reports/
+            !reports/videos/page@*.webm
           retention-days: 30
 
       # NOTE: GitHub Pages deploy moved to the consolidate-reports job (end of
@@ -453,6 +467,7 @@ jobs:
             reports/qa02*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -548,6 +563,7 @@ jobs:
             reports/qa05*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -598,6 +614,7 @@ jobs:
             reports/qa0[67]*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -640,6 +657,7 @@ jobs:
             reports/qa08*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -752,6 +770,7 @@ jobs:
             reports/qa09*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -803,6 +822,7 @@ jobs:
             reports/qa10*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -864,6 +884,7 @@ jobs:
             reports/visual-diffs/
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -906,6 +927,7 @@ jobs:
             reports/qa12*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -949,6 +971,7 @@ jobs:
             reports/qa13*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -988,6 +1011,7 @@ jobs:
             reports/qa14*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -1027,6 +1051,7 @@ jobs:
             reports/qa15*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -1069,6 +1094,7 @@ jobs:
             reports/qa16*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -1111,6 +1137,7 @@ jobs:
             reports/qa17*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -1150,6 +1177,7 @@ jobs:
             reports/qa18*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -1193,6 +1221,7 @@ jobs:
             reports/qa19*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -1234,6 +1263,7 @@ jobs:
             reports/qa20*
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -1293,6 +1323,7 @@ jobs:
             reports/vision-shots/
             reports/screenshots/
             reports/videos/
+            !reports/videos/page@*.webm
             reports/evidence/
           retention-days: 30
           if-no-files-found: warn
@@ -1341,7 +1372,9 @@ jobs:
         continue-on-error: true
         with:
           name: full-reports-${{ github.run_number }}
-          path: reports/
+          path: |
+            reports/
+            !reports/videos/page@*.webm
       - name: Download QA Agent 1 artifacts
         uses: actions/download-artifact@v4
         continue-on-error: true

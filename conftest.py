@@ -456,10 +456,16 @@ def pytest_internalerror(excrepr, excinfo):
 # ── Write indexes at session end ──────────────────────────────────────────────
 
 def _finalise_videos() -> None:
-    """Move/rename auto-generated playwright videos to predictable filenames.
-    Delete videos for passed tests to save artifact size (CI quota matters)."""
+    """Move/rename auto-generated playwright videos to predictable filenames,
+    then aggressively delete every Playwright RAW video file that's left
+    over. Why aggressive: actions/upload-artifact lists files first and
+    reads bytes later — if a `page@<hash>.webm` Playwright temp file is
+    listed but disappears between list and read, the upload step fails
+    with ENOENT (the bug that broke run #43). Cleaning these unconditionally
+    here closes the TOCTOU window."""
     if not _VIDEO_ON or not VIDEOS_DIR.exists():
         return
+
     # 1. Move pending failure videos to their target name
     for key in list(_VIDEO_INDEX.keys()):
         if not key.startswith("__pending__"):
@@ -475,9 +481,6 @@ def _finalise_videos() -> None:
                 target_abs.parent.mkdir(parents=True, exist_ok=True)
                 shutil.move(str(raw_path), str(target_abs))
             else:
-                # Sometimes Playwright writes the video AFTER context close;
-                # if it's not there yet, drop the index entry so the report
-                # gracefully falls back to "no video".
                 _VIDEO_INDEX.pop(nodeid, None)
         except Exception as e:
             print(f"  [VIDEO] move failed for {nodeid}: {e}", flush=True)
@@ -486,15 +489,34 @@ def _finalise_videos() -> None:
     # 2. Delete leftover videos that don't belong to any failure
     keep = set()
     for v_rel in _VIDEO_INDEX.values():
-        keep.add((_ROOT / v_rel).resolve())
+        if isinstance(v_rel, str):
+            try:
+                keep.add((_ROOT / v_rel).resolve())
+            except Exception:
+                pass
     for video in VIDEOS_DIR.rglob("*.webm"):
         if video.resolve() not in keep:
             try:
                 video.unlink()
             except Exception:
                 pass
+
+    # 3. AGGRESSIVE cleanup: any Playwright raw `page@<hash>.webm` left
+    # behind for ANY reason (race, exception, Playwright not finalising
+    # in time) gets nuked here. This is what prevents the
+    # actions/upload-artifact ENOENT crash in CI.
+    import glob as _glob
+    for pat in ("page@*.webm", "page@*.webm.*"):
+        for stale in VIDEOS_DIR.rglob(pat):
+            try:
+                stale.unlink()
+                print(f"  [VIDEO] cleaned raw playwright temp: {stale.name}",
+                      flush=True)
+            except Exception:
+                pass
+
     # Tidy empty per-test subdirs Playwright may have left behind
-    for sub in VIDEOS_DIR.iterdir():
+    for sub in list(VIDEOS_DIR.iterdir()):
         if sub.is_dir():
             try:
                 if not any(sub.iterdir()):
