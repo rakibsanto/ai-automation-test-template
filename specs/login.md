@@ -430,3 +430,27 @@ Level   : Advanced     → filtered subset
 - [ ] GDPR / PDPL compliance notices
 - [ ] Chatbot or live support widget
 - [ ] Pricing page content (`/en/pricing` — in footer but not confirmed)
+
+---
+
+## Skip Directives — How to Tell the QA System What NOT to Test
+
+The Fagun QA agent reads this section and automatically skips matching
+tests. Use natural language; recognised verbs include **don't test**,
+**skip**, **ignore**, **exclude**, **avoid testing**.
+
+Example forms (uncomment to apply):
+
+<!--
+- Don't test phone responsiveness
+- Skip i18n tests
+- Ignore visual regression on this page
+- Do not test OTP rate limiting
+- Avoid testing cross-browser
+-->
+
+The system maps phrases to canonical test types — see
+`ai_engine/spec_directives.py` for the full synonym table. When a
+directive triggers, matching tests appear as **SKIPPED** in the report
+with reason `skipped per spec directive: type='<name>'` so you always
+know why.

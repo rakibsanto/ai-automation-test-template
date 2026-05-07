@@ -11,9 +11,20 @@ All paths in _index.json are RELATIVE so consolidate-reports.py running
 on a different runner can resolve them after artifact download.
 """
 
-import os, re, json, shutil, pytest
+import os, re, json, shutil, sys, pytest
 from pathlib import Path
 from datetime import datetime
+
+# Spec directive parser — honor "Don't test X" / "Skip Y" instructions
+# the spec author writes inside the .md spec files.
+sys.path.insert(0, str(Path(__file__).parent))
+try:
+    from ai_engine.spec_directives import (
+        aggregate_directives, should_skip_test_name,
+    )
+    _DIRECTIVES_AVAILABLE = True
+except ImportError:
+    _DIRECTIVES_AVAILABLE = False
 
 # ─── Optional: PIL is used to draw an error banner on the screenshot.
 # If unavailable, we skip annotation but still save the raw screenshot.
@@ -340,6 +351,38 @@ def pytest_runtest_makereport(item, call):
 
 
 # ── Diagnostics ───────────────────────────────────────────────────────────────
+
+def pytest_collection_modifyitems(config, items):
+    """Honor 'Don't test X' / 'Skip Y' directives in any specs/*.md file.
+    Applies a pytest.mark.skip to matching test items so they show up as
+    SKIPPED in the report (with a clear reason) instead of PASSED."""
+    if not _DIRECTIVES_AVAILABLE:
+        return
+    try:
+        agg = aggregate_directives(Path(__file__).parent / "specs")
+    except Exception as e:
+        print(f"[DIRECTIVES] Could not load: {e}", flush=True)
+        return
+    if agg.empty():
+        return
+    print(f"[DIRECTIVES] Honoring {len(agg.raw_directives)} skip directive(s) "
+          f"from spec files: types={sorted(agg.skip_test_types)}", flush=True)
+    skipped = 0
+    for item in items:
+        # Match against the full nodeid + class name + method name combined
+        # so 'TestQA10I18nAndRTL' triggers an 'i18n' skip directive even
+        # when the test method itself is named test_qa10_arabic_*.
+        haystack = item.nodeid
+        cls = getattr(item, "cls", None)
+        if cls is not None:
+            haystack += " " + cls.__name__
+        skip, reason = should_skip_test_name(agg, haystack)
+        if skip:
+            item.add_marker(pytest.mark.skip(reason=reason))
+            skipped += 1
+    if skipped:
+        print(f"[DIRECTIVES] Auto-skipped {skipped} test(s) per spec directives", flush=True)
+
 
 def pytest_collection_finish(session):
     n = len(session.items)

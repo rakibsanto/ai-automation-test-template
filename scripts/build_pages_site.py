@@ -54,7 +54,10 @@ AGENT_REPORTS = [
     ("agent-qa13_security_headers.html","qa13-security-headers.html","QA-13 Security Headers",    "🛡️"),
     ("agent-qa14_cookies.html",         "qa14-cookies.html",         "QA-14 Cookie Security",     "🍪"),
     ("agent-qa15_owasp.html",           "qa15-owasp.html",           "QA-15 OWASP Surface",       "🎯"),
-    ("agent-mehadedu_homepage.html",    "ai-test-agent.html",        "AI Test Agent (auto-gen)",  "🤖"),
+    ("agent-qa16_lighthouse.html",      "qa16-lighthouse.html",      "QA-16 Core Web Vitals",     "📊"),
+    ("agent-qa17_memory.html",          "qa17-memory.html",          "QA-17 Memory Leak",         "💧"),
+    ("agent-qa18_network.html",         "qa18-network.html",         "QA-18 Network Resilience",  "📡"),
+    ("agent-login.html",                "ai-test-agent.html",        "AI Test Agent (auto-gen)",  "🤖"),
 ]
 
 

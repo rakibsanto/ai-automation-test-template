@@ -465,6 +465,9 @@ def build_consolidated_results(base_url: str) -> dict:
         "qa13_security_headers": ("QA-13 Security Headers",    "QA13"),
         "qa14_cookies":          ("QA-14 Cookie Security",     "QA14"),
         "qa15_owasp":            ("QA-15 OWASP Surface",       "QA15"),
+        "qa16_lighthouse":       ("QA-16 Core Web Vitals",     "QA16"),
+        "qa17_memory":           ("QA-17 Memory Leak",         "QA17"),
+        "qa18_network":          ("QA-18 Network Resilience",  "QA18"),
     }
 
     for file_stem, (group_name, prefix) in qa_groups.items():

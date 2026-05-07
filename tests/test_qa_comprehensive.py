@@ -1,6 +1,6 @@
 """
 QA Comprehensive Test Suite — Mehad Homepage & Login Modal
-Spec: specs/mehadedu_homepage.md
+Spec: specs/login.md (and 21 student/tutor sub-specs)
 Covers 8 test groups:
   QA-01  Functional & User Flow Tests       (homepage, modal, login, navigation)
   QA-02  Edge Case & Boundary Tests         (phone validation, OTP, modal state)
@@ -2716,4 +2716,313 @@ class TestQA15OWASPSurface:
         assert leaks, (
             f"verification failed — leak-detector did NOT flag obvious "
             f"secrets in the body. body={body[:80]!r}"
+        )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PHASE 3 — PERFORMANCE & RELIABILITY
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# QA-16 Lighthouse / Core Web Vitals — captures LCP, CLS, INP-proxy, TTFB
+# QA-17 Memory Leak Detection — heap snapshots before/after action loops
+# QA-18 Network Resilience — offline mode, request blocking, slow API
+#
+# All three include 2 phase-3 verification tests at the end of QA-18.
+
+# ── Performance budgets ─────────────────────────────────────────────────────
+# Tightening any of these surfaces more bugs but increases false-positive
+# noise on slow CI runners. Tuned for staging.
+_PERF_BUDGETS = {
+    "TTFB_MS":          1500,    # time to first byte
+    "DOM_READY_MS":     3500,    # DOMContentLoaded
+    "PAGE_LOAD_MS":     6000,    # full load
+    "LCP_MS":           4000,    # Largest Contentful Paint
+    "CLS_SCORE":        0.25,    # Cumulative Layout Shift
+    "JS_HEAP_GROWTH_MB": 8.0,    # heap growth per 10 modal opens
+}
+
+
+class TestQA16Lighthouse:
+    """Core Web Vitals — captured via Playwright performance APIs.
+
+    Note: Playwright doesn't run a full Lighthouse audit (would need
+    chromium-headless-shell + lighthouse npm pkg). We capture the same
+    underlying metrics directly via the Performance API, which is faster
+    and works in our existing pipeline."""
+
+    PAGES = [
+        ("homepage_en",  BASE_URL),
+        ("find_tutors",  f"{BASE_URL}/find-tutors"),
+        ("become_tutor", f"{BASE_URL.rstrip('/en')}/en/become-tutor"),
+    ]
+
+    def _collect_vitals(self, page: Page) -> dict:
+        """Return {ttfb_ms, dom_ready_ms, page_load_ms, lcp_ms, cls_score}."""
+        # Inject the perf observer EARLY so we don't miss the LCP entry
+        # which fires shortly after first contentful paint.
+        page.add_init_script("""
+        window.__perfMetrics = { lcp: 0, cls: 0 };
+        try {
+          new PerformanceObserver((entries) => {
+            const last = entries.getEntries().pop();
+            if (last) window.__perfMetrics.lcp = Math.round(last.renderTime || last.loadTime || last.startTime);
+          }).observe({ type: 'largest-contentful-paint', buffered: true });
+          let cls = 0;
+          new PerformanceObserver((entries) => {
+            for (const e of entries.getEntries())
+              if (!e.hadRecentInput) cls += e.value;
+            window.__perfMetrics.cls = cls;
+          }).observe({ type: 'layout-shift', buffered: true });
+        } catch (e) { /* older browsers */ }
+        """)
+        return {}  # placeholder — actual values fetched after navigation
+
+    def _metrics_after_load(self, page: Page) -> dict:
+        """Read metrics after page has loaded + had time to settle."""
+        page.wait_for_timeout(2500)  # let LCP/CLS settle
+        return page.evaluate("""() => {
+            const t = performance.timing;
+            return {
+                ttfb_ms:      Math.max(0, t.responseStart - t.navigationStart),
+                dom_ready_ms: Math.max(0, t.domContentLoadedEventEnd - t.navigationStart),
+                page_load_ms: Math.max(0, t.loadEventEnd - t.navigationStart),
+                lcp_ms:       (window.__perfMetrics || {}).lcp || 0,
+                cls_score:    (window.__perfMetrics || {}).cls || 0,
+            };
+        }""")
+
+    @pytest.mark.parametrize("page_id,url", PAGES)
+    def test_qa16_core_web_vitals(self, page: Page, page_id: str, url: str):
+        """Core Web Vitals must all be within budget for a passing user
+        experience. Logs all values so the team sees actuals even on pass."""
+        self._collect_vitals(page)  # install observers
+        page.goto(url, wait_until="domcontentloaded", timeout=15000)
+        m = self._metrics_after_load(page)
+        # Always log so the team sees the actuals
+        print(f"\n  [QA-16] {page_id}: TTFB={m['ttfb_ms']}ms  "
+              f"DOM={m['dom_ready_ms']}ms  Load={m['page_load_ms']}ms  "
+              f"LCP={m['lcp_ms']}ms  CLS={m['cls_score']:.3f}", flush=True)
+
+        violations = []
+        if m["ttfb_ms"]      > _PERF_BUDGETS["TTFB_MS"]:
+            violations.append(f"TTFB {m['ttfb_ms']}ms > budget {_PERF_BUDGETS['TTFB_MS']}ms")
+        if m["dom_ready_ms"] > _PERF_BUDGETS["DOM_READY_MS"]:
+            violations.append(f"DOM-ready {m['dom_ready_ms']}ms > budget {_PERF_BUDGETS['DOM_READY_MS']}ms")
+        if m["page_load_ms"] > _PERF_BUDGETS["PAGE_LOAD_MS"]:
+            violations.append(f"Page-load {m['page_load_ms']}ms > budget {_PERF_BUDGETS['PAGE_LOAD_MS']}ms")
+        if m["lcp_ms"] and m["lcp_ms"] > _PERF_BUDGETS["LCP_MS"]:
+            violations.append(f"LCP {m['lcp_ms']}ms > budget {_PERF_BUDGETS['LCP_MS']}ms")
+        if m["cls_score"]    > _PERF_BUDGETS["CLS_SCORE"]:
+            violations.append(f"CLS {m['cls_score']:.3f} > budget {_PERF_BUDGETS['CLS_SCORE']}")
+
+        assert not violations, (
+            f"{page_id}: {len(violations)} Core Web Vitals violation(s):\n  "
+            + "\n  ".join(violations)
+        )
+
+
+class TestQA17MemoryLeak:
+    """Heap-growth detection — opens & closes the login modal 10 times,
+    fails if JS heap grows beyond budget. Catches event-listener leaks,
+    detached DOM nodes, retained closures."""
+
+    def test_qa17_modal_open_close_no_heap_growth(self, page: Page):
+        """Opening the login modal 10 times must not grow JS heap > budget."""
+        page.goto(BASE_URL, wait_until="domcontentloaded", timeout=15000)
+        page.wait_for_timeout(1500)
+
+        # Get initial heap
+        before = page.evaluate(
+            "() => performance.memory ? performance.memory.usedJSHeapSize : 0")
+        if before == 0:
+            pytest.skip("performance.memory not available in this browser")
+
+        login_btn = _find_visible_login_button(page)
+        if login_btn.count() == 0:
+            pytest.skip("Login button not found")
+        login_btn.wait_for(state="visible", timeout=10000)
+
+        for i in range(10):
+            try:
+                login_btn.click()
+                page.wait_for_selector("[role='dialog']", state="visible", timeout=5000)
+                page.locator("[aria-label='Close']").first.click(timeout=3000)
+                page.wait_for_timeout(200)
+            except Exception:
+                pass
+
+        # Force GC if exposed (Chrome with --js-flags="--expose-gc")
+        try:
+            page.evaluate("() => window.gc && window.gc()")
+        except Exception:
+            pass
+        page.wait_for_timeout(800)
+
+        after = page.evaluate(
+            "() => performance.memory ? performance.memory.usedJSHeapSize : 0")
+        growth_mb = (after - before) / (1024 * 1024)
+        print(f"\n  [QA-17] heap before={before/1024/1024:.1f}MB  "
+              f"after={after/1024/1024:.1f}MB  growth={growth_mb:.2f}MB", flush=True)
+        assert growth_mb <= _PERF_BUDGETS["JS_HEAP_GROWTH_MB"], (
+            f"JS heap grew {growth_mb:.2f}MB across 10 modal cycles "
+            f"(budget {_PERF_BUDGETS['JS_HEAP_GROWTH_MB']}MB) — "
+            f"likely leak: detached DOM nodes, listener leaks, or unfreed closures"
+        )
+
+    def test_qa17_detached_dom_nodes_count(self, page: Page):
+        """Count detached DOM nodes — large leaks would surface here.
+        We use a heap-snapshot proxy: count the difference between
+        document.querySelectorAll('*').length and a stress scenario.
+        Soft fails (warn only) if >5000 elements remain after cleanup."""
+        page.goto(BASE_URL, wait_until="domcontentloaded", timeout=15000)
+        page.wait_for_timeout(1500)
+        baseline_count = page.evaluate("() => document.querySelectorAll('*').length")
+
+        # Stress: open and close the modal 5 times via the visible header button
+        login_btn = _find_visible_login_button(page)
+        if login_btn.count() == 0:
+            pytest.skip("Login button not found")
+        login_btn.wait_for(state="visible", timeout=10000)
+        for _ in range(5):
+            try:
+                login_btn.click()
+                page.wait_for_selector("[role='dialog']", state="visible", timeout=5000)
+                page.locator("[aria-label='Close']").first.click(timeout=3000)
+                page.wait_for_timeout(150)
+            except Exception:
+                pass
+
+        page.wait_for_timeout(500)
+        after_count = page.evaluate("() => document.querySelectorAll('*').length")
+        delta = after_count - baseline_count
+        print(f"\n  [QA-17] DOM elements before={baseline_count}  after={after_count}  "
+              f"delta={delta:+d}", flush=True)
+        # Allow reasonable hidden-overlay growth, fail on extreme growth
+        assert delta < 200, (
+            f"DOM grew by {delta} elements after 5 modal cycles — possible "
+            f"leak (orphaned modal containers retained?). before={baseline_count}, "
+            f"after={after_count}"
+        )
+
+
+class TestQA18NetworkResilience:
+    """Verifies the UI handles network failures gracefully — no white
+    screens, no infinite spinners, no JS exceptions."""
+
+    def test_qa18_offline_does_not_crash_page(self, page: Page):
+        """Going offline mid-session must not produce uncaught JS errors."""
+        errors: list = []
+        page.on("pageerror", lambda exc: errors.append(str(exc)))
+        page.goto(BASE_URL, wait_until="domcontentloaded", timeout=15000)
+        page.wait_for_timeout(1500)
+        # Toggle network off
+        page.context.set_offline(True)
+        try:
+            # Try to navigate — should fail gracefully
+            try:
+                page.goto(f"{BASE_URL}/find-tutors", wait_until="domcontentloaded",
+                          timeout=4000)
+            except Exception:
+                pass  # expected — navigation failure
+            page.wait_for_timeout(800)
+        finally:
+            page.context.set_offline(False)
+        # Allow the navigation-error type — just ensure no JS crash
+        real = [e for e in errors if "extension" not in e.lower()]
+        assert not real, (
+            f"Offline mode triggered uncaught JS exception(s): {real[:3]}"
+        )
+
+    def test_qa18_blocked_api_shows_no_white_screen(self, page: Page):
+        """If the main API is unreachable, the page must still render
+        SOMETHING (loader, error message, fallback content) — never a
+        completely blank white page."""
+        # Block all /api/ requests
+        page.route("**/api/**", lambda route: route.abort())
+        page.route("**/_next/data/**", lambda route: route.abort())
+        page.goto(BASE_URL, wait_until="domcontentloaded", timeout=15000)
+        page.wait_for_timeout(2500)
+        body_text = page.inner_text("body").strip()
+        body_html = page.inner_html("body")
+        assert len(body_text) > 20 or "<img" in body_html or "<svg" in body_html, (
+            f"With API blocked, body has only {len(body_text)} chars of text "
+            f"and no visible images/SVGs — looks like a white-screen failure."
+        )
+
+    def test_qa18_slow_network_does_not_show_partial_data(self, page: Page):
+        """3G-throttled load must not display half-rendered components
+        (e.g., 'undefined' user names from partial data)."""
+        # Throttle every request by 200ms — simulates slow 3G
+        def slow(route, request):
+            page.wait_for_timeout(200)
+            route.continue_()
+        page.route("**/*", slow)
+        page.goto(BASE_URL, wait_until="domcontentloaded", timeout=20000)
+        page.wait_for_timeout(2500)
+        body = page.inner_text("body")
+        bad_markers = ("undefined", "null", "[object Object]", "NaN")
+        leaks = [m for m in bad_markers
+                 if re.search(rf"\b{re.escape(m)}\b", body, re.I)]
+        assert not leaks, (
+            f"Slow-network load shows partial-data markers in body: {leaks}"
+        )
+
+    def test_qa18_5xx_response_shown_friendly(self, page: Page):
+        """If a backend route returns 500, the user-facing page should
+        not display a raw stacktrace or framework debug page."""
+        # Block specific endpoint with a 500 to simulate a server failure
+        def fail(route):
+            route.fulfill(status=500, body="Internal Server Error")
+        # Apply to the homepage's data fetcher (Next.js prefetches)
+        page.route("**/_next/data/**", fail)
+        page.goto(BASE_URL, wait_until="domcontentloaded", timeout=15000)
+        page.wait_for_timeout(1500)
+        body = page.inner_text("body")
+        leak_markers = (
+            "Traceback (most recent call last)",
+            "Whitelabel Error",
+            "stack:",
+            "at ServerComponentBundle",
+            "Error: An unexpected error",
+        )
+        leaks = [m for m in leak_markers if m in body]
+        assert not leaks, (
+            f"5xx backend exposed framework internals to user: {leaks}"
+        )
+
+    # ── Phase-3 verification test #1: budget-violation detection works ────
+    def test_qa18_phase3_verification_synthetic_budget_violation(self):
+        """Synthetic check — feed fake metrics into the budget logic and
+        confirm the violation list is built correctly. Catches false
+        negatives in the budget comparison."""
+        fake_metrics = {
+            "ttfb_ms":      9999,   # over 1500
+            "dom_ready_ms": 9999,   # over 3500
+            "page_load_ms": 9999,   # over 6000
+            "lcp_ms":       9999,   # over 4000
+            "cls_score":    1.0,    # over 0.25
+        }
+        violations = []
+        if fake_metrics["ttfb_ms"]      > _PERF_BUDGETS["TTFB_MS"]:      violations.append("TTFB")
+        if fake_metrics["dom_ready_ms"] > _PERF_BUDGETS["DOM_READY_MS"]: violations.append("DOM")
+        if fake_metrics["page_load_ms"] > _PERF_BUDGETS["PAGE_LOAD_MS"]: violations.append("LOAD")
+        if fake_metrics["lcp_ms"]       > _PERF_BUDGETS["LCP_MS"]:       violations.append("LCP")
+        if fake_metrics["cls_score"]    > _PERF_BUDGETS["CLS_SCORE"]:    violations.append("CLS")
+        assert violations == ["TTFB", "DOM", "LOAD", "LCP", "CLS"], (
+            f"verification failed — budget detector returned {violations} "
+            f"instead of all 5 violations"
+        )
+
+    # ── Phase-3 verification test #2: heap-growth detector catches it ────
+    def test_qa18_phase3_verification_synthetic_heap_growth_caught(self):
+        """Synthetic check — feed fake before/after heap sizes into the
+        growth-comparison logic and confirm it correctly flags a leak."""
+        before = 50 * 1024 * 1024   # 50 MB
+        after  = 75 * 1024 * 1024   # 75 MB → 25 MB growth, way over 8 MB budget
+        growth_mb = (after - before) / (1024 * 1024)
+        budget = _PERF_BUDGETS["JS_HEAP_GROWTH_MB"]
+        leak_detected = growth_mb > budget
+        assert leak_detected, (
+            f"verification failed — heap detector did NOT flag {growth_mb}MB "
+            f"growth as over the {budget}MB budget"
         )

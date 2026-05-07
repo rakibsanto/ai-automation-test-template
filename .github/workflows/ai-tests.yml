@@ -1028,6 +1028,129 @@ jobs:
           if-no-files-found: warn
 
   # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 3 — PERFORMANCE & RELIABILITY
+  # ─────────────────────────────────────────────────────────────────────────────
+  # QA AGENT 13 — Lighthouse / Core Web Vitals (QA-16)
+  qa-agent-13-lighthouse:
+    name: "QA Agent 13 — Core Web Vitals"
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: "pip" }
+      - name: Install dependencies
+        run: pip install playwright pytest pytest-playwright pytest-html pytest-timeout pytest-json-report Pillow
+      - name: Install Playwright Chromium
+        run: playwright install chromium --with-deps
+      - name: Prepare reports directory
+        run: mkdir -p reports reports/screenshots reports/evidence
+      - name: Run QA-16 Core Web Vitals Tests
+        continue-on-error: true
+        run: |
+          BASE_URL=${{ env.BASE_URL }} python3 -m pytest \
+            tests/test_qa_comprehensive.py::TestQA16Lighthouse \
+            --timeout=60 --timeout-method=thread --tb=short -v -p no:warnings \
+            --html=reports/qa16-lighthouse.html --self-contained-html \
+            --json-report --json-report-file=reports/qa16_lighthouse_results.json \
+            -p no:cacheprovider 2>&1 | tee reports/qa16-lighthouse.txt
+      - name: Upload QA Agent 13 Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-agent-13-reports-${{ github.run_number }}
+          path: |
+            reports/qa16*
+            reports/screenshots/
+            reports/videos/
+            reports/evidence/
+          retention-days: 30
+          if-no-files-found: warn
+
+  # QA AGENT 14 — Memory Leak Detection (QA-17)
+  qa-agent-14-memory-leak:
+    name: "QA Agent 14 — Memory Leak"
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: "pip" }
+      - name: Install dependencies
+        run: pip install playwright pytest pytest-playwright pytest-html pytest-timeout pytest-json-report Pillow
+      - name: Install Playwright Chromium
+        run: playwright install chromium --with-deps
+      - name: Prepare reports directory
+        run: mkdir -p reports reports/screenshots reports/evidence
+      - name: Run QA-17 Memory Leak Tests
+        continue-on-error: true
+        # --enable-precise-memory-info exposes performance.memory in headless Chromium
+        env:
+          PWDEBUG_BROWSER_ARGS: "--enable-precise-memory-info"
+        run: |
+          BASE_URL=${{ env.BASE_URL }} python3 -m pytest \
+            tests/test_qa_comprehensive.py::TestQA17MemoryLeak \
+            --timeout=120 --timeout-method=thread --tb=short -v -p no:warnings \
+            --html=reports/qa17-memory.html --self-contained-html \
+            --json-report --json-report-file=reports/qa17_memory_results.json \
+            -p no:cacheprovider 2>&1 | tee reports/qa17-memory.txt
+      - name: Upload QA Agent 14 Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-agent-14-reports-${{ github.run_number }}
+          path: |
+            reports/qa17*
+            reports/screenshots/
+            reports/videos/
+            reports/evidence/
+          retention-days: 30
+          if-no-files-found: warn
+
+  # QA AGENT 15 — Network Resilience (QA-18)
+  qa-agent-15-network-resilience:
+    name: "QA Agent 15 — Network Resilience"
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: "pip" }
+      - name: Install dependencies
+        run: pip install playwright pytest pytest-playwright pytest-html pytest-timeout pytest-json-report Pillow
+      - name: Install Playwright Chromium
+        run: playwright install chromium --with-deps
+      - name: Prepare reports directory
+        run: mkdir -p reports reports/screenshots reports/evidence
+      - name: Run QA-18 Network Resilience Tests
+        continue-on-error: true
+        run: |
+          BASE_URL=${{ env.BASE_URL }} python3 -m pytest \
+            tests/test_qa_comprehensive.py::TestQA18NetworkResilience \
+            --timeout=90 --timeout-method=thread --tb=short -v -p no:warnings \
+            --html=reports/qa18-network.html --self-contained-html \
+            --json-report --json-report-file=reports/qa18_network_results.json \
+            -p no:cacheprovider 2>&1 | tee reports/qa18-network.txt
+      - name: Upload QA Agent 15 Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-agent-15-reports-${{ github.run_number }}
+          path: |
+            reports/qa18*
+            reports/screenshots/
+            reports/videos/
+            reports/evidence/
+          retention-days: 30
+          if-no-files-found: warn
+
+  # ─────────────────────────────────────────────────────────────────────────────
   # CONSOLIDATE — Merges ALL QA agent results into one master bug-report.html
   # Runs after every other job completes (pass or fail).
   # ─────────────────────────────────────────────────────────────────────────────
@@ -1050,6 +1173,9 @@ jobs:
       - qa-agent-10-security-headers
       - qa-agent-11-cookie-security
       - qa-agent-12-owasp-surface
+      - qa-agent-13-lighthouse
+      - qa-agent-14-memory-leak
+      - qa-agent-15-network-resilience
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -1138,6 +1264,24 @@ jobs:
         with:
           name: qa-agent-12-reports-${{ github.run_number }}
           path: reports/agent-12/
+      - name: Download QA Agent 13 artifacts (lighthouse)
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: qa-agent-13-reports-${{ github.run_number }}
+          path: reports/agent-13/
+      - name: Download QA Agent 14 artifacts (memory leak)
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: qa-agent-14-reports-${{ github.run_number }}
+          path: reports/agent-14/
+      - name: Download QA Agent 15 artifacts (network resilience)
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: qa-agent-15-reports-${{ github.run_number }}
+          path: reports/agent-15/
       - name: Download screenshots (for embedding in master report)
         uses: actions/download-artifact@v4
         continue-on-error: true

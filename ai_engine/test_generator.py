@@ -1559,6 +1559,25 @@ def _apply_fallback(name: str, ai_code: str, spec: ParsedSpec) -> str:
         return ""
 
 
+def _load_skip_directives(spec: ParsedSpec):
+    """Look up the spec's source .md and parse skip directives. Returns a
+    SpecDirectives or None if unavailable."""
+    try:
+        from ai_engine.spec_directives import parse_directives_for_spec
+    except ImportError:
+        return None
+    # spec.path / spec.md_path / similar — fall back to specs/<slug>.md
+    for attr in ("md_path", "path", "source_path", "spec_path"):
+        if hasattr(spec, attr):
+            p = getattr(spec, attr)
+            if p:
+                return parse_directives_for_spec(p)
+    candidate = Path("specs") / f"{getattr(spec, 'slug', 'unknown')}.md"
+    if candidate.exists():
+        return parse_directives_for_spec(candidate)
+    return None
+
+
 def generate_all(
     spec: ParsedSpec,
     xss_payloads: list[str] | None = None,
@@ -1568,6 +1587,9 @@ def generate_all(
     Returns {type_name: function_code_blocks} for every test type.
     Each value contains def test_...() blocks with no module-level code.
 
+    Honors 'Don't test X' / 'Skip Y' directives in the spec's .md file —
+    matching test types are not generated at all.
+
     When AI returns empty for a type, we substitute a deterministic fallback
     (see _FALLBACKS) so users always get coverage.
     """
@@ -1575,7 +1597,19 @@ def generate_all(
     sqli = sqli_payloads or []
     results: dict[str, str] = {}
 
+    # ── Spec directive filter ──────────────────────────────────────────────
+    directives = _load_skip_directives(spec)
+    skip_types: set[str] = set()
+    if directives is not None and not directives.empty():
+        skip_types = {t.lower() for t in directives.skip_test_types}
+        print(f"  [GEN] honoring spec directives — skipping types: {sorted(skip_types)}",
+              flush=True)
+
     for name, fn in ALL_TYPES:
+        if name.lower() in skip_types:
+            print(f"  [GEN:{name}] ⏭  skipped per spec directive", flush=True)
+            results[name] = ""
+            continue
         try:
             code = fn(spec)
             results[name] = _apply_fallback(name, code, spec)
@@ -1584,11 +1618,15 @@ def generate_all(
             results[name] = _apply_fallback(name, "", spec)
 
     # Security needs payload lists
-    try:
-        results["security"] = _apply_fallback(
-            "security", security(spec, xss, sqli), spec)
-    except Exception as e:
-        print(f"  [GEN:security] error: {e}", flush=True)
-        results["security"] = _apply_fallback("security", "", spec)
+    if "security" in skip_types:
+        print(f"  [GEN:security] ⏭  skipped per spec directive", flush=True)
+        results["security"] = ""
+    else:
+        try:
+            results["security"] = _apply_fallback(
+                "security", security(spec, xss, sqli), spec)
+        except Exception as e:
+            print(f"  [GEN:security] error: {e}", flush=True)
+            results["security"] = _apply_fallback("security", "", spec)
 
     return results
