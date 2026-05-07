@@ -670,8 +670,23 @@ def main():
         print(f"  • {c.cluster_id()} [{c.severity}/{c.priority}] "
               f"{c.affected_count()}× — {c.title}")
 
-    # Update trends file (read previous trends, append this run, write back)
+    # Update trends file (read previous trends, append this run, write back).
+    # CI runners are stateless — pull the previous trends.json from the live
+    # gh-pages site so cumulative tracking actually works across runs.
     trends_path = REPORTS_DIR / "trends.json"
+    if not trends_path.exists():
+        # Try fetching the persisted trends from the deployed gh-pages site
+        prior_url = (f"https://{os.getenv('GITHUB_REPOSITORY_OWNER','')}.github.io/"
+                     f"{(os.getenv('GITHUB_REPOSITORY','/').split('/') or [''])[-1]}/"
+                     f"trends.json")
+        try:
+            from urllib.request import urlopen
+            with urlopen(prior_url, timeout=10) as resp:
+                prior_text = resp.read().decode("utf-8")
+                trends_path.write_text(prior_text, encoding="utf-8")
+                print(f"  [TRENDS] Loaded prior trends.json from {prior_url}")
+        except Exception as e:
+            print(f"  [TRENDS] No prior trends.json available ({e}); starting fresh")
     trends      = load_trends(trends_path)
     run_number  = os.getenv("GITHUB_RUN_NUMBER", str(int(datetime.now().timestamp())))
     run_url     = (f"https://github.com/{os.getenv('GITHUB_REPOSITORY','')}/"

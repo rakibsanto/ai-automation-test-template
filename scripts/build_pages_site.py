@@ -513,6 +513,16 @@ def main() -> None:
         n_videos = sum(1 for _ in dest_videos.glob("*.webm"))
         print(f"  ✅ videos-embed/ copied ({n_videos} video(s))")
 
+    # 1c. Persist trends.json on the site root so the next CI run can fetch
+    # it via https://<owner>.github.io/<repo>/trends.json — this is what
+    # makes cumulative trend tracking actually work across runs.
+    trends_src = REPORTS_DIR / "trends.json"
+    if trends_src.exists():
+        shutil.copy(trends_src, SITE_DIR / "trends.json")
+        # Also save a per-run snapshot for historical inspection
+        shutil.copy(trends_src, archive / "trends.json")
+        print(f"  ✅ trends.json published to site root")
+
     # 2. Per-agent reports under /agents/ (and archived copy). Prefer the
     #    custom Fagun-styled `agent-<src>.html` over the default pytest-html
     #    output. Fall back to pytest-html only if no custom report exists.

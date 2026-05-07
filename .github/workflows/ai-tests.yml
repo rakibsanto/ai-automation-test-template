@@ -1421,6 +1421,8 @@ jobs:
           path: |
             reports/bug-report.html
             reports/consolidated_summary.json
+            reports/trends.json
+            reports/agent-*.html
           retention-days: 60
           if-no-files-found: warn
 
