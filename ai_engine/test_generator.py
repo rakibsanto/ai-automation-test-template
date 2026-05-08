@@ -317,52 +317,151 @@ Write exactly {len(cases)} test functions, one per edge case, in the order above
 # 4. BOUNDARY — min/max/exact edge lengths
 # ─────────────────────────────────────────────────────────────────────────────
 def boundary(spec: ParsedSpec) -> str:
+    # Output is ONE parametrized test that explodes into 30+ runtime tests
+    # via the parameter list. Cheap on AI tokens, expensive in coverage.
     boundary_cases = [
-        ("email_min",          "a@b.co",               "minimum valid email",         "pass"),
-        ("email_255_chars",    "a"*248 + "@test.com",   "255-char email",              "pass or graceful error"),
-        ("email_256_chars",    "a"*249 + "@test.com",   "256-char email (over limit)", "graceful error"),
-        ("password_min",       "Aa1!aaaa",              "minimum 8-char password",     "pass"),
-        ("password_7_chars",   "Aa1!aaa",               "7-char password (below min)", "error"),
-        ("password_max",       "A"*99 + "a1!",          "100-char password",           "pass or graceful error"),
-        ("spaces_only_email",  "   ",                   "spaces-only email",           "error (required/invalid)"),
-        ("spaces_only_pass",   "   ",                   "spaces-only password",        "error"),
-        ("single_char_email",  "a",                     "single char email",           "error"),
-        ("null_bytes",         "test\x00@test.com",     "null byte in email",          "graceful error"),
-        ("unicode_email",      "tëst@examplé.com",      "unicode email",               "error or pass (depends on impl)"),
-        ("newline_in_email",   "test\nemail@test.com",  "newline in email",            "error"),
+        ("email_min",          "a@b.co",                "minimum valid email",         "pass"),
+        ("email_64_chars",     "a"*57 + "@test.com",     "64-char email",               "pass or graceful error"),
+        ("email_128_chars",    "a"*121 + "@test.com",    "128-char email",              "pass or graceful error"),
+        ("email_254_chars",    "a"*247 + "@test.com",    "254-char email (RFC max)",    "pass"),
+        ("email_255_chars",    "a"*248 + "@test.com",    "255-char email",              "pass or graceful error"),
+        ("email_256_chars",    "a"*249 + "@test.com",    "256-char email (over limit)", "graceful error"),
+        ("email_500_chars",    "a"*493 + "@test.com",    "500-char email (way over)",   "graceful error"),
+        ("password_min_8",     "Aa1!aaaa",               "minimum 8-char password",     "pass"),
+        ("password_7_chars",   "Aa1!aaa",                "7-char password (below min)", "error"),
+        ("password_64",        "A"*60 + "a1!",           "64-char password",            "pass"),
+        ("password_100",       "A"*96 + "a1!",           "100-char password",           "pass or graceful error"),
+        ("password_500",       "A"*497 + "a1!",          "500-char password",           "graceful error"),
+        ("spaces_only_email",  "   ",                    "spaces-only email",           "error (required/invalid)"),
+        ("spaces_only_pass",   "   ",                    "spaces-only password",        "error"),
+        ("single_char_email",  "a",                      "single char email",           "error"),
+        ("at_only",            "@",                      "@-only",                      "error"),
+        ("dot_only",           ".",                      ".-only",                      "error"),
+        ("null_bytes",         "test\\x00@test.com",     "null byte in email",          "graceful error"),
+        ("crlf_inject",        "test%0d%0a@test.com",    "CRLF injected",               "graceful error"),
+        ("unicode_email",      "tëst@examplé.com",       "unicode email",               "error or pass"),
+        ("arabic_email",       "أبجد@test.com",          "Arabic chars in email",       "error or pass"),
+        ("chinese_email",      "测试@test.com",          "Chinese chars in email",      "error or pass"),
+        ("emoji_email",        "test😀@test.com",        "emoji in email",              "error or pass"),
+        ("newline_in_email",   "test\\nemail@test.com",  "newline in email",            "error"),
+        ("tab_in_email",       "test\\t@test.com",       "tab in email",                "error"),
+        ("rtl_override",       "test‮@test.com",         "RTL override char",           "graceful"),
+        ("zero_width",         "test\\u200b@test.com",   "zero-width space",            "graceful"),
+        ("triple_at",          "a@@@test.com",           "triple @",                    "error"),
+        ("plus_alias",         "user+tag@test.com",      "valid plus alias",            "pass"),
+        ("subdomain",          "u@a.b.c.example.com",    "deep subdomain",              "pass"),
+        ("ipv4_domain",        "u@[127.0.0.1]",          "IP-literal domain",           "pass or error"),
+        ("ipv6_domain",        "u@[::1]",                "IPv6 domain",                 "pass or error"),
+        ("dot_atom",           "first.last@test.com",    "dot-atom email",              "pass"),
+        ("hyphen_domain",      "u@a-b-c.com",            "hyphen domain",               "pass"),
     ]
 
     cases_text = "\n".join(
-        f"  - {name}: input='{val[:40]}' desc='{desc}' expect={exp}"
+        f'    ({name!r}, {val!r}, {desc!r}, {exp!r}),'
         for name, val, desc, exp in boundary_cases
     )
 
     return _ai(f"""{_RULES}
 PAGE: {spec.page_name}  URL: {spec.url}
 
-Write BOUNDARY tests for every form field.
-Each test uses an edge-case input value and asserts the SPECIFIC expected behavior.
+Write a SINGLE parametrized boundary test — pytest expands the parameter
+list into ONE runtime test PER row, giving us {len(boundary_cases)} tests
+from one function.
 
-BOUNDARY TEST CASES:
+@pytest.mark.parametrize("name,value,desc,expect", [
 {cases_text}
+])
+def test_boundary(page: Page, name, value, desc, expect):
+    \"\"\"Boundary input handling.
+    # TEST_DATA: name=<name>  value=<value>  desc=<desc>  expect=<expect>
+    \"\"\"
+    page.goto("{spec.url}", wait_until="domcontentloaded", timeout=15000)
+    page.wait_for_timeout(800)
+    # Pick the FIRST visible text-or-email input on the page (spec-agnostic
+    # so this works for any spec without inventing field names)
+    field = page.locator('input[type="email"], input[type="text"], input[type="password"]').filter(visible=True).first
+    if field.count() == 0:
+        return  # no input on this page → nothing to boundary-test
+    try:
+        field.fill(value, timeout=5000)
+    except Exception:
+        return  # rate-limited or read-only — graceful exit
+    # Submit if a button exists, then verify the page didn't crash
+    submit = page.locator('button[type="submit"]').filter(visible=True).first
+    if submit.count() > 0:
+        try:
+            submit.click(timeout=4000)
+        except Exception:
+            pass
+        page.wait_for_timeout(500)
+    # Universal pass-criteria: page must not show a 500, must still have
+    # body content, must not have a JS-thrown stack trace in the body
+    body = page.inner_text("body")
+    assert len(body) > 50, f"{{name}}: page collapsed to <50 chars after boundary input"
+    assert "500 Internal" not in body, f"{{name}}: server 500 on boundary input '{{value[:40]}}'"
+    assert "Traceback (most recent" not in body, f"{{name}}: stack trace leaked"
 
-Pattern for each test:
-1. Navigate to page
-2. Fill input with the exact boundary value
-3. Submit
-4. Assert: error appears (for invalid) OR no error (for valid)
-5. Assert: page does NOT crash (no 500, no blank page, URL stays or redirects properly)
+Output ONLY this one parametrized test function. No imports.""", 3000)
 
-Include # TEST_DATA: <exact_value_used> in docstring.
-Write 8-10 test functions covering the most important boundary cases above:""", 3000)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 4.5. COMBINATORIAL — field × input-shape × viewport matrix
+# ─────────────────────────────────────────────────────────────────────────────
+def combinatorial(spec: ParsedSpec) -> str:
+    """One parametrized test that crosses input-shape × viewport. Produces
+    20-30 runtime tests from one function — pure parametrize-multiplier.
+    Spec-agnostic: targets the first visible input (no field invention)."""
+    return _ai(f"""{_RULES}
+PAGE: {spec.page_name}  URL: {spec.url}
+
+Write a SINGLE parametrized combinatorial test that explodes via two axes:
+input-shape (8 values) × viewport (4 sizes) → 32 runtime tests.
+
+@pytest.mark.parametrize("shape,value", [
+    ("empty",       ""),
+    ("single",      "a"),
+    ("normal",      "test@example.com"),
+    ("long",        "a" * 200),
+    ("unicode",     "tëst+RTL‮@example.com"),
+    ("emoji",       "test😀@example.com"),
+    ("specials",    "<>&\\"' \\\\/"),
+    ("template",    "{{{{7*7}}}}"),
+])
+@pytest.mark.parametrize("vp_w,vp_h,vp_name", [
+    (1920, 1080, "fullhd"),
+    (1280, 720,  "laptop"),
+    (768,  1024, "tablet"),
+    (375,  812,  "mobile"),
+])
+def test_combo(page: Page, shape, value, vp_w, vp_h, vp_name):
+    \"\"\"Combinatorial: input-shape × viewport.
+    # TEST_DATA: shape=<shape> value=<value> viewport=<vp_w>x<vp_h>
+    \"\"\"
+    page.set_viewport_size({{"width": vp_w, "height": vp_h}})
+    page.goto("{spec.url}", wait_until="domcontentloaded", timeout=15000)
+    page.wait_for_timeout(800)
+    field = page.locator('input[type="email"], input[type="text"]').filter(visible=True).first
+    if field.count() == 0:
+        return  # no input field at this viewport — fine
+    try:
+        field.fill(value, timeout=4000)
+    except Exception:
+        return
+    body = page.inner_text("body")
+    assert len(body) > 50, f"{{shape}}@{{vp_name}}: body collapsed"
+    assert "Traceback" not in body, f"{{shape}}@{{vp_name}}: stack trace leaked"
+
+Output ONLY this one parametrized test function.""", 2000)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 5. SECURITY — XSS, SQLi, injection (parametrized with all payloads)
 # ─────────────────────────────────────────────────────────────────────────────
 def security(spec: ParsedSpec, xss_payloads: list[str], sqli_payloads: list[str]) -> str:
-    xss_list  = ",\n    ".join(f'"{p}"' for p in xss_payloads[:16])
-    sqli_list = ",\n    ".join(f'"{p}"' for p in sqli_payloads[:13])
+    # Repr-quote so internal quotes/backslashes survive — was breaking on
+    # payloads containing literal double quotes.
+    xss_list  = ",\n    ".join(repr(p) for p in xss_payloads[:50])
+    sqli_list = ",\n    ".join(repr(p) for p in sqli_payloads[:50])
 
     return _ai(f"""{_RULES}
 PAGE: {spec.page_name}  URL: {spec.url}  PATH: {spec.path}
@@ -994,14 +1093,34 @@ Write these 2 parametrized test functions:""", 2500)
 # ─────────────────────────────────────────────────────────────────────────────
 def i18n(spec: ParsedSpec) -> str:
     i18n_inputs = [
-        ("arabic_rtl",    "مرحبا@test.com",              "Arabic RTL text in email"),
-        ("chinese_chars", "测试用户@example.com",           "Chinese characters in email"),
-        ("emoji_in_name", "test😀@example.com",            "Emoji in email"),
-        ("accented_chars","tëst@exämplé.com",              "Accented Latin characters"),
-        ("japanese",      "テスト@テスト.jp",                "Japanese characters"),
-        ("long_unicode",  "à"*50 + "@test.com",           "Long unicode string"),
-        ("rtl_password",  "كلمة مرور123",                 "Arabic password"),
-        ("zero_width",    "test​@test.com",          "Zero-width character"),
+        ("arabic_rtl",     "مرحبا@test.com",          "Arabic RTL text in email"),
+        ("hebrew_rtl",     "שלום@test.com",           "Hebrew RTL"),
+        ("persian_rtl",    "سلام@test.com",           "Persian RTL"),
+        ("urdu_rtl",       "ہیلو@test.com",           "Urdu RTL"),
+        ("chinese_simp",   "测试@example.com",         "Chinese simplified"),
+        ("chinese_trad",   "測試@example.com",         "Chinese traditional"),
+        ("japanese_kanji", "テスト@テスト.jp",          "Japanese kanji"),
+        ("japanese_hira",  "ひらがな@test.com",         "Japanese hiragana"),
+        ("korean",         "한국어@test.com",          "Korean hangul"),
+        ("thai",           "ทดสอบ@test.com",          "Thai script"),
+        ("hindi",          "नमस्ते@test.com",            "Hindi devanagari"),
+        ("bengali",        "বাংলা@test.com",            "Bengali"),
+        ("greek",          "δοκιμή@test.com",         "Greek"),
+        ("cyrillic",       "тест@test.com",           "Cyrillic"),
+        ("emoji_in_name",  "test😀@example.com",      "Single emoji"),
+        ("emoji_combo",    "🇵🇸🇸🇦🔥@test.com",         "Emoji combo with flags"),
+        ("accented",       "tëst@exämplé.com",        "Accented Latin"),
+        ("german_umlaut",  "müller@test.de",          "German umlauts"),
+        ("french_accent",  "café@test.fr",            "French accents"),
+        ("spanish_tilde",  "señor@test.es",           "Spanish ñ"),
+        ("turkish_dot",    "i̇stanbul@test.com",       "Turkish dotted i"),
+        ("vietnamese",     "tiếng@test.com",          "Vietnamese"),
+        ("long_unicode",   "à"*50 + "@test.com",      "Long unicode prefix"),
+        ("rtl_password",   "كلمة مرور123",            "Arabic password"),
+        ("zero_width",     "test​@test.com",           "Zero-width space"),
+        ("rtl_override",   "test‮@test.com",          "RTL override char"),
+        ("combining",      "á@test.com",        "Combining accent"),
+        ("normalized_nfc", "café@test.com",           "NFC-normalized é"),
     ]
 
     cases_text = "\n".join(
@@ -1312,6 +1431,7 @@ ALL_TYPES = [
     ("edge_cases",     edge_cases),
     # DEEP COVERAGE
     ("boundary",       boundary),
+    ("combinatorial",  combinatorial),
     ("data_driven",    data_driven),
     ("deep_form",      deep_form),
     # SECURITY

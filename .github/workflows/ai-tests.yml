@@ -393,7 +393,10 @@ jobs:
   qa-agent-1-functional:
     name: "QA Agent 1 — Functional & Edge Cases"
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # Bumped 30→45 after run #50 hit the limit on slow-staging runs.
+    # QA-01 + QA-02 typically finish in ~6-10 min; the buffer absorbs
+    # OTP rate-limit retries that occasionally drag tests out.
+    timeout-minutes: 45
 
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
@@ -479,7 +482,10 @@ jobs:
   qa-agent-2-security-perf:
     name: "QA Agent 2 — Security, Performance & Hallucination"
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # Bumped 30→45 — XSS+SQLi payload files expanded to 50 each, so QA-03
+    # parametrize count went from ~59 to ~172 tests. ~9 min for QA-03 alone
+    # on staging; QA-04 + QA-05 push total to ~17 min.
+    timeout-minutes: 45
 
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}

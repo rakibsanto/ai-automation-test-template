@@ -3264,15 +3264,50 @@ class TestPhase4ClusteringVerification:
 #                                                       click + capture errors)
 #  3. If staging is offline                          → test skips cleanly
 
+def _spec_urls_for_exploration() -> list[tuple[str, str]]:
+    """Extract every spec md file's target URL so QA-19 walks each one.
+    Capped to keep CI runtime bounded. Falls back to empty list silently
+    if specs/ dir is unavailable (spec_parser shouldn't be required for
+    the qa_comprehensive suite to load)."""
+    try:
+        import sys as _sys
+        from pathlib import Path as _Path
+        _sys.path.insert(0, str(_Path(__file__).parent.parent))
+        from ai_engine.spec_parser import parse as _parse_spec
+        specs_dir = _Path(__file__).parent.parent / "specs"
+        out: list[tuple[str, str]] = []
+        seen_urls: set[str] = set()
+        for p in sorted(specs_dir.glob("*.md")):
+            if p.name in {"TEMPLATE.md", "README.md", "EXAMPLE.md"} or p.name.startswith("_"):
+                continue
+            try:
+                spec = _parse_spec(p)
+            except Exception:
+                continue
+            if spec.url and spec.url.startswith("http") and spec.url not in seen_urls:
+                seen_urls.add(spec.url)
+                # Stable, parametrize-safe id derived from the spec slug
+                out.append((f"spec_{spec.slug}", spec.url))
+        return out[:12]  # cap so QA-19 stays under 5 min
+    except Exception:
+        return []
+
+
 class TestQA19AutonomousExploratory:
-    """Autonomous bug-finding via browser-use AI agent or deterministic walk."""
+    """Autonomous bug-finding via browser-use AI agent or deterministic walk.
+
+    EXPLORE_PAGES merges:
+      (a) hand-picked high-value URLs (homepage / search / tutor flows)
+      (b) every spec md file's target URL — so the explorer walks each
+          page that has its own spec, step by step, feature by feature.
+    """
 
     EXPLORE_PAGES = [
         ("homepage_en",  BASE_URL),
         ("find_tutors",  f"{BASE_URL}/find-tutors"),
         ("become_tutor", f"{BASE_URL.rstrip('/en')}/en/become-tutor"),
         ("how_it_works", f"{BASE_URL.rstrip('/en')}/en/how-mehad-works"),
-    ]
+    ] + _spec_urls_for_exploration()
 
     def _deterministic_walk(self, page: Page, url: str) -> list[str]:
         """Fallback when browser-use is unavailable: random-scroll + click

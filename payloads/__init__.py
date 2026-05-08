@@ -15,6 +15,9 @@ XSS      = load("xss")
 SQLI     = load("sqli")
 BOUNDARY = load("boundary")
 
-# Top payloads for quick CI runs (subset of each)
-XSS_QUICK      = XSS[:5]
-SQLI_QUICK     = SQLI[:5]
+# Quick subsets are now broader — the per-spec security generator uses these
+# directly via parametrize, so a larger QUICK list means more tests per spec
+# without the agent emitting more code (parametrize multiplies cheaply).
+XSS_QUICK      = XSS[:50]
+SQLI_QUICK     = SQLI[:50]
+BOUNDARY_QUICK = BOUNDARY[:50]

