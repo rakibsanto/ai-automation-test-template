@@ -58,7 +58,7 @@ jobs:
     steps:
       # ── 1. Checkout ──────────────────────────────────────────────────────────
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # ── 2. Python 3.12 ──────────────────────────────────────────────────────
       - name: Set up Python 3.12
@@ -233,7 +233,7 @@ jobs:
 
       # ── 14. Upload HTML bug report ────────────────────────────────────────
       - name: Upload HTML bug report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: bug-report-${{ github.run_number }}
@@ -245,7 +245,7 @@ jobs:
       # Only created on test failures, so when the AI agent has 0 failures
       # there is nothing to upload — `ignore` keeps the log clean.
       - name: Upload screenshots
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: screenshots-${{ github.run_number }}
@@ -267,7 +267,7 @@ jobs:
 
       # ── 16. Upload full reports + evidence ────────────────────────────────
       - name: Upload full reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: full-reports-${{ github.run_number }}
@@ -282,7 +282,7 @@ jobs:
 
       # ── 17. Upload generated tests ────────────────────────────────────────
       - name: Upload generated tests
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: ai-generated-tests-${{ github.run_number }}
@@ -292,7 +292,7 @@ jobs:
 
       # ── 18. Upload compiled specs ─────────────────────────────────────────
       - name: Upload compiled specs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: compiled-specs-${{ github.run_number }}
@@ -400,7 +400,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
@@ -458,7 +458,7 @@ jobs:
           done
 
       - name: Upload QA Agent 1 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-1-reports-${{ github.run_number }}
@@ -486,7 +486,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
@@ -553,7 +553,7 @@ jobs:
           done
 
       - name: Upload QA Agent 2 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-2-reports-${{ github.run_number }}
@@ -578,7 +578,7 @@ jobs:
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install dependencies
@@ -606,7 +606,7 @@ jobs:
             --json-report --json-report-file=reports/qa07_accessibility_results.json \
             -p no:cacheprovider 2>&1 | tee reports/qa07-accessibility.txt
       - name: Upload QA Agent 3 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-3-reports-${{ github.run_number }}
@@ -630,7 +630,7 @@ jobs:
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install dependencies
@@ -649,7 +649,7 @@ jobs:
             --json-report --json-report-file=reports/qa08_mobile_results.json \
             -p no:cacheprovider 2>&1 | tee reports/qa08-mobile.txt
       - name: Upload QA Agent 4 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-4-reports-${{ github.run_number }}
@@ -677,7 +677,7 @@ jobs:
       OPENAI_API_KEY:      "ollama"
       OPENAI_BASE_URL:     "http://localhost:11434/v1"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install Python dependencies
@@ -713,7 +713,7 @@ jobs:
           echo "=== LangGraph Agent — spec → generate → cache → run ==="
           python -u -m ai_engine.langgraph_agent || true
       - name: Upload LangGraph Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-5-langgraph-${{ github.run_number }}
@@ -733,7 +733,7 @@ jobs:
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install dependencies
@@ -762,7 +762,7 @@ jobs:
           echo "" >> "$GITHUB_STEP_SUMMARY"
           [ -f reports/qa09-seo.txt ] && grep -E "^(PASSED|FAILED|ERROR|tests ran|passed|failed)" reports/qa09-seo.txt | tail -5 >> "$GITHUB_STEP_SUMMARY" || true
       - name: Upload QA Agent 6 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-6-reports-${{ github.run_number }}
@@ -785,7 +785,7 @@ jobs:
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install dependencies
@@ -814,7 +814,7 @@ jobs:
           echo "" >> "$GITHUB_STEP_SUMMARY"
           [ -f reports/qa10-i18n.txt ] && grep -E "^(PASSED|FAILED|ERROR|tests ran|passed|failed)" reports/qa10-i18n.txt | tail -5 >> "$GITHUB_STEP_SUMMARY" || true
       - name: Upload QA Agent 7 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-7-reports-${{ github.run_number }}
@@ -841,7 +841,7 @@ jobs:
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with: { lfs: true }   # baselines stored under tests/visual_baselines/
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
@@ -874,7 +874,7 @@ jobs:
             git push origin HEAD:main || echo "push skipped (token lacks permission)"
           fi
       - name: Upload QA Agent 8 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-8-reports-${{ github.run_number }}
@@ -900,7 +900,7 @@ jobs:
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install dependencies
@@ -919,7 +919,7 @@ jobs:
             --json-report --json-report-file=reports/qa12_js_errors_results.json \
             -p no:cacheprovider 2>&1 | tee reports/qa12-js-errors.txt
       - name: Upload QA Agent 9 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-9-reports-${{ github.run_number }}
@@ -944,7 +944,7 @@ jobs:
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install dependencies
@@ -963,7 +963,7 @@ jobs:
             --json-report --json-report-file=reports/qa13_security_headers_results.json \
             -p no:cacheprovider 2>&1 | tee reports/qa13-security-headers.txt
       - name: Upload QA Agent 10 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-10-reports-${{ github.run_number }}
@@ -984,7 +984,7 @@ jobs:
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install dependencies
@@ -1003,7 +1003,7 @@ jobs:
             --json-report --json-report-file=reports/qa14_cookies_results.json \
             -p no:cacheprovider 2>&1 | tee reports/qa14-cookies.txt
       - name: Upload QA Agent 11 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-11-reports-${{ github.run_number }}
@@ -1024,7 +1024,7 @@ jobs:
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install dependencies
@@ -1043,7 +1043,7 @@ jobs:
             --json-report --json-report-file=reports/qa15_owasp_results.json \
             -p no:cacheprovider 2>&1 | tee reports/qa15-owasp.txt
       - name: Upload QA Agent 12 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-12-reports-${{ github.run_number }}
@@ -1067,7 +1067,7 @@ jobs:
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install dependencies
@@ -1086,7 +1086,7 @@ jobs:
             --json-report --json-report-file=reports/qa16_lighthouse_results.json \
             -p no:cacheprovider 2>&1 | tee reports/qa16-lighthouse.txt
       - name: Upload QA Agent 13 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-13-reports-${{ github.run_number }}
@@ -1107,7 +1107,7 @@ jobs:
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install dependencies
@@ -1129,7 +1129,7 @@ jobs:
             --json-report --json-report-file=reports/qa17_memory_results.json \
             -p no:cacheprovider 2>&1 | tee reports/qa17-memory.txt
       - name: Upload QA Agent 14 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-14-reports-${{ github.run_number }}
@@ -1150,7 +1150,7 @@ jobs:
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install dependencies
@@ -1169,7 +1169,7 @@ jobs:
             --json-report --json-report-file=reports/qa18_network_results.json \
             -p no:cacheprovider 2>&1 | tee reports/qa18-network.txt
       - name: Upload QA Agent 15 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-15-reports-${{ github.run_number }}
@@ -1193,7 +1193,7 @@ jobs:
       BASE_URL:                ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
       BROWSER_USE_ENABLED:     "false"   # set true once Ollama is hooked
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install dependencies
@@ -1213,7 +1213,7 @@ jobs:
             --json-report --json-report-file=reports/qa19_exploratory_results.json \
             -p no:cacheprovider 2>&1 | tee reports/qa19-exploratory.txt
       - name: Upload QA Agent 16 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-16-reports-${{ github.run_number }}
@@ -1236,7 +1236,7 @@ jobs:
     env:
       BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install dependencies
@@ -1255,7 +1255,7 @@ jobs:
             --json-report --json-report-file=reports/qa20_fuzzing_results.json \
             -p no:cacheprovider 2>&1 | tee reports/qa20-fuzzing.txt
       - name: Upload QA Agent 17 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-17-reports-${{ github.run_number }}
@@ -1282,7 +1282,7 @@ jobs:
       ENABLE_VISION_QA:   ${{ github.event.inputs.enable_vision || 'false' }}
       VISION_MODEL:       "qwen2-vl:7b"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install dependencies
@@ -1314,7 +1314,7 @@ jobs:
             --json-report --json-report-file=reports/qa22_vision_results.json \
             -p no:cacheprovider 2>&1 | tee reports/qa22-vision.txt
       - name: Upload QA Agent 18 Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: qa-agent-18-reports-${{ github.run_number }}
@@ -1358,7 +1358,7 @@ jobs:
       - qa-agent-17-fuzzing
       - qa-agent-18-vision-ui
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12", cache: "pip" }
       - name: Install report dependencies
@@ -1368,7 +1368,7 @@ jobs:
 
       # Download artifacts from every QA agent
       - name: Download AI Agent artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: full-reports-${{ github.run_number }}
@@ -1376,115 +1376,115 @@ jobs:
             reports/
             !reports/videos/page@*.webm
       - name: Download QA Agent 1 artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-1-reports-${{ github.run_number }}
           path: reports/agent-1/
       - name: Download QA Agent 2 artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-2-reports-${{ github.run_number }}
           path: reports/agent-2/
       - name: Download QA Agent 3 artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-3-reports-${{ github.run_number }}
           path: reports/agent-3/
       - name: Download QA Agent 4 artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-4-reports-${{ github.run_number }}
           path: reports/agent-4/
       - name: Download QA Agent 5 artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-5-langgraph-${{ github.run_number }}
           path: reports/agent-5/
       - name: Download QA Agent 6 artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-6-reports-${{ github.run_number }}
           path: reports/agent-6/
       - name: Download QA Agent 7 artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-7-reports-${{ github.run_number }}
           path: reports/agent-7/
       - name: Download QA Agent 8 artifacts (visual regression)
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-8-reports-${{ github.run_number }}
           path: reports/agent-8/
       - name: Download QA Agent 9 artifacts (JS error sweeper)
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-9-reports-${{ github.run_number }}
           path: reports/agent-9/
       - name: Download QA Agent 10 artifacts (security headers)
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-10-reports-${{ github.run_number }}
           path: reports/agent-10/
       - name: Download QA Agent 11 artifacts (cookie security)
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-11-reports-${{ github.run_number }}
           path: reports/agent-11/
       - name: Download QA Agent 12 artifacts (OWASP surface)
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-12-reports-${{ github.run_number }}
           path: reports/agent-12/
       - name: Download QA Agent 13 artifacts (lighthouse)
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-13-reports-${{ github.run_number }}
           path: reports/agent-13/
       - name: Download QA Agent 14 artifacts (memory leak)
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-14-reports-${{ github.run_number }}
           path: reports/agent-14/
       - name: Download QA Agent 15 artifacts (network resilience)
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-15-reports-${{ github.run_number }}
           path: reports/agent-15/
       - name: Download QA Agent 16 artifacts (autonomous exploratory)
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-16-reports-${{ github.run_number }}
           path: reports/agent-16/
       - name: Download QA Agent 17 artifacts (property-based fuzz)
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-17-reports-${{ github.run_number }}
           path: reports/agent-17/
       - name: Download QA Agent 18 artifacts (vision UI review)
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: qa-agent-18-reports-${{ github.run_number }}
           path: reports/agent-18/
       - name: Download screenshots (for embedding in master report)
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         continue-on-error: true
         with:
           name: screenshots-${{ github.run_number }}
@@ -1517,7 +1517,7 @@ jobs:
           fi
 
       - name: Upload consolidated master report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: master-bug-report-${{ github.run_number }}

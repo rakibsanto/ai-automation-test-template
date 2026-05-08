@@ -77,6 +77,16 @@ PLAYWRIGHT PYTHON STRICT RULES (violating ANY rule = test cannot run):
 - Use @pytest.mark.parametrize for data-driven tests (payload, input value, viewport).
 - Add # TEST_DATA: <values used> comment in docstring for traceability.
 - NO markdown fences. NO prose. Functions only.
+
+ANTI-HALLUCINATION GUARD (critical — false test = worse than no test):
+- Use ONLY fields, buttons, links, URLs, and labels listed in the SPEC SECTIONS below.
+- Do NOT invent: form fields, button labels, navigation links, cookie names, API
+  endpoints, error messages, or user roles that the spec does not mention.
+- If a flow doesn't say "click X" don't write `click('X')`. If a field isn't named
+  in the spec, don't fill it. Use the URL exactly as given.
+- When in doubt, write a generic visibility assertion (`expect(page).to_have_url`,
+  body text length > 100) instead of a specific text/selector you're guessing at.
+- Every assertion message must reference WHAT WAS EXPECTED so a failure is debuggable.
 """
 
 
@@ -109,9 +119,11 @@ def _selector_hints(spec: ParsedSpec) -> str:
 def functional(spec: ParsedSpec) -> str:
     if not spec.flows:
         return ""
+    # Use up to 16 flows (was 8). Each flow → ONE end-to-end test.
+    n_flows = min(len(spec.flows), 16)
     flows_text = ""
-    for i, f in enumerate(spec.flows[:8], 1):
-        steps = "\n    ".join(f["steps"][:8])
+    for i, f in enumerate(spec.flows[:n_flows], 1):
+        steps = "\n    ".join(f["steps"][:10])
         flows_text += f"\nFLOW {i}: {f['name']}\n    {steps}\n"
 
     valid_email = spec.test_data_valid[0] if spec.test_data_valid else "testuser@mailinator.com"
@@ -120,8 +132,11 @@ def functional(spec: ParsedSpec) -> str:
     return _ai(f"""{_RULES}
 PAGE: {spec.page_name}  URL: {spec.url}
 
-Write ONE pytest+Playwright test function per user flow.
-Each test must: navigate, fill real inputs, click submit, assert the expected outcome.
+Write ONE pytest+Playwright test function per user flow listed below.
+Each test MUST navigate, perform the listed steps with real inputs, and assert
+the SPECIFIC outcome the flow describes (redirect URL, success/error text,
+element visibility). NO test should pass without a real assertion against
+a state observable from the spec.
 
 TEST DATA:
   valid_email = "{valid_email}" (or use f"qa_{{int(time.time())}}@mailinator.com" for uniqueness)
@@ -131,45 +146,57 @@ TEST DATA:
 
 {_selector_hints(spec)}
 
-FLOWS TO TEST:
+FLOWS TO TEST (one test per flow — DO NOT skip flows, DO NOT add flows):
 {flows_text}
 
-REQUIREMENT: Each function must assert the SPECIFIC outcome described (redirect URL, error message, etc).
-Write {min(len(spec.flows), 8)} test functions now:""", 3500)
+OUTPUT: exactly {n_flows} test functions, one per flow, in flow order.
+Function naming: test_flow_<flow_name_snake_case>.
+Write these {n_flows} test functions now:""", 4000)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 2. VALIDATION — every field rule, valid AND invalid inputs
 # ─────────────────────────────────────────────────────────────────────────────
 def validation(spec: ParsedSpec) -> str:
-    rules = "\n".join(f"  RULE {i+1}: {r}" for i, r in enumerate(spec.validation_rules[:12]))
-    invalid_data = "\n".join(f"  - {t}" for t in spec.test_data_invalid[:8])
-    valid_data   = "\n".join(f"  - {t}" for t in spec.test_data_valid[:5])
+    # Up to 16 rules (was 12). For each rule we want TWO tests (invalid + valid).
+    n_rules = min(len(spec.validation_rules), 16) if spec.validation_rules else 8
+    rules = "\n".join(f"  RULE {i+1}: {r}" for i, r in enumerate(
+                        (spec.validation_rules or [
+                            "Email: valid format required",
+                            "Password: minimum 8 chars",
+                            "All required fields: must not be empty",
+                        ])[:16]))
+    invalid_data = "\n".join(f"  - {t}" for t in spec.test_data_invalid[:10])
+    valid_data   = "\n".join(f"  - {t}" for t in spec.test_data_valid[:8])
+    target_count = max(8, min(n_rules * 2, 16))  # 2 per rule, capped 8-16
 
     return _ai(f"""{_RULES}
 PAGE: {spec.page_name}  URL: {spec.url}
 
-Write VALIDATION tests. For every rule: one test with INVALID input (must show error) + one with VALID input.
+Write VALIDATION tests. For EVERY rule below produce TWO tests:
+  (A) one with INVALID input — must show a user-facing error AND not redirect
+  (B) one with VALID   input — must NOT show an error (or redirect to success)
 
-VALIDATION RULES:
-{rules or "  - Email: valid format required\n  - Password: minimum 8 chars\n  - All fields: required"}
+VALIDATION RULES (use ONLY these — do not invent rules):
+{rules}
 
-INVALID TEST INPUTS (inject these directly into tests):
-{invalid_data or "  - empty string\n  - spaces only\n  - invalid@@@email"}
+INVALID TEST INPUTS (use these — ONE per invalid test):
+{invalid_data or "  - empty string\n  - spaces only\n  - invalid@@@email\n  - <script>alert(1)</script>"}
 
 VALID TEST INPUTS:
 {valid_data or "  - valid@example.com\n  - Test@1234!"}
 
 PATTERN (use exactly):
-1. page.goto(URL) + wait
-2. Fill the field with the test value
-3. page.locator('button[type="submit"]').click()
-4. page.wait_for_timeout(500)
-5. For invalid: assert error visible — expect(page.locator("[role='alert']")).to_be_visible()
-6. For valid: assert no error OR url changed
+1. page.goto(URL, wait_until="domcontentloaded", timeout=15000)
+2. page.wait_for_timeout(800)  # SPA hydration
+3. Fill the field with the test value
+4. Submit (button[type='submit'] or get_by_role('button', name='...'))
+5. page.wait_for_timeout(500)
+6. (invalid) expect(page.locator("[role='alert'], .error, .text-red-500").first).to_be_visible(timeout=4000)
+   (valid)   assert page.url != ORIG_URL OR no .error visible
 
-Include # TEST_DATA: <input_value> in each function docstring.
-Write 8-12 test functions now:""", 3000)
+Include # TEST_DATA: <input_value> in each docstring.
+Write exactly {target_count} test functions ({target_count // 2} invalid + {target_count // 2} valid):""", 3500)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -213,6 +240,15 @@ def negative(spec: ParsedSpec) -> str:
             "very long input (300+ chars) → graceful error",
         ]
 
+    # Universal scenarios that apply to ANY form — added on top of the
+    # page-specific list. Bumps the test count without inventing fields.
+    universal = [
+        "browser back button after a failed submit → form state preserved or cleanly reset",
+        "double-click submit button → no duplicate submission (network only fires once)",
+        "paste (Ctrl+V) into a required field then submit → value accepted, no JS error",
+        "rapid 5x clicks on submit with empty form → only validation errors, no crash",
+    ]
+    scenarios = scenarios + universal
     scenarios_text = "\n".join(f"  {i+1}. {s}" for i, s in enumerate(scenarios))
     return _ai(f"""{_RULES}
 PAGE: {spec.page_name}  URL: {spec.url}
@@ -220,17 +256,61 @@ PAGE: {spec.page_name}  URL: {spec.url}
 Write NEGATIVE tests — inputs that MUST be REJECTED with a user-friendly error.
 NEVER crash. NEVER show stack traces. NEVER return blank page.
 
-SCENARIOS TO TEST:
+SCENARIOS TO TEST (one test per scenario — DO NOT skip, DO NOT invent extras):
 {scenarios_text}
 
 For EACH scenario:
-- Fill the form with the wrong/negative input
-- Submit or trigger action
-- Assert the user-facing error appears (not a JS error, not a 500 page)
+- Fill / interact as the scenario describes (use ONLY fields/buttons mentioned
+  in the FLOWS or VALIDATION RULES of this spec — do not invent UI elements)
+- Submit or trigger the action
+- Assert the user-facing error appears (`[role="alert"]`, `.error`, or visible
+  red-text element) — NOT a JS error, NOT a 500 page
 - Assert the URL did NOT redirect to dashboard/success
 
 Include # TEST_DATA: <input_used> in each docstring.
-Write {len(scenarios)} test functions now:""", 3000)
+Write {len(scenarios)} test functions now:""", 3500)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 3.5. EDGE CASES — exactly the edge cases listed in the spec md
+# ─────────────────────────────────────────────────────────────────────────────
+def edge_cases(spec: ParsedSpec) -> str:
+    """One test per edge case parsed out of the spec's `## Edge Cases` section.
+    Strictly spec-driven — no invention. Skipped entirely if the spec has none.
+
+    spec.edge_cases is a list of dicts: {id, scenario, expected}."""
+    if not spec.edge_cases:
+        return ""
+    cases = spec.edge_cases[:14]  # cap so the prompt stays under context limit
+
+    def _fmt(c) -> str:
+        if isinstance(c, dict):
+            ec_id = c.get("id", "")
+            sc    = c.get("scenario", "")
+            ex    = c.get("expected", "")
+            return f"[{ec_id}] {sc} → expect: {ex}" if ec_id else f"{sc} → expect: {ex}"
+        return str(c)
+
+    cases_text = "\n".join(f"  EDGE {i+1}: {_fmt(c)}" for i, c in enumerate(cases))
+    return _ai(f"""{_RULES}
+PAGE: {spec.page_name}  URL: {spec.url}
+
+Write ONE pytest+Playwright test PER edge case below. Each test must reproduce
+the edge condition and assert the SPECIFIC behavior described.
+
+EDGE CASES (use ONLY these — do not invent edge cases not in this list):
+{cases_text}
+
+For EACH edge case:
+- Reproduce the condition (specific input value, action sequence, viewport,
+  timing, etc.) using ONLY UI elements named in the spec
+- Assert the documented outcome (error visible, redirect, element state, etc.)
+- If the edge case description doesn't specify a precise outcome, fall back
+  to: page must not crash AND no JS console errors
+
+Function naming: test_edge_<edge_short_name>.
+Include # TEST_DATA: <inputs / actions used> in each docstring.
+Write exactly {len(cases)} test functions, one per edge case, in the order above:""", 3500)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -1152,6 +1232,7 @@ ALL_TYPES = [
     ("functional",     functional),
     ("validation",     validation),
     ("negative",       negative),
+    ("edge_cases",     edge_cases),
     # DEEP COVERAGE
     ("boundary",       boundary),
     ("data_driven",    data_driven),
