@@ -131,7 +131,7 @@ def _history_table(history: list[tuple[int, Path]]) -> str:
         return ('<p style="color:#8b949e;text-align:center;padding:30px">'
                 'No previous runs archived yet — this is the first deployment.</p>')
     rows = []
-    for run_num, _path in history[:25]:  # show last 25 runs
+    for run_num, _path in history[:50]:  # show last 50 runs
         rows.append(
             f'<tr><td>Run #{run_num}</td>'
             f'<td><a href="history/run-{run_num}.html">View report</a></td></tr>'
@@ -597,15 +597,41 @@ def main() -> None:
 
     # 3. Build index.html
     summary = _load_summary()
-    history = _existing_history(SITE_DIR)
-    # Add this run to the in-memory history for the index render
+    # History sources, in priority order:
+    #   (a) trends.json — cumulative across all runs (gh-pages backed),
+    #       knows about runs even if their run-N.html was cleaned up
+    #   (b) local SITE_DIR/history/run-*.html — files the build script
+    #       just emitted or copied into the deploy dir
+    #   (c) the current RUN_NUMBER itself (so a fresh first deployment shows up)
+    # Then dedupe BY RUN NUMBER (not by Path tuple — Path strings differ
+    # between absolute filesystem entries and relative href strings, which
+    # was causing duplicate "Run #N" rows to appear).
+    history_runs: dict[int, Path] = {}
+    for n, p in _existing_history(SITE_DIR):
+        history_runs[n] = Path(f"history/run-{n}.html")
+    # Pull every run number trends.json knows about
+    try:
+        trends_path = SITE_DIR / "trends.json"
+        if trends_path.exists():
+            tdata = json.loads(trends_path.read_text(encoding="utf-8"))
+            for entry in tdata.get("history", []) or tdata.get("runs", []):
+                n = entry.get("run") or entry.get("run_number")
+                if n is not None:
+                    try:
+                        history_runs.setdefault(int(n),
+                                                  Path(f"history/run-{int(n)}.html"))
+                    except (TypeError, ValueError):
+                        pass
+    except Exception as e:
+        print(f"  ⚠️  Could not merge trends.json into history: {e}")
+    # Always include the current run if its html was emitted
     if (SITE_DIR / "history" / f"run-{RUN_NUMBER}.html").exists():
         try:
-            num = int(RUN_NUMBER)
-            history = sorted(set(history + [(num, Path(f"history/run-{num}.html"))]),
-                             reverse=True)
+            n = int(RUN_NUMBER)
+            history_runs[n] = Path(f"history/run-{n}.html")
         except Exception:
             pass
+    history = sorted(history_runs.items(), reverse=True)
 
     (SITE_DIR / "index.html").write_text(
         _build_index_html(summary, history), encoding="utf-8")

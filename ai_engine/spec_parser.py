@@ -22,7 +22,8 @@ class ParsedSpec:
     test_data_invalid: list[str]
     security_inputs: list[str]
     api_endpoints: list[dict]        # [{method, endpoint, trigger}]
-    raw: str                         # full original text (for fallback)
+    languages: list[str] = field(default_factory=list)  # e.g. ["en", "ar"]
+    raw: str = ""                    # full original text (for fallback)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -56,8 +57,40 @@ def parse(spec_path: Path) -> ParsedSpec:
     # ── URL / path ────────────────────────────────────────────────────────────
     url_match = re.search(r"\*\*URL:\*\*\s*`(.+?)`", raw)
     url = url_match.group(1).strip() if url_match else ""
+    if not url:
+        # Fallback: first http(s) URL anywhere in the first 30 lines.
+        # Handles spec styles like `[https://...]`, bare URL lines, and
+        # `Open the website: https://...`.
+        for line in raw.splitlines()[:30]:
+            m = re.search(r"https?://[^\s\]\)`]+", line)
+            if m:
+                url = m.group(0).rstrip(".,;)")
+                break
     path_match = re.search(r"https?://[^/]+(/[^\s`\)]+)", url)
     path = path_match.group(1) if path_match else f"/{slug}"
+
+    # ── Language / locale detection ───────────────────────────────────────────
+    # Locale codes must be the FIRST path segment of an http(s) URL — that's
+    # the actual semantics of locale-prefixed routes (e.g. /en/foo, /ar/bar).
+    # Also accept an explicit `**Locale:**` declaration line.
+    KNOWN_LOCALES = {"en", "ar", "fr", "es", "de", "pt", "it", "tr", "zh",
+                      "ja", "ko", "ru", "hi", "ur", "bn", "id", "ms", "vi",
+                      "th", "nl", "pl", "sv", "fi", "no", "da", "el", "he", "fa"}
+    languages: list[str] = []
+    seen = set()
+    locale_line = re.search(r"\*\*Locale[s]?:\*\*\s*([^\n]+)", raw, re.IGNORECASE)
+    if locale_line:
+        for code in re.findall(r"`?/([a-z]{2})`?", locale_line.group(1).lower()):
+            if code in KNOWN_LOCALES and code not in seen:
+                seen.add(code); languages.append(code)
+    # URL-anchored: only match when /xx is the first path segment of a URL.
+    # Avoids false positives like RTL/LTR, AND/OR, etc.
+    for m in re.finditer(r"https?://[^/\s]+/([a-z]{2})(?=[/`\s\]\)]|$)", raw):
+        code = m.group(1)
+        if code in KNOWN_LOCALES and code not in seen:
+            seen.add(code); languages.append(code)
+    # Cap — too many languages = noisy tests
+    languages = languages[:6]
 
     # ── Requirements ──────────────────────────────────────────────────────────
     requirements = re.findall(r"(REQ-[A-Z\-\d]+:.+)", raw)
@@ -123,6 +156,7 @@ def parse(spec_path: Path) -> ParsedSpec:
         test_data_invalid=td_invalid[:8],
         security_inputs=td_security[:5],
         api_endpoints=api_endpoints[:6],
+        languages=languages,
         raw=raw,
     )
 

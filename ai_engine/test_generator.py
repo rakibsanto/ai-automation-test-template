@@ -1170,7 +1170,84 @@ Write all 4 test functions:""", 2500)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 21. DEEP FORM — every field, every state, every combination
+# 22. MULTI-LANGUAGE — exercise every locale the spec mentions
+# ─────────────────────────────────────────────────────────────────────────────
+def multi_language(spec: ParsedSpec) -> str:
+    """For each locale code declared in the spec (en, ar, fr, ...) verify:
+    - the locale URL loads (HTTP < 400)
+    - the page has body content (not blank / 500)
+    - the document.documentElement.dir matches expectations for RTL locales
+      (ar / he / fa / ur — must be 'rtl' or have an explicit lang attribute)
+
+    Skipped silently when the spec declares 0 or 1 locale (single-language
+    spec — nothing to verify across languages)."""
+    langs = spec.languages or []
+    if len(langs) < 2:
+        return ""
+    if not spec.url:
+        return ""
+    # Substitute the locale segment in the URL — preserves any sub-path.
+    # E.g. https://x.com/en/foo/bar → /ar/foo/bar
+    base_url = spec.url
+    m = re.match(r"(https?://[^/]+)/([a-z]{2})(/.*)?", base_url)
+    if not m:
+        return ""
+    host = m.group(1)
+    sub  = m.group(3) or ""
+    locale_urls = "\n".join(
+        f'        ("{lc}", "{host}/{lc}{sub}"),' for lc in langs)
+    rtl_set = ", ".join(f'"{c}"' for c in ("ar", "he", "fa", "ur"))
+
+    return _ai(f"""{_RULES}
+PAGE: {spec.page_name}  URL: {spec.url}
+LOCALES DECLARED IN SPEC: {langs}
+
+Write MULTI-LANGUAGE tests — for EACH declared locale verify the page works.
+
+LOCALE URLs (parametrize across exactly these — do NOT add or remove):
+@pytest.mark.parametrize("locale,url", [
+{locale_urls}
+])
+
+Tests to write (one parametrized test per behaviour):
+
+1. test_locale_page_loads(page, locale, url):
+   - page.goto(url, wait_until="domcontentloaded", timeout=15000)
+   - page.wait_for_timeout(1500)  # SPA hydration
+   - assert page.url.startswith(url[:60]) — no error redirect
+   - body = page.inner_text("body")
+   - assert len(body) > 100, f"{{locale}}: page body too short ({{len(body)}} chars)"
+
+2. test_locale_html_lang_attribute(page, locale, url):
+   - page.goto(url, ...)
+   - lang = page.locator("html").get_attribute("lang") or ""
+   - assert lang.lower().startswith(locale), \\
+         f"{{locale}}: <html lang> expected to start with {{locale}}, got {{lang!r}}"
+
+3. test_locale_rtl_direction_for_rtl_locales(page, locale, url):
+   - rtl_locales = {{{rtl_set}}}
+   - page.goto(url, ...)
+   - direction = page.locator("html").get_attribute("dir") or ""
+   - if locale in rtl_locales:
+       assert direction.lower() == "rtl", \\
+           f"{{locale}}: expected dir='rtl' for RTL locale, got {{direction!r}}"
+   - else:
+       assert direction.lower() in ("", "ltr"), \\
+           f"{{locale}}: expected dir='ltr' or unset, got {{direction!r}}"
+
+4. test_locale_no_console_errors(page, locale, url):
+   - errors = []
+   - page.on("pageerror", lambda e: errors.append(str(e)))
+   - page.goto(url, ...)
+   - page.wait_for_timeout(1500)
+   - assert errors == [], f"{{locale}}: JS errors: {{errors[:2]}}"
+
+Output: 4 parametrized test functions ONLY. NO imports.
+Include # TEST_DATA: locale codes + URLs in each docstring.""", 3000)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 23. DEEP FORM — every field, every state, every combination
 # ─────────────────────────────────────────────────────────────────────────────
 def deep_form(spec: ParsedSpec) -> str:
     field_names = [r for r in spec.validation_rules[:6]] if spec.validation_rules else \
@@ -1252,6 +1329,7 @@ ALL_TYPES = [
     ("cross_browser",  cross_browser),
     # ADVANCED
     ("i18n",           i18n),
+    ("multi_language", multi_language),
     ("rate_limiting",  rate_limiting),
     ("cookie_storage", cookie_storage),
 ]
