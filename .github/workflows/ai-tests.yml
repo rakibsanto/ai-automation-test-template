@@ -307,7 +307,7 @@ jobs:
         run: |
           # ── Header (always written) ─────────────────────────────────────
           cat >> "$GITHUB_STEP_SUMMARY" << 'HEADER'
-          ## 🤖 Fagun Autonomous AI Test Agent — v5
+          ## 🤖 Mehad Autonomous AI Test Agent — v5
           HEADER
           echo "" >> "$GITHUB_STEP_SUMMARY"
 
