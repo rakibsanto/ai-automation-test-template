@@ -363,10 +363,10 @@ def pytest_runtest_makereport(item, call):
             try:
                 from PIL import Image
                 im = Image.open(shot_path).convert("RGB").resize((200, 200))
-                pixels = list(im.getdata())
-                white_pixels = sum(1 for r, g, b in pixels
-                                    if r > 240 and g > 240 and b > 240)
-                white_ratio = white_pixels / max(1, len(pixels))
+                raw = im.tobytes()  # flat R,G,B,R,G,B,... — avoids getdata() deprecation
+                white_pixels = sum(1 for i in range(0, len(raw), 3)
+                                   if raw[i] > 240 and raw[i+1] > 240 and raw[i+2] > 240)
+                white_ratio = white_pixels / max(1, len(raw) // 3)
                 if white_ratio > 0.97:
                     print(f"  [SCREENSHOT] Mostly-white capture ({white_ratio:.0%}) "
                           f"— retrying after extra hydration wait", flush=True)

@@ -418,12 +418,10 @@ class TestQA01Functional:
     def test_qa01_send_code_enabled_after_phone_entry(self, page: Page):
         """Send Code button must become enabled after a valid phone is entered."""
         _open_login_modal(page)
-        phone_input = page.locator('input[type="tel"]').first
-        phone_input.fill("98976564")
-        page.wait_for_timeout(500)
+        # Must set country code first — default is +966 (Saudi), which rejects 8-digit numbers
+        _fill_phone(page, TEST_COUNTRY_CODE, TEST_PHONE)
+        page.wait_for_timeout(800)  # React validation is async
         btn = page.locator('button:has-text("Send Code")').first
-        # Allow a brief moment for React state update
-        page.wait_for_timeout(300)
         is_disabled = btn.is_disabled()
         assert not is_disabled, "Send Code button still disabled after valid phone entered"
 
@@ -481,10 +479,17 @@ class TestQA01Functional:
         _open_login_modal(page)
         _fill_phone(page, TEST_COUNTRY_CODE, TEST_PHONE)
 
+        rate_limited = []
+        page.on("response", lambda r: rate_limited.append(r.status)
+                if r.status == 429 else None)
+
         send_btn = page.locator('button:has-text("Send Code")').first
         page.wait_for_timeout(400)
         send_btn.click()
         page.wait_for_timeout(2000)
+
+        if rate_limited:
+            pytest.skip("Server rate-limited OTP send (429) on staging — skipping timer check")
 
         modal_text = page.locator('[role="dialog"]').first.inner_text().lower()
         assert "resend" in modal_text or "60" in modal_text or "timer" in modal_text or (
@@ -496,10 +501,17 @@ class TestQA01Functional:
         _open_login_modal(page)
         _fill_phone(page, TEST_COUNTRY_CODE, TEST_PHONE)
 
+        rate_limited = []
+        page.on("response", lambda r: rate_limited.append(r.status)
+                if r.status == 429 else None)
+
         send_btn = page.locator('button:has-text("Send Code")').first
         page.wait_for_timeout(400)
         send_btn.click()
         page.wait_for_timeout(2000)
+
+        if rate_limited:
+            pytest.skip("Server rate-limited OTP send (429) on staging — skipping change-number check")
 
         modal_text = page.locator('[role="dialog"]').first.inner_text().lower()
         assert "change" in modal_text and ("mobile" in modal_text or "number" in modal_text), (
