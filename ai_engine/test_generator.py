@@ -19,7 +19,7 @@ except ImportError:
     sys.path.insert(0, str(Path(__file__).parent.parent))
     from ai_engine.spec_parser import ParsedSpec
 
-BASE_URL = os.getenv("BASE_URL", "https://beta-stg.fagun.ai")
+BASE_URL = os.getenv("BASE_URL", "https://dev.mehadedu.com/en")
 
 # ── AI caller (injected by agent.py) ─────────────────────────────────────────
 _ai_call = None
@@ -56,7 +56,9 @@ def _ai(prompt: str, max_tokens: int = 2500) -> str:
 
 
 # ── Shared rules injected into every prompt ───────────────────────────────────
-_RULES = f"""
+def _rules(spec: "ParsedSpec") -> str:
+    spec_url = spec.url if spec and spec.url else BASE_URL
+    return f"""
 PLAYWRIGHT PYTHON STRICT RULES (violating ANY rule = test cannot run):
 - Output ONLY def test_...() function bodies + their decorators. NO imports. NO module code.
 - Signature MUST be: def test_NAME(page: Page): OR def test_NAME(page: Page, param):
@@ -71,7 +73,7 @@ PLAYWRIGHT PYTHON STRICT RULES (violating ANY rule = test cannot run):
 - Password: os.getenv("TEST_PASSWORD", "Test@1234!")
 - Phone:    os.getenv("TEST_PHONE", "512345678")  — 9-digit Saudi default
 - OTP:      os.getenv("TEST_OTP",   "123456")
-- BASE_URL = os.getenv("BASE_URL", "{BASE_URL}")
+- BASE_URL = os.getenv("BASE_URL", "{spec_url}")
 - MAX 25 lines per function. End every def completely — never leave open.
 - Include ONE docstring per test explaining what it verifies and what test data it uses.
 - Use @pytest.mark.parametrize for data-driven tests (payload, input value, viewport).
@@ -129,7 +131,7 @@ def functional(spec: ParsedSpec) -> str:
     valid_email = spec.test_data_valid[0] if spec.test_data_valid else "testuser@mailinator.com"
     valid_pass  = spec.test_data_valid[1] if len(spec.test_data_valid) > 1 else "Test@1234!"
 
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write ONE pytest+Playwright test function per user flow listed below.
@@ -174,7 +176,7 @@ def validation(spec: ParsedSpec) -> str:
     _invalid_fallback = "  - empty string\n  - spaces only\n  - invalid@@@email\n  - <script>alert(1)</script>"
     _valid_fallback   = "  - valid@example.com\n  - Test@1234!"
 
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write VALIDATION tests. For EVERY rule below produce TWO tests:
@@ -254,7 +256,7 @@ def negative(spec: ParsedSpec) -> str:
     ]
     scenarios = scenarios + universal
     scenarios_text = "\n".join(f"  {i+1}. {s}" for i, s in enumerate(scenarios))
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write NEGATIVE tests — inputs that MUST be REJECTED with a user-friendly error.
@@ -296,7 +298,7 @@ def edge_cases(spec: ParsedSpec) -> str:
         return str(c)
 
     cases_text = "\n".join(f"  EDGE {i+1}: {_fmt(c)}" for i, c in enumerate(cases))
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write ONE pytest+Playwright test PER edge case below. Each test must reproduce
@@ -365,7 +367,7 @@ def boundary(spec: ParsedSpec) -> str:
         for name, val, desc, exp in boundary_cases
     )
 
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write a SINGLE parametrized boundary test — pytest expands the parameter
@@ -415,7 +417,7 @@ def combinatorial(spec: ParsedSpec) -> str:
     """One parametrized test that crosses input-shape × viewport. Produces
     20-30 runtime tests from one function — pure parametrize-multiplier.
     Spec-agnostic: targets the first visible input (no field invention)."""
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write a SINGLE parametrized combinatorial test that explodes via two axes:
@@ -467,7 +469,7 @@ def security(spec: ParsedSpec, xss_payloads: list[str], sqli_payloads: list[str]
     xss_list  = ",\n    ".join(repr(p) for p in xss_payloads[:50])
     sqli_list = ",\n    ".join(repr(p) for p in sqli_payloads[:50])
 
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}  PATH: {spec.path}
 
 Write SECURITY tests for authorized testing. Use @pytest.mark.parametrize for all payload lists.
@@ -521,7 +523,7 @@ def api_network(spec: ParsedSpec) -> str:
         for e in spec.api_endpoints[:5]
     ) or "  POST /api/auth/login (or similar auth endpoint)"
 
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write API/NETWORK tests using Playwright request interception.
@@ -564,7 +566,7 @@ Write all 6 test functions:""", 3000)
 # 7. ACCESSIBILITY — ARIA, keyboard, axe-core, WCAG 2.1 AA
 # ─────────────────────────────────────────────────────────────────────────────
 def accessibility(spec: ParsedSpec) -> str:
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write ACCESSIBILITY tests (WCAG 2.1 AA compliance).
@@ -619,7 +621,7 @@ Write all 7 test functions:""", 3000)
 # 8. RESPONSIVE — 6 viewports + layout checks
 # ─────────────────────────────────────────────────────────────────────────────
 def responsive(spec: ParsedSpec) -> str:
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write RESPONSIVE tests using @pytest.mark.parametrize for viewports.
@@ -682,7 +684,7 @@ def navigation(spec: ParsedSpec) -> str:
     for key, label, dest, desc in links:
         link_tests += f"\n  - test_nav_{key}: click '{label}' → assert URL contains '{dest}' ({desc})"
 
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write NAVIGATION tests for all internal page links.
@@ -706,7 +708,7 @@ Write {len(links) + 3} test functions now:""", 2500)
 # 10. SESSION / AUTH — tokens, redirects, multi-session
 # ─────────────────────────────────────────────────────────────────────────────
 def session_auth(spec: ParsedSpec) -> str:
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write SESSION/AUTH tests:
@@ -754,7 +756,7 @@ Write all 6 test functions:""", 2500)
 def performance(spec: ParsedSpec) -> str:
     js_timing = "() => { const t = window.performance.timing; return { dom: t.domContentLoadedEventEnd - t.navigationStart, load: t.loadEventEnd - t.navigationStart, ttfb: t.responseStart - t.navigationStart }; }"
 
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write PERFORMANCE tests checking Core Web Vitals and load times.
@@ -810,7 +812,7 @@ Write all 6 test functions:""", 2500)
 # 12. CONSOLE ERRORS — monitor all JS errors and warnings
 # ─────────────────────────────────────────────────────────────────────────────
 def console_errors(spec: ParsedSpec) -> str:
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write CONSOLE ERROR tests monitoring browser JavaScript console.
@@ -864,7 +866,7 @@ Write all 5 test functions:""", 2500)
 # 13. ERROR STATES — graceful failure, no leaks
 # ─────────────────────────────────────────────────────────────────────────────
 def error_states(spec: ParsedSpec) -> str:
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write ERROR STATE tests verifying graceful failure handling.
@@ -918,7 +920,7 @@ Write all 4 test functions:""", 2500)
 # 14. VISUAL / LAYOUT — DOM assertions, no broken layout
 # ─────────────────────────────────────────────────────────────────────────────
 def visual(spec: ParsedSpec) -> str:
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write VISUAL/LAYOUT tests using DOM bounding box assertions (no screenshot comparison).
@@ -972,7 +974,7 @@ Write all 6 test functions:""", 2500)
 # 15. CROSS-BROWSER — parametrized smoke tests
 # ─────────────────────────────────────────────────────────────────────────────
 def cross_browser(spec: ParsedSpec) -> str:
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write CROSS-BROWSER smoke tests.
@@ -1013,7 +1015,7 @@ Write these 2 test functions:""", 1500)
 # 16. SMOKE — critical path in <60 seconds
 # ─────────────────────────────────────────────────────────────────────────────
 def smoke(spec: ParsedSpec) -> str:
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write SMOKE tests — fastest possible critical path verification (each under 15s).
@@ -1054,7 +1056,7 @@ def data_driven(spec: ParsedSpec) -> str:
     valid_list   = ", ".join(f'"{v}"' for v in valid_cases)
     invalid_list = ", ".join(f'"{v}"' for v in invalid_cases)
 
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write DATA-DRIVEN tests using @pytest.mark.parametrize with actual spec test data.
@@ -1132,7 +1134,7 @@ def i18n(spec: ParsedSpec) -> str:
         for key, inp, desc in i18n_inputs
     )
 
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write I18N (internationalization) tests for non-ASCII / special character inputs.
@@ -1170,7 +1172,7 @@ Write these 2 test functions:""", 2500)
 # 19. RATE LIMITING — rapid submission, brute force detection
 # ─────────────────────────────────────────────────────────────────────────────
 def rate_limiting(spec: ParsedSpec) -> str:
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write RATE LIMITING tests — verify the app defends against rapid form submission.
@@ -1236,7 +1238,7 @@ Write these 3 test functions:""", 2500)
 # 20. COOKIE & STORAGE — localStorage, sessionStorage, cookies
 # ─────────────────────────────────────────────────────────────────────────────
 def cookie_storage(spec: ParsedSpec) -> str:
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write COOKIE & STORAGE tests for localStorage, sessionStorage, and cookies.
@@ -1321,7 +1323,7 @@ def multi_language(spec: ParsedSpec) -> str:
         f'        ("{lc}", "{host}/{lc}{sub}"),' for lc in langs)
     rtl_set = ", ".join(f'"{c}"' for c in ("ar", "he", "fa", "ur"))
 
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 LOCALES DECLARED IN SPEC: {langs}
 
@@ -1376,7 +1378,7 @@ def deep_form(spec: ParsedSpec) -> str:
     field_names = [r for r in spec.validation_rules[:6]] if spec.validation_rules else \
                   ["email field", "password field"]
 
-    return _ai(f"""{_RULES}
+    return _ai(f"""{_rules(spec)}
 PAGE: {spec.page_name}  URL: {spec.url}
 
 Write DEEP FORM tests — exhaustively test every form field and state.
