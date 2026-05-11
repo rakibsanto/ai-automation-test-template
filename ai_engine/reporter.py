@@ -651,7 +651,7 @@ tr:hover td{{background:#1c2333}}
 <!-- Footer with author/contact card -->
 <div class="footer-wrap">
   <div style="color:var(--muted);font-size:12px;margin-bottom:6px">
-    Built by Mehad Autonomous AI Test Agent · 100% local AI · no third-party API keys
+    Built by Mejbaur Bahar Fagun
   </div>
   <div class="contact-card">
     <div class="name">Mejbaur Bahar Fagun</div>

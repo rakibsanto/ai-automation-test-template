@@ -153,20 +153,52 @@ def _history_table(history: list[tuple[int, Path]], ts_map: dict[int, str] | Non
         return ('<p style="color:#8b949e;text-align:center;padding:30px">'
                 'No previous runs archived yet — this is the first deployment.</p>')
     ts_map = ts_map or {}
-    rows = []
-    for run_num, _path in history[:50]:  # show last 50 runs
+    visible_rows = []
+    hidden_rows = []
+    for i, (run_num, _path) in enumerate(history[:50]):
         ts = _fmt_run_ts(run_num, ts_map)
         ts_cell = (f'<span style="color:#8b949e;font-size:12px">{ts}</span>'
                    if ts else '<span style="color:#484f58;font-size:12px">—</span>')
-        rows.append(
+        row = (
             f'<tr><td>Run #{run_num}</td>'
             f'<td>{ts_cell}</td>'
             f'<td><a href="history/run-{run_num}.html">View report</a></td></tr>'
         )
+        if i < 5:
+            visible_rows.append(row)
+        else:
+            hidden_rows.append(row)
+
+    hidden_tbody = ""
+    see_more_btn = ""
+    if hidden_rows:
+        hidden_tbody = (
+            f'<tbody id="history-extra" style="display:none">{"".join(hidden_rows)}</tbody>'
+        )
+        see_more_btn = (
+            '<div style="text-align:center;margin-top:12px">'
+            '<button id="history-toggle-btn" onclick="(function(){'
+            'var e=document.getElementById(\'history-extra\');'
+            'var b=document.getElementById(\'history-toggle-btn\');'
+            'if(e.style.display===\'none\'){'
+            'e.style.display=\'\';b.textContent=\'See less ▲\';}'
+            'else{e.style.display=\'none\';b.textContent=\'See more ▼\';}'
+            '})()" '
+            'style="background:#21262d;color:#58a6ff;border:1px solid #30363d;'
+            'border-radius:6px;padding:6px 20px;font-size:13px;cursor:pointer;'
+            'transition:background 0.2s" '
+            'onmouseover="this.style.background=\'#30363d\'" '
+            'onmouseout="this.style.background=\'#21262d\'">'
+            'See more &#9660;</button></div>'
+        )
+
     return (
         '<table class="history-table">'
         '<thead><tr><th>Run</th><th>Date &amp; Time</th><th>Report</th></tr></thead>'
-        f'<tbody>{"".join(rows)}</tbody></table>'
+        f'<tbody>{"".join(visible_rows)}</tbody>'
+        f'{hidden_tbody}'
+        '</table>'
+        f'{see_more_btn}'
     )
 
 
@@ -544,7 +576,7 @@ def _build_index_html(summary: dict, history: list[tuple[int, Path]]) -> str:
   {history_html}
 
   <div class="footer">
-    <div style="margin-bottom:6px">Built by Mehad Autonomous AI Test Agent · 100% local AI · no third-party API keys</div>
+    <div style="margin-bottom:6px">Built by Mejbaur Bahar Fagun</div>
     <div class="contact-card">
       <div class="name">Mejbaur Bahar Fagun</div>
       <div class="title">Senior Software Engineer QA (IV) · Markopolo.ai</div>
@@ -719,7 +751,7 @@ li:hover{{background:#161b22}}
 <p><a href="../index.html">← Back to latest</a></p>
 <ul>{"".join(rows)}</ul>
 <div class="footer">
-  <div style="margin-bottom:6px">Built by Mehad Autonomous AI Test Agent · 100% local AI · no third-party API keys</div>
+  <div style="margin-bottom:6px">Built by Mejbaur Bahar Fagun</div>
   <div class="contact-card">
     <div class="name">Mejbaur Bahar Fagun</div>
     <div class="title">Senior Software Engineer QA (IV) · Markopolo.ai</div>
