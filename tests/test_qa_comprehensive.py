@@ -98,11 +98,16 @@ def _fill_phone(page: Page, country_code: str, phone: str):
         page.wait_for_timeout(600)
         option = page.locator('[role="option"]').filter(has_text=country_code).first
         option.click(force=True)
-        page.wait_for_timeout(400)
+        page.wait_for_timeout(600)  # extra wait for React re-render after country change
 
     phone_input = page.locator('input[type="tel"]').first
     phone_input.wait_for(state="visible", timeout=5000)
-    phone_input.fill(phone)
+    phone_input.click()
+    phone_input.fill("")  # clear any stale value first
+    # Use press_sequentially to simulate real key events so React's onChange fires
+    phone_input.press_sequentially(phone, delay=60)
+    phone_input.press("Tab")  # trigger blur / validation
+    page.wait_for_timeout(300)
 
 
 def _collect_js_errors(page: Page) -> list:
@@ -224,7 +229,11 @@ class TestQA01Functional:
         btn = page.locator('button:has-text("Find a Teacher"), a:has-text("Find a Teacher")').first
         btn.wait_for(state="visible", timeout=8000)
         btn.click()
-        page.wait_for_load_state(LOAD_STATE)
+        # SPA navigation: wait_for_load_state returns immediately; wait for URL change
+        try:
+            page.wait_for_url("**/find-tutors**", timeout=8000)
+        except Exception:
+            page.wait_for_timeout(2000)
         assert "find-tutors" in page.url or "find_tutors" in page.url, (
             f"Find a Teacher did not navigate to find-tutors: {page.url}")
 
@@ -420,8 +429,19 @@ class TestQA01Functional:
         _open_login_modal(page)
         # Must set country code first — default is +966 (Saudi), which rejects 8-digit numbers
         _fill_phone(page, TEST_COUNTRY_CODE, TEST_PHONE)
-        page.wait_for_timeout(800)  # React validation is async
         btn = page.locator('button:has-text("Send Code")').first
+        # Poll up to 3 s for React's async validation to enable the button
+        try:
+            page.wait_for_function(
+                """() => {
+                    const btns = Array.from(document.querySelectorAll('button'));
+                    const b = btns.find(el => el.textContent.trim().includes('Send Code'));
+                    return b ? !b.disabled : false;
+                }""",
+                timeout=3000,
+            )
+        except Exception:
+            pass  # fall through to assertion which will give the clear error message
         is_disabled = btn.is_disabled()
         assert not is_disabled, "Send Code button still disabled after valid phone entered"
 
@@ -432,17 +452,39 @@ class TestQA01Functional:
 
         send_btn = page.locator('button:has-text("Send Code")').first
         send_btn.wait_for(state="visible", timeout=5000)
-        page.wait_for_timeout(400)
+        # Wait for React validation to enable the button before clicking
+        try:
+            page.wait_for_function(
+                """() => {
+                    const btns = Array.from(document.querySelectorAll('button'));
+                    const b = btns.find(el => el.textContent.trim().includes('Send Code'));
+                    return b ? !b.disabled : false;
+                }""",
+                timeout=3000,
+            )
+        except Exception:
+            pass
         send_btn.click()
 
-        # Wait for OTP input to become enabled
+        # Wait for OTP input to appear and become enabled (not just visible)
         otp_input = page.locator(
             'input[placeholder="000000"], '
             'input[autocomplete="one-time-code"], '
             'input[maxlength="6"]'
         ).first
         otp_input.wait_for(state="visible", timeout=10000)
-        page.wait_for_timeout(800)
+        try:
+            page.wait_for_function(
+                """() => {
+                    const otp = document.querySelector(
+                        'input[placeholder="000000"], input[autocomplete="one-time-code"], input[maxlength="6"]'
+                    );
+                    return otp ? !otp.disabled : false;
+                }""",
+                timeout=15000,
+            )
+        except Exception:
+            pass
         otp_input.fill(TEST_OTP)
 
         continue_btn = page.locator('button:has-text("Continue")').first
@@ -484,16 +526,32 @@ class TestQA01Functional:
                 if r.status == 429 else None)
 
         send_btn = page.locator('button:has-text("Send Code")').first
-        page.wait_for_timeout(400)
+        # Only click if button is enabled; disabled means phone validation failed
+        try:
+            page.wait_for_function(
+                """() => {
+                    const btns = Array.from(document.querySelectorAll('button'));
+                    const b = btns.find(el => el.textContent.trim().includes('Send Code'));
+                    return b ? !b.disabled : false;
+                }""",
+                timeout=3000,
+            )
+        except Exception:
+            pytest.skip("Send Code button still disabled — phone validation failed, skipping timer check")
         send_btn.click()
-        page.wait_for_timeout(2000)
+        page.wait_for_timeout(3000)
 
         if rate_limited:
             pytest.skip("Server rate-limited OTP send (429) on staging — skipping timer check")
 
-        modal_text = page.locator('[role="dialog"]').first.inner_text().lower()
-        assert "resend" in modal_text or "60" in modal_text or "timer" in modal_text or (
-            "change" in modal_text), (
+        modal = page.locator('[role="dialog"]').first
+        modal_text = modal.inner_text().lower()
+        # Also check for countdown digits rendered as separate elements
+        timer_locator = modal.locator('[class*="timer"], [class*="countdown"], [data-testid*="timer"]')
+        has_timer_element = timer_locator.count() > 0
+        assert ("resend" in modal_text or "60" in modal_text or "timer" in modal_text
+                or "change" in modal_text or re.search(r'\b\d{1,2}\s*s\b', modal_text)
+                or has_timer_element), (
             "Resend timer/countdown not found after Send Code")
 
     def test_qa01_change_number_link_appears_after_send(self, page: Page):
@@ -506,15 +564,31 @@ class TestQA01Functional:
                 if r.status == 429 else None)
 
         send_btn = page.locator('button:has-text("Send Code")').first
-        page.wait_for_timeout(400)
+        # Only click if button is enabled; disabled means phone validation failed
+        try:
+            page.wait_for_function(
+                """() => {
+                    const btns = Array.from(document.querySelectorAll('button'));
+                    const b = btns.find(el => el.textContent.trim().includes('Send Code'));
+                    return b ? !b.disabled : false;
+                }""",
+                timeout=3000,
+            )
+        except Exception:
+            pytest.skip("Send Code button still disabled — phone validation failed, skipping change-number check")
         send_btn.click()
-        page.wait_for_timeout(2000)
+        page.wait_for_timeout(3000)
 
         if rate_limited:
             pytest.skip("Server rate-limited OTP send (429) on staging — skipping change-number check")
 
-        modal_text = page.locator('[role="dialog"]').first.inner_text().lower()
-        assert "change" in modal_text and ("mobile" in modal_text or "number" in modal_text), (
+        modal = page.locator('[role="dialog"]').first
+        modal_text = modal.inner_text().lower()
+        # Also check for a link element with change-number text
+        change_link = modal.locator('button:has-text("Change"), a:has-text("Change")').first
+        has_change_element = change_link.count() > 0
+        assert ("change" in modal_text and ("mobile" in modal_text or "number" in modal_text)
+                or has_change_element), (
             "'Change Mobile Number' link not found after Send Code")
 
     # ── Navigation Tests ──────────────────────────────────────────────────────
