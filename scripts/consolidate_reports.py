@@ -659,7 +659,7 @@ def main():
     REPORTS_DIR.mkdir(exist_ok=True)
 
     summary  = _load(REPORTS_DIR / "summary.json")
-    base_url = summary.get("base_url", "https://dev.mehadedu.com/en")
+    base_url = summary.get("base_url", "https://dev.prowhats.com/en")
     model    = summary.get("model", "unknown")
 
     all_results = build_consolidated_results(base_url)

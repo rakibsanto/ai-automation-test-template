@@ -15,7 +15,7 @@
 #    ./run_local.sh fast               # All tests, faster (no slow_mo)
 #
 #  Environment overrides:
-#    BASE_URL=https://dev.mehadedu.com/en ./run_local.sh
+#    BASE_URL=https://dev.prowhats.com/en ./run_local.sh
 #    SLOW_MO=1200 ./run_local.sh          # even slower for demos
 #    SLOW_MO=0    ./run_local.sh fast     # headless-speed but still headed
 # ─────────────────────────────────────────────────────────────────────────────
@@ -23,7 +23,7 @@
 set -e
 
 # ── Defaults ─────────────────────────────────────────────────────────────────
-BASE_URL="${BASE_URL:-https://dev.mehadedu.com/en}"
+BASE_URL="${BASE_URL:-https://dev.prowhats.com/en}"
 SLOW_MO="${SLOW_MO:-800}"          # ms between each Playwright action
 HEADED=1                           # always open browser window
 

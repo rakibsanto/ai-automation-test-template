@@ -16,7 +16,7 @@ on:
       base_url:
         description: "Target URL to test"
         required: false
-        default: "https://dev.mehadedu.com/en"
+        default: "https://dev.prowhats.com/en"
       browser_use:
         description: "Enable browser-use agent? (true/false)"
         required: false
@@ -45,7 +45,7 @@ jobs:
     timeout-minutes: 90   # 7b model needs more time
 
     env:
-      BASE_URL:              ${{ github.event.inputs.base_url  || 'https://dev.mehadedu.com/en' }}
+      BASE_URL:              ${{ github.event.inputs.base_url  || 'https://dev.prowhats.com/en' }}
       AI_MODEL:              ${{ github.event.inputs.ai_model  || 'qwen2.5-coder:7b' }}
       AI_TIMEOUT:            "120"      # seconds per ollama.chat() call before giving up (7b needs more time)
       MAX_FIX_RETRIES:       "1"        # self-heal rounds in CI (reduce from 3 to save time)
@@ -399,7 +399,7 @@ jobs:
     timeout-minutes: 45
 
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
 
     steps:
       - name: Checkout repository
@@ -488,7 +488,7 @@ jobs:
     timeout-minutes: 45
 
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
 
     steps:
       - name: Checkout repository
@@ -582,7 +582,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
@@ -634,7 +634,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
@@ -676,7 +676,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     env:
-      BASE_URL:            ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL:            ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
       AI_MODEL:            ${{ github.event.inputs.ai_model || 'qwen2.5-coder:7b' }}
       AI_TIMEOUT:          "90"
       MAX_FIX_RETRIES:     "1"
@@ -737,7 +737,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
@@ -789,7 +789,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
@@ -845,7 +845,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
     steps:
       - uses: actions/checkout@v5
         with: { lfs: true }   # baselines stored under tests/visual_baselines/
@@ -904,7 +904,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
@@ -948,7 +948,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
@@ -988,7 +988,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
@@ -1028,7 +1028,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
@@ -1071,7 +1071,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
@@ -1111,7 +1111,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
@@ -1154,7 +1154,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
@@ -1196,7 +1196,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
-      BASE_URL:                ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL:                ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
       BROWSER_USE_ENABLED:     "false"   # set true once Ollama is hooked
     steps:
       - uses: actions/checkout@v5
@@ -1240,7 +1240,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL: ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
@@ -1284,7 +1284,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 35
     env:
-      BASE_URL:           ${{ github.event.inputs.base_url || 'https://dev.mehadedu.com/en' }}
+      BASE_URL:           ${{ github.event.inputs.base_url || 'https://dev.prowhats.com/en' }}
       ENABLE_VISION_QA:   ${{ github.event.inputs.enable_vision || 'false' }}
       VISION_MODEL:       "qwen2-vl:7b"
     steps:

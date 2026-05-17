@@ -1,6 +1,6 @@
 import os, time, pytest
 from playwright.sync_api import Page, expect
-BASE_URL = os.getenv("BASE_URL", "https://dev.mehadedu.com/en")
+BASE_URL = os.getenv("BASE_URL", "https://dev.prowhats.com/en")
 
 def test_login_page_loads(page: Page):
     page.goto(BASE_URL, wait_until="domcontentloaded", timeout=15000)

@@ -17,9 +17,9 @@ import pytest
 from pathlib import Path
 from playwright.sync_api import Page, expect
 
-BASE_URL = os.getenv("BASE_URL", "https://dev.mehadedu.com/en")
+BASE_URL = os.getenv("BASE_URL", "https://dev.prowhats.com/en")
 FIND_TUTORS_URL = f"{BASE_URL}/find-tutors"
-AR_URL          = os.getenv("BASE_URL", "https://dev.mehadedu.com").rstrip("/en").rstrip("/") + "/ar"
+AR_URL          = os.getenv("BASE_URL", "https://dev.prowhats.com/ar").rstrip("/en").rstrip("/") + "/ar"
 
 # SPA-safe load state — SPAs never reach networkidle
 LOAD_STATE = "domcontentloaded"

@@ -9,7 +9,7 @@ Usage:
     python run.py --ai       # full AI Test Agent v5 — auto-generates from md specs
     python run.py --all      # every QA agent — full suite, ~30 min
     python run.py --headless # same as default but no visible browser
-    python run.py --url X    # override BASE_URL (default: dev.mehadedu.com/en)
+    python run.py --url X    # override BASE_URL (default: dev.prowhats.com/en)
 """
 
 from __future__ import annotations
@@ -138,7 +138,7 @@ def main(argv: list[str]) -> int:
     ensure_ollama_serving()
 
     env = os.environ.copy()
-    env.setdefault("BASE_URL", args["url"] or "https://dev.mehadedu.com/en")
+    env.setdefault("BASE_URL", args["url"] or "https://dev.prowhats.com/en")
     if args["url"]:
         env["BASE_URL"] = args["url"]
     env["HEADED"] = "1" if args["headed"] else "0"
