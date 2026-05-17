@@ -1,5 +1,5 @@
 """
-Mehad Autonomous AI Test Agent  —  v5
+Raad Autonomous AI Test Agent  —  v5
 ------------------------------------------
 v2 architecture: MD → Spec Compiler → JSON → 22 test types → Validator → Execute
                  → Memory → Self-Heal → Bug Tickets → Gap Analysis → HTML Report
@@ -2141,7 +2141,7 @@ class AutonomousTestAgent:
 
     def _banner(self):
         log("═"*64)
-        log("  Mehad Autonomous AI Test Agent  v5")
+        log("  Raad Autonomous AI Test Agent  v5")
         log(f"  Primary model  : {AI_MODEL}")
         log(f"  Model chain    : {len(MODEL_CHAIN)} models (all free/open-source)")
         log(f"  AI timeout     : {AI_TIMEOUT}s per call")

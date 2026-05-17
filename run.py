@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""run.py — single command to run Mehad Autonomous AI Testing.
+"""run.py — single command to run Raad Autonomous AI Testing.
 
 Auto-runs install.py the first time if anything is missing.
 Always opens a real browser window so you SEE what's happening.

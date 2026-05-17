@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""install.py — one-shot cross-OS setup for Mehad Autonomous AI Testing.
+"""install.py — one-shot cross-OS setup for Raad Autonomous AI Testing.
 
 Installs everything a cloner needs to run the project from scratch:
   · Python deps  (pip install -r requirements.txt)
@@ -210,7 +210,7 @@ def main(argv: list[str]) -> int:
         report_status()
         return 0
     print("=" * 64)
-    print("Mehad Autonomous AI Testing — installer")
+    print("Raad Autonomous AI Testing — installer")
     print(f"OS: {platform.system()} {platform.machine()}   Python: {sys.version.split()[0]}")
     print("=" * 64)
     check_python()

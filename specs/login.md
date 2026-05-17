@@ -40,10 +40,31 @@ Placeholder:
 
 ---
 
-### Login Button
-States:
-- Enabled when both fields are filled
-- Disabled when empty
+### Disabled Scenarios
+
+#### Scenario 1
+Email empty + Password empty  
+Expected: **Disabled**
+
+#### Scenario 2
+Email entered + Password empty  
+Expected: **Disabled**
+
+#### Scenario 3
+Email empty + Password entered  
+Expected: **Disabled**
+
+#### Scenario 4
+Email entered + Password less than 6 characters  
+Expected: **Disabled**
+
+---
+
+### Enabled Scenario
+
+#### Scenario 5
+Valid email entered + Password 6+ characters  
+Expected: **Enabled**
 
 ---
 
@@ -117,38 +138,15 @@ Error:
 
 ---
 
-## Failed Login Protection
-After 5 failed attempts:
-
-- Temporarily block login for 15 minutes
-
-Error:
-`Too many failed login attempts. Try again later.`
-
----
-
-## Session Security
-- Auto logout after 30 minutes inactivity
-- Session invalidation after logout
-- Prevent session reuse
-
----
-
 ## Unauthorized Access
 Direct URL access blocked without login
 
 Example:
 Attempt:
-`/admin/dashboard`
+`/dashboard`
 
 Expected:
 Redirect to Login page
-
----
-
-## Brute Force Protection
-- Rate limiting enabled
-- IP monitoring
 
 ---
 
@@ -170,38 +168,226 @@ Example:
 
 # 5. Responsive Requirements
 
-## Desktop
+## Large Desktop
+Resolution:
+2560x1440
+
+Expected:
+- Centered login container
+- Proper whitespace usage
+- No stretched UI elements
+- Consistent component sizing
+
+---
+
+## Standard Desktop
 Resolution:
 1920x1080
 
 Expected:
-Proper alignment and spacing
+- Proper alignment and spacing
+- Full visibility
+- Balanced layout
+
+---
+
+## Small Desktop
+Resolution:
+1600x900
+
+Expected:
+- No overflow
+- All content visible
+- Proper button spacing
 
 ---
 
 ## Laptop
+Resolution:
 1366x768
 
 Expected:
-Fully visible without overflow
+- Fully visible without overflow
+- Login form centered
+- No clipping
 
 ---
 
-## Tablet
+## Small Laptop
+Resolution:
+1280x720
+
+Expected:
+- Form fits viewport
+- No vertical cutoff
+- Buttons accessible
+
+---
+
+## Tablet Landscape
+Resolution:
+1024x768
+
+Expected:
+- Responsive horizontal layout
+- Proper spacing maintained
+
+---
+
+## Tablet Portrait
+Resolution:
 768x1024
 
 Expected:
-Responsive layout
+- Responsive stacked layout
+- Inputs full-width
 
 ---
 
-## Mobile
+## Large Mobile
+Device:
+iPhone 14 Pro Max
+
+Resolution:
+430x932
+
+Expected:
+- Proper alignment
+- Comfortable spacing
+- Touch-friendly controls
+
+---
+
+## Standard Mobile
+Device:
+iPhone 12 / 13
+
+Resolution:
+390x844
+
+Expected:
+- Inputs aligned
+- Buttons clickable
+- No horizontal scrolling
+
+---
+
+## Small Mobile
+Device:
+iPhone SE
+
+Resolution:
 375x667
 
 Expected:
-- Inputs properly aligned
-- Buttons clickable
+- No content cutoff
+- Full button visibility
+- Scroll only if required
+
+---
+
+## Android Medium
+Device:
+Samsung Galaxy S21
+
+Resolution:
+360x800
+
+Expected:
+- Responsive layout
+- Proper touch target spacing
+
+---
+
+## Android Small
+Device:
+Small Android Device
+
+Resolution:
+320x568
+
+Expected:
+- Layout remains usable
+- Text readable
+- No overlapping elements
+
+---
+
+## Foldable Device
+Device:
+Galaxy Fold
+
+Resolution:
+280x653 (folded)
+
+Expected:
+- Adaptive layout
+- Inputs remain accessible
+
+---
+
+## Ultra Wide Screen
+Resolution:
+3440x1440
+
+Expected:
+- Centered login form
+- No excessive stretching
+
+---
+
+## Zoom Testing
+
+### Browser Zoom 80%
+Expected:
+No layout break
+
+---
+
+### Browser Zoom 100%
+Expected:
+Default proper rendering
+
+---
+
+### Browser Zoom 125%
+Expected:
+No overflow
+
+---
+
+### Browser Zoom 150%
+Expected:
+Still usable
+
+---
+
+## Orientation Testing
+
+### Portrait Mode
+Expected:
+Optimized vertical stacking
+
+---
+
+### Landscape Mode
+Expected:
+Proper horizontal fit
+
+---
+
+## Responsive Validation Rules
+
+The login page must ensure:
+
 - No horizontal scrolling
+- No overlapping text
+- No hidden buttons
+- Proper field spacing
+- Tap targets minimum accessible size
+- Logo scales correctly
+- Error messages remain readable
+- Submit button visible on all screen sizes
 
 ---
 
@@ -218,7 +404,7 @@ Supported
 # 6. UI / UX Requirements
 
 ## Logo Display
-ProWhats logo visible at top
+Raad logo visible at top
 
 ---
 

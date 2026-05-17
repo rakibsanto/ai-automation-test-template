@@ -98,7 +98,7 @@ collecting ... collected 95 items
   → tests/test_qa_comprehensive.py::TestQA03Security::test_qa03_xss_in_password_field[chromium-${7*7}]
 
 tests/test_qa_comprehensive.py::TestQA01Functional::test_qa01_login_page_elements_present[chromium] /opt/homebrew/lib/python3.14/site-packages/_pytest/runner.py:249: PluggyTeardownRaisedWarning: A plugin raised an exception during an old-style hookwrapper teardown.
-Plugin: /Users/mejbaurbaharfagun/Desktop/Office/Markopolo-md/conftest.py, Hook: pytest_runtest_makereport
+Plugin: /home/rakibsanto/Documents/Raad AI Automation/raad-ai-automation/conftest.py, Hook: pytest_runtest_makereport
 Failed: Timeout (>30.0s) from pytest-timeout.
 For more information see https://pluggy.readthedocs.io/en/stable/api_reference.html#pluggy.PluggyTeardownRaisedWarning
   report: TestReport = ihook.pytest_runtest_makereport(item=item, call=call)
@@ -208,7 +208,7 @@ INTERNALERROR>     ~~~~~~~~~~~~~^^^^^^^^
 INTERNALERROR>   File "/opt/homebrew/lib/python3.14/site-packages/pluggy/_callers.py", line 43, in run_old_style_hookwrapper
 INTERNALERROR>     teardown.send(result)
 INTERNALERROR>     ~~~~~~~~~~~~~^^^^^^^^
-INTERNALERROR>   File "/Users/mejbaurbaharfagun/Desktop/Office/Markopolo-md/conftest.py", line 149, in pytest_runtest_makereport
+INTERNALERROR>   File "/home/rakibsanto/Documents/Raad AI Automation/raad-ai-automation/conftest.py", line 149, in pytest_runtest_makereport
 INTERNALERROR>     page.screenshot(path=str(shot_path), full_page=True)
 INTERNALERROR>     ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 INTERNALERROR>   File "/opt/homebrew/lib/python3.14/site-packages/playwright/sync_api/_generated.py", line 9819, in screenshot

@@ -1,5 +1,5 @@
 """
-QA Comprehensive Test Suite — Mehad Homepage & Login Modal
+QA Comprehensive Test Suite — Raad Homepage & Login Modal
 Spec: specs/login.md (and 21 student/tutor sub-specs)
 Covers 8 test groups:
   QA-01  Functional & User Flow Tests       (homepage, modal, login, navigation)
@@ -136,27 +136,27 @@ class TestQA01Functional:
     # ── Homepage Structure ────────────────────────────────────────────────────
 
     def test_qa01_homepage_loads_correct_url(self, page: Page):
-        """Homepage must load at the Mehad /en URL without redirect loop."""
+        """Homepage must load at the Raad /en URL without redirect loop."""
         page.goto(BASE_URL)
         page.wait_for_load_state(LOAD_STATE)
-        assert "mehadedu.com" in page.url, f"Wrong domain loaded: {page.url}"
+        assert "raadedu.com" in page.url, f"Wrong domain loaded: {page.url}"
         assert page.url.startswith("http"), f"Non-HTTP URL: {page.url}"
 
-    def test_qa01_page_title_contains_mehad(self, page: Page):
-        """Page title must mention Mehad (brand presence check)."""
+    def test_qa01_page_title_contains_raad(self, page: Page):
+        """Page title must mention Raad (brand presence check)."""
         page.goto(BASE_URL)
         page.wait_for_load_state(LOAD_STATE)
         title = page.title()
         assert title.strip() != "", "Page title is empty"
-        assert "mehad" in title.lower() or "مهد" in title, (
+        assert "raad" in title.lower() or "مهد" in title, (
             f"Brand name not in title: {title!r}")
 
     def test_qa01_header_logo_visible(self, page: Page):
-        """Mehad logo/link must be visible in the header."""
+        """Raad logo/link must be visible in the header."""
         page.goto(BASE_URL)
         page.wait_for_load_state(LOAD_STATE)
-        logo = page.locator('[aria-label="Mehad homepage"], a[href="/en"]').first
-        assert logo.count() > 0, "Mehad logo/home link not found in header"
+        logo = page.locator('[aria-label="Raad homepage"], a[href="/en"]').first
+        assert logo.count() > 0, "Raad logo/home link not found in header"
 
     def test_qa01_header_login_button_present(self, page: Page):
         """Log In button must be visible in the header (unauthenticated state)."""
@@ -171,7 +171,7 @@ class TestQA01Functional:
         """Header must have Home, Become a Tutor, How It Works, About Us links."""
         page.goto(BASE_URL)
         page.wait_for_load_state(LOAD_STATE)
-        expected_hrefs = ["/en/become-tutor", "/en/how-mehad-works", "/en/about-us"]
+        expected_hrefs = ["/en/become-tutor", "/en/how-raad-works", "/en/about-us"]
         for href in expected_hrefs:
             link = page.locator(f'a[href="{href}"]').first
             assert link.count() > 0, f"Nav link {href} not found in header"
@@ -277,7 +277,7 @@ class TestQA01Functional:
             "Top Teachers section not found on homepage")
 
     def test_qa01_footer_present_with_links(self, page: Page):
-        """Footer must contain Mehad logo, nav links, and copyright."""
+        """Footer must contain Raad logo, nav links, and copyright."""
         page.goto(BASE_URL)
         page.wait_for_load_state(LOAD_STATE)
         footer = page.locator("footer").first
@@ -286,7 +286,7 @@ class TestQA01Functional:
         assert footer.count() > 0, "Footer element not found"
         footer_text = footer.inner_text().lower()
         assert "privacy" in footer_text or "terms" in footer_text or (
-            "2026" in footer_text or "mahad" in footer_text.lower()), (
+            "2026" in footer_text or "raad" in footer_text.lower()), (
             "Footer appears empty or incomplete")
 
     def test_qa01_student_reviews_section_present(self, page: Page):
@@ -295,7 +295,7 @@ class TestQA01Functional:
         page.wait_for_load_state(LOAD_STATE)
         content = page.inner_text("body").lower()
         assert "students say" in content or "student reviews" in content or (
-            "trust mehad" in content or "testimonial" in content), (
+            "trust raad" in content or "testimonial" in content), (
             "Student reviews section not found")
 
     # ── Login Modal ───────────────────────────────────────────────────────────
@@ -608,18 +608,18 @@ class TestQA01Functional:
             f"Expected /en/become-tutor, got: {page.url}")
 
     def test_qa01_how_it_works_link_navigates(self, page: Page):
-        """How It Works link must navigate to /en/how-mehad-works."""
+        """How It Works link must navigate to /en/how-raad-works."""
         page.goto(BASE_URL)
         page.wait_for_load_state(LOAD_STATE)
-        link = page.locator('a[href="/en/how-mehad-works"]').first
+        link = page.locator('a[href="/en/how-raad-works"]').first
         assert link.count() > 0, "How It Works link not found"
         link.click()
         try:
-            page.wait_for_url("**/how-mehad-works**", timeout=5000)
+            page.wait_for_url("**/how-raad-works**", timeout=5000)
         except Exception:
             pass
-        assert "how-mehad-works" in page.url, (
-            f"Expected /en/how-mehad-works, got: {page.url}")
+        assert "how-raad-works" in page.url, (
+            f"Expected /en/how-raad-works, got: {page.url}")
 
     def test_qa01_about_us_link_navigates(self, page: Page):
         """About Us link must navigate to /en/about-us."""
@@ -686,7 +686,7 @@ class TestQA01Functional:
         ar_url = BASE_URL.replace("/en", "/ar")
         page.goto(ar_url)
         page.wait_for_load_state(LOAD_STATE)
-        assert "mehadedu.com" in page.url, f"Wrong domain: {page.url}"
+        assert "raadedu.com" in page.url, f"Wrong domain: {page.url}"
         assert "/ar" in page.url, f"Did not stay in /ar locale: {page.url}"
 
     def test_qa01_footer_privacy_policy_link_works(self, page: Page):
@@ -960,7 +960,7 @@ class TestQA02EdgeCaseBoundary:
         page.wait_for_load_state(LOAD_STATE)
         page.go_back()
         page.wait_for_load_state(LOAD_STATE)
-        assert "mehadedu.com/en" in page.url or page.url.endswith("/en"), (
+        assert "raadedu.com/en" in page.url or page.url.endswith("/en"), (
             f"Browser Back did not return to homepage: {page.url}")
 
 
@@ -969,7 +969,7 @@ class TestQA02EdgeCaseBoundary:
 # ─────────────────────────────────────────────────────────────────────────────
 
 class TestQA03Security:
-    """Verifies that injection payloads are safely rejected in the Mehad UI."""
+    """Verifies that injection payloads are safely rejected in the Raad UI."""
 
     @pytest.mark.parametrize("payload", _load_payload_lines("xss.txt") or [
         "<script>alert('xss')</script>",
@@ -1016,13 +1016,13 @@ class TestQA03Security:
     def test_qa03_xss_not_reflected_in_page_html(self, page: Page):
         """XSS payload entered in phone field must not be reflected raw in HTML."""
         _open_login_modal(page)
-        payload = "<script>alert('QA_XSS_MARKER_MEHAD')</script>"
+        payload = "<script>alert('QA_XSS_MARKER_RAAD')</script>"
         phone_input = page.locator('input[type="tel"]').first
         phone_input.fill(payload)
         page.wait_for_timeout(1000)
 
         html = page.content()
-        assert "QA_XSS_MARKER_MEHAD" not in html, (
+        assert "QA_XSS_MARKER_RAAD" not in html, (
             "XSS payload reflected unescaped in HTML — stored/reflected XSS risk")
 
     def test_qa03_template_injection_in_phone(self, page: Page):
@@ -1147,7 +1147,7 @@ class TestQA03Security:
 
         # Filter out known external tracking that may 404
         real_404 = [u for u in not_found
-                    if "mehadedu.com" in u or "cdn" in u]
+                    if "raadedu.com" in u or "cdn" in u]
         assert real_404 == [], (
             f"404 resources on homepage:\n" + "\n".join(real_404[:5]))
 
@@ -1294,7 +1294,7 @@ class TestQA04PerformanceAndJSErrors:
             f"Homepage took {elapsed_ms:.0f}ms — expected < 5000ms")
 
     def test_qa04_ttfb_under_1000ms(self, page: Page):
-        """Time To First Byte must be below 1000ms for the Mehad staging env."""
+        """Time To First Byte must be below 1000ms for the Raad staging env."""
         page.goto(BASE_URL)
         page.wait_for_load_state(LOAD_STATE)
         ttfb = page.evaluate("""() => {
@@ -1434,7 +1434,7 @@ class TestQA04PerformanceAndJSErrors:
                 .filter(img => img.src
                     && !img.src.startsWith('data:')
                     && img.naturalWidth === 0
-                    && img.src.includes('mehadedu.com'))
+                    && img.src.includes('raadedu.com'))
                 .map(img => img.src)
                 .slice(0, 5);
         }""")
@@ -1501,7 +1501,7 @@ class TestQA04PerformanceAndJSErrors:
 class TestQA05HallucinationDataIntegrity:
     """
     Detects UI hallucinations: phantom elements, stale data, data bleeding,
-    inconsistent states, and AI-generated content anomalies on Mehad homepage.
+    inconsistent states, and AI-generated content anomalies on Raad homepage.
     """
 
     def test_qa05_no_placeholder_text_on_homepage(self, page: Page):
@@ -1637,12 +1637,12 @@ class TestQA05HallucinationDataIntegrity:
             f"Footer copyright year not found or incorrect: {footer_text[-100:]!r}")
 
     def test_qa05_footer_brand_name_correct(self, page: Page):
-        """Footer must mention Mehad / Mahad brand name, not a competitor's."""
+        """Footer must mention Raad / Raad brand name, not a competitor's."""
         page.goto(BASE_URL)
         page.wait_for_load_state(LOAD_STATE)
         footer_text = page.locator("footer").first.inner_text().lower()
-        assert "mehad" in footer_text or "mahad" in footer_text, (
-            f"Mehad brand name not in footer: {footer_text[:200]!r}")
+        assert "raad" in footer_text or "raad" in footer_text, (
+            f"Raad brand name not in footer: {footer_text[:200]!r}")
 
     def test_qa05_arabic_page_has_rtl_direction(self, page: Page):
         """Arabic locale page must have RTL text direction."""
@@ -1757,7 +1757,7 @@ class TestQA05HallucinationDataIntegrity:
             pass
 
         # Back on EN — no phantom modal, no crash
-        assert "mehadedu.com/en" in page.url or page.url.endswith("/en"), (
+        assert "raadedu.com/en" in page.url or page.url.endswith("/en"), (
             f"After EN→AR→EN round-trip, URL is: {page.url}")
         assert "500" not in page.title(), "Page crashed after language round-trip"
 
@@ -2476,7 +2476,7 @@ class TestQA11VisualRegression:
         ("homepage_ar",            AR_URL,                                  "AR homepage"),
         ("find_tutors",            f"{BASE_URL}/find-tutors",               "find tutors page"),
         ("become_tutor",           f"{BASE_URL.rstrip('/en')}/en/become-tutor",  "become tutor page"),
-        ("how_it_works",           f"{BASE_URL.rstrip('/en')}/en/how-mehad-works", "how it works page"),
+        ("how_it_works",           f"{BASE_URL.rstrip('/en')}/en/how-raad-works", "how it works page"),
     ]
 
     @pytest.mark.parametrize("page_id,url,label", PAGES)
@@ -2561,7 +2561,7 @@ class TestQA12JSErrorSweeper:
         ("homepage_ar",   AR_URL),
         ("find_tutors",   f"{BASE_URL}/find-tutors"),
         ("become_tutor",  f"{BASE_URL.rstrip('/en')}/en/become-tutor"),
-        ("how_it_works",  f"{BASE_URL.rstrip('/en')}/en/how-mehad-works"),
+        ("how_it_works",  f"{BASE_URL.rstrip('/en')}/en/how-raad-works"),
         ("about_us",      f"{BASE_URL.rstrip('/en')}/en/about-us"),
     ]
 
@@ -3392,7 +3392,7 @@ class TestQA19AutonomousExploratory:
         ("homepage_en",  BASE_URL),
         ("find_tutors",  f"{BASE_URL}/find-tutors"),
         ("become_tutor", f"{BASE_URL.rstrip('/en')}/en/become-tutor"),
-        ("how_it_works", f"{BASE_URL.rstrip('/en')}/en/how-mehad-works"),
+        ("how_it_works", f"{BASE_URL.rstrip('/en')}/en/how-raad-works"),
     ] + _spec_urls_for_exploration()
 
     def _deterministic_walk(self, page: Page, url: str) -> list[str]:
@@ -3792,7 +3792,7 @@ class TestQA22VisionUIValidation:
 
     PAGES = [
         ("homepage_en",  BASE_URL,
-         "Mehad homepage — Saudi tutoring marketplace; hero, search form, top tutors"),
+         "Raad homepage — Saudi tutoring marketplace; hero, search form, top tutors"),
         ("find_tutors",  f"{BASE_URL}/find-tutors",
          "Find Tutors listing — search filters + tutor cards + pagination"),
         ("become_tutor", f"{BASE_URL.rstrip('/en')}/en/become-tutor",
@@ -3941,8 +3941,8 @@ def test_no_check():
         test_file = tmp_path / "test_synthetic.py"
         test_file.write_text("""
 def test_real_check():
-    title = 'Mehad'
-    assert title == 'Mehad'
+    title = 'Raad'
+    assert title == 'Raad'
     assert len(title) == 5
 """)
         findings = audit_test_file(test_file)

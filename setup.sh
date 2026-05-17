@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────────────────────
-# Fagun Autonomous AI Test Agent — One-command setup
+# Raad AI Automation Test Agent — One-command setup
 # Works on macOS and Linux. Run: bash setup.sh
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -14,7 +14,7 @@ info() { echo -e "   $*"; }
 
 echo ""
 echo "═══════════════════════════════════════════════════════════════"
-echo "  Fagun Autonomous AI Test Agent — Setup"
+echo "  Raad AI Test Automation — Setup"    
 echo "═══════════════════════════════════════════════════════════════"
 echo ""
 
