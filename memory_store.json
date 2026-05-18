@@ -48,7 +48,8 @@
     "test_visual_body_has_visible_text_fb",
     "test_cross_browser_basic_load_fb",
     "test_i18n_meta_charset_fb",
-    "test_boundary_input_lengths_fb"
+    "test_boundary_input_lengths_fb",
+    "test_agent_can_login_and_reach_dashboard"
   ],
   "known_good_selectors": {},
   "selector_attempts": {}
