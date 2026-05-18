@@ -2012,6 +2012,17 @@ class AutonomousTestAgent:
                     4096,
                 )
                 fixed = clean_code(fixed_raw)
+                # ── Truncation guard (before syntax check) ────────────────────
+                # Small models output a short snippet, not the full file.
+                # That snippet is ALREADY broken at line ~20 (mid-function),
+                # so is_valid_python returns False and we'd hit the else branch
+                # below, never seeing the size issue. Check length FIRST.
+                if not fixed or len(fixed) < len(code) * 0.40:
+                    log(f"  [FIX] ❌ AI output too short "
+                        f"({len(fixed) if fixed else 0} chars vs "
+                        f"{len(code)} original) "
+                        f"— truncated fix rejected, keeping original file")
+                    continue
                 v, e = is_valid_python(ensure_imports(fixed))
                 if v and fixed:
                     code = ensure_imports(fixed)
@@ -2047,7 +2058,43 @@ class AutonomousTestAgent:
         gaps = gc_detect_gaps(spec, code, results)
         save_gaps_report(name, gaps, REPORTS_DIR)
 
-        results.update({"bugs": bugs, "gaps": gaps, "spec_name": name, "compiled": compiled})
+        # ── Populate passed_tests for the HTML report ───────────────────────
+        # generate_report renders a per-test breakdown only when all_results
+        # contains a 'passed_tests' list.  agent.py never set this key, so
+        # the report showed only the count, not the individual test names.
+        # We read the pytest JSON report (already on disk) and use the same
+        # helper used by consolidate_reports.py to extract the list.
+        passed_tests: list = []
+        json_report_path = results.get("json_report", "")
+        if json_report_path:
+            try:
+                import sys as _sys
+                _scripts = str(Path(__file__).parent.parent / "scripts")
+                if _scripts not in _sys.path:
+                    _sys.path.insert(0, _scripts)
+                from consolidate_reports import (
+                    _passed_from_pytest_json, _bugs_from_pytest_json,
+                )
+                _jdata = json.loads(Path(json_report_path).read_text(encoding="utf-8"))
+                passed_tests = _passed_from_pytest_json(_jdata)
+                # Also enrich bugs with full detail from the JSON report when
+                # the normal build_from_json_report produced empty results.
+                if not bugs and results.get("failed", 0) > 0:
+                    bugs = _bugs_from_pytest_json(
+                        _jdata,
+                        prefix=f"BUG-{name[:4].upper()}",
+                        base_url=BASE_URL,
+                    )
+            except Exception as _e:
+                log(f"  [WARN] Could not load passed_tests from JSON report: {_e}")
+
+        results.update({
+            "bugs":         bugs,
+            "passed_tests": passed_tests,
+            "gaps":         gaps,
+            "spec_name":    name,
+            "compiled":     compiled,
+        })
         self.all_results[name] = results
 
         # ── Save to cache ───────────────────────────────────────────────

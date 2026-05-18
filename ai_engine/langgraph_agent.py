@@ -441,21 +441,52 @@ def run_all_specs(spec_paths: list[Path] | None = None) -> dict:
         try:
             final_state = graph.invoke(init_state, config=config)
             results     = final_state.get("test_results", {})
+
+            # ── Read the pytest JSON report to get full pass/fail detail ──────
+            # _run_pytest saves a JSON report at REPORTS_DIR/result_{stem}.json.
+            # We use the same consolidator helpers to extract passed_tests and
+            # bugs so the HTML report shows EVERY test, not just failures.
+            stem = f"test_{name.replace('-', '_')}"
+            json_report_path = REPORTS_DIR / f"result_{stem}.json"
+            passed_tests: list = []
+            bug_records:  list = []
+            if json_report_path.exists():
+                try:
+                    import sys as _sys
+                    _root = str(Path(__file__).parent.parent)
+                    if _root not in _sys.path:
+                        _sys.path.insert(0, _root)
+                    # Import consolidator helpers lazily to avoid circular import
+                    from scripts.consolidate_reports import (
+                        _passed_from_pytest_json, _bugs_from_pytest_json,
+                    )
+                    _jdata = json.loads(json_report_path.read_text(encoding="utf-8"))
+                    passed_tests = _passed_from_pytest_json(_jdata)
+                    bug_records  = _bugs_from_pytest_json(
+                        _jdata,
+                        prefix=f"BUG-{name[:4].upper()}",
+                        base_url=BASE_URL,
+                    )
+                except Exception as _e:
+                    log(f"  [WARN] Could not load passed_tests from JSON report: {_e}")
+
             all_results[name] = {
-                "status":     "passed" if results.get("failed", 0) == 0 and results.get("total", 0) > 0
-                              else "failed",
-                "passed":     results.get("passed", 0),
-                "failed":     results.get("failed", 0),
-                "total":      results.get("total", 0),
-                "from_cache": final_state.get("from_cache", False),
-                "bugs":       [],
-                "gaps":       "",
+                "status":       "passed" if results.get("failed", 0) == 0 and results.get("total", 0) > 0
+                                else "failed",
+                "passed":       results.get("passed", 0),
+                "failed":       results.get("failed", 0),
+                "total":        results.get("total", 0),
+                "from_cache":   final_state.get("from_cache", False),
+                "bugs":         bug_records,
+                "passed_tests": passed_tests,
+                "json_report":  str(json_report_path) if json_report_path.exists() else None,
+                "gaps":         "",
             }
         except Exception as exc:
             log(f"  [ERROR] Graph execution failed for {name}: {exc}")
             all_results[name] = {
                 "status": "error", "passed": 0, "failed": 0, "total": 0,
-                "from_cache": False, "bugs": [], "gaps": str(exc),
+                "from_cache": False, "bugs": [], "passed_tests": [], "gaps": str(exc),
             }
 
     return all_results

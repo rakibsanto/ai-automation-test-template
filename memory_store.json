@@ -27,7 +27,8 @@
     "test_login_page_loads_empty_password",
     "test_login_page_loads_spaces_only_password",
     "test_login_page_loads_invalid_password_format",
-    "test_login_page_loads_valid_password_format"
+    "test_login_page_loads_valid_password_format",
+    "test_a11y_inputs_have_accessible_name_fb"
   ],
   "known_good_selectors": {},
   "selector_attempts": {}
