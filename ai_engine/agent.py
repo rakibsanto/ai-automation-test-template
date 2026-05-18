@@ -1907,7 +1907,20 @@ class AutonomousTestAgent:
         # sha256(spec_md + base_url) so any spec edit invalidates it.
         spec_md = spec_path.read_text(encoding="utf-8")
         cached  = MEMORY.get(name, spec_md, BASE_URL)
-        if cached and cached.get("code"):
+        
+        disk_code = test_file.read_text(encoding="utf-8") if test_file.exists() else None
+        
+        if disk_code and cached and disk_code.strip() != cached.get("code", "").strip():
+            log(f"  [CACHE-OVERRIDE] {name}: Manual edits detected in {test_file.name}. Prioritizing disk over cache.")
+            code = disk_code
+            type_log = {
+                "manual_override": {
+                    "test_count": disk_code.count("def test_"),
+                    "tests":      re.findall(r"def (test_\w+)", disk_code),
+                    "test_data":  ["(manually edited test file)"]
+                }
+            }
+        elif cached and cached.get("code"):
             code     = cached["code"]
             type_log = {
                 "cached_from_prior_run": {

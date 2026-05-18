@@ -1023,24 +1023,24 @@ These run first in CI to fail fast if the app is completely broken.
 
 def test_smoke_page_accessible(page: Page):
     \"\"\"Smoke: page responds and main form visible.\"\"\"
-    page.goto("{bas}", timeout=10000)
+    page.goto("{spec.url}", timeout=10000)
     assert page.locator("form, main, [role='main']").is_visible(), "Page structure broken"
 
 def test_smoke_form_interactive(page: Page):
     \"\"\"Smoke: can type in form fields.\"\"\"
-    page.goto("{BASE_URL}")
+    page.goto("{spec.url}")
     page.locator('input[type="email"]').fill("smoke@test.com")
     assert page.locator('input[type="email"]').input_value() == "smoke@test.com"
 
 def test_smoke_submit_button_clickable(page: Page):
     \"\"\"Smoke: submit button is clickable (not disabled, not hidden).\"\"\"
-    page.goto("{BASE_URL}")
+    page.goto("{spec.url}")
     btn = page.locator('button[type="submit"]')
     assert btn.is_visible() and btn.is_enabled(), "Submit button broken"
 
 def test_smoke_no_500_error(page: Page):
     \"\"\"Smoke: page returns 200 (not a server error).\"\"\"
-    response = page.goto("{BASE_URL}")
+    response = page.goto("{spec.url}")
     assert response.status < 400, f"Page returned HTTP {{response.status}}"
 
 Write these 4 smoke test functions:""", 2000)
