@@ -19,6 +19,12 @@ import subprocess
 import sys
 from pathlib import Path
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 ROOT = Path(__file__).parent.resolve()
 
 
@@ -90,7 +96,11 @@ def run_demo(env: dict) -> int:
            "tests/test_qa_comprehensive.py::TestQA01Functional",
            "--browser=chromium",
            "--tb=short", "-v", "--timeout=90",
+           "--html=reports/report.html", "--self-contained-html",
            "-p", "no:cacheprovider"]
+    project_name = env.get("PROJECT_NAME", "")
+    if project_name:
+        cmd.extend(["--title", f"{project_name} Automation Report"])
     if env.get("HEADED") == "1":
         cmd.append("--headed")
     return subprocess.call(cmd, env=env)
@@ -119,7 +129,11 @@ def run_all(env: dict) -> int:
            "tests/test_qa_comprehensive.py",
            "--browser=chromium",
            "--tb=short", "-v", "--timeout=90",
+           "--html=reports/report.html", "--self-contained-html",
            "-p", "no:cacheprovider"]
+    project_name = env.get("PROJECT_NAME", "")
+    if project_name:
+        cmd.extend(["--title", f"{project_name} Automation Report"])
     if env.get("HEADED") == "1":
         cmd.append("--headed")
     return subprocess.call(cmd, env=env)
@@ -138,12 +152,23 @@ def main(argv: list[str]) -> int:
     ensure_ollama_serving()
 
     env = os.environ.copy()
+    
+    # QA Template defaults - overriden by .env if present
     env.setdefault("BASE_URL", args["url"] or "https://dev.prowhats.com/en")
     if args["url"]:
         env["BASE_URL"] = args["url"]
-    env["HEADED"] = "1" if args["headed"] else "0"
-    # Default to the small first-run model
+        
+    # Respect .env HEADED setting if --headless wasn't passed directly
+    if not args["headed"]:
+        env["HEADED"] = "0"
+    elif "HEADED" not in env:
+        env["HEADED"] = "1"
+        
+    # Default AI Model
     env.setdefault("AI_MODEL", "qwen2.5-coder:1.5b")
+    
+    project_name = env.get("PROJECT_NAME", "AI Automation")
+    print(f"Loaded Project: {project_name}")
 
     if args["mode"] == "ai":
         return run_ai(env)

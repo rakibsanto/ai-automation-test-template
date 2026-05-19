@@ -6,8 +6,6 @@ __pycache__/
 # Generated AI test files (created at CI time, not committed). Real
 # hand-written tests like test_qa_comprehensive.py and helpers like
 # _visual_diff.py MUST be tracked — only ignore the auto-generated ones.
-tests/test_raadedu_homepage.py
-tests/test_signup.py
 tests/test_login_generated.py
 
 reports/*.html

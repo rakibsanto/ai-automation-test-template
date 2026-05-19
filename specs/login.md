@@ -404,7 +404,7 @@ Supported
 # 6. UI / UX Requirements
 
 ## Logo Display
-Raad logo visible at top
+logo visible at top
 
 ---
 

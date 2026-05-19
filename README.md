@@ -1,4 +1,4 @@
-# Raad Autonomous AI Testing
+# Autonomous AI Testing
 
 > **Intent-based autonomous QA system** — describe your app in Markdown, AI handles everything else.
 
@@ -109,6 +109,11 @@ build_pages_site.py ← consolidates 18 agents → publishes to gh-pages
 ```bash
 git clone https://github.com/mejbaur-markopolo/Markopolo-Automation-Testing.git
 cd Markopolo-Automation-Testing
+
+# Setup Configuration
+cp .env.example .env
+# Edit .env to set your PROJECT_NAME, BASE_URL, and credentials (TEST_USERNAME/PASSWORD)
+
 python run.py
 ```
 

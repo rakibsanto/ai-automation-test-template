@@ -18,3 +18,4 @@ langchain-core>=0.3.0
 # Activate: BROWSER_USE_ENABLED=true BROWSER_USE_MODEL=qwen2.5:7b
 browser-use>=0.1.0
 langchain-ollama>=0.2.0
+python-dotenv>=1.0.1
