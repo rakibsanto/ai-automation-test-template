@@ -798,7 +798,7 @@ def main():
     print(f"[CONSOLIDATE] ✅ Summary       → {cons_path}")
 
     # Generate ONE custom-styled per-agent report per source. Each renders
-    # with the same Raad UI but contains only that agent's data — replaces
+    # with the same UI but contains only that agent's data — replaces
     # the default pytest-html reports that don't match our design.
     # NOTE: per-agent reports get deployed to /agents/<name>.html on gh-pages,
     # so their 'Back to Dashboard' link must use '../index.html' (not just

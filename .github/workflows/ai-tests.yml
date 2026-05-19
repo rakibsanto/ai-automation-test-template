@@ -1,4 +1,4 @@
-name: Raad Autonomous AI Testing
+name: Autonomous AI Testing
 
 on:
   push:
@@ -307,7 +307,7 @@ jobs:
         run: |
           # ── Header (always written) ─────────────────────────────────────
           cat >> "$GITHUB_STEP_SUMMARY" << 'HEADER'
-          ## 🤖 Raad Autonomous AI Test Agent — v5
+          ## 🤖 Autonomous AI Test Agent — v5
           HEADER
           echo "" >> "$GITHUB_STEP_SUMMARY"
 

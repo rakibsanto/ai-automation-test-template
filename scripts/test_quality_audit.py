@@ -13,7 +13,7 @@ These patterns produce green tests that don't catch any bug — pure noise
 in the report.
 
 This isn't classical mutation testing (which mutates production code
-to verify the suite catches the change). For Raad the production code
+to verify the suite catches the change). For the production code
 is a remote staging website we can't mutate. Instead we audit OUR test
 file for tests that look like they assert something but don't.
 

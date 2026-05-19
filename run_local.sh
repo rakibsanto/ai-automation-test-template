@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────────────────────
-#  Raad Autonomous AI Testing — Local Browser Runner
+#  Autonomous AI Testing — Local Browser Runner
 #  Runs tests in a VISIBLE browser so you can watch every action live.
 #
 #  Usage:
@@ -31,7 +31,7 @@ HEADED=1                           # always open browser window
 TEAL='\033[0;36m'; BOLD='\033[1m'; RESET='\033[0m'; GREEN='\033[0;32m'
 
 echo ""
-echo -e "${BOLD}${TEAL}  Raad Autonomous AI Testing — Local Browser Runner${RESET}"
+echo -e "${BOLD}${TEAL} Autonomous AI Testing — Local Browser Runner${RESET}"
 echo -e "  Target  : ${GREEN}${BASE_URL}${RESET}"
 echo -e "  Slow Mo : ${SLOW_MO}ms between actions"
 echo ""

@@ -18,7 +18,7 @@ _PAGE = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Raad QA Bug Report — {run_date}</title>
+<title>QA Bug Report — {run_date}</title>
 <style>
 /* ── Reset & base ── */
 *,*::before,*::after{{box-sizing:border-box;margin:0;padding:0}}
@@ -599,7 +599,7 @@ tr:hover td{{background:#1c2333}}
 <div class="hdr">
   <div class="hdr-inner">
     <div class="hdr-left">
-      <h1>Raad <span>QA</span> Bug Report</h1>
+      <h1><span>QA</span> Bug Report</h1>
       <div style="font-size:13px;color:var(--muted);margin-top:4px">
         AI-generated · autonomous · intent-based testing
       </div>

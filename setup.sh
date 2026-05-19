@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────────────────────
-# Raad AI Automation Test Agent — One-command setup
+# AI Automation Test Agent — One-command setup
 # Works on macOS and Linux. Run: bash setup.sh
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -14,7 +14,7 @@ info() { echo -e "   $*"; }
 
 echo ""
 echo "═══════════════════════════════════════════════════════════════"
-echo "  Raad AI Test Automation — Setup"    
+echo "  AI Test Automation — Setup"    
 echo "═══════════════════════════════════════════════════════════════"
 echo ""
 

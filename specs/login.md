@@ -73,21 +73,6 @@ Clickable navigation to password recovery page
 
 ---
 
-# 2. Role-Based Authentication
-
-## Admin Credential
-Email: ammarahmedmk@gmail.com  
-Password: @mm@rpr0
-
-Redirect:
-**Admin Panel**
-
----
-
-## Agent Credential
-Email: rakibsanto.1998@gmail.com  
-Password: 111111
-
 Redirect:
 **Company Section**
 

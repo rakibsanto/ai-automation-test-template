@@ -230,7 +230,7 @@ All discovered selectors are passed into the test generator so tests use real, w
 browser-use is **disabled by default** in CI to keep runs fast. Enable it via `workflow_dispatch`:
 
 ```
-Actions → Raad Autonomous AI Testing → Run workflow → browser_use: true
+Actions → Autonomous AI Testing → Run workflow → browser_use: true
 ```
 
 Note: browser-use needs a larger model (7b+) which isn't pulled by default in CI. If enabled without the right model, it falls back gracefully.
@@ -540,7 +540,7 @@ The Actions summary tab shows:
 
 ### Manual trigger with custom settings
 
-Go to: **Actions → Raad Autonomous AI Testing → Run workflow**
+Go to: **Actions → Autonomous AI Testing → Run workflow**
 
 Inputs:
 - **AI model** — e.g. `qwen2.5-coder:7b` for higher quality
