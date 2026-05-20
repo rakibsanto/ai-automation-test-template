@@ -19,7 +19,7 @@ except ImportError:
     sys.path.insert(0, str(Path(__file__).parent.parent))
     from ai_engine.spec_parser import ParsedSpec
 
-BASE_URL = os.getenv("BASE_URL", "https://dev.prowhats.com/en")
+BASE_URL = os.getenv("BASE_URL", "https://example.com")
 
 # ── AI caller (injected by agent.py) ─────────────────────────────────────────
 _ai_call = None

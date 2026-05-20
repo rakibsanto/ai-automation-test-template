@@ -60,7 +60,7 @@ try:
 except ImportError:
     _BU_OPENAI = False
 
-BASE_URL          = os.getenv("BASE_URL",           "https://beta-stg.fagun.ai")
+BASE_URL          = os.getenv("BASE_URL",           "https://example.com")
 BROWSER_USE_MODEL = os.getenv("BROWSER_USE_MODEL",  "qwen2.5:7b")
 _BU_TIMEOUT       = int(os.getenv("BROWSER_USE_TIMEOUT", "120"))  # seconds per task
 _OLLAMA_HOST      = os.getenv("OLLAMA_HOST",        "http://localhost:11434")

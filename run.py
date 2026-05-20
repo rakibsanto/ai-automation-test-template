@@ -9,7 +9,7 @@ Usage:
     python run.py --ai       # full AI Test Agent v5 — auto-generates from md specs
     python run.py --all      # every QA agent — full suite, ~30 min
     python run.py --headless # same as default but no visible browser
-    python run.py --url X    # override BASE_URL (default: dev.prowhats.com/en)
+    python run.py --url X    # override BASE_URL (default: example.com)
 """
 
 from __future__ import annotations
@@ -154,7 +154,7 @@ def main(argv: list[str]) -> int:
     env = os.environ.copy()
     
     # QA Template defaults - overriden by .env if present
-    env.setdefault("BASE_URL", args["url"] or "https://dev.prowhats.com/en")
+    env.setdefault("BASE_URL", args["url"] or "https://example.com")
     if args["url"]:
         env["BASE_URL"] = args["url"]
         

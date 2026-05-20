@@ -176,7 +176,7 @@ def main():
     data_log = _load(REPORTS_DIR / "test_data_log.json")
 
     model    = summary.get("model",    data_log.get("model_used", "unknown"))
-    base_url = summary.get("base_url", data_log.get("base_url",  "https://beta-stg.fagun.ai"))
+    base_url = summary.get("base_url", data_log.get("base_url",  ""))
     partial  = summary.get("partial",  False)
 
     all_results = build_all_results(summary, data_log)

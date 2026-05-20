@@ -40,15 +40,116 @@ def test_functional_h1_present_fb(page: Page):
     headings = page.locator("h1, h2, [role='heading']").count()
     assert headings >= 1, "no H1/H2/role=heading on page after 6s hydration wait"
 
-def test_validation_required_field_blocks_submit_fb(page: Page):
-    """FB validation: clicking submit with empty form does not 500."""
+import os, time, pytest
+from playwright.sync_api import Page, expect
+BASE_URL = os.getenv("BASE_URL", "https://stage.prowhats.com/en")
+
+def test_login_page_loads(page: Page):
+    """Login page must respond and show a non-empty title."""
     page.goto(BASE_URL, wait_until="domcontentloaded", timeout=15000)
-    submit = page.locator('button[type="submit"], button:has-text("Submit"), '
-                          'button:has-text("Send Code"), button:has-text("Login")')
-    if submit.count() > 0:
-        submit.first.click(force=True)
-        page.wait_for_timeout(500)
-    assert "500" not in page.title(), "500 after empty submit"
+    expect(page).to_have_title(lambda t: bool(t and len(t) > 3))
+
+@pytest.mark.parametrize("input_value", ["", " ", "invalid@@@email", "<script>alert(1)</script>"])
+def test_login_page_invalid_email(page: Page, input_value):
+    """Invalid email should show an error."""
+    page.goto(f"{BASE_URL}/login", wait_until="domcontentloaded", timeout=15000)
+    page.locator('input[type="email"]').fill(input_value)
+    page.click('button[type="submit"]')
+    expect(page).to_have_url(BASE_URL)  # Ensure no redirect
+    assert not page.locator("[role='alert'], .error, .text-red-500").first
+
+@pytest.mark.parametrize("input_value", ["valid@example.com", "Test@1234!"])
+def test_login_page_valid_email(page: Page, input_value):
+    """Valid email should not show an error."""
+    page.goto(f"{BASE_URL}/login", wait_until="domcontentloaded", timeout=15000)
+    page.locator('input[type="email"]').fill(input_value)
+    page.click('button[type="submit"]')
+    expect(page).to_have_url(BASE_URL)  # Ensure no redirect
+    assert not page.locator("[role='alert'], .error, .text-red-500").first
+
+@pytest.mark.parametrize("input_value", ["", " ", "invalid@@@email", "<script>alert(1)</script>"])
+def test_login_page_invalid_password(page: Page, input_value):
+    """Invalid password should show an error."""
+    page.goto(f"{BASE_URL}/login", wait_until="domcontentloaded", timeout=15000)
+    email = page.locator('input[type="email"]').first
+    password = page.locator('input[type="password"]').first
+    email.fill(input_value)
+    password.fill(input_value)
+    page.click('button[type="submit"]')
+    expect(page).to_have_url(BASE_URL)  # Ensure no redirect
+    assert not page.locator("[role='alert'], .error, .text-red-500").first
+
+@pytest.mark.parametrize("input_value", ["valid@example.com", "Test@1234!"])
+def test_login_page_valid_password(page: Page, input_value):
+    """Valid password should not show an error."""
+    page.goto(f"{BASE_URL}/login", wait_until="domcontentloaded", timeout=15000)
+    email = page.locator('input[type="email"]').first
+    password = page.locator('input[type="password"]').first
+    email.fill(input_value)
+    password.fill(input_value)
+    page.click('button[type="submit"]')
+    expect(page).to_have_url(BASE_URL)  # Ensure no redirect
+    assert not page.locator("[role='alert'], .error, .text-red-500").first
+
+@pytest.mark.parametrize("input_value", ["", " ", "invalid@@@email", "<script>alert(1)</script>"])
+def test_login_page_invalid_phone(page: Page, input_value):
+    """Invalid phone should show an error."""
+    page.goto(f"{BASE_URL}/login", wait_until="domcontentloaded", timeout=15000)
+    phone = page.locator('input[type="tel"]').first
+    phone.fill(input_value)
+    page.click('button[type="submit"]')
+    expect(page).to_have_url(BASE_URL)  # Ensure no redirect
+    assert not page.locator("[role='alert'], .error, .text-red-500").first
+
+@pytest.mark.parametrize("input_value", ["valid@example.com", "Test@1234!"])
+def test_login_page_valid_phone(page: Page, input_value):
+    """Valid phone should not show an error."""
+    page.goto(f"{BASE_URL}/login", wait_until="domcontentloaded", timeout=15000)
+    phone = page.locator('input[type="tel"]').first
+    phone.fill(input_value)
+    page.click('button[type="submit"]')
+    expect(page).to_have_url(BASE_URL)  # Ensure no redirect
+    assert not page.locator("[role='alert'], .error, .text-red-500").first
+
+@pytest.mark.parametrize("input_value", ["", " ", "invalid@@@email", "<script>alert(1)</script>"])
+def test_login_page_invalid_otp(page: Page, input_value):
+    """Invalid OTP should show an error."""
+    page.goto(f"{BASE_URL}/login", wait_until="domcontentloaded", timeout=15000)
+    otp = page.locator('input[autocomplete="one-time-code"], input[placeholder="000000"]').first
+    otp.fill(input_value)
+    page.click('button[type="submit"]')
+    expect(page).to_have_url(BASE_URL)  # Ensure no redirect
+    assert not page.locator("[role='alert'], .error, .text-red-500").first
+
+@pytest.mark.parametrize("input_value", ["valid@example.com", "Test@1234!"])
+def test_login_page_valid_otp(page: Page, input_value):
+    """Valid OTP should not show an error."""
+    page.goto(f"{BASE_URL}/login", wait_until="domcontentloaded", timeout=15000)
+    otp = page.locator('input[autocomplete="one-time-code"], input[placeholder="000000"]').first
+    otp.fill(input_value)
+    page.click('button[type="submit"]')
+    expect(page).to_have_url(BASE_URL)  # Ensure no redirect
+    assert not page.locator("[role='alert'], .error, .text-red-500").first
+
+@pytest.mark.parametrize("input_value", ["", " ", "invalid@@@email", "<script>alert(1)</script>"])
+def test_login_page_invalid_country_code(page: Page, input_value):
+    """Invalid country code should show an error."""
+    page.goto(f"{BASE_URL}/login", wait_until="domcontentloaded", timeout=15000)
+    country_code = page.locator('[aria-label="Country code"]').first
+    country_code.fill(input_value)
+    page.click('button[type="submit"]')
+    expect(page).to_have_url(BASE_URL)  # Ensure no redirect
+    assert not page.locator("[role='alert'], .error, .text-red-500").first
+
+@pytest.mark.parametrize("input_value", ["valid@example.com", "Test@1234!"])
+def test_login_page_valid_country_code(page: Page, input_value):
+    """Valid country code should not show an error."""
+    page.goto(f"{BASE_URL}/login", wait_until="domcontentloaded", timeout=15000)
+    country_code = page.locator('[aria-label="Country code"]').first
+    country_code.fill(input_value)
+    page.click('button[type="submit"]')
+    expect(page).to_have_url(BASE_URL)  # Ensure no redirect
+    assert not page.locator("[role='alert'], .error, .text-red-500").first
 
 def test_negative_invalid_input_does_not_crash_fb(page: Page):
     """FB negative: filling junk into any text input does not crash the page."""

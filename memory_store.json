@@ -49,7 +49,17 @@
     "test_cross_browser_basic_load_fb",
     "test_i18n_meta_charset_fb",
     "test_boundary_input_lengths_fb",
-    "test_agent_can_login_and_reach_dashboard"
+    "test_agent_can_login_and_reach_dashboard",
+    "test_login_page_invalid_email",
+    "test_login_page_valid_email",
+    "test_login_page_invalid_password",
+    "test_login_page_valid_password",
+    "test_login_page_invalid_phone",
+    "test_login_page_valid_phone",
+    "test_login_page_invalid_otp",
+    "test_login_page_valid_otp",
+    "test_login_page_invalid_country_code",
+    "test_login_page_valid_country_code"
   ],
   "known_good_selectors": {},
   "selector_attempts": {}

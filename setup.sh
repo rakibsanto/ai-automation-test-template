@@ -188,8 +188,8 @@ else:
 echo ""
 echo "── 9. Configuration..."
 echo ""
-read -r -p "   Target URL (default: https://beta-stg.fagun.ai): " INPUT_URL
-BASE_URL="${INPUT_URL:-https://beta-stg.fagun.ai}"
+read -r -p "   Target URL (default: https://example.com): " INPUT_URL
+BASE_URL="${INPUT_URL:-https://example.com}"
 echo "   BASE_URL=$BASE_URL"
 echo ""
 

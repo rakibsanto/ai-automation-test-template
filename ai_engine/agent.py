@@ -91,7 +91,7 @@ def log(msg=""):
     _real_print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
 
 # ── Config ────────────────────────────────────────────────────────────────────
-BASE_URL         = os.getenv("BASE_URL",  "https://beta-stg.fagun.ai")
+BASE_URL         = os.getenv("BASE_URL",  "https://example.com")
 AI_MODEL         = os.getenv("AI_MODEL",  "qwen2.5-coder:1.5b")
 AI_TIMEOUT       = int(os.getenv("AI_TIMEOUT", "90"))    # seconds per ollama call
 BROWSER_USE_ON   = os.getenv("BROWSER_USE_ENABLED", "false").lower() == "true"
