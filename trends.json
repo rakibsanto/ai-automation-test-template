@@ -1,16 +1,6 @@
 {
   "runs": [
     {
-      "run_number": 103,
-      "run_url": "https://github.com/rakibsanto/ai-automation-test-template/actions/runs/33070526249",
-      "timestamp": "2026-08-27T12:28:33.124618Z",
-      "passed": 248,
-      "failed": 107,
-      "total": 355,
-      "bugs": 107,
-      "pass_rate": "69.9%"
-    },
-    {
       "run_number": 104,
       "run_url": "https://github.com/rakibsanto/ai-automation-test-template/actions/runs/33175865014",
       "timestamp": "2026-08-28T13:51:41.541638Z",
@@ -499,14 +489,23 @@
       "total": 181,
       "bugs": 78,
       "pass_rate": "56.9%"
+    },
+    {
+      "run_number": 153,
+      "run_url": "https://github.com/rakibsanto/ai-automation-test-template/actions/runs/38861897938",
+      "timestamp": "2026-10-16T07:19:29.237594Z",
+      "passed": 102,
+      "failed": 79,
+      "total": 181,
+      "bugs": 79,
+      "pass_rate": "56.4%"
     }
   ],
   "fingerprints": {
     "c0325d900192": {
       "first_seen_run": 2,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        122,
         123,
         124,
         125,
@@ -535,7 +534,8 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "5d3e2f096fed": {
@@ -576,9 +576,8 @@
     },
     "3fb581456488": {
       "first_seen_run": 2,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        122,
         123,
         124,
         125,
@@ -607,14 +606,14 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "8cbec1665c69": {
       "first_seen_run": 2,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        122,
         123,
         124,
         125,
@@ -643,7 +642,8 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "a7bfd7d38d07": {
@@ -655,9 +655,8 @@
     },
     "a7f290e2b3be": {
       "first_seen_run": 2,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        122,
         123,
         124,
         125,
@@ -686,14 +685,14 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "318b5b7cebe6": {
       "first_seen_run": 2,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        122,
         123,
         124,
         125,
@@ -722,7 +721,8 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "89f220d00a13": {
@@ -734,9 +734,8 @@
     },
     "61bdca766f4e": {
       "first_seen_run": 2,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        122,
         123,
         124,
         125,
@@ -765,7 +764,8 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "4c478d52d063": {
@@ -777,9 +777,8 @@
     },
     "c0c999130a00": {
       "first_seen_run": 2,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        122,
         123,
         124,
         125,
@@ -808,14 +807,14 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "48661fc6824b": {
       "first_seen_run": 2,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        122,
         123,
         124,
         125,
@@ -844,14 +843,14 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "01cd6b2d1b53": {
       "first_seen_run": 2,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        122,
         123,
         124,
         125,
@@ -880,7 +879,8 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "770fb9e7e1f4": {
@@ -892,9 +892,8 @@
     },
     "8ca35425dc86": {
       "first_seen_run": 2,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        122,
         123,
         124,
         125,
@@ -923,7 +922,8 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "69c69b461be4": {
@@ -1000,9 +1000,8 @@
     },
     "9252bcf5ad3d": {
       "first_seen_run": 2,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        122,
         123,
         124,
         125,
@@ -1031,14 +1030,14 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "046ef2e7920e": {
       "first_seen_run": 2,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        122,
         123,
         124,
         125,
@@ -1067,7 +1066,8 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "d81d51b6ee63": {
@@ -1144,9 +1144,8 @@
     },
     "487f7c99518c": {
       "first_seen_run": 3,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        123,
         124,
         125,
         126,
@@ -1175,7 +1174,8 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "027062860020": {
@@ -1216,9 +1216,8 @@
     },
     "038fb7fde9f8": {
       "first_seen_run": 3,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        122,
         123,
         124,
         125,
@@ -1247,14 +1246,14 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "e037c9c1a6d3": {
       "first_seen_run": 3,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        122,
         123,
         124,
         125,
@@ -1283,7 +1282,8 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "c6a2bd4f0ae8": {
@@ -1324,9 +1324,8 @@
     },
     "455ad8765712": {
       "first_seen_run": 3,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
-        123,
         124,
         125,
         126,
@@ -1355,7 +1354,8 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "9f794e912528": {
@@ -1405,7 +1405,7 @@
     },
     "20dadad9532c": {
       "first_seen_run": 132,
-      "last_seen_run": 152,
+      "last_seen_run": 153,
       "runs_seen": [
         132,
         133,
@@ -1426,7 +1426,8 @@
         149,
         150,
         151,
-        152
+        152,
+        153
       ]
     },
     "465027ea3b23": {
