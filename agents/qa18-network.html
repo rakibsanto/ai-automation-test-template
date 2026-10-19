@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>QA Bug Report — 2026-10-18 07:33:28</title>
+<title>QA Bug Report — 2026-10-19 07:52:08</title>
 <style>
 /* ── Reset & base ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -590,7 +590,7 @@ tr:hover td{background:#1c2333}
       </div>
     </div>
     <div class="hdr-meta">
-      <div><b>Date:</b> 2026-10-18 07:33:28</div>
+      <div><b>Date:</b> 2026-10-19 07:52:08</div>
       <div><b>Target:</b> </div>
       <div><b>AI Model:</b> unknown (local · no API key)</div>
       <div><b>Browser:</b> Chromium (headless)</div>
@@ -605,10 +605,10 @@ tr:hover td{background:#1c2333}
 <div class="stats">
   <a href="#bugs"        class="stat critical" data-filter="bugs"     title="Show CRITICAL bug tickets"><div class="label">Critical</div><div class="val">0</div></a>
   <a href="#bugs"        class="stat high"     data-filter="bugs"     title="Show HIGH bug tickets"><div class="label">High</div>    <div class="val">0</div></a>
-  <a href="#bugs"        class="stat medium"   data-filter="bugs"     title="Show MEDIUM bug tickets"><div class="label">Medium</div>  <div class="val">1</div></a>
+  <a href="#bugs"        class="stat medium"   data-filter="bugs"     title="Show MEDIUM bug tickets"><div class="label">Medium</div>  <div class="val">0</div></a>
   <a href="#bugs"        class="stat low"      data-filter="bugs"     title="Show LOW bug tickets"><div class="label">Low</div>     <div class="val">0</div></a>
-  <a href="#tests"       class="stat pass"     data-filter="passed"   title="Show only PASSED tests"><div class="label">Passed</div>  <div class="val">3</div></a>
-  <a href="#tests"       class="stat fail"     data-filter="failed"   title="Show only FAILED tests"><div class="label">Failed</div>  <div class="val">1</div></a>
+  <a href="#tests"       class="stat pass"     data-filter="passed"   title="Show only PASSED tests"><div class="label">Passed</div>  <div class="val">4</div></a>
+  <a href="#tests"       class="stat fail"     data-filter="failed"   title="Show only FAILED tests"><div class="label">Failed</div>  <div class="val">0</div></a>
   <a href="#tests"       class="stat total"    data-filter="all"      title="Show all tests"><div class="label">Total Tests</div><div class="val">4</div></a>
 </div>
 
@@ -629,7 +629,7 @@ tr:hover td{background:#1c2333}
   <div class="pstrip-item p2" onclick="applyBugFilter('P2')"
        title="P2 Medium · Current or next sprint · Everything Else">
     <div class="pstrip-label">P2 · Medium</div>
-    <div class="pstrip-val">1</div>
+    <div class="pstrip-val">0</div>
     <div class="pstrip-sla">⏱ Current sprint &nbsp;·&nbsp; 📋 Everything Else</div>
   </div>
   <div class="pstrip-item p3" onclick="applyBugFilter('P3')"
@@ -643,179 +643,34 @@ tr:hover td{background:#1c2333}
 <!-- Cluster summary — groups bugs by root cause (e.g. 6 missing-headers
      finding share '1 root cause: security headers') -->
 
-<div class="cluster-summary" id="clusters">
-  <div class="sec-title" style="margin:24px 0 12px">
-    🎯 Root-Cause Summary <span class="count">1 clusters</span>
-  </div>
-  <div class="cluster-headline">1 bug ticket(s) → <strong>1 unique root cause(s)</strong></div>
-  <div class="cluster-list">
-<div class="cluster-row">
-  <div class="cluster-meta">
-    <span class="badge MEDIUM">MEDIUM</span>
-    <span class="badge P2">P2</span>
-    <span class="cluster-count">1× affected</span>
-    <span class="recurrence-badge">3× consecutive runs</span>
-  </div>
-  <div class="cluster-title">Uncategorized failure</div>
-  <div class="cluster-tickets"><a href="#QA-18 -001" class="cluster-bug-link">QA-18 -001</a></div>
-</div></div>
-  <div class="cluster-help">
-    Bugs sharing a root cause are grouped here so you fix one thing
-    instead of N. Click any ticket ID to jump to its full bug card below.
-  </div>
-</div>
 
 <!-- Extra section: cross-spec inconsistencies, etc. -->
 
 
 <!-- Bug Tickets -->
 <div class="sec-title" id="bugs">
-  Bug Tickets <span class="count">1</span>
+  Bug Tickets <span class="count">0</span>
 </div>
 
 <!-- Bug-tickets filters — by severity or by priority level -->
 <div class="filter-bar bug-filter-bar" id="bug-filter-bar">
   <span class="filter-lbl">Severity:</span>
-  <button class="fbtn active" data-bug-filter="all">All (1)</button>
+  <button class="fbtn active" data-bug-filter="all">All (0)</button>
   <button class="fbtn fbtn-critical" data-bug-filter="CRITICAL">Critical (0)</button>
   <button class="fbtn fbtn-high"     data-bug-filter="HIGH">High (0)</button>
-  <button class="fbtn fbtn-medium"   data-bug-filter="MEDIUM">Medium (1)</button>
+  <button class="fbtn fbtn-medium"   data-bug-filter="MEDIUM">Medium (0)</button>
   <button class="fbtn fbtn-low"      data-bug-filter="LOW">Low (0)</button>
 </div>
 <div class="filter-bar" style="margin-top:6px">
   <span class="filter-lbl">Priority:</span>
   <button class="fbtn" data-bug-filter="P0" title="P0 Highest — 24h SLA — Expedite">P0 Highest (0)</button>
   <button class="fbtn" data-bug-filter="P1" title="P1 High — 2-3 days — Expedite">P1 High (0)</button>
-  <button class="fbtn" data-bug-filter="P2" title="P2 Medium — This sprint">P2 Medium (1)</button>
+  <button class="fbtn" data-bug-filter="P2" title="P2 Medium — This sprint">P2 Medium (0)</button>
   <button class="fbtn" data-bug-filter="P3" title="P3 Low — Backlog">P3 Low (0)</button>
 </div>
 
 <div id="bug-list">
-
-<div class="bug-card" id="QA-18 -001" data-priority="P2">
-  <div class="bug-card-hdr">
-    <div>
-      <div class="left">
-        <span class="bug-id">QA-18 -001</span>
-        <span class="badge MEDIUM">MEDIUM</span>
-        <span class="badge P2">P2</span>
-        
-      </div>
-      <div class="bug-title">Failed: Test qa18 5xx response shown friendly</div>
-      <div class="bug-meta">
-        <span>🔗 <a href="" target="_blank"></a></span>
-        <span>🧪 <code>test_qa18_5xx_response_shown_friendly</code></span>
-        <span>🕐 2026-10-18 07:33:28</span>
-        <span>⏱ 0.00s</span>
-        
-        
-      </div>
-    </div>
-  </div>
-  <div class="bug-body">
-    
-    
-<div class="info-block analysis" style="margin-bottom:16px">
-  <div class="ib-label">📋 What this test was checking</div>
-  <div>If a backend route returns 500, the user-facing page should
-not display a raw stacktrace or framework debug page — verified against the staging site.</div>
-</div>
-    
-<div class="info-block analysis" style="margin-bottom:16px">
-  <div class="ib-label">🧪 Test data used</div>
-  <div style="font-family:'SF Mono',monospace;color:#a371f7;font-size:12px">
-    BASE_URL
-  </div>
-</div>
-    
-<div style="margin-bottom:16px">
-  <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;
-              color:var(--muted);margin-bottom:8px">Steps to Reproduce</div>
-  <ol class="steps"><li>Open a browser and go to the test URL</li><li>Observe the result: it does NOT match what the test expected (see Actual Behavior)</li></ol>
-</div>
-    
-<div class="two-col">
-  <div class="info-block expected">
-    <div class="ib-label">✓ What should happen</div>
-    <div>If a backend route returns 500, the user-facing page should</div>
-  </div>
-  <div class="info-block actual">
-    <div class="ib-label">✗ What actually happened</div>
-    <div>Browser automation error (TargetClosedError): Browser.new_context: &quot;Page.wait_for_timeout: Target page, context or browser has been closed&quot; while running route callback.
-Consider awaiting `page.unroute_all(behavior='ignoreErrors')`
-before the end of the test to ignore remaining routes in flight.
-conftest.py:187: in _capture_evidence
-    page = request.getfixturevalue(&quot;page&quot;)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pytest_playwright/pytest_playwright.py:620: in context
-    return new_context()
-           ^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pytest_playwright/pytest_playwright.py:596: in _new_context
-    context = browser.new_context(**browser_context_args, **kwargs)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py:1617: in new_context
-    self._sync(
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_browser.py:176: in new_context
-    channel = await self._channel.send(&quot;newContext&quot;, None, params)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py:78: in send
-    return await self._connection.wrap_api_call(
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py:636: in wrap_api_call
-    raise rewrite_error(error, f&quot;{parsed_st['apiName']}: {error}&quot;) from None
-playwright._impl._errors.TargetClosedError: Browser.new_context: &quot;Page.wait_for_timeout: Target page, context or browser has been closed&quot; while running route callback.
-Consider awaiting `page.unroute_all(behavior='ignoreErrors')`
-before the end of the test to ignore remaining routes in flight.</div>
-  </div>
-</div>
-    
-<div class="shot-wrap">
-  <div class="shot-label">Proof of Concept — Screenshot</div>
-  <div class="no-shot">No screenshot captured (test may have failed before page loaded)</div>
-</div>
-    
-    
-<button class="err-toggle" onclick="toggleErr('err-1')">
-  <span>▶ Show error details</span>
-  <span style="font-size:11px;color:var(--muted)">AssertionError / Traceback</span>
-</button>
-<div class="err-body" id="err-1">
-  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">    raise rewrite_error(error, f&quot;{parsed_st['apiName']}: {error}&quot;) from None
-E   playwright._impl._errors.TargetClosedError: Browser.new_context: &quot;Page.wait_for_timeout: Target page, context or browser has been closed&quot; while running route callback.
-E   Consider awaiting `page.unroute_all(behavior='ignoreErrors')`
-E   before the end of the test to ignore remaining routes in flight.</strong>
-
-conftest.py:187: in _capture_evidence
-    page = request.getfixturevalue(&quot;page&quot;)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pytest_playwright/pytest_playwright.py:620: in context
-    return new_context()
-           ^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pytest_playwright/pytest_playwright.py:596: in _new_context
-    context = browser.new_context(**browser_context_args, **kwargs)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py:1617: in new_context
-    self._sync(
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_browser.py:176: in new_context
-    channel = await self._channel.send(&quot;newContext&quot;, None, params)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py:78: in send
-    return await self._connection.wrap_api_call(
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py:636: in wrap_api_call
-    raise rewrite_error(error, f&quot;{parsed_st['apiName']}: {error}&quot;) from None
-E   playwright._impl._errors.TargetClosedError: Browser.new_context: &quot;Page.wait_for_timeout: Target page, context or browser has been closed&quot; while running route callback.
-E   Consider awaiting `page.unroute_all(behavior='ignoreErrors')`
-E   before the end of the test to ignore remaining routes in flight.</pre>
-</div>
-    
-    <div style="margin-top:16px"></div>
-    <div class="env-strip">
-      <span><b>Browser:</b> Chromium</span>
-      <span><b>Viewport:</b> 1280x720</span>
-      <span><b>Env:</b> Staging</span>
-      <span><b>Spec:</b> <a href="" target="_blank">View page</a></span>
-    </div>
-  </div>
-</div>
+<p style="color:var(--muted);text-align:center;padding:24px">No bugs detected — all tests passed.</p>
 </div>
 
 <!-- Summary Table -->
@@ -829,11 +684,11 @@ E   before the end of the test to ignore remaining routes in flight.</pre>
   <tbody>
     <tr>
       <td><strong>qa18_network</strong></td>
-      <td><span class="badge FAIL">FAILED</span></td>
-      <td style="color:var(--c-pass)">3</td>
-      <td style="color:var(--c-critical)">1</td>
+      <td><span class="badge PASS">PASSED</span></td>
+      <td style="color:var(--c-pass)">4</td>
+      <td style="color:var(--c-critical)">0</td>
       <td>4</td>
-      <td><a href="#QA-18 -001" class="badge MEDIUM">QA-18 -001</a></td>
+      <td><span style="color:var(--muted)">—</span></td>
     </tr>
   </tbody>
 </table>
@@ -846,8 +701,8 @@ E   before the end of the test to ignore remaining routes in flight.</pre>
 <div class="filter-bar test-filter-bar">
   <span class="filter-lbl">Show:</span>
   <button class="fbtn active" data-test-filter="all">All (4)</button>
-  <button class="fbtn fbtn-pass" data-test-filter="passed">✅ Passed (3)</button>
-  <button class="fbtn fbtn-fail" data-test-filter="failed">❌ Failed (1)</button>
+  <button class="fbtn fbtn-pass" data-test-filter="passed">✅ Passed (4)</button>
+  <button class="fbtn fbtn-fail" data-test-filter="failed">❌ Failed (0)</button>
   <input type="text" class="fbtn-search" placeholder="🔍 Search by test name..." data-search="">
   <button class="fbtn-action" data-action="expand-all">⬇ Expand all</button>
   <button class="fbtn-action" data-action="collapse-all">⬆ Collapse all</button>
@@ -856,7 +711,7 @@ E   before the end of the test to ignore remaining routes in flight.</pre>
 
 <div class="spec-blk">
   <div class="spec-blk-hdr" onclick="toggleSpec('spec-detail-0')">
-    <span class="spec-blk-title">❌ <code>qa18_network</code> — <span style='color:var(--c-pass)'>3 passed</span> · <span style='color:var(--c-critical)'>1 failed</span> · 4 total</span>
+    <span class="spec-blk-title">✅ <code>qa18_network</code> — <span style='color:var(--c-pass)'>4 passed</span> · <span style='color:var(--c-critical)'>0 failed</span> · 4 total</span>
     <span class="spec-blk-toggle">▶ Show tests</span>
   </div>
   <div class="spec-blk-body" id="spec-detail-0">
@@ -870,10 +725,10 @@ E   before the end of the test to ignore remaining routes in flight.</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa18_offline_does_not_crash_page</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">3.76s</span>
+    <span class="trow-dur">3.88s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Going offline mid-session must not produce uncaught JS errors.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.76s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_offline_does_not_crash_page</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Going offline mid-session must not produce uncaught JS errors.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.88s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_offline_does_not_crash_page</code></span></div>
   </div>
 </details>
 
@@ -882,12 +737,12 @@ E   before the end of the test to ignore remaining routes in flight.</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa18_blocked_api_shows_no_white_screen</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">4.02s</span>
+    <span class="trow-dur">3.98s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">If the main API is unreachable, the page must still render
 SOMETHING (loader, error message, fallback content) — never a
-completely blank white page.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.02s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_blocked_api_shows_no_white_screen</code></span></div>
+completely blank white page.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.98s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_blocked_api_shows_no_white_screen</code></span></div>
   </div>
 </details>
 
@@ -896,47 +751,24 @@ completely blank white page.</span></div><div class="td-row"><span class="td-lbl
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa18_slow_network_does_not_show_partial_data</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">4.16s</span>
+    <span class="trow-dur">4.39s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">3G-throttled load must not display half-rendered components
-(e.g., 'undefined' user names from partial data).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.16s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_slow_network_does_not_show_partial_data</code></span></div>
+(e.g., 'undefined' user names from partial data).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.39s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_slow_network_does_not_show_partial_data</code></span></div>
   </div>
 </details>
 
-<details class="trow fail">
+<details class="trow pass">
   <summary>
-    <span class="t-chip fail">❌ FAILED</span>
+    <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa18_5xx_response_shown_friendly</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">—</span>
+    <span class="trow-dur">3.14s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">If a backend route returns 500, the user-facing page should
-not display a raw stacktrace or framework debug page.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">—</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_5xx_response_shown_friendly</code></span></div><div class="td-row"><span class="td-lbl exp">Expected:</span><span class="td-val">If a backend route returns 500, the user-facing page should</span></div><div class="td-row"><span class="td-lbl act">What happened:</span><span class="td-val">Browser automation error (TargetClosedError): Browser.new_context: &quot;Page.wait_for_timeout: Target page, context or browser has been closed&quot; while running route callback.
-Consider awaiting `page.unroute_all(behavior='ignoreErrors')`
-before the end of the test to ignore remaining routes in flight.
-conftest.py:187: in _capture_evidence
-    page = request.getfixturevalue(&quot;page&quot;)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pytest_playwright/pytest_playwright.py:620: in context
-    return new_context()
-           ^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pytest_playwright/pytest_playwright.py:596: in _new_context
-    context = browser.new_context(**browser_context_args, **kwargs)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py:1617: in new_context
-    self._sync(
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_browser.py:176: in new_context
-    channel = await self._channel.send(&quot;newContext&quot;, None, params)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py:78: in send
-    return await self._connection.wrap_api_call(
-/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py:636: in wrap_api_call
-    raise rewrite_error(error, f&quot;{parsed_st['apiName']}: {error}&quot;) from None
-playwright._impl._errors.TargetClosedError: Browser.new_context: &quot;Page.wait_for_timeout: Target page, context or browser has been closed&quot; while running route callback.
-Consider awaiting `page.unroute_all(behavior='ignoreErrors')`
-before the end of the test to ignore remaining routes in flight.</span></div><div class="td-row"><span class="td-lbl">Bug ticket:</span><span class="td-val"><a href="#QA-18 -001">QA-18 -001</a> — see full details below</span></div>
+not display a raw stacktrace or framework debug page.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.14s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_5xx_response_shown_friendly</code></span></div>
   </div>
 </details>
   </div>
