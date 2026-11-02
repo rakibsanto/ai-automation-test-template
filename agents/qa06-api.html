@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>QA Bug Report — 2026-11-01 09:09:51</title>
+<title>QA Bug Report — 2026-11-02 09:24:05</title>
 <style>
 /* ── Reset & base ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -590,7 +590,7 @@ tr:hover td{background:#1c2333}
       </div>
     </div>
     <div class="hdr-meta">
-      <div><b>Date:</b> 2026-11-01 09:09:51</div>
+      <div><b>Date:</b> 2026-11-02 09:24:05</div>
       <div><b>Target:</b> </div>
       <div><b>AI Model:</b> unknown (local · no API key)</div>
       <div><b>Browser:</b> Chromium (headless)</div>
@@ -605,10 +605,10 @@ tr:hover td{background:#1c2333}
 <div class="stats">
   <a href="#bugs"        class="stat critical" data-filter="bugs"     title="Show CRITICAL bug tickets"><div class="label">Critical</div><div class="val">0</div></a>
   <a href="#bugs"        class="stat high"     data-filter="bugs"     title="Show HIGH bug tickets"><div class="label">High</div>    <div class="val">0</div></a>
-  <a href="#bugs"        class="stat medium"   data-filter="bugs"     title="Show MEDIUM bug tickets"><div class="label">Medium</div>  <div class="val">5</div></a>
+  <a href="#bugs"        class="stat medium"   data-filter="bugs"     title="Show MEDIUM bug tickets"><div class="label">Medium</div>  <div class="val">2</div></a>
   <a href="#bugs"        class="stat low"      data-filter="bugs"     title="Show LOW bug tickets"><div class="label">Low</div>     <div class="val">0</div></a>
-  <a href="#tests"       class="stat pass"     data-filter="passed"   title="Show only PASSED tests"><div class="label">Passed</div>  <div class="val">6</div></a>
-  <a href="#tests"       class="stat fail"     data-filter="failed"   title="Show only FAILED tests"><div class="label">Failed</div>  <div class="val">5</div></a>
+  <a href="#tests"       class="stat pass"     data-filter="passed"   title="Show only PASSED tests"><div class="label">Passed</div>  <div class="val">9</div></a>
+  <a href="#tests"       class="stat fail"     data-filter="failed"   title="Show only FAILED tests"><div class="label">Failed</div>  <div class="val">2</div></a>
   <a href="#tests"       class="stat total"    data-filter="all"      title="Show all tests"><div class="label">Total Tests</div><div class="val">11</div></a>
 </div>
 
@@ -629,7 +629,7 @@ tr:hover td{background:#1c2333}
   <div class="pstrip-item p2" onclick="applyBugFilter('P2')"
        title="P2 Medium · Current or next sprint · Everything Else">
     <div class="pstrip-label">P2 · Medium</div>
-    <div class="pstrip-val">5</div>
+    <div class="pstrip-val">2</div>
     <div class="pstrip-sla">⏱ Current sprint &nbsp;·&nbsp; 📋 Everything Else</div>
   </div>
   <div class="pstrip-item p3" onclick="applyBugFilter('P3')"
@@ -645,49 +645,29 @@ tr:hover td{background:#1c2333}
 
 <div class="cluster-summary" id="clusters">
   <div class="sec-title" style="margin:24px 0 12px">
-    🎯 Root-Cause Summary <span class="count">4 clusters</span>
+    🎯 Root-Cause Summary <span class="count">2 clusters</span>
   </div>
-  <div class="cluster-headline">5 bug ticket(s) → <strong>4 unique root cause(s)</strong></div>
+  <div class="cluster-headline">2 bug ticket(s) → <strong>2 unique root cause(s)</strong></div>
   <div class="cluster-list">
 <div class="cluster-row">
   <div class="cluster-meta">
     <span class="badge MEDIUM">MEDIUM</span>
     <span class="badge P2">P2</span>
-    <span class="cluster-count">2× affected</span>
+    <span class="cluster-count">1× affected</span>
     <span class="recurrence-badge">30× consecutive runs</span>
   </div>
-  <div class="cluster-title">Generic assertion failure</div>
-  <div class="cluster-tickets"><a href="#QA-06 -001" class="cluster-bug-link">QA-06 -001</a> <a href="#QA-06 -004" class="cluster-bug-link">QA-06 -004</a></div>
+  <div class="cluster-title">Uncategorized failure</div>
+  <div class="cluster-tickets"><a href="#QA-06 -001" class="cluster-bug-link">QA-06 -001</a></div>
 </div>
 <div class="cluster-row">
   <div class="cluster-meta">
     <span class="badge MEDIUM">MEDIUM</span>
     <span class="badge P2">P2</span>
     <span class="cluster-count">1× affected</span>
-    
+    <span class="recurrence-badge">30× consecutive runs</span>
   </div>
   <div class="cluster-title">Uncategorized failure</div>
   <div class="cluster-tickets"><a href="#QA-06 -002" class="cluster-bug-link">QA-06 -002</a></div>
-</div>
-<div class="cluster-row">
-  <div class="cluster-meta">
-    <span class="badge MEDIUM">MEDIUM</span>
-    <span class="badge P2">P2</span>
-    <span class="cluster-count">1× affected</span>
-    <span class="recurrence-badge">30× consecutive runs</span>
-  </div>
-  <div class="cluster-title">Uncategorized failure</div>
-  <div class="cluster-tickets"><a href="#QA-06 -003" class="cluster-bug-link">QA-06 -003</a></div>
-</div>
-<div class="cluster-row">
-  <div class="cluster-meta">
-    <span class="badge MEDIUM">MEDIUM</span>
-    <span class="badge P2">P2</span>
-    <span class="cluster-count">1× affected</span>
-    <span class="recurrence-badge">30× consecutive runs</span>
-  </div>
-  <div class="cluster-title">Uncategorized failure</div>
-  <div class="cluster-tickets"><a href="#QA-06 -005" class="cluster-bug-link">QA-06 -005</a></div>
 </div></div>
   <div class="cluster-help">
     Bugs sharing a root cause are grouped here so you fix one thing
@@ -700,23 +680,23 @@ tr:hover td{background:#1c2333}
 
 <!-- Bug Tickets -->
 <div class="sec-title" id="bugs">
-  Bug Tickets <span class="count">5</span>
+  Bug Tickets <span class="count">2</span>
 </div>
 
 <!-- Bug-tickets filters — by severity or by priority level -->
 <div class="filter-bar bug-filter-bar" id="bug-filter-bar">
   <span class="filter-lbl">Severity:</span>
-  <button class="fbtn active" data-bug-filter="all">All (5)</button>
+  <button class="fbtn active" data-bug-filter="all">All (2)</button>
   <button class="fbtn fbtn-critical" data-bug-filter="CRITICAL">Critical (0)</button>
   <button class="fbtn fbtn-high"     data-bug-filter="HIGH">High (0)</button>
-  <button class="fbtn fbtn-medium"   data-bug-filter="MEDIUM">Medium (5)</button>
+  <button class="fbtn fbtn-medium"   data-bug-filter="MEDIUM">Medium (2)</button>
   <button class="fbtn fbtn-low"      data-bug-filter="LOW">Low (0)</button>
 </div>
 <div class="filter-bar" style="margin-top:6px">
   <span class="filter-lbl">Priority:</span>
   <button class="fbtn" data-bug-filter="P0" title="P0 Highest — 24h SLA — Expedite">P0 Highest (0)</button>
   <button class="fbtn" data-bug-filter="P1" title="P1 High — 2-3 days — Expedite">P1 High (0)</button>
-  <button class="fbtn" data-bug-filter="P2" title="P2 Medium — This sprint">P2 Medium (5)</button>
+  <button class="fbtn" data-bug-filter="P2" title="P2 Medium — This sprint">P2 Medium (2)</button>
   <button class="fbtn" data-bug-filter="P3" title="P3 Low — Backlog">P3 Low (0)</button>
 </div>
 
@@ -731,190 +711,12 @@ tr:hover td{background:#1c2333}
         <span class="badge P2">P2</span>
         
       </div>
-      <div class="bug-title">Failed: Test qa06 homepage returns 2xx</div>
-      <div class="bug-meta">
-        <span>🔗 <a href="" target="_blank"></a></span>
-        <span>🧪 <code>test_qa06_homepage_returns_2xx</code></span>
-        <span>🕐 2026-11-01 09:09:50</span>
-        <span>⏱ 0.51s</span>
-        
-        
-      </div>
-    </div>
-  </div>
-  <div class="bug-body">
-    
-    
-<div class="info-block analysis" style="margin-bottom:16px">
-  <div class="ib-label">📋 What this test was checking</div>
-  <div>Homepage initial response must be 2xx — verified against the staging site.</div>
-</div>
-    
-<div class="info-block analysis" style="margin-bottom:16px">
-  <div class="ib-label">🧪 Test data used</div>
-  <div style="font-family:'SF Mono',monospace;color:#a371f7;font-size:12px">
-    BASE_URL
-  </div>
-</div>
-    
-<div style="margin-bottom:16px">
-  <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;
-              color:var(--muted);margin-bottom:8px">Steps to Reproduce</div>
-  <ol class="steps"><li>Open a browser and go to the test URL</li><li>Observe the result: it does NOT match what the test expected (see Actual Behavior)</li></ol>
-</div>
-    
-<div class="two-col">
-  <div class="info-block expected">
-    <div class="ib-label">✓ What should happen</div>
-    <div>Homepage initial response must be 2xx.</div>
-  </div>
-  <div class="info-block actual">
-    <div class="ib-label">✗ What actually happened</div>
-    <div>Homepage returned HTTP 502</div>
-  </div>
-</div>
-    
-<div class="shot-wrap">
-  <div class="shot-label">Proof of Concept — Screenshot</div>
-  <div class="no-shot">No screenshot captured (test may have failed before page loaded)</div>
-</div>
-    
-    
-<button class="err-toggle" onclick="toggleErr('err-1')">
-  <span>▶ Show error details</span>
-  <span style="font-size:11px;color:var(--muted)">AssertionError / Traceback</span>
-</button>
-<div class="err-body" id="err-1">
-  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">    assert resp.status &lt; 300, f&quot;Homepage returned HTTP {resp.status}&quot;
-E   AssertionError: Homepage returned HTTP 502
-E   assert 502 &lt; 300
-E    +  where 502 = &lt;Response url='https://dev.prowhats.com/en' request=&lt;Request url='https://dev.prowhats.com/en' method='GET'&gt;&gt;.status</strong>
-
-tests/test_qa_comprehensive.py:1808: in test_qa06_homepage_returns_2xx
-    assert resp.status &lt; 300, f&quot;Homepage returned HTTP {resp.status}&quot;
-E   AssertionError: Homepage returned HTTP 502
-E   assert 502 &lt; 300
-E    +  where 502 = &lt;Response url='https://dev.prowhats.com/en' request=&lt;Request url='https://dev.prowhats.com/en' method='GET'&gt;&gt;.status</pre>
-</div>
-    
-    <div style="margin-top:16px"></div>
-    <div class="env-strip">
-      <span><b>Browser:</b> Chromium</span>
-      <span><b>Viewport:</b> 1280x720</span>
-      <span><b>Env:</b> Staging</span>
-      <span><b>Spec:</b> <a href="" target="_blank">View page</a></span>
-    </div>
-  </div>
-</div>
-<div class="bug-card" id="QA-06 -002" data-priority="P2">
-  <div class="bug-card-hdr">
-    <div>
-      <div class="left">
-        <span class="bug-id">QA-06 -002</span>
-        <span class="badge MEDIUM">MEDIUM</span>
-        <span class="badge P2">P2</span>
-        
-      </div>
-      <div class="bug-title">Failed: Test qa06 no 5xx responses during load</div>
-      <div class="bug-meta">
-        <span>🔗 <a href="" target="_blank"></a></span>
-        <span>🧪 <code>test_qa06_no_5xx_responses_during_load</code></span>
-        <span>🕐 2026-11-01 09:09:50</span>
-        <span>⏱ 0.51s</span>
-        
-        
-      </div>
-    </div>
-  </div>
-  <div class="bug-body">
-    
-    
-<div class="info-block analysis" style="margin-bottom:16px">
-  <div class="ib-label">📋 What this test was checking</div>
-  <div>No network response must be 5xx on full homepage load — verified against the staging site.</div>
-</div>
-    
-<div class="info-block analysis" style="margin-bottom:16px">
-  <div class="ib-label">🧪 Test data used</div>
-  <div style="font-family:'SF Mono',monospace;color:#a371f7;font-size:12px">
-    BASE_URL
-  </div>
-</div>
-    
-<div style="margin-bottom:16px">
-  <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;
-              color:var(--muted);margin-bottom:8px">Steps to Reproduce</div>
-  <ol class="steps"><li>Open a browser and go to the test URL</li><li>Observe the result: it does NOT match what the test expected (see Actual Behavior)</li></ol>
-</div>
-    
-<div class="two-col">
-  <div class="info-block expected">
-    <div class="ib-label">✓ What should happen</div>
-    <div>No network response must be 5xx on full homepage load.</div>
-  </div>
-  <div class="info-block actual">
-    <div class="ib-label">✗ What actually happened</div>
-    <div>5xx responses: [{'url': 'https://dev.prowhats.com/en', 'status': 502}]</div>
-  </div>
-</div>
-    
-<div class="shot-wrap">
-  <div class="shot-label">Proof of Concept — Screenshot</div>
-  <div class="no-shot">No screenshot captured (test may have failed before page loaded)</div>
-</div>
-    
-    
-<button class="err-toggle" onclick="toggleErr('err-2')">
-  <span>▶ Show error details</span>
-  <span style="font-size:11px;color:var(--muted)">AssertionError / Traceback</span>
-</button>
-<div class="err-body" id="err-2">
-  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">E     +         'url': 'https://dev.prowhats.com/en',
-E     +         'status': 502,
-E     +     },
-E     + ]</strong>
-
-tests/test_qa_comprehensive.py:1817: in test_qa06_no_5xx_responses_during_load
-    assert server_errors == [], f&quot;5xx responses: {server_errors[:3]}&quot;
-E   AssertionError: 5xx responses: [{'url': 'https://dev.prowhats.com/en', 'status': 502}]
-E   assert [{'url': 'htt...status': 502}] == []
-E     
-E     Left contains one more item: {'url': 'https://dev.prowhats.com/en', 'status': 502}
-E     
-E     Full diff: (-: missing in left side, +: extra in left side)
-E     - []
-E     + [
-E     +     {
-E     +         'url': 'https://dev.prowhats.com/en',
-E     +         'status': 502,
-E     +     },
-E     + ]</pre>
-</div>
-    
-    <div style="margin-top:16px"></div>
-    <div class="env-strip">
-      <span><b>Browser:</b> Chromium</span>
-      <span><b>Viewport:</b> 1280x720</span>
-      <span><b>Env:</b> Staging</span>
-      <span><b>Spec:</b> <a href="" target="_blank">View page</a></span>
-    </div>
-  </div>
-</div>
-<div class="bug-card" id="QA-06 -003" data-priority="P2">
-  <div class="bug-card-hdr">
-    <div>
-      <div class="left">
-        <span class="bug-id">QA-06 -003</span>
-        <span class="badge MEDIUM">MEDIUM</span>
-        <span class="badge P2">P2</span>
-        
-      </div>
       <div class="bug-title">Failed: Test qa06 no sensitive headers exposed</div>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa06_no_sensitive_headers_exposed</code></span>
-        <span>🕐 2026-11-01 09:09:50</span>
-        <span>⏱ 0.50s</span>
+        <span>🕐 2026-11-02 09:24:05</span>
+        <span>⏱ 3.02s</span>
         
         
       </div>
@@ -958,11 +760,11 @@ E     + ]</pre>
 </div>
     
     
-<button class="err-toggle" onclick="toggleErr('err-3')">
+<button class="err-toggle" onclick="toggleErr('err-1')">
   <span>▶ Show error details</span>
   <span style="font-size:11px;color:var(--muted)">AssertionError / Traceback</span>
 </button>
-<div class="err-body" id="err-3">
+<div class="err-body" id="err-1">
   <pre style="margin-top:8px"><strong style="color:var(--c-critical)">E     
 E     'nginx/1.' is contained here:
 E       nginx/1.24.0 (ubuntu)
@@ -987,89 +789,11 @@ E     ? ++++++++</pre>
     </div>
   </div>
 </div>
-<div class="bug-card" id="QA-06 -004" data-priority="P2">
+<div class="bug-card" id="QA-06 -002" data-priority="P2">
   <div class="bug-card-hdr">
     <div>
       <div class="left">
-        <span class="bug-id">QA-06 -004</span>
-        <span class="badge MEDIUM">MEDIUM</span>
-        <span class="badge P2">P2</span>
-        
-      </div>
-      <div class="bug-title">Failed: Test qa06 find tutors api returns data</div>
-      <div class="bug-meta">
-        <span>🔗 <a href="" target="_blank"></a></span>
-        <span>🧪 <code>test_qa06_find_tutors_api_returns_data</code></span>
-        <span>🕐 2026-11-01 09:09:50</span>
-        <span>⏱ 2.03s</span>
-        
-        
-      </div>
-    </div>
-  </div>
-  <div class="bug-body">
-    
-    
-<div class="info-block analysis" style="margin-bottom:16px">
-  <div class="ib-label">📋 What this test was checking</div>
-  <div>Find-tutors page must issue at least one API/data fetch request — verified against the staging site.</div>
-</div>
-    
-    
-<div style="margin-bottom:16px">
-  <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;
-              color:var(--muted);margin-bottom:8px">Steps to Reproduce</div>
-  <ol class="steps"><li>Open a browser and go to the test URL</li><li>Observe the result: it does NOT match what the test expected (see Actual Behavior)</li></ol>
-</div>
-    
-<div class="two-col">
-  <div class="info-block expected">
-    <div class="ib-label">✓ What should happen</div>
-    <div>Find-tutors page must issue at least one API/data fetch request.</div>
-  </div>
-  <div class="info-block actual">
-    <div class="ib-label">✗ What actually happened</div>
-    <div>Find-tutors page appears empty</div>
-  </div>
-</div>
-    
-<div class="shot-wrap">
-  <div class="shot-label">Proof of Concept — Screenshot</div>
-  <div class="no-shot">No screenshot captured (test may have failed before page loaded)</div>
-</div>
-    
-    
-<button class="err-toggle" onclick="toggleErr('err-4')">
-  <span>▶ Show error details</span>
-  <span style="font-size:11px;color:var(--muted)">AssertionError / Traceback</span>
-</button>
-<div class="err-body" id="err-4">
-  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">    assert len(content) &gt; 100, &quot;Find-tutors page appears empty&quot;
-E   AssertionError: Find-tutors page appears empty
-E   assert 37 &gt; 100
-E    +  where 37 = len('502 Bad Gateway\nnginx/1.24.0 (Ubuntu)')</strong>
-
-tests/test_qa_comprehensive.py:1861: in test_qa06_find_tutors_api_returns_data
-    assert len(content) &gt; 100, &quot;Find-tutors page appears empty&quot;
-E   AssertionError: Find-tutors page appears empty
-E   assert 37 &gt; 100
-E    +  where 37 = len('502 Bad Gateway\nnginx/1.24.0 (Ubuntu)')</pre>
-</div>
-    
-    <div style="margin-top:16px"></div>
-    <div class="env-strip">
-      <span><b>Browser:</b> Chromium</span>
-      <span><b>Viewport:</b> 1280x720</span>
-      <span><b>Env:</b> Staging</span>
-      <span><b>Spec:</b> <a href="" target="_blank">View page</a></span>
-    </div>
-  </div>
-</div>
-<div class="bug-card" id="QA-06 -005" data-priority="P2">
-  <div class="bug-card-hdr">
-    <div>
-      <div class="left">
-        <span class="bug-id">QA-06 -005</span>
+        <span class="bug-id">QA-06 -002</span>
         <span class="badge MEDIUM">MEDIUM</span>
         <span class="badge P2">P2</span>
         
@@ -1078,7 +802,7 @@ E    +  where 37 = len('502 Bad Gateway\nnginx/1.24.0 (Ubuntu)')</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa06_json_responses_are_well_formed</code></span>
-        <span>🕐 2026-11-01 09:09:50</span>
+        <span>🕐 2026-11-02 09:24:05</span>
         <span>⏱ 0.00s</span>
         
         
@@ -1126,11 +850,11 @@ and truncated responses — verified against the staging site.</div>
 </div>
     
     
-<button class="err-toggle" onclick="toggleErr('err-5')">
+<button class="err-toggle" onclick="toggleErr('err-2')">
   <span>▶ Show error details</span>
   <span style="font-size:11px;color:var(--muted)">AssertionError / Traceback</span>
 </button>
-<div class="err-body" id="err-5">
+<div class="err-body" id="err-2">
   <pre style="margin-top:8px"><strong style="color:var(--c-critical)">tests/test_qa_comprehensive.py:1905: in test_qa06_json_responses_are_well_formed
     from jsonschema import validate, ValidationError
 E   ModuleNotFoundError: No module named 'jsonschema'</strong>
@@ -1163,10 +887,10 @@ E   ModuleNotFoundError: No module named 'jsonschema'</pre>
     <tr>
       <td><strong>qa06_api</strong></td>
       <td><span class="badge FAIL">FAILED</span></td>
-      <td style="color:var(--c-pass)">6</td>
-      <td style="color:var(--c-critical)">5</td>
+      <td style="color:var(--c-pass)">9</td>
+      <td style="color:var(--c-critical)">2</td>
       <td>11</td>
-      <td><a href="#QA-06 -001" class="badge MEDIUM">QA-06 -001</a> <a href="#QA-06 -002" class="badge MEDIUM">QA-06 -002</a> <a href="#QA-06 -003" class="badge MEDIUM">QA-06 -003</a> <a href="#QA-06 -004" class="badge MEDIUM">QA-06 -004</a> <a href="#QA-06 -005" class="badge MEDIUM">QA-06 -005</a></td>
+      <td><a href="#QA-06 -001" class="badge MEDIUM">QA-06 -001</a> <a href="#QA-06 -002" class="badge MEDIUM">QA-06 -002</a></td>
     </tr>
   </tbody>
 </table>
@@ -1179,8 +903,8 @@ E   ModuleNotFoundError: No module named 'jsonschema'</pre>
 <div class="filter-bar test-filter-bar">
   <span class="filter-lbl">Show:</span>
   <button class="fbtn active" data-test-filter="all">All (11)</button>
-  <button class="fbtn fbtn-pass" data-test-filter="passed">✅ Passed (6)</button>
-  <button class="fbtn fbtn-fail" data-test-filter="failed">❌ Failed (5)</button>
+  <button class="fbtn fbtn-pass" data-test-filter="passed">✅ Passed (9)</button>
+  <button class="fbtn fbtn-fail" data-test-filter="failed">❌ Failed (2)</button>
   <input type="text" class="fbtn-search" placeholder="🔍 Search by test name..." data-search="">
   <button class="fbtn-action" data-action="expand-all">⬇ Expand all</button>
   <button class="fbtn-action" data-action="collapse-all">⬆ Collapse all</button>
@@ -1189,7 +913,7 @@ E   ModuleNotFoundError: No module named 'jsonschema'</pre>
 
 <div class="spec-blk">
   <div class="spec-blk-hdr" onclick="toggleSpec('spec-detail-0')">
-    <span class="spec-blk-title">❌ <code>qa06_api</code> — <span style='color:var(--c-pass)'>6 passed</span> · <span style='color:var(--c-critical)'>5 failed</span> · 11 total</span>
+    <span class="spec-blk-title">❌ <code>qa06_api</code> — <span style='color:var(--c-pass)'>9 passed</span> · <span style='color:var(--c-critical)'>2 failed</span> · 11 total</span>
     <span class="spec-blk-toggle">▶ Show tests</span>
   </div>
   <div class="spec-blk-body" id="spec-detail-0">
@@ -1203,10 +927,34 @@ E   ModuleNotFoundError: No module named 'jsonschema'</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_all_requests_use_https</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">1.36s</span>
+    <span class="trow-dur">3.87s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Every outbound request on the homepage must use HTTPS.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.36s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_all_requests_use_https</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Every outbound request on the homepage must use HTTPS.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.87s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_all_requests_use_https</code></span></div>
+  </div>
+</details>
+
+<details class="trow pass">
+  <summary>
+    <span class="t-chip pass">✅ PASSED</span>
+    <span class="trow-name">test_qa06_homepage_returns_2xx</span>
+    <span class="trow-params">BASE_URL</span>
+    <span class="trow-dur">3.03s</span>
+  </summary>
+  <div class="trow-details">
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage initial response must be 2xx.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.03s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_homepage_returns_2xx</code></span></div>
+  </div>
+</details>
+
+<details class="trow pass">
+  <summary>
+    <span class="t-chip pass">✅ PASSED</span>
+    <span class="trow-name">test_qa06_no_5xx_responses_during_load</span>
+    <span class="trow-params">BASE_URL</span>
+    <span class="trow-dur">3.03s</span>
+  </summary>
+  <div class="trow-details">
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">No network response must be 5xx on full homepage load.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.03s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_no_5xx_responses_during_load</code></span></div>
   </div>
 </details>
 
@@ -1215,10 +963,10 @@ E   ModuleNotFoundError: No module named 'jsonschema'</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_content_type_header_present</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">0.50s</span>
+    <span class="trow-dur">3.01s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage HTML response must include Content-Type header.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.50s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_content_type_header_present</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage HTML response must include Content-Type header.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.01s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_content_type_header_present</code></span></div>
   </div>
 </details>
 
@@ -1227,10 +975,22 @@ E   ModuleNotFoundError: No module named 'jsonschema'</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_api_calls_on_load_are_reasonable</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">1.51s</span>
+    <span class="trow-dur">3.84s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage must not make an excessive number of API calls (&gt; 50) on load.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.51s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_api_calls_on_load_are_reasonable</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage must not make an excessive number of API calls (&gt; 50) on load.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.84s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_api_calls_on_load_are_reasonable</code></span></div>
+  </div>
+</details>
+
+<details class="trow pass">
+  <summary>
+    <span class="t-chip pass">✅ PASSED</span>
+    <span class="trow-name">test_qa06_find_tutors_api_returns_data</span>
+    
+    <span class="trow-dur">4.50s</span>
+  </summary>
+  <div class="trow-details">
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Find-tutors page must issue at least one API/data fetch request.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.50s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_find_tutors_api_returns_data</code></span></div>
   </div>
 </details>
 
@@ -1239,10 +999,10 @@ E   ModuleNotFoundError: No module named 'jsonschema'</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_no_auth_tokens_in_url_params</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">0.50s</span>
+    <span class="trow-dur">2.81s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Auth tokens must never appear in URL query parameters.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.50s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_no_auth_tokens_in_url_params</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Auth tokens must never appear in URL query parameters.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.81s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_no_auth_tokens_in_url_params</code></span></div>
   </div>
 </details>
 
@@ -1251,10 +1011,10 @@ E   ModuleNotFoundError: No module named 'jsonschema'</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_csp_header_present_or_meta</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">0.53s</span>
+    <span class="trow-dur">3.06s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Content-Security-Policy should be set (header or meta tag).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.53s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_csp_header_present_or_meta</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Content-Security-Policy should be set (header or meta tag).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.06s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_csp_header_present_or_meta</code></span></div>
   </div>
 </details>
 
@@ -1263,34 +1023,10 @@ E   ModuleNotFoundError: No module named 'jsonschema'</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa06_find_tutors_no_cors_error</span>
     
-    <span class="trow-dur">1.30s</span>
+    <span class="trow-dur">3.58s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Find-tutors page must not log CORS errors in the console.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.30s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_find_tutors_no_cors_error</code></span></div>
-  </div>
-</details>
-
-<details class="trow fail">
-  <summary>
-    <span class="t-chip fail">❌ FAILED</span>
-    <span class="trow-name">test_qa06_homepage_returns_2xx</span>
-    <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">—</span>
-  </summary>
-  <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Homepage initial response must be 2xx.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">—</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_homepage_returns_2xx</code></span></div><div class="td-row"><span class="td-lbl exp">Expected:</span><span class="td-val">Homepage initial response must be 2xx.</span></div><div class="td-row"><span class="td-lbl act">What happened:</span><span class="td-val">Homepage returned HTTP 502</span></div><div class="td-row"><span class="td-lbl">Bug ticket:</span><span class="td-val"><a href="#QA-06 -001">QA-06 -001</a> — see full details below</span></div>
-  </div>
-</details>
-
-<details class="trow fail">
-  <summary>
-    <span class="t-chip fail">❌ FAILED</span>
-    <span class="trow-name">test_qa06_no_5xx_responses_during_load</span>
-    <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">—</span>
-  </summary>
-  <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">No network response must be 5xx on full homepage load.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">—</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_no_5xx_responses_during_load</code></span></div><div class="td-row"><span class="td-lbl exp">Expected:</span><span class="td-val">No network response must be 5xx on full homepage load.</span></div><div class="td-row"><span class="td-lbl act">What happened:</span><span class="td-val">5xx responses: [{'url': 'https://dev.prowhats.com/en', 'status': 502}]</span></div><div class="td-row"><span class="td-lbl">Bug ticket:</span><span class="td-val"><a href="#QA-06 -002">QA-06 -002</a> — see full details below</span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Find-tutors page must not log CORS errors in the console.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.58s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_find_tutors_no_cors_error</code></span></div>
   </div>
 </details>
 
@@ -1302,19 +1038,7 @@ E   ModuleNotFoundError: No module named 'jsonschema'</pre>
     <span class="trow-dur">—</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Response headers must not expose server technology details.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">—</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_no_sensitive_headers_exposed</code></span></div><div class="td-row"><span class="td-lbl exp">Expected:</span><span class="td-val">Response headers must not expose server technology details.</span></div><div class="td-row"><span class="td-lbl act">What happened:</span><span class="td-val">Header server: 'nginx/1.24.0 (Ubuntu)' reveals server technology</span></div><div class="td-row"><span class="td-lbl">Bug ticket:</span><span class="td-val"><a href="#QA-06 -003">QA-06 -003</a> — see full details below</span></div>
-  </div>
-</details>
-
-<details class="trow fail">
-  <summary>
-    <span class="t-chip fail">❌ FAILED</span>
-    <span class="trow-name">test_qa06_find_tutors_api_returns_data</span>
-    
-    <span class="trow-dur">—</span>
-  </summary>
-  <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Find-tutors page must issue at least one API/data fetch request.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">—</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_find_tutors_api_returns_data</code></span></div><div class="td-row"><span class="td-lbl exp">Expected:</span><span class="td-val">Find-tutors page must issue at least one API/data fetch request.</span></div><div class="td-row"><span class="td-lbl act">What happened:</span><span class="td-val">Find-tutors page appears empty</span></div><div class="td-row"><span class="td-lbl">Bug ticket:</span><span class="td-val"><a href="#QA-06 -004">QA-06 -004</a> — see full details below</span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Response headers must not expose server technology details.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">—</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_no_sensitive_headers_exposed</code></span></div><div class="td-row"><span class="td-lbl exp">Expected:</span><span class="td-val">Response headers must not expose server technology details.</span></div><div class="td-row"><span class="td-lbl act">What happened:</span><span class="td-val">Header server: 'nginx/1.24.0 (Ubuntu)' reveals server technology</span></div><div class="td-row"><span class="td-lbl">Bug ticket:</span><span class="td-val"><a href="#QA-06 -001">QA-06 -001</a> — see full details below</span></div>
   </div>
 </details>
 
@@ -1329,7 +1053,7 @@ E   ModuleNotFoundError: No module named 'jsonschema'</pre>
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Every application/json response on homepage load must parse and
 be a dict or list (not a stray string or null). Catches malformed
 JSON, accidental HTML error pages served with json content-type,
-and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">—</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_json_responses_are_well_formed</code></span></div><div class="td-row"><span class="td-lbl exp">Expected:</span><span class="td-val">Every application/json response on homepage load must parse and</span></div><div class="td-row"><span class="td-lbl act">What happened:</span><span class="td-val">ModuleNotFoundError: No module named 'jsonschema'</span></div><div class="td-row"><span class="td-lbl">Bug ticket:</span><span class="td-val"><a href="#QA-06 -005">QA-06 -005</a> — see full details below</span></div>
+and truncated responses.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">—</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa06_json_responses_are_well_formed</code></span></div><div class="td-row"><span class="td-lbl exp">Expected:</span><span class="td-val">Every application/json response on homepage load must parse and</span></div><div class="td-row"><span class="td-lbl act">What happened:</span><span class="td-val">ModuleNotFoundError: No module named 'jsonschema'</span></div><div class="td-row"><span class="td-lbl">Bug ticket:</span><span class="td-val"><a href="#QA-06 -002">QA-06 -002</a> — see full details below</span></div>
   </div>
 </details>
   </div>
