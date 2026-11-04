@@ -1,16 +1,6 @@
 {
   "runs": [
     {
-      "run_number": 122,
-      "run_url": "https://github.com/rakibsanto/ai-automation-test-template/actions/runs/34939289987",
-      "timestamp": "2026-09-15T07:14:41.513654Z",
-      "passed": 248,
-      "failed": 107,
-      "total": 355,
-      "bugs": 107,
-      "pass_rate": "69.9%"
-    },
-    {
       "run_number": 123,
       "run_url": "https://github.com/rakibsanto/ai-automation-test-template/actions/runs/35066252973",
       "timestamp": "2026-09-16T07:16:31.143567Z",
@@ -494,6 +484,16 @@
       "run_number": 171,
       "run_url": "https://github.com/rakibsanto/ai-automation-test-template/actions/runs/41606136468",
       "timestamp": "2026-11-03T09:01:59.187227Z",
+      "passed": 8,
+      "failed": 29,
+      "total": 37,
+      "bugs": 29,
+      "pass_rate": "21.6%"
+    },
+    {
+      "run_number": 172,
+      "run_url": "https://github.com/rakibsanto/ai-automation-test-template/actions/runs/41798443742",
+      "timestamp": "2026-11-04T08:31:36.715996Z",
       "passed": 8,
       "failed": 29,
       "total": 37,
@@ -1144,9 +1144,8 @@
     },
     "487f7c99518c": {
       "first_seen_run": 3,
-      "last_seen_run": 171,
+      "last_seen_run": 172,
       "runs_seen": [
-        142,
         143,
         144,
         145,
@@ -1175,7 +1174,8 @@
         168,
         169,
         170,
-        171
+        171,
+        172
       ]
     },
     "027062860020": {
@@ -1324,9 +1324,8 @@
     },
     "455ad8765712": {
       "first_seen_run": 3,
-      "last_seen_run": 171,
+      "last_seen_run": 172,
       "runs_seen": [
-        142,
         143,
         144,
         145,
@@ -1355,7 +1354,8 @@
         168,
         169,
         170,
-        171
+        171,
+        172
       ]
     },
     "9f794e912528": {
@@ -1384,11 +1384,12 @@
     },
     "8051c8d53756": {
       "first_seen_run": 31,
-      "last_seen_run": 171,
+      "last_seen_run": 172,
       "runs_seen": [
         31,
         145,
-        171
+        171,
+        172
       ]
     },
     "76ec7a6b7e83": {
@@ -1443,10 +1444,11 @@
     },
     "465027ea3b23": {
       "first_seen_run": 145,
-      "last_seen_run": 171,
+      "last_seen_run": 172,
       "runs_seen": [
         145,
-        171
+        171,
+        172
       ]
     },
     "f92887500883": {
