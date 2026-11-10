@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>QA Bug Report — 2026-11-09 09:37:01</title>
+<title>QA Bug Report — 2026-11-10 09:42:59</title>
 <style>
 /* ── Reset & base ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -590,7 +590,7 @@ tr:hover td{background:#1c2333}
       </div>
     </div>
     <div class="hdr-meta">
-      <div><b>Date:</b> 2026-11-09 09:37:01</div>
+      <div><b>Date:</b> 2026-11-10 09:42:59</div>
       <div><b>Target:</b> </div>
       <div><b>AI Model:</b> unknown (local · no API key)</div>
       <div><b>Browser:</b> Chromium (headless)</div>
@@ -715,8 +715,8 @@ tr:hover td{background:#1c2333}
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa07_page_has_main_landmark</code></span>
-        <span>🕐 2026-11-09 09:37:00</span>
-        <span>⏱ 3.38s</span>
+        <span>🕐 2026-11-10 09:42:58</span>
+        <span>⏱ 3.26s</span>
         
         
       </div>
@@ -809,8 +809,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa07_heading_hierarchy_starts_with_h1</code></span>
-        <span>🕐 2026-11-09 09:37:00</span>
-        <span>⏱ 3.53s</span>
+        <span>🕐 2026-11-10 09:42:58</span>
+        <span>⏱ 3.25s</span>
         
         
       </div>
@@ -901,8 +901,8 @@ E   assert 0 &gt;= 1</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa07_modal_has_dialog_role</code></span>
-        <span>🕐 2026-11-09 09:37:00</span>
-        <span>⏱ 17.40s</span>
+        <span>🕐 2026-11-10 09:42:58</span>
+        <span>⏱ 17.59s</span>
         
         
       </div>
@@ -957,14 +957,14 @@ E   assert 0 &gt;= 1</pre>
   <pre style="margin-top:8px"><strong style="color:var(--c-critical)">E   AssertionError: Login modal missing role='dialog'
 E   assert 0 &gt; 0
 E    +  where 0 = count()
-E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://apps.pingone.com/ec6cad81-77fb-43ce-ac0d-61c525e12743/signon/?error=%7B%0A%20%20%22id%22%20:%20%22bededc99-54a6-4863-b290-c22f83df430d%22,%0A%20%20%22code%22%20:%20%22INVALID_DATA%22,%0A%20%20%22message%22%20:%20%22The%20request%20could%20not%20be%20completed.%20One%20or%20more%20validation%20errors%20were%20in%20the%20request.%22,%0A%2</strong>
+E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://apps.pingone.com/ec6cad81-77fb-43ce-ac0d-61c525e12743/signon/?error=%7B%0A%20%20%22id%22%20:%20%22c7ad0f84-5546-4ca7-a274-d70f39a4d2f4%22,%0A%20%20%22code%22%20:%20%22INVALID_DATA%22,%0A%20%20%22message%22%20:%20%22The%20request%20could%20not%20be%20completed.%20One%20or%20more%20validation%20errors%20were%20in%20the%20request.%22,%0A%2</strong>
 
 tests/test_qa_comprehensive.py:1986: in test_qa07_modal_has_dialog_role
     assert dialog.count() &gt; 0, &quot;Login modal missing role='dialog'&quot;
 E   AssertionError: Login modal missing role='dialog'
 E   assert 0 &gt; 0
 E    +  where 0 = count()
-E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://apps.pingone.com/ec6cad81-77fb-43ce-ac0d-61c525e12743/signon/?error=%7B%0A%20%20%22id%22%20:%20%22bededc99-54a6-4863-b290-c22f83df430d%22,%0A%20%20%22code%22%20:%20%22INVALID_DATA%22,%0A%20%20%22message%22%20:%20%22The%20request%20could%20not%20be%20completed.%20One%20or%20more%20validation%20errors%20were%20in%20the%20request.%22,%0A%20%20%22details%22%20:%20[%20%7B%0A%20%20%20%20%22code%22%20:%20%22INVALID_VALUE%22,%0A%20%20%20%20%22target%22%20:%20%22redirect_uri%22,%0A%20%20%20%20%22message%22%20:%20%22Redirect%20URI%20mismatch%22%0A%20%20%7D%20],%0A%20%20%22errorSignature%22%20:%20%22dd7x6qeyZpNZyKxz36B911nLuIkTOe0ST1Wch1ebgKiJXVTA7PHbZR5eH6ifuR8VtuBOkttfb-v6IwJYyBInfAE1zamg08vxmJyhMiVpjAz-ZO4NXlDfYwlpzknjVToZoqVIy__RJlfPYpO9REzNoiX4XZDtrXmMSm4u3VTyGXo9g0240WR2O5hJ-DlkGJ9WdeADa4uUg8SHADevCMzfdWnublqTp5MCA8rfRbf1ohHMBwYtCT3Z6Y2-_o3u5UnolPxi_xz9gfVwqQfOkUIyO3qFWpzuxlGXYtgxJYa6nJThDzWBhGL8BUXtweTPZldlDsqRZeJDlhKNVbVR_pRwdw%22,%0A%20%20%22alg%22%20:%20%22RS256%22,%0A%20%20%22kid%22%20:%20%2259dcffc0-80a9-11f1-a418-e332386e56c3%22,%0A%20%20%22iat%22%20:%201794214362%0A%7D'&gt; selector='[role=&quot;dialog&quot;] &gt;&gt; nth=0'&gt;.count</pre>
+E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://apps.pingone.com/ec6cad81-77fb-43ce-ac0d-61c525e12743/signon/?error=%7B%0A%20%20%22id%22%20:%20%22c7ad0f84-5546-4ca7-a274-d70f39a4d2f4%22,%0A%20%20%22code%22%20:%20%22INVALID_DATA%22,%0A%20%20%22message%22%20:%20%22The%20request%20could%20not%20be%20completed.%20One%20or%20more%20validation%20errors%20were%20in%20the%20request.%22,%0A%20%20%22details%22%20:%20[%20%7B%0A%20%20%20%20%22code%22%20:%20%22INVALID_VALUE%22,%0A%20%20%20%20%22target%22%20:%20%22redirect_uri%22,%0A%20%20%20%20%22message%22%20:%20%22Redirect%20URI%20mismatch%22%0A%20%20%7D%20],%0A%20%20%22errorSignature%22%20:%20%22Yyy2PaP3gnHNff_UZqesHdgPA7hmAj_j9BsF-vlrbOHAfy0U8qmcmP3HnlwEocrMf2V_b7K4wy8vZL5_JVwNvoZKZ7DjZN4ykuoG5sCd9ZCwZMpoMnoAO_fbj-hcYtsdjCMd2jqPrKos_b7jjihpWFklSuCovOQzzdz1hDLlkmXcOa8OXE6outNKo6IhzxKwMSRqYQ8sSt8y59siFdz_PhWpu9fbldyLEVvB-vPnarim90xAuAyGckSfWSofCtgejtBykHY7uxWJDcNdT_KBLIeF2Lv3M35xSme0ho-DNq5yE0asqY9gdbftZrQ-g9l99pNlZLTRTyh6E-DhlveiRA%22,%0A%20%20%22alg%22%20:%20%22RS256%22,%0A%20%20%22kid%22%20:%20%2259dcffc0-80a9-11f1-a418-e332386e56c3%22,%0A%20%20%22iat%22%20:%201794301143%0A%7D'&gt; selector='[role=&quot;dialog&quot;] &gt;&gt; nth=0'&gt;.count</pre>
 </div>
     
     <div style="margin-top:16px"></div>
@@ -989,8 +989,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://apps.ping
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa07_modal_close_button_has_aria_label</code></span>
-        <span>🕐 2026-11-09 09:37:00</span>
-        <span>⏱ 17.20s</span>
+        <span>🕐 2026-11-10 09:42:58</span>
+        <span>⏱ 17.61s</span>
         
         
       </div>
@@ -1045,14 +1045,14 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://apps.ping
   <pre style="margin-top:8px"><strong style="color:var(--c-critical)">E   AssertionError: Close button missing aria-label='Close'
 E   assert 0 &gt; 0
 E    +  where 0 = count()
-E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://apps.pingone.com/ec6cad81-77fb-43ce-ac0d-61c525e12743/signon/?error=%7B%0A%20%20%22id%22%20:%20%228cb25f60-f119-4e93-9b5c-146dc09d09cd%22,%0A%20%20%22code%22%20:%20%22INVALID_DATA%22,%0A%20%20%22message%22%20:%20%22The%20request%20could%20not%20be%20completed.%20One%20or%20more%20validation%20errors%20were%20in%20the%20request.%22</strong>
+E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://apps.pingone.com/ec6cad81-77fb-43ce-ac0d-61c525e12743/signon/?error=%7B%0A%20%20%22id%22%20:%20%223b579d22-782e-4ff1-9ca1-ebf386b38545%22,%0A%20%20%22code%22%20:%20%22INVALID_DATA%22,%0A%20%20%22message%22%20:%20%22The%20request%20could%20not%20be%20completed.%20One%20or%20more%20validation%20errors%20were%20in%20the%20request.%22</strong>
 
 tests/test_qa_comprehensive.py:1993: in test_qa07_modal_close_button_has_aria_label
     assert close.count() &gt; 0, &quot;Close button missing aria-label='Close'&quot;
 E   AssertionError: Close button missing aria-label='Close'
 E   assert 0 &gt; 0
 E    +  where 0 = count()
-E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://apps.pingone.com/ec6cad81-77fb-43ce-ac0d-61c525e12743/signon/?error=%7B%0A%20%20%22id%22%20:%20%228cb25f60-f119-4e93-9b5c-146dc09d09cd%22,%0A%20%20%22code%22%20:%20%22INVALID_DATA%22,%0A%20%20%22message%22%20:%20%22The%20request%20could%20not%20be%20completed.%20One%20or%20more%20validation%20errors%20were%20in%20the%20request.%22,%0A%20%20%22details%22%20:%20[%20%7B%0A%20%20%20%20%22code%22%20:%20%22INVALID_VALUE%22,%0A%20%20%20%20%22target%22%20:%20%22redirect_uri%22,%0A%20%20%20%20%22message%22%20:%20%22Redirect%20URI%20mismatch%22%0A%20%20%7D%20],%0A%20%20%22errorSignature%22%20:%20%22VPxJAquVTyYHqPaexx-7fGId7h6ATv-TovJcJseIOyKfy0EmcZeWd--5HzFiJKateD_dZs0nfNSJJXdXn1nNMgxZUxQvFvSHiv7P65C1Za67ZVmVUG1wIkjQaAWVTfAu8o-kmoNntDCi48aht0_5_XU50w8sN594HJJsBuHkKw660DCfQlur_-E45vhbC9o_PEwv070vVQmidRj21ziIfw_h31HJMIXDQc6gUl8TfHhlSCw9HDvSclaCo2poMgCxMrzVIYT0TAkkmVsgF-NDuujezTB9iBU1mdMeF_hB-VK1eXIgE8OeMpp11m-4uoSG0GPuJCc9vrdQDHz0qF5YAg%22,%0A%20%20%22alg%22%20:%20%22RS256%22,%0A%20%20%22kid%22%20:%20%2259dcffc0-80a9-11f1-a418-e332386e56c3%22,%0A%20%20%22iat%22%20:%201794214381%0A%7D'&gt; selector='[aria-label=&quot;Close&quot;] &gt;&gt; nth=0'&gt;.count</pre>
+E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://apps.pingone.com/ec6cad81-77fb-43ce-ac0d-61c525e12743/signon/?error=%7B%0A%20%20%22id%22%20:%20%223b579d22-782e-4ff1-9ca1-ebf386b38545%22,%0A%20%20%22code%22%20:%20%22INVALID_DATA%22,%0A%20%20%22message%22%20:%20%22The%20request%20could%20not%20be%20completed.%20One%20or%20more%20validation%20errors%20were%20in%20the%20request.%22,%0A%20%20%22details%22%20:%20[%20%7B%0A%20%20%20%20%22code%22%20:%20%22INVALID_VALUE%22,%0A%20%20%20%20%22target%22%20:%20%22redirect_uri%22,%0A%20%20%20%20%22message%22%20:%20%22Redirect%20URI%20mismatch%22%0A%20%20%7D%20],%0A%20%20%22errorSignature%22%20:%20%22MNGp1Rcm5kBzJ6-WVnt9IR2I50VpIirpv0vt3x6sYMTlzHuypFO2nKPQzFTa-vQoslKjoQg7pj8H78OYDW6ZPrxVLX9YMiD4NButlg3vkde9scnZAVEr6D4vm7OxgsGTeYdDXWb8xKBvBpFfsq6qLUVjQfDYM-zH2BUk0Adg_AT0TKu9seHWAlsrP3lZ3AyUjNHZkepZIbH0Sowrd7m2ZKFiMOyMVnex0Fd1L-KqAkOQ09s8L_TlwcRWHysJb6U0LsMLZWs3SniZPWo3FlZ8sV283gP3UYdC5mtreQfDi8GaZkHtlsjDKcqTiHh5aaH1EOzX19eD2hhaO0JLVVJ79g%22,%0A%20%20%22alg%22%20:%20%22RS256%22,%0A%20%20%22kid%22%20:%20%2259dcffc0-80a9-11f1-a418-e332386e56c3%22,%0A%20%20%22iat%22%20:%201794301163%0A%7D'&gt; selector='[aria-label=&quot;Close&quot;] &gt;&gt; nth=0'&gt;.count</pre>
 </div>
     
     <div style="margin-top:16px"></div>
@@ -1077,8 +1077,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://apps.ping
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa07_language_buttons_aria_labels_correct</code></span>
-        <span>🕐 2026-11-09 09:37:00</span>
-        <span>⏱ 3.95s</span>
+        <span>🕐 2026-11-10 09:42:58</span>
+        <span>⏱ 3.59s</span>
         
         
       </div>
@@ -1212,10 +1212,10 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa07_html_lang_attribute_set</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">3.65s</span>
+    <span class="trow-dur">3.48s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">HTML element must have a lang attribute set to a valid language code.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.65s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_html_lang_attribute_set</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">HTML element must have a lang attribute set to a valid language code.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.48s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_html_lang_attribute_set</code></span></div>
   </div>
 </details>
 
@@ -1224,10 +1224,10 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa07_images_have_alt_text</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">4.45s</span>
+    <span class="trow-dur">4.29s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Meaningful images must have non-empty alt text.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.45s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_images_have_alt_text</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Meaningful images must have non-empty alt text.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.29s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_images_have_alt_text</code></span></div>
   </div>
 </details>
 
@@ -1236,10 +1236,10 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa07_login_button_keyboard_accessible</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">4.89s</span>
+    <span class="trow-dur">4.73s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Log In button must be reachable and activatable via keyboard (Tab + Enter).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.89s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_login_button_keyboard_accessible</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Log In button must be reachable and activatable via keyboard (Tab + Enter).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.73s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_login_button_keyboard_accessible</code></span></div>
   </div>
 </details>
 
@@ -1248,10 +1248,10 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa07_phone_input_has_label</span>
     
-    <span class="trow-dur">17.35s</span>
+    <span class="trow-dur">17.05s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Phone input in modal must have an associated label or aria-label.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">17.35s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_phone_input_has_label</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Phone input in modal must have an associated label or aria-label.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">17.05s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_phone_input_has_label</code></span></div>
   </div>
 </details>
 
@@ -1260,10 +1260,10 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa07_nav_links_have_descriptive_text</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">3.25s</span>
+    <span class="trow-dur">3.76s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Navigation links must not use ambiguous text like 'click here' or 'more'.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.25s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_nav_links_have_descriptive_text</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Navigation links must not use ambiguous text like 'click here' or 'more'.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.76s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa07_nav_links_have_descriptive_text</code></span></div>
   </div>
 </details>
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>QA Bug Report — 2026-11-09 09:37:01</title>
+<title>QA Bug Report — 2026-11-10 09:42:59</title>
 <style>
 /* ── Reset & base ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -590,7 +590,7 @@ tr:hover td{background:#1c2333}
       </div>
     </div>
     <div class="hdr-meta">
-      <div><b>Date:</b> 2026-11-09 09:37:01</div>
+      <div><b>Date:</b> 2026-11-10 09:42:59</div>
       <div><b>Target:</b> </div>
       <div><b>AI Model:</b> unknown (local · no API key)</div>
       <div><b>Browser:</b> Chromium (headless)</div>
@@ -654,7 +654,7 @@ tr:hover td{background:#1c2333}
     <span class="badge MEDIUM">MEDIUM</span>
     <span class="badge P2">P2</span>
     <span class="cluster-count">1× affected</span>
-    <span class="recurrence-badge">8× consecutive runs</span>
+    <span class="recurrence-badge">9× consecutive runs</span>
   </div>
   <div class="cluster-title">Uncategorized failure</div>
   <div class="cluster-tickets"><a href="#QA-15 -001" class="cluster-bug-link">QA-15 -001</a></div>
@@ -705,7 +705,7 @@ tr:hover td{background:#1c2333}
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa15_https_enforced</code></span>
-        <span>🕐 2026-11-09 09:37:00</span>
+        <span>🕐 2026-11-10 09:42:58</span>
         <span>⏱ 15.02s</span>
         
         
@@ -743,28 +743,35 @@ tr:hover td{background:#1c2333}
     <div>Browser automation error (TimeoutError): APIRequestContext.get: Timeout 15000ms exceeded.
 Call log:
   - → GET http://dev.prowhats.com/en
-    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36
+    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.8127.18 Safari/537.36
     - accept: */*
     - accept-encoding: gzip,deflate,br
 tests/test_qa_comprehensive.py:2850: in test_qa15_https_enforced
     resp = page.request.get(http_url, timeout=15000, max_redirects=5)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py:609: in get
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py:613: in get
     self._sync(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_fetch.py:232: in get
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/fetch.py:344: in get
     return await self.fetch(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_fetch.py:357: in fetch
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/channel_owner.py:387: in finish
+    raise e from None
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/channel_owner.py:352: in finish
+    result = await zone.run_async(lambda: awaitable)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/utils/zones.py:58: in run_async
+    return await func()
+           ^^^^^^^^^^^^
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/fetch.py:464: in fetch
     return await self._inner_fetch(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_fetch.py:460: in _inner_fetch
-    response = await self._channel.send(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py:78: in send
-    return await self._connection.wrap_api_call(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py:636: in wrap_api_call
-    raise rewrite_error(error, f&quot;{parsed_st['apiName']}: {error}&quot;) from None
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/fetch.py:589: in _inner_fetch
+    result = await self._channel.fetch(
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/channel_owner.py:398: in _mapped
+    return mapper(await awaitable)
+                  ^^^^^^^^^^^^^^^
 playwright._impl._errors.TimeoutError: APIRequestContext.get: Timeout 15000ms exceeded.
 Call log:
   - → GET http://dev.prowhats.com/en
-    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36
+    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.8127.18 Safari/537.36
     - accept: */*
     - accept-encoding: gzip,deflate,br</div>
   </div>
@@ -791,29 +798,36 @@ Call log:
 </button>
 <div class="err-body" id="err-1">
   <pre style="margin-top:8px"><strong style="color:var(--c-critical)">E     - → GET http://dev.prowhats.com/en
-E       - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36
+E       - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.8127.18 Safari/537.36
 E       - accept: */*
 E       - accept-encoding: gzip,deflate,br</strong>
 
 tests/test_qa_comprehensive.py:2850: in test_qa15_https_enforced
     resp = page.request.get(http_url, timeout=15000, max_redirects=5)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py:609: in get
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py:613: in get
     self._sync(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_fetch.py:232: in get
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/fetch.py:344: in get
     return await self.fetch(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_fetch.py:357: in fetch
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/channel_owner.py:387: in finish
+    raise e from None
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/channel_owner.py:352: in finish
+    result = await zone.run_async(lambda: awaitable)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/utils/zones.py:58: in run_async
+    return await func()
+           ^^^^^^^^^^^^
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/fetch.py:464: in fetch
     return await self._inner_fetch(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_fetch.py:460: in _inner_fetch
-    response = await self._channel.send(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py:78: in send
-    return await self._connection.wrap_api_call(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py:636: in wrap_api_call
-    raise rewrite_error(error, f&quot;{parsed_st['apiName']}: {error}&quot;) from None
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/fetch.py:589: in _inner_fetch
+    result = await self._channel.fetch(
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/channel_owner.py:398: in _mapped
+    return mapper(await awaitable)
+                  ^^^^^^^^^^^^^^^
 E   playwright._impl._errors.TimeoutError: APIRequestContext.get: Timeout 15000ms exceeded.
 E   Call log:
 E     - → GET http://dev.prowhats.com/en
-E       - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36
+E       - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.8127.18 Safari/537.36
 E       - accept: */*
 E       - accept-encoding: gzip,deflate,br</pre>
 </div>
@@ -881,10 +895,10 @@ E       - accept-encoding: gzip,deflate,br</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/.env, env file] · BASE_URL</span>
-    <span class="trow-dur">1.91s</span>
+    <span class="trow-dur">2.03s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.env, env file] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.91s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.env, env file] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.03s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -893,10 +907,10 @@ E       - accept-encoding: gzip,deflate,br</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/.git/config, git config] · BASE_URL</span>
-    <span class="trow-dur">1.89s</span>
+    <span class="trow-dur">2.00s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.git/config, git config] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.89s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.git/config, git config] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.00s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -905,10 +919,10 @@ E       - accept-encoding: gzip,deflate,br</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/admin, admin panel] · BASE_URL</span>
-    <span class="trow-dur">1.90s</span>
+    <span class="trow-dur">2.02s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/admin, admin panel] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.90s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/admin, admin panel] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.02s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -917,10 +931,10 @@ E       - accept-encoding: gzip,deflate,br</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/wp, admin, WordPress admin] · BASE_URL</span>
-    <span class="trow-dur">1.96s</span>
+    <span class="trow-dur">2.02s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/wp, admin, WordPress admin] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.96s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/wp, admin, WordPress admin] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.02s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -929,10 +943,10 @@ E       - accept-encoding: gzip,deflate,br</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/phpinfo.php, phpinfo] · BASE_URL</span>
-    <span class="trow-dur">1.83s</span>
+    <span class="trow-dur">1.97s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/phpinfo.php, phpinfo] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.83s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/phpinfo.php, phpinfo] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.97s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -941,10 +955,10 @@ E       - accept-encoding: gzip,deflate,br</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/server, status, Apache server, status] · BASE_URL</span>
-    <span class="trow-dur">1.90s</span>
+    <span class="trow-dur">1.97s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/server, status, Apache server, status] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.90s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/server, status, Apache server, status] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.97s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -953,10 +967,10 @@ E       - accept-encoding: gzip,deflate,br</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/.aws/credentials, AWS credentials] · BASE_URL</span>
-    <span class="trow-dur">1.86s</span>
+    <span class="trow-dur">1.99s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.aws/credentials, AWS credentials] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.86s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.aws/credentials, AWS credentials] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.99s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -965,10 +979,10 @@ E       - accept-encoding: gzip,deflate,br</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/config.json, config json] · BASE_URL</span>
-    <span class="trow-dur">1.85s</span>
+    <span class="trow-dur">2.00s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/config.json, config json] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.85s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/config.json, config json] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.00s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -977,10 +991,10 @@ E       - accept-encoding: gzip,deflate,br</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/swagger.json, swagger spec] · BASE_URL</span>
-    <span class="trow-dur">1.84s</span>
+    <span class="trow-dur">2.00s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/swagger.json, swagger spec] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.84s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/swagger.json, swagger spec] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.00s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -989,10 +1003,10 @@ E       - accept-encoding: gzip,deflate,br</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/api, docs, API docs index] · BASE_URL</span>
-    <span class="trow-dur">1.90s</span>
+    <span class="trow-dur">1.99s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/api, docs, API docs index] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.90s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/api, docs, API docs index] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.99s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -1001,10 +1015,10 @@ E       - accept-encoding: gzip,deflate,br</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_no_sensitive_endpoint_exposed</span>
     <span class="trow-params">[/.DS_Store, macOS metadata] · BASE_URL</span>
-    <span class="trow-dur">1.92s</span>
+    <span class="trow-dur">1.97s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.DS_Store, macOS metadata] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.92s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Sensitive endpoints must NOT return 2xx with their content.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[/.DS_Store, macOS metadata] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.97s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_no_sensitive_endpoint_exposed</code></span></div>
   </div>
 </details>
 
@@ -1013,11 +1027,11 @@ E       - accept-encoding: gzip,deflate,br</pre>
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_404_does_not_leak_stacktrace</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">1.90s</span>
+    <span class="trow-dur">2.02s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">A 404 page must not contain Python/Java/Node stacktraces or
-framework debug info.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.90s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_404_does_not_leak_stacktrace</code></span></div>
+framework debug info.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">2.02s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_404_does_not_leak_stacktrace</code></span></div>
   </div>
 </details>
 
@@ -1026,12 +1040,12 @@ framework debug info.</span></div><div class="td-row"><span class="td-lbl">Test 
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_sequential_id_probe_no_oracle</span>
     <span class="trow-params">[1] · BASE_URL</span>
-    <span class="trow-dur">3.27s</span>
+    <span class="trow-dur">3.20s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Probing common /users/{id} or /api/users/{id} paths must NOT
 return a different response shape for valid vs invalid IDs (which
-would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[1] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.27s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
+would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[1] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.20s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
   </div>
 </details>
 
@@ -1040,12 +1054,12 @@ would be a username-enumeration oracle).</span></div><div class="td-row"><span c
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_sequential_id_probe_no_oracle</span>
     <span class="trow-params">[2] · BASE_URL</span>
-    <span class="trow-dur">3.07s</span>
+    <span class="trow-dur">3.42s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Probing common /users/{id} or /api/users/{id} paths must NOT
 return a different response shape for valid vs invalid IDs (which
-would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[2] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.07s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
+would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[2] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.42s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
   </div>
 </details>
 
@@ -1054,12 +1068,12 @@ would be a username-enumeration oracle).</span></div><div class="td-row"><span c
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_sequential_id_probe_no_oracle</span>
     <span class="trow-params">[999999] · BASE_URL</span>
-    <span class="trow-dur">3.07s</span>
+    <span class="trow-dur">3.46s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Probing common /users/{id} or /api/users/{id} paths must NOT
 return a different response shape for valid vs invalid IDs (which
-would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[999999] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.07s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
+would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[999999] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.46s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
   </div>
 </details>
 
@@ -1068,12 +1082,12 @@ would be a username-enumeration oracle).</span></div><div class="td-row"><span c
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_sequential_id_probe_no_oracle</span>
     <span class="trow-params">[00000000, 0000, 0000, 0000, 000000000001] · BASE_URL</span>
-    <span class="trow-dur">3.23s</span>
+    <span class="trow-dur">3.40s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Probing common /users/{id} or /api/users/{id} paths must NOT
 return a different response shape for valid vs invalid IDs (which
-would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[00000000, 0000, 0000, 0000, 000000000001] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.23s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
+would be a username-enumeration oracle).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">[00000000, 0000, 0000, 0000, 000000000001] · BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.40s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_sequential_id_probe_no_oracle</code></span></div>
   </div>
 </details>
 
@@ -1082,11 +1096,11 @@ would be a username-enumeration oracle).</span></div><div class="td-row"><span c
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa15_options_method_does_not_leak_methods</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">0.90s</span>
+    <span class="trow-dur">1.04s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">An OPTIONS preflight must not return wildcard methods like
-TRACE, DELETE on the root that could enable cross-site tracing.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">0.90s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_options_method_does_not_leak_methods</code></span></div>
+TRACE, DELETE on the root that could enable cross-site tracing.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">1.04s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_options_method_does_not_leak_methods</code></span></div>
   </div>
 </details>
 
@@ -1101,28 +1115,35 @@ TRACE, DELETE on the root that could enable cross-site tracing.</span></div><div
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">The HTTP version of BASE_URL must redirect to HTTPS.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">—</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa15_https_enforced</code></span></div><div class="td-row"><span class="td-lbl exp">Expected:</span><span class="td-val">The HTTP version of BASE_URL must redirect to HTTPS.</span></div><div class="td-row"><span class="td-lbl act">What happened:</span><span class="td-val">Browser automation error (TimeoutError): APIRequestContext.get: Timeout 15000ms exceeded.
 Call log:
   - → GET http://dev.prowhats.com/en
-    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36
+    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.8127.18 Safari/537.36
     - accept: */*
     - accept-encoding: gzip,deflate,br
 tests/test_qa_comprehensive.py:2850: in test_qa15_https_enforced
     resp = page.request.get(http_url, timeout=15000, max_redirects=5)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py:609: in get
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py:613: in get
     self._sync(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_fetch.py:232: in get
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/fetch.py:344: in get
     return await self.fetch(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_fetch.py:357: in fetch
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/channel_owner.py:387: in finish
+    raise e from None
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/channel_owner.py:352: in finish
+    result = await zone.run_async(lambda: awaitable)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/utils/zones.py:58: in run_async
+    return await func()
+           ^^^^^^^^^^^^
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/fetch.py:464: in fetch
     return await self._inner_fetch(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_fetch.py:460: in _inner_fetch
-    response = await self._channel.send(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py:78: in send
-    return await self._connection.wrap_api_call(
-/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py:636: in wrap_api_call
-    raise rewrite_error(error, f&quot;{parsed_st['apiName']}: {error}&quot;) from None
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/fetch.py:589: in _inner_fetch
+    result = await self._channel.fetch(
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/channel_owner.py:398: in _mapped
+    return mapper(await awaitable)
+                  ^^^^^^^^^^^^^^^
 playwright._impl._errors.TimeoutError: APIRequestContext.get: Timeout 15000ms exceeded.
 Call log:
   - → GET http://dev.prowhats.com/en
-    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36
+    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.8127.18 Safari/537.36
     - accept: */*
     - accept-encoding: gzip,deflate,br</span></div><div class="td-row"><span class="td-lbl">Bug ticket:</span><span class="td-val"><a href="#QA-15 -001">QA-15 -001</a> — see full details below</span></div>
   </div>

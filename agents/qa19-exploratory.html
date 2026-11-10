@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>QA Bug Report — 2026-11-09 09:37:01</title>
+<title>QA Bug Report — 2026-11-10 09:42:59</title>
 <style>
 /* ── Reset & base ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -590,7 +590,7 @@ tr:hover td{background:#1c2333}
       </div>
     </div>
     <div class="hdr-meta">
-      <div><b>Date:</b> 2026-11-09 09:37:01</div>
+      <div><b>Date:</b> 2026-11-10 09:42:59</div>
       <div><b>Target:</b> </div>
       <div><b>AI Model:</b> unknown (local · no API key)</div>
       <div><b>Browser:</b> Chromium (headless)</div>
@@ -605,10 +605,10 @@ tr:hover td{background:#1c2333}
 <div class="stats">
   <a href="#bugs"        class="stat critical" data-filter="bugs"     title="Show CRITICAL bug tickets"><div class="label">Critical</div><div class="val">0</div></a>
   <a href="#bugs"        class="stat high"     data-filter="bugs"     title="Show HIGH bug tickets"><div class="label">High</div>    <div class="val">0</div></a>
-  <a href="#bugs"        class="stat medium"   data-filter="bugs"     title="Show MEDIUM bug tickets"><div class="label">Medium</div>  <div class="val">0</div></a>
+  <a href="#bugs"        class="stat medium"   data-filter="bugs"     title="Show MEDIUM bug tickets"><div class="label">Medium</div>  <div class="val">4</div></a>
   <a href="#bugs"        class="stat low"      data-filter="bugs"     title="Show LOW bug tickets"><div class="label">Low</div>     <div class="val">0</div></a>
-  <a href="#tests"       class="stat pass"     data-filter="passed"   title="Show only PASSED tests"><div class="label">Passed</div>  <div class="val">4</div></a>
-  <a href="#tests"       class="stat fail"     data-filter="failed"   title="Show only FAILED tests"><div class="label">Failed</div>  <div class="val">0</div></a>
+  <a href="#tests"       class="stat pass"     data-filter="passed"   title="Show only PASSED tests"><div class="label">Passed</div>  <div class="val">0</div></a>
+  <a href="#tests"       class="stat fail"     data-filter="failed"   title="Show only FAILED tests"><div class="label">Failed</div>  <div class="val">4</div></a>
   <a href="#tests"       class="stat total"    data-filter="all"      title="Show all tests"><div class="label">Total Tests</div><div class="val">4</div></a>
 </div>
 
@@ -629,7 +629,7 @@ tr:hover td{background:#1c2333}
   <div class="pstrip-item p2" onclick="applyBugFilter('P2')"
        title="P2 Medium · Current or next sprint · Everything Else">
     <div class="pstrip-label">P2 · Medium</div>
-    <div class="pstrip-val">0</div>
+    <div class="pstrip-val">4</div>
     <div class="pstrip-sla">⏱ Current sprint &nbsp;·&nbsp; 📋 Everything Else</div>
   </div>
   <div class="pstrip-item p3" onclick="applyBugFilter('P3')"
@@ -643,34 +643,431 @@ tr:hover td{background:#1c2333}
 <!-- Cluster summary — groups bugs by root cause (e.g. 6 missing-headers
      finding share '1 root cause: security headers') -->
 
+<div class="cluster-summary" id="clusters">
+  <div class="sec-title" style="margin:24px 0 12px">
+    🎯 Root-Cause Summary <span class="count">1 clusters</span>
+  </div>
+  <div class="cluster-headline">4 bug ticket(s) → <strong>1 unique root cause(s)</strong></div>
+  <div class="cluster-list">
+<div class="cluster-row">
+  <div class="cluster-meta">
+    <span class="badge MEDIUM">MEDIUM</span>
+    <span class="badge P2">P2</span>
+    <span class="cluster-count">4× affected</span>
+    <span class="recurrence-badge">30× consecutive runs</span>
+  </div>
+  <div class="cluster-title">Uncategorized failure</div>
+  <div class="cluster-tickets"><a href="#QA-19 -001" class="cluster-bug-link">QA-19 -001</a> <a href="#QA-19 -002" class="cluster-bug-link">QA-19 -002</a> <a href="#QA-19 -003" class="cluster-bug-link">QA-19 -003</a> <a href="#QA-19 -004" class="cluster-bug-link">QA-19 -004</a></div>
+</div></div>
+  <div class="cluster-help">
+    Bugs sharing a root cause are grouped here so you fix one thing
+    instead of N. Click any ticket ID to jump to its full bug card below.
+  </div>
+</div>
 
 <!-- Extra section: cross-spec inconsistencies, etc. -->
 
 
 <!-- Bug Tickets -->
 <div class="sec-title" id="bugs">
-  Bug Tickets <span class="count">0</span>
+  Bug Tickets <span class="count">4</span>
 </div>
 
 <!-- Bug-tickets filters — by severity or by priority level -->
 <div class="filter-bar bug-filter-bar" id="bug-filter-bar">
   <span class="filter-lbl">Severity:</span>
-  <button class="fbtn active" data-bug-filter="all">All (0)</button>
+  <button class="fbtn active" data-bug-filter="all">All (4)</button>
   <button class="fbtn fbtn-critical" data-bug-filter="CRITICAL">Critical (0)</button>
   <button class="fbtn fbtn-high"     data-bug-filter="HIGH">High (0)</button>
-  <button class="fbtn fbtn-medium"   data-bug-filter="MEDIUM">Medium (0)</button>
+  <button class="fbtn fbtn-medium"   data-bug-filter="MEDIUM">Medium (4)</button>
   <button class="fbtn fbtn-low"      data-bug-filter="LOW">Low (0)</button>
 </div>
 <div class="filter-bar" style="margin-top:6px">
   <span class="filter-lbl">Priority:</span>
   <button class="fbtn" data-bug-filter="P0" title="P0 Highest — 24h SLA — Expedite">P0 Highest (0)</button>
   <button class="fbtn" data-bug-filter="P1" title="P1 High — 2-3 days — Expedite">P1 High (0)</button>
-  <button class="fbtn" data-bug-filter="P2" title="P2 Medium — This sprint">P2 Medium (0)</button>
+  <button class="fbtn" data-bug-filter="P2" title="P2 Medium — This sprint">P2 Medium (4)</button>
   <button class="fbtn" data-bug-filter="P3" title="P3 Low — Backlog">P3 Low (0)</button>
 </div>
 
 <div id="bug-list">
-<p style="color:var(--muted);text-align:center;padding:24px">No bugs detected — all tests passed.</p>
+
+<div class="bug-card" id="QA-19 -001" data-priority="P2">
+  <div class="bug-card-hdr">
+    <div>
+      <div class="left">
+        <span class="bug-id">QA-19 -001</span>
+        <span class="badge MEDIUM">MEDIUM</span>
+        <span class="badge P2">P2</span>
+        
+      </div>
+      <div class="bug-title">Failed: Test qa19 autonomous exploration</div>
+      <div class="bug-meta">
+        <span>🔗 <a href="" target="_blank"></a></span>
+        <span>🧪 <code>test_qa19_autonomous_exploration</code></span>
+        <span>🕐 2026-11-10 09:42:58</span>
+        <span>⏱ 27.27s</span>
+        
+        
+      </div>
+    </div>
+  </div>
+  <div class="bug-body">
+    
+    
+<div class="info-block analysis" style="margin-bottom:16px">
+  <div class="ib-label">📋 What this test was checking</div>
+  <div>Walks the page autonomously and reports any issues encountered.
+Hard-fails ONLY on confirmed bugs (JS errors, 5xx, broken navigation).
+Soft passes when nothing meaningful surfaces — verified against the staging site. Test parameters: homepage_en, https://dev.prowhats.com/en.</div>
+</div>
+    
+<div class="info-block analysis" style="margin-bottom:16px">
+  <div class="ib-label">🧪 Test data used</div>
+  <div style="font-family:'SF Mono',monospace;color:#a371f7;font-size:12px">
+    params: [homepage_en, https://dev.prowhats.com/en]
+  </div>
+</div>
+    
+<div style="margin-bottom:16px">
+  <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;
+              color:var(--muted);margin-bottom:8px">Steps to Reproduce</div>
+  <ol class="steps"><li>Open a browser and go to the test URL</li><li>Use these parameters: homepage_en, https://dev.prowhats.com/en</li><li>Observe the result: it does NOT match what the test expected (see Actual Behavior)</li></ol>
+</div>
+    
+<div class="two-col">
+  <div class="info-block expected">
+    <div class="ib-label">✓ What should happen</div>
+    <div>Walks the page autonomously and reports any issues encountered.</div>
+  </div>
+  <div class="info-block actual">
+    <div class="ib-label">✗ What actually happened</div>
+    <div>IndexError: list index out of range</div>
+  </div>
+</div>
+    
+<div class="shot-wrap">
+  <div class="shot-label">Proof of Concept — Screenshot (annotated with bug)</div>
+  <img class="screenshot" src="data:image/png;base64,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GAAAAAQwAAAACGAAAAAQwAAAAAhgswAAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAgAA2CwAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGCzAAAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAAfKT9P+U48sEPtt5SAAAAAElFTkSuQmCC" alt="Test failure screenshot"
+       onclick="openShot(this.src)" title="Click to enlarge"/>
+</div>
+    
+<div class="video-wrap">
+  <div class="video-label">Proof of Concept — Screen Recording</div>
+  <video class="poc-video" controls preload="metadata"
+         src="videos-embed/test_qa19_autonomous_exploration.webm" type="video/webm">
+    Your browser does not support embedded video.
+  </video>
+  <div><a class="video-cta" href="videos-embed/test_qa19_autonomous_exploration.webm" download>⬇ Download .webm</a></div>
+</div>
+    
+<button class="err-toggle" onclick="toggleErr('err-1')">
+  <span>▶ Show error details</span>
+  <span style="font-size:11px;color:var(--muted)">AssertionError / Traceback</span>
+</button>
+<div class="err-body" id="err-1">
+  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">tests/test_qa_comprehensive.py:3505: in test_qa19_autonomous_exploration
+    or &quot;5&quot; in i.split(&quot;BAD_RESPONSE:&quot;)[1][:5] if &quot;BAD_RESPONSE:&quot; in i]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   IndexError: list index out of range</strong>
+
+tests/test_qa_comprehensive.py:3505: in test_qa19_autonomous_exploration
+    or &quot;5&quot; in i.split(&quot;BAD_RESPONSE:&quot;)[1][:5] if &quot;BAD_RESPONSE:&quot; in i]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   IndexError: list index out of range</pre>
+</div>
+    
+    <div style="margin-top:16px"></div>
+    <div class="env-strip">
+      <span><b>Browser:</b> Chromium</span>
+      <span><b>Viewport:</b> 1280x720</span>
+      <span><b>Env:</b> Staging</span>
+      <span><b>Spec:</b> <a href="" target="_blank">View page</a></span>
+    </div>
+  </div>
+</div>
+<div class="bug-card" id="QA-19 -002" data-priority="P2">
+  <div class="bug-card-hdr">
+    <div>
+      <div class="left">
+        <span class="bug-id">QA-19 -002</span>
+        <span class="badge MEDIUM">MEDIUM</span>
+        <span class="badge P2">P2</span>
+        
+      </div>
+      <div class="bug-title">Failed: Test qa19 autonomous exploration</div>
+      <div class="bug-meta">
+        <span>🔗 <a href="" target="_blank"></a></span>
+        <span>🧪 <code>test_qa19_autonomous_exploration</code></span>
+        <span>🕐 2026-11-10 09:42:58</span>
+        <span>⏱ 27.02s</span>
+        
+        
+      </div>
+    </div>
+  </div>
+  <div class="bug-body">
+    
+    
+<div class="info-block analysis" style="margin-bottom:16px">
+  <div class="ib-label">📋 What this test was checking</div>
+  <div>Walks the page autonomously and reports any issues encountered.
+Hard-fails ONLY on confirmed bugs (JS errors, 5xx, broken navigation).
+Soft passes when nothing meaningful surfaces — verified against the staging site. Test parameters: find_tutors, https://dev.prowhats.com/en/find, tutors.</div>
+</div>
+    
+<div class="info-block analysis" style="margin-bottom:16px">
+  <div class="ib-label">🧪 Test data used</div>
+  <div style="font-family:'SF Mono',monospace;color:#a371f7;font-size:12px">
+    params: [find_tutors, https://dev.prowhats.com/en/find, tutors]
+  </div>
+</div>
+    
+<div style="margin-bottom:16px">
+  <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;
+              color:var(--muted);margin-bottom:8px">Steps to Reproduce</div>
+  <ol class="steps"><li>Open a browser and go to the test URL</li><li>Use these parameters: find_tutors, https://dev.prowhats.com/en/find, tutors</li><li>Observe the result: it does NOT match what the test expected (see Actual Behavior)</li></ol>
+</div>
+    
+<div class="two-col">
+  <div class="info-block expected">
+    <div class="ib-label">✓ What should happen</div>
+    <div>Walks the page autonomously and reports any issues encountered.</div>
+  </div>
+  <div class="info-block actual">
+    <div class="ib-label">✗ What actually happened</div>
+    <div>IndexError: list index out of range</div>
+  </div>
+</div>
+    
+<div class="shot-wrap">
+  <div class="shot-label">Proof of Concept — Screenshot (annotated with bug)</div>
+  <img class="screenshot" src="data:image/png;base64,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GAAAAAQwAAAACGAAAAAQwAAAAAhgswAAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAgAA2CwAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGCzAAAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAAfKT9P+U48sEPtt5SAAAAAElFTkSuQmCC" alt="Test failure screenshot"
+       onclick="openShot(this.src)" title="Click to enlarge"/>
+</div>
+    
+<div class="video-wrap">
+  <div class="video-label">Proof of Concept — Screen Recording</div>
+  <video class="poc-video" controls preload="metadata"
+         src="videos-embed/test_qa19_autonomous_exploration.webm" type="video/webm">
+    Your browser does not support embedded video.
+  </video>
+  <div><a class="video-cta" href="videos-embed/test_qa19_autonomous_exploration.webm" download>⬇ Download .webm</a></div>
+</div>
+    
+<button class="err-toggle" onclick="toggleErr('err-2')">
+  <span>▶ Show error details</span>
+  <span style="font-size:11px;color:var(--muted)">AssertionError / Traceback</span>
+</button>
+<div class="err-body" id="err-2">
+  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">tests/test_qa_comprehensive.py:3505: in test_qa19_autonomous_exploration
+    or &quot;5&quot; in i.split(&quot;BAD_RESPONSE:&quot;)[1][:5] if &quot;BAD_RESPONSE:&quot; in i]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   IndexError: list index out of range</strong>
+
+tests/test_qa_comprehensive.py:3505: in test_qa19_autonomous_exploration
+    or &quot;5&quot; in i.split(&quot;BAD_RESPONSE:&quot;)[1][:5] if &quot;BAD_RESPONSE:&quot; in i]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   IndexError: list index out of range</pre>
+</div>
+    
+    <div style="margin-top:16px"></div>
+    <div class="env-strip">
+      <span><b>Browser:</b> Chromium</span>
+      <span><b>Viewport:</b> 1280x720</span>
+      <span><b>Env:</b> Staging</span>
+      <span><b>Spec:</b> <a href="" target="_blank">View page</a></span>
+    </div>
+  </div>
+</div>
+<div class="bug-card" id="QA-19 -003" data-priority="P2">
+  <div class="bug-card-hdr">
+    <div>
+      <div class="left">
+        <span class="bug-id">QA-19 -003</span>
+        <span class="badge MEDIUM">MEDIUM</span>
+        <span class="badge P2">P2</span>
+        
+      </div>
+      <div class="bug-title">Failed: Test qa19 autonomous exploration</div>
+      <div class="bug-meta">
+        <span>🔗 <a href="" target="_blank"></a></span>
+        <span>🧪 <code>test_qa19_autonomous_exploration</code></span>
+        <span>🕐 2026-11-10 09:42:58</span>
+        <span>⏱ 26.93s</span>
+        
+        
+      </div>
+    </div>
+  </div>
+  <div class="bug-body">
+    
+    
+<div class="info-block analysis" style="margin-bottom:16px">
+  <div class="ib-label">📋 What this test was checking</div>
+  <div>Walks the page autonomously and reports any issues encountered.
+Hard-fails ONLY on confirmed bugs (JS errors, 5xx, broken navigation).
+Soft passes when nothing meaningful surfaces — verified against the staging site. Test parameters: become_tutor, https://dev.prowhats.com/en/become, tutor.</div>
+</div>
+    
+<div class="info-block analysis" style="margin-bottom:16px">
+  <div class="ib-label">🧪 Test data used</div>
+  <div style="font-family:'SF Mono',monospace;color:#a371f7;font-size:12px">
+    params: [become_tutor, https://dev.prowhats.com/en/become, tutor]
+  </div>
+</div>
+    
+<div style="margin-bottom:16px">
+  <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;
+              color:var(--muted);margin-bottom:8px">Steps to Reproduce</div>
+  <ol class="steps"><li>Open a browser and go to the test URL</li><li>Use these parameters: become_tutor, https://dev.prowhats.com/en/become, tutor</li><li>Observe the result: it does NOT match what the test expected (see Actual Behavior)</li></ol>
+</div>
+    
+<div class="two-col">
+  <div class="info-block expected">
+    <div class="ib-label">✓ What should happen</div>
+    <div>Walks the page autonomously and reports any issues encountered.</div>
+  </div>
+  <div class="info-block actual">
+    <div class="ib-label">✗ What actually happened</div>
+    <div>IndexError: list index out of range</div>
+  </div>
+</div>
+    
+<div class="shot-wrap">
+  <div class="shot-label">Proof of Concept — Screenshot (annotated with bug)</div>
+  <img class="screenshot" src="data:image/png;base64,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GAAAAAQwAAAACGAAAAAQwAAAAAhgswAAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAgAA2CwAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGCzAAAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAAfKT9P+U48sEPtt5SAAAAAElFTkSuQmCC" alt="Test failure screenshot"
+       onclick="openShot(this.src)" title="Click to enlarge"/>
+</div>
+    
+<div class="video-wrap">
+  <div class="video-label">Proof of Concept — Screen Recording</div>
+  <video class="poc-video" controls preload="metadata"
+         src="videos-embed/test_qa19_autonomous_exploration.webm" type="video/webm">
+    Your browser does not support embedded video.
+  </video>
+  <div><a class="video-cta" href="videos-embed/test_qa19_autonomous_exploration.webm" download>⬇ Download .webm</a></div>
+</div>
+    
+<button class="err-toggle" onclick="toggleErr('err-3')">
+  <span>▶ Show error details</span>
+  <span style="font-size:11px;color:var(--muted)">AssertionError / Traceback</span>
+</button>
+<div class="err-body" id="err-3">
+  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">tests/test_qa_comprehensive.py:3505: in test_qa19_autonomous_exploration
+    or &quot;5&quot; in i.split(&quot;BAD_RESPONSE:&quot;)[1][:5] if &quot;BAD_RESPONSE:&quot; in i]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   IndexError: list index out of range</strong>
+
+tests/test_qa_comprehensive.py:3505: in test_qa19_autonomous_exploration
+    or &quot;5&quot; in i.split(&quot;BAD_RESPONSE:&quot;)[1][:5] if &quot;BAD_RESPONSE:&quot; in i]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   IndexError: list index out of range</pre>
+</div>
+    
+    <div style="margin-top:16px"></div>
+    <div class="env-strip">
+      <span><b>Browser:</b> Chromium</span>
+      <span><b>Viewport:</b> 1280x720</span>
+      <span><b>Env:</b> Staging</span>
+      <span><b>Spec:</b> <a href="" target="_blank">View page</a></span>
+    </div>
+  </div>
+</div>
+<div class="bug-card" id="QA-19 -004" data-priority="P2">
+  <div class="bug-card-hdr">
+    <div>
+      <div class="left">
+        <span class="bug-id">QA-19 -004</span>
+        <span class="badge MEDIUM">MEDIUM</span>
+        <span class="badge P2">P2</span>
+        
+      </div>
+      <div class="bug-title">Failed: Test qa19 autonomous exploration</div>
+      <div class="bug-meta">
+        <span>🔗 <a href="" target="_blank"></a></span>
+        <span>🧪 <code>test_qa19_autonomous_exploration</code></span>
+        <span>🕐 2026-11-10 09:42:58</span>
+        <span>⏱ 26.97s</span>
+        
+        
+      </div>
+    </div>
+  </div>
+  <div class="bug-body">
+    
+    
+<div class="info-block analysis" style="margin-bottom:16px">
+  <div class="ib-label">📋 What this test was checking</div>
+  <div>Walks the page autonomously and reports any issues encountered.
+Hard-fails ONLY on confirmed bugs (JS errors, 5xx, broken navigation).
+Soft passes when nothing meaningful surfaces — verified against the staging site. Test parameters: how_it_works, https://dev.prowhats.com/en/how, mehad, works.</div>
+</div>
+    
+<div class="info-block analysis" style="margin-bottom:16px">
+  <div class="ib-label">🧪 Test data used</div>
+  <div style="font-family:'SF Mono',monospace;color:#a371f7;font-size:12px">
+    params: [how_it_works, https://dev.prowhats.com/en/how, mehad, works]
+  </div>
+</div>
+    
+<div style="margin-bottom:16px">
+  <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;
+              color:var(--muted);margin-bottom:8px">Steps to Reproduce</div>
+  <ol class="steps"><li>Open a browser and go to the test URL</li><li>Use these parameters: how_it_works, https://dev.prowhats.com/en/how, mehad, works</li><li>Observe the result: it does NOT match what the test expected (see Actual Behavior)</li></ol>
+</div>
+    
+<div class="two-col">
+  <div class="info-block expected">
+    <div class="ib-label">✓ What should happen</div>
+    <div>Walks the page autonomously and reports any issues encountered.</div>
+  </div>
+  <div class="info-block actual">
+    <div class="ib-label">✗ What actually happened</div>
+    <div>IndexError: list index out of range</div>
+  </div>
+</div>
+    
+<div class="shot-wrap">
+  <div class="shot-label">Proof of Concept — Screenshot (annotated with bug)</div>
+  <img class="screenshot" src="data:image/png;base64,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GAAAAAQwAAAACGAAAAAQwAAAAAhgswAAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAgAA2CwAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAACCAAQAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAQwAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAAACGAAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAAAAAQwAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGCzAAAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAgAAGAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAAEAAAwAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAggAEAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAAEMAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAAAAAhgAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAAAEMAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAABAAAMAAIAABgAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAAIIABAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAAIYAAAAAQwAAAACGAAAAAQwAAAACCAAQAAQAADAACAAAYAAAABDAAAAAIYAAAABDAAAAACGAAAAAQwAAAAfKT9P+U48sEPtt5SAAAAAElFTkSuQmCC" alt="Test failure screenshot"
+       onclick="openShot(this.src)" title="Click to enlarge"/>
+</div>
+    
+<div class="video-wrap">
+  <div class="video-label">Proof of Concept — Screen Recording</div>
+  <video class="poc-video" controls preload="metadata"
+         src="videos-embed/test_qa19_autonomous_exploration.webm" type="video/webm">
+    Your browser does not support embedded video.
+  </video>
+  <div><a class="video-cta" href="videos-embed/test_qa19_autonomous_exploration.webm" download>⬇ Download .webm</a></div>
+</div>
+    
+<button class="err-toggle" onclick="toggleErr('err-4')">
+  <span>▶ Show error details</span>
+  <span style="font-size:11px;color:var(--muted)">AssertionError / Traceback</span>
+</button>
+<div class="err-body" id="err-4">
+  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">tests/test_qa_comprehensive.py:3505: in test_qa19_autonomous_exploration
+    or &quot;5&quot; in i.split(&quot;BAD_RESPONSE:&quot;)[1][:5] if &quot;BAD_RESPONSE:&quot; in i]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   IndexError: list index out of range</strong>
+
+tests/test_qa_comprehensive.py:3505: in test_qa19_autonomous_exploration
+    or &quot;5&quot; in i.split(&quot;BAD_RESPONSE:&quot;)[1][:5] if &quot;BAD_RESPONSE:&quot; in i]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   IndexError: list index out of range</pre>
+</div>
+    
+    <div style="margin-top:16px"></div>
+    <div class="env-strip">
+      <span><b>Browser:</b> Chromium</span>
+      <span><b>Viewport:</b> 1280x720</span>
+      <span><b>Env:</b> Staging</span>
+      <span><b>Spec:</b> <a href="" target="_blank">View page</a></span>
+    </div>
+  </div>
+</div>
 </div>
 
 <!-- Summary Table -->
@@ -684,11 +1081,11 @@ tr:hover td{background:#1c2333}
   <tbody>
     <tr>
       <td><strong>qa19_exploratory</strong></td>
-      <td><span class="badge PASS">PASSED</span></td>
-      <td style="color:var(--c-pass)">4</td>
-      <td style="color:var(--c-critical)">0</td>
+      <td><span class="badge FAIL">FAILED</span></td>
+      <td style="color:var(--c-pass)">0</td>
+      <td style="color:var(--c-critical)">4</td>
       <td>4</td>
-      <td><span style="color:var(--muted)">—</span></td>
+      <td><a href="#QA-19 -001" class="badge MEDIUM">QA-19 -001</a> <a href="#QA-19 -002" class="badge MEDIUM">QA-19 -002</a> <a href="#QA-19 -003" class="badge MEDIUM">QA-19 -003</a> <a href="#QA-19 -004" class="badge MEDIUM">QA-19 -004</a></td>
     </tr>
   </tbody>
 </table>
@@ -701,8 +1098,8 @@ tr:hover td{background:#1c2333}
 <div class="filter-bar test-filter-bar">
   <span class="filter-lbl">Show:</span>
   <button class="fbtn active" data-test-filter="all">All (4)</button>
-  <button class="fbtn fbtn-pass" data-test-filter="passed">✅ Passed (4)</button>
-  <button class="fbtn fbtn-fail" data-test-filter="failed">❌ Failed (0)</button>
+  <button class="fbtn fbtn-pass" data-test-filter="passed">✅ Passed (0)</button>
+  <button class="fbtn fbtn-fail" data-test-filter="failed">❌ Failed (4)</button>
   <input type="text" class="fbtn-search" placeholder="🔍 Search by test name..." data-search="">
   <button class="fbtn-action" data-action="expand-all">⬇ Expand all</button>
   <button class="fbtn-action" data-action="collapse-all">⬆ Collapse all</button>
@@ -711,7 +1108,7 @@ tr:hover td{background:#1c2333}
 
 <div class="spec-blk">
   <div class="spec-blk-hdr" onclick="toggleSpec('spec-detail-0')">
-    <span class="spec-blk-title">✅ <code>qa19_exploratory</code> — <span style='color:var(--c-pass)'>4 passed</span> · <span style='color:var(--c-critical)'>0 failed</span> · 4 total</span>
+    <span class="spec-blk-title">❌ <code>qa19_exploratory</code> — <span style='color:var(--c-pass)'>0 passed</span> · <span style='color:var(--c-critical)'>4 failed</span> · 4 total</span>
     <span class="spec-blk-toggle">▶ Show tests</span>
   </div>
   <div class="spec-blk-body" id="spec-detail-0">
@@ -720,59 +1117,59 @@ tr:hover td{background:#1c2333}
       data used, and (for failures) what went wrong in plain English.
     </div>
     
-<details class="trow pass">
+<details class="trow fail">
   <summary>
-    <span class="t-chip pass">✅ PASSED</span>
+    <span class="t-chip fail">❌ FAILED</span>
     <span class="trow-name">test_qa19_autonomous_exploration</span>
-    <span class="trow-params">homepage_en, https://dev.prowhats.com/en</span>
-    <span class="trow-dur">27.08s</span>
+    <span class="trow-params">params: [homepage_en, https://dev.prowhats.com/en]</span>
+    <span class="trow-dur">—</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Walks the page autonomously and reports any issues encountered.
 Hard-fails ONLY on confirmed bugs (JS errors, 5xx, broken navigation).
-Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">homepage_en, https://dev.prowhats.com/en</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">27.08s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa19_autonomous_exploration</code></span></div>
+Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">params: [homepage_en, https://dev.prowhats.com/en]</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">—</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa19_autonomous_exploration</code></span></div><div class="td-row"><span class="td-lbl exp">Expected:</span><span class="td-val">Walks the page autonomously and reports any issues encountered.</span></div><div class="td-row"><span class="td-lbl act">What happened:</span><span class="td-val">IndexError: list index out of range</span></div><div class="td-row"><span class="td-lbl">Bug ticket:</span><span class="td-val"><a href="#QA-19 -001">QA-19 -001</a> — see full details below</span></div>
   </div>
 </details>
 
-<details class="trow pass">
+<details class="trow fail">
   <summary>
-    <span class="t-chip pass">✅ PASSED</span>
+    <span class="t-chip fail">❌ FAILED</span>
     <span class="trow-name">test_qa19_autonomous_exploration</span>
-    <span class="trow-params">find_tutors, https://dev.prowhats.com/en/find, tutors</span>
-    <span class="trow-dur">27.13s</span>
+    <span class="trow-params">params: [find_tutors, https://dev.prowhats.com/en/find, tutors]</span>
+    <span class="trow-dur">—</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Walks the page autonomously and reports any issues encountered.
 Hard-fails ONLY on confirmed bugs (JS errors, 5xx, broken navigation).
-Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">find_tutors, https://dev.prowhats.com/en/find, tutors</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">27.13s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa19_autonomous_exploration</code></span></div>
+Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">params: [find_tutors, https://dev.prowhats.com/en/find, tutors]</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">—</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa19_autonomous_exploration</code></span></div><div class="td-row"><span class="td-lbl exp">Expected:</span><span class="td-val">Walks the page autonomously and reports any issues encountered.</span></div><div class="td-row"><span class="td-lbl act">What happened:</span><span class="td-val">IndexError: list index out of range</span></div><div class="td-row"><span class="td-lbl">Bug ticket:</span><span class="td-val"><a href="#QA-19 -002">QA-19 -002</a> — see full details below</span></div>
   </div>
 </details>
 
-<details class="trow pass">
+<details class="trow fail">
   <summary>
-    <span class="t-chip pass">✅ PASSED</span>
+    <span class="t-chip fail">❌ FAILED</span>
     <span class="trow-name">test_qa19_autonomous_exploration</span>
-    <span class="trow-params">become_tutor, https://dev.prowhats.com/en/become, tutor</span>
-    <span class="trow-dur">26.88s</span>
+    <span class="trow-params">params: [become_tutor, https://dev.prowhats.com/en/become, tutor]</span>
+    <span class="trow-dur">—</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Walks the page autonomously and reports any issues encountered.
 Hard-fails ONLY on confirmed bugs (JS errors, 5xx, broken navigation).
-Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">become_tutor, https://dev.prowhats.com/en/become, tutor</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">26.88s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa19_autonomous_exploration</code></span></div>
+Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">params: [become_tutor, https://dev.prowhats.com/en/become, tutor]</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">—</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa19_autonomous_exploration</code></span></div><div class="td-row"><span class="td-lbl exp">Expected:</span><span class="td-val">Walks the page autonomously and reports any issues encountered.</span></div><div class="td-row"><span class="td-lbl act">What happened:</span><span class="td-val">IndexError: list index out of range</span></div><div class="td-row"><span class="td-lbl">Bug ticket:</span><span class="td-val"><a href="#QA-19 -003">QA-19 -003</a> — see full details below</span></div>
   </div>
 </details>
 
-<details class="trow pass">
+<details class="trow fail">
   <summary>
-    <span class="t-chip pass">✅ PASSED</span>
+    <span class="t-chip fail">❌ FAILED</span>
     <span class="trow-name">test_qa19_autonomous_exploration</span>
-    <span class="trow-params">how_it_works, https://dev.prowhats.com/en/how, mehad, works</span>
-    <span class="trow-dur">27.01s</span>
+    <span class="trow-params">params: [how_it_works, https://dev.prowhats.com/en/how, mehad, works]</span>
+    <span class="trow-dur">—</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Walks the page autonomously and reports any issues encountered.
 Hard-fails ONLY on confirmed bugs (JS errors, 5xx, broken navigation).
-Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">how_it_works, https://dev.prowhats.com/en/how, mehad, works</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">27.01s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa19_autonomous_exploration</code></span></div>
+Soft passes when nothing meaningful surfaces.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">params: [how_it_works, https://dev.prowhats.com/en/how, mehad, works]</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">—</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa19_autonomous_exploration</code></span></div><div class="td-row"><span class="td-lbl exp">Expected:</span><span class="td-val">Walks the page autonomously and reports any issues encountered.</span></div><div class="td-row"><span class="td-lbl act">What happened:</span><span class="td-val">IndexError: list index out of range</span></div><div class="td-row"><span class="td-lbl">Bug ticket:</span><span class="td-val"><a href="#QA-19 -004">QA-19 -004</a> — see full details below</span></div>
   </div>
 </details>
   </div>
