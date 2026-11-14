@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>QA Bug Report — 2026-11-13 09:39:40</title>
+<title>QA Bug Report — 2026-11-14 09:04:02</title>
 <style>
 /* ── Reset & base ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -590,7 +590,7 @@ tr:hover td{background:#1c2333}
       </div>
     </div>
     <div class="hdr-meta">
-      <div><b>Date:</b> 2026-11-13 09:39:40</div>
+      <div><b>Date:</b> 2026-11-14 09:04:02</div>
       <div><b>Target:</b> </div>
       <div><b>AI Model:</b> unknown (local · no API key)</div>
       <div><b>Browser:</b> Chromium (headless)</div>
@@ -674,7 +674,7 @@ tr:hover td{background:#1c2333}
     <span class="badge LOW">LOW</span>
     <span class="badge P3">P3</span>
     <span class="cluster-count">2× affected</span>
-    <span class="recurrence-badge">4× consecutive runs</span>
+    <span class="recurrence-badge">5× consecutive runs</span>
   </div>
   <div class="cluster-title">Uncategorized failure</div>
   <div class="cluster-tickets"><a href="#QA-10 -006" class="cluster-bug-link">QA-10 -006</a> <a href="#QA-10 -008" class="cluster-bug-link">QA-10 -008</a></div>
@@ -725,8 +725,8 @@ tr:hover td{background:#1c2333}
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_html_lang_is_ar</code></span>
-        <span>🕐 2026-11-13 09:39:40</span>
-        <span>⏱ 3.30s</span>
+        <span>🕐 2026-11-14 09:04:01</span>
+        <span>⏱ 3.21s</span>
         
         
       </div>
@@ -780,15 +780,15 @@ tr:hover td{background:#1c2333}
 <div class="err-body" id="err-1">
   <pre style="margin-top:8px"><strong style="color:var(--c-critical)">E   AssertionError: &lt;html lang&gt; on /ar is 'en', expected ar*
 E   assert False
-E    +  where False = &lt;built-in method startswith of str object at 0x779dc7edd530&gt;('ar')
-E    +    where &lt;built-in method startswith of str object at 0x779dc7edd530&gt; = 'en'.startswith</strong>
+E    +  where False = &lt;built-in method startswith of str object at 0x78e0cf5f1680&gt;('ar')
+E    +    where &lt;built-in method startswith of str object at 0x78e0cf5f1680&gt; = 'en'.startswith</strong>
 
 tests/test_qa_comprehensive.py:2338: in test_qa10_html_lang_is_ar
     assert lang.startswith(&quot;ar&quot;), f&quot;&lt;html lang&gt; on /ar is {lang!r}, expected ar*&quot;
 E   AssertionError: &lt;html lang&gt; on /ar is 'en', expected ar*
 E   assert False
-E    +  where False = &lt;built-in method startswith of str object at 0x779dc7edd530&gt;('ar')
-E    +    where &lt;built-in method startswith of str object at 0x779dc7edd530&gt; = 'en'.startswith</pre>
+E    +  where False = &lt;built-in method startswith of str object at 0x78e0cf5f1680&gt;('ar')
+E    +    where &lt;built-in method startswith of str object at 0x78e0cf5f1680&gt; = 'en'.startswith</pre>
 </div>
     
     <div style="margin-top:16px"></div>
@@ -813,8 +813,8 @@ E    +    where &lt;built-in method startswith of str object at 0x779dc7edd530&g
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_html_dir_is_rtl</code></span>
-        <span>🕐 2026-11-13 09:39:40</span>
-        <span>⏱ 3.29s</span>
+        <span>🕐 2026-11-14 09:04:01</span>
+        <span>⏱ 3.12s</span>
         
         
       </div>
@@ -899,8 +899,8 @@ E   assert None == 'rtl'</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_arabic_text_present</code></span>
-        <span>🕐 2026-11-13 09:39:40</span>
-        <span>⏱ 4.77s</span>
+        <span>🕐 2026-11-14 09:04:01</span>
+        <span>⏱ 5.12s</span>
         
         
       </div>
@@ -985,8 +985,8 @@ E   assert 0 &gt;= 50</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_language_toggle_to_english</code></span>
-        <span>🕐 2026-11-13 09:39:40</span>
-        <span>⏱ 4.87s</span>
+        <span>🕐 2026-11-14 09:04:01</span>
+        <span>⏱ 4.75s</span>
         
         
       </div>
@@ -1073,8 +1073,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_language_toggle_to_arabic</code></span>
-        <span>🕐 2026-11-13 09:39:40</span>
-        <span>⏱ 4.77s</span>
+        <span>🕐 2026-11-14 09:04:01</span>
+        <span>⏱ 4.78s</span>
         
         
       </div>
@@ -1167,8 +1167,8 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_arabic_modal_opens</code></span>
-        <span>🕐 2026-11-13 09:39:40</span>
-        <span>⏱ 17.44s</span>
+        <span>🕐 2026-11-14 09:04:01</span>
+        <span>⏱ 17.50s</span>
         
         
       </div>
@@ -1271,8 +1271,8 @@ E     - waiting for locator(&quot;[role=\&quot;dialog\&quot;], [aria-modal=\&quo
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_no_english_strings_in_arabic_body</code></span>
-        <span>🕐 2026-11-13 09:39:40</span>
-        <span>⏱ 4.77s</span>
+        <span>🕐 2026-11-14 09:04:01</span>
+        <span>⏱ 4.86s</span>
         
         
       </div>
@@ -1357,8 +1357,8 @@ E   assert 0 &gt; 0</pre>
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_arabic_country_code_default_966</code></span>
-        <span>🕐 2026-11-13 09:39:40</span>
-        <span>⏱ 17.81s</span>
+        <span>🕐 2026-11-14 09:04:01</span>
+        <span>⏱ 17.17s</span>
         
         
       </div>
@@ -1461,8 +1461,8 @@ E     - waiting for locator(&quot;[role=\&quot;dialog\&quot;], [aria-modal=\&quo
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa10_arabic_h1_non_empty</code></span>
-        <span>🕐 2026-11-13 09:39:40</span>
-        <span>⏱ 5.23s</span>
+        <span>🕐 2026-11-14 09:04:01</span>
+        <span>⏱ 4.77s</span>
         
         
       </div>
@@ -1590,10 +1590,10 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa10_arabic_url_loads</span>
     
-    <span class="trow-dur">3.35s</span>
+    <span class="trow-dur">3.42s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">/ar URL must load without redirecting to /en.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.35s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_url_loads</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">/ar URL must load without redirecting to /en.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">3.42s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_url_loads</code></span></div>
   </div>
 </details>
 
@@ -1602,10 +1602,10 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa10_arabic_no_layout_horizontal_overflow</span>
     
-    <span class="trow-dur">5.00s</span>
+    <span class="trow-dur">5.11s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">RTL page must not have horizontal overflow at desktop 1280×720.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">5.00s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_no_layout_horizontal_overflow</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">RTL page must not have horizontal overflow at desktop 1280×720.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">5.11s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_no_layout_horizontal_overflow</code></span></div>
   </div>
 </details>
 
@@ -1614,10 +1614,10 @@ E    +    where count = &lt;Locator frame=&lt;Frame name= url='https://dev.prowh
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa10_arabic_no_console_errors</span>
     
-    <span class="trow-dur">5.45s</span>
+    <span class="trow-dur">4.71s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Loading /ar must not produce JS console errors.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">5.45s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_no_console_errors</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Loading /ar must not produce JS console errors.</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">4.71s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa10_arabic_no_console_errors</code></span></div>
   </div>
 </details>
 
