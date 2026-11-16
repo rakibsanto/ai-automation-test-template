@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>QA Bug Report — 2026-11-14 09:04:02</title>
+<title>QA Bug Report — 2026-11-16 09:32:18</title>
 <style>
 /* ── Reset & base ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -590,7 +590,7 @@ tr:hover td{background:#1c2333}
       </div>
     </div>
     <div class="hdr-meta">
-      <div><b>Date:</b> 2026-11-14 09:04:02</div>
+      <div><b>Date:</b> 2026-11-16 09:32:18</div>
       <div><b>Target:</b> </div>
       <div><b>AI Model:</b> unknown (local · no API key)</div>
       <div><b>Browser:</b> Chromium (headless)</div>
@@ -605,10 +605,10 @@ tr:hover td{background:#1c2333}
 <div class="stats">
   <a href="#bugs"        class="stat critical" data-filter="bugs"     title="Show CRITICAL bug tickets"><div class="label">Critical</div><div class="val">0</div></a>
   <a href="#bugs"        class="stat high"     data-filter="bugs"     title="Show HIGH bug tickets"><div class="label">High</div>    <div class="val">0</div></a>
-  <a href="#bugs"        class="stat medium"   data-filter="bugs"     title="Show MEDIUM bug tickets"><div class="label">Medium</div>  <div class="val">0</div></a>
+  <a href="#bugs"        class="stat medium"   data-filter="bugs"     title="Show MEDIUM bug tickets"><div class="label">Medium</div>  <div class="val">1</div></a>
   <a href="#bugs"        class="stat low"      data-filter="bugs"     title="Show LOW bug tickets"><div class="label">Low</div>     <div class="val">0</div></a>
-  <a href="#tests"       class="stat pass"     data-filter="passed"   title="Show only PASSED tests"><div class="label">Passed</div>  <div class="val">4</div></a>
-  <a href="#tests"       class="stat fail"     data-filter="failed"   title="Show only FAILED tests"><div class="label">Failed</div>  <div class="val">0</div></a>
+  <a href="#tests"       class="stat pass"     data-filter="passed"   title="Show only PASSED tests"><div class="label">Passed</div>  <div class="val">3</div></a>
+  <a href="#tests"       class="stat fail"     data-filter="failed"   title="Show only FAILED tests"><div class="label">Failed</div>  <div class="val">1</div></a>
   <a href="#tests"       class="stat total"    data-filter="all"      title="Show all tests"><div class="label">Total Tests</div><div class="val">4</div></a>
 </div>
 
@@ -629,7 +629,7 @@ tr:hover td{background:#1c2333}
   <div class="pstrip-item p2" onclick="applyBugFilter('P2')"
        title="P2 Medium · Current or next sprint · Everything Else">
     <div class="pstrip-label">P2 · Medium</div>
-    <div class="pstrip-val">0</div>
+    <div class="pstrip-val">1</div>
     <div class="pstrip-sla">⏱ Current sprint &nbsp;·&nbsp; 📋 Everything Else</div>
   </div>
   <div class="pstrip-item p3" onclick="applyBugFilter('P3')"
@@ -643,34 +643,150 @@ tr:hover td{background:#1c2333}
 <!-- Cluster summary — groups bugs by root cause (e.g. 6 missing-headers
      finding share '1 root cause: security headers') -->
 
+<div class="cluster-summary" id="clusters">
+  <div class="sec-title" style="margin:24px 0 12px">
+    🎯 Root-Cause Summary <span class="count">1 clusters</span>
+  </div>
+  <div class="cluster-headline">1 bug ticket(s) → <strong>1 unique root cause(s)</strong></div>
+  <div class="cluster-list">
+<div class="cluster-row">
+  <div class="cluster-meta">
+    <span class="badge MEDIUM">MEDIUM</span>
+    <span class="badge P2">P2</span>
+    <span class="cluster-count">1× affected</span>
+    <span class="recurrence-badge">30× consecutive runs</span>
+  </div>
+  <div class="cluster-title">Generic assertion failure</div>
+  <div class="cluster-tickets"><a href="#QA-18 -001" class="cluster-bug-link">QA-18 -001</a></div>
+</div></div>
+  <div class="cluster-help">
+    Bugs sharing a root cause are grouped here so you fix one thing
+    instead of N. Click any ticket ID to jump to its full bug card below.
+  </div>
+</div>
 
 <!-- Extra section: cross-spec inconsistencies, etc. -->
 
 
 <!-- Bug Tickets -->
 <div class="sec-title" id="bugs">
-  Bug Tickets <span class="count">0</span>
+  Bug Tickets <span class="count">1</span>
 </div>
 
 <!-- Bug-tickets filters — by severity or by priority level -->
 <div class="filter-bar bug-filter-bar" id="bug-filter-bar">
   <span class="filter-lbl">Severity:</span>
-  <button class="fbtn active" data-bug-filter="all">All (0)</button>
+  <button class="fbtn active" data-bug-filter="all">All (1)</button>
   <button class="fbtn fbtn-critical" data-bug-filter="CRITICAL">Critical (0)</button>
   <button class="fbtn fbtn-high"     data-bug-filter="HIGH">High (0)</button>
-  <button class="fbtn fbtn-medium"   data-bug-filter="MEDIUM">Medium (0)</button>
+  <button class="fbtn fbtn-medium"   data-bug-filter="MEDIUM">Medium (1)</button>
   <button class="fbtn fbtn-low"      data-bug-filter="LOW">Low (0)</button>
 </div>
 <div class="filter-bar" style="margin-top:6px">
   <span class="filter-lbl">Priority:</span>
   <button class="fbtn" data-bug-filter="P0" title="P0 Highest — 24h SLA — Expedite">P0 Highest (0)</button>
   <button class="fbtn" data-bug-filter="P1" title="P1 High — 2-3 days — Expedite">P1 High (0)</button>
-  <button class="fbtn" data-bug-filter="P2" title="P2 Medium — This sprint">P2 Medium (0)</button>
+  <button class="fbtn" data-bug-filter="P2" title="P2 Medium — This sprint">P2 Medium (1)</button>
   <button class="fbtn" data-bug-filter="P3" title="P3 Low — Backlog">P3 Low (0)</button>
 </div>
 
 <div id="bug-list">
-<p style="color:var(--muted);text-align:center;padding:24px">No bugs detected — all tests passed.</p>
+
+<div class="bug-card" id="QA-18 -001" data-priority="P2">
+  <div class="bug-card-hdr">
+    <div>
+      <div class="left">
+        <span class="bug-id">QA-18 -001</span>
+        <span class="badge MEDIUM">MEDIUM</span>
+        <span class="badge P2">P2</span>
+        
+      </div>
+      <div class="bug-title">Failed: Test qa18 blocked api shows no white screen</div>
+      <div class="bug-meta">
+        <span>🔗 <a href="" target="_blank"></a></span>
+        <span>🧪 <code>test_qa18_blocked_api_shows_no_white_screen</code></span>
+        <span>🕐 2026-11-16 09:32:17</span>
+        <span>⏱ 13.67s</span>
+        
+        
+      </div>
+    </div>
+  </div>
+  <div class="bug-body">
+    
+    
+<div class="info-block analysis" style="margin-bottom:16px">
+  <div class="ib-label">📋 What this test was checking</div>
+  <div>If the main API is unreachable, the page must still render
+SOMETHING (loader, error message, fallback content) — never a
+completely blank white page — verified against the staging site.</div>
+</div>
+    
+<div class="info-block analysis" style="margin-bottom:16px">
+  <div class="ib-label">🧪 Test data used</div>
+  <div style="font-family:'SF Mono',monospace;color:#a371f7;font-size:12px">
+    BASE_URL
+  </div>
+</div>
+    
+<div style="margin-bottom:16px">
+  <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;
+              color:var(--muted);margin-bottom:8px">Steps to Reproduce</div>
+  <ol class="steps"><li>Open a browser and go to the test URL</li><li>Observe the result: it does NOT match what the test expected (see Actual Behavior)</li></ol>
+</div>
+    
+<div class="two-col">
+  <div class="info-block expected">
+    <div class="ib-label">✓ What should happen</div>
+    <div>If the main API is unreachable, the page must still render</div>
+  </div>
+  <div class="info-block actual">
+    <div class="ib-label">✗ What actually happened</div>
+    <div>With API blocked, body has only 20 chars of text and no visible images/SVGs — looks like a white-screen failure.</div>
+  </div>
+</div>
+    
+<div class="shot-wrap">
+  <div class="shot-label">Proof of Concept — Screenshot (annotated with bug)</div>
+  <img class="screenshot" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABQAAAAMqCAIAAABSYXvKAABVvklEQVR42u3dfXxXdcE//rMx2IfbDRE2bnTzhhiaMkxlqcXUipl1QaIxLRXLLrAysCzoqq7oKgXrKsjvlVDXz4tVV1+wLGZZzr4lo1IG3jC8Yyg3QxE27rYhsM+42X5/fNjZZ2PA7kCw5/PBH599+HzO55z3+31uXue8z/skPHX22QEAAAC82yUqAgAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAABAAAYAAAABGAAAAAEYAAAABGAAAAAQgAEAAEAABgAAAAEYAAAABGAAAAAQgAEAAKADkjrwnSuff77HmWce4wNPX3rp/u3bj/GB3A0bErp1i3+n4dChQ/v21b311u7S0i2LF+9eteoYX1lxzTX71q8P/2vAtdde/D//E3u9b8OGFVdf3eK7kWHD0m+8MfXyy3udd1731NQgIeFgTc2Bmprom2/uXrWqeuXK6pKSti9+r3PPTb/pptQxY3pmZCSlpNTX1R3Ytatuy5bqlSt3PvXUkXPeMzMzZ9my+HdWfvjDe197rS3FEgRBfTS6f+fOt196qXLJku1FReH7V6xYkZye3pYZrquoeGbMmI6VYSs1VV9/aO/e6ObN1StXbvnlL/e+/npbliLes9ddt+fVV1v5cEND/cGD9bW1B6qro2+++fZLL1UWFu5Zs8ZaCgAAvGMBOAiCl++6a/uf/nTk+5Fhw97/9NMdmGBCt25JffsmZWX1zsoanJ+/8Yc/LH/wwc4vXreePc/7xjeG3HJLi0jWY9CgHoMG9R4+fMA117SamVufWq9ew7/zncE33RQkJIRvJnbvntSnT8+zz07NyUl53/tKb7mlxbfSb7yx5TsTJ66fPbuNi5AYiUSGDo0MHTowL29ncfHLU6bUR6PvYItJSExM6tu3z8iRfUaOHPqpT6358pcrH3usiyadkNi9e2L37kn9+vU8++z+V1559tSpu5YtW3Pvvfu3bbOuAgAA70wA7kKxS5GJPXqcmZd3wY9/nJCYGATBOV/+8vYnn9y7dm2n0m/v3qMXL+578cWxP/etX1/+4INVzzxzsKoqKTW13yWXpH384wM/+tG2T+2S3/ymz4UXxv58+8UXN/7oRzXPP99w4EDPc84Z9PGPD5s8udVQl37DDS3eS/vEJzZ8//sNhw61pVhSLrts5A9/mDx4cBAEA3Jzz//GN1771reCIIhd1A0N//a3h33mM7HXb/3iF7HPnIia6jFw4Fl33nn21KlBECQkJY2YPXtncfHBmppjfKUd09+woXtKSt/s7LM++9kzPvjBIAjOGDv2sieeeGHixNrycqsrAADQGafKPcD1+/dv+/3vq/72tzA3DsjN7eQ0sx54IEy/Nc8++9zHPlZZWLh/27b6Awf2b9++48knX/niF1d++MM1zz7bpql9//th+q1avvyFiRN3Ll16cPfuQ7W1e159dcMDD6y89trdpaUtvtU/JycydGi4jLEXyWlp/a+6qo3FUvX00+vuuy98Z/AnP5kYibyDNbV/+/YNDzwQ3bIlPC/Q/4orumzqDQ0Hqqt3FRevvvXWzY1dsnuceebF//M/id27W10BAIB3QwCOib71Vvi6+xlndGZSfS++eNDHP344VR08+Oo99xzat+/Ij+1bv77sa19r09Q+9rFwamVf+UqYZptmfsuWDd//fos34/s/b3jggab3J05s+7LUPPdcU4VFIj0zMt7Zamqor98Xd+tvclraifiVdffdV7tpU+x1r/POG5yfb3UFAADePQE4ufFiaRAEdY3XGDsm7V/+JXy96x//iL75ZldOLS6oH0O3Xr0GXnddGI/ffPjhsB/vwHHjkvr2bevPx91yHARB0NBwCjScppZzoKrqhMTsgwcrfvOb8M9BcVUAAABwGgfgxB49Bn3sY7HbPoMgOPj229sef7wzE+z3vveFr3e/8EInZ6/Z1I4Y5/loBl53XbfevWOvt/3+90FDQ+Uf/nB4eSORgddf38bppFx6afi6PhqtfeONd7ayEhITe5933uGYeuhQzfPPn6Af2r16dVMVjB7d8kQAAABAe7zzg2CNeeqpFu/Ubtz46j337N+5szOTjX9Q0/4dO5rCW1JS7hHDMq37j/948+GH2zq1Yz7hKV58/+fKwsIgCLY99ljm3XfH3hl8441bFy8+7nmBlMsuO//f/i18Z+uvf/3OjgLdY+DAs6dMSR4yJPbn5oULo5s3t71ya5577oU2d/+OL+rY6NBHG20LAADgNAjAR0oeNmzwJz+55+WX6w8c6PBEEuKvFna6z3BC+689Jg8ZkpqTE3u9b9262PNs977++p41a/qMHBkEQcpll/XMyAhvcz1udAyCYFdx8fr77z9FTlXs3779jfnzj33ioLMSE62iAADAuycAx56Uk9CtW8+MjOHf/vYZubmJ3bsPueWWICFh7cyZHZ5s3fbtkbPOir2Ov37bcPDg0oyMIAgy7777nHvv7cjUBg5sy1fSJ05MaMxvscu/Mdt+//tYAI59ZuOPfnTs6dTv379/x463X3qpcsmS7U88ceo0ncQePZL69QsSEo5xfqFdj0E6UnzF1R84cHD3bmssAABwGgfgw7n00KF9Gzas+fKXr2y8X3fwTTet++53D+3dezj/1NV169Ur9johqdlsx/8Zdg/e/fzzKZdcEnvdb/ToTs5eB6YW//jfc+69t9WwnT5x4sa5c1sNkJ2Mjq1n6XaW4ZGzFH3zzX6jR4+cNy8yZEhSSkrm9Ondevde973vnaBW0S87u6kKXnjhlBj9CwAAOG2dWl1M9+/ceXDPnjCS9Tz77Kb/2rYtfN2j+ROS4q8T1jV+bFvjcFNBEJzxwQ8mDx7cmRlrNrWrroo03gF7NCmXXNLr3HOPO9nIsGGpY8acvOJtZxm2EqH3769eseLlKVMa6utj75x1553xY3R1ZdPs3j3+Jur4KgAAADjtA3CPgQOT+vQJ/zz49tvh66rly8PXqVdeGf+t/nF/Vj/zTOzF7tWrw3GkE5KSsn7wg8QePTo8Yy2n9p//mdi9e8s0O2TIuY2PFI5PbiuuvnppRkb8v+VxM9yuBwJ3UnvL8GjefvHFbb///eE/EhLO/epXT8Tcnv/v/x6eAdm3fv1xBwwDAAA4PQJwQrduvc49d2TcDbF71qyJH174zf/+73BMrLPuvDP9ppu69+/fY9CgjM9/PnzW7oGdO7csWhR+pexrX9vzyiux12d84AOXLFly5rhx3fv3T+zevWdGRt+LLmrXHMZPrf+VV45+9NEBublJffokRiJ9Ro4892tfu/yvf4112U3s0WPQxz8e+2RdZeW+DRtaTCq6eXO4aIOuv75bz54np5A7UIZHU/7gg+FF4NScnHC4r063g4SklJQzcnNH/e//Dr3ttth7+3fsePGzn+3MiGgAAADBqfkYpFgMW/OVr8S/s2/9+le/8IWRc+d26927W8+eI//zP1t8pa6y8uXPfS5+nKRDe/e+cOONw7/zncE33RQkJPR973sv+tnPOjyfLabWLzv74p//vNVPnvmRjyT16xd7XR130TVe1TPPDP7kJ4Mg6Na795l5eZVLlpyEou5AGR5jUtv+8Ie08eNjf55zzz2rJk1qY+W+/u//vrm1ojvawNdrvvrV/UfvlQ0AAHDaBOBQ/YEDB2tq9q1bt2vZsrd+9asjn/i6/cknd1999eD8/P5XXdX7vPOSUlIa6usPVlfvWbt219KlW3/96/gu04dT6759ZV/96hvz56ffdFNqTk6vjIyklJT6uroD1dUHq6trN2/e/dxz1c8++/ZLL7UpAx9tart2Rd96q+bZZ3f89a9B8/7PVUcJwNXLl8cCcBAEg2+66eQE4I6V4dGUP/jgoI9/PDbSdewicHVJSSdnr+HgwUPR6MGqqtrNm99+6aXK3/0u9vgoAACAzkt4Km6gqTa68vnnX/vWt7b/6U9H/ldk2LD3P/3005deun/7doULAADAqSNREQAAAPDPoINdoN87f76yAwAA4DTSkS7QAAAAcNrRBRoAAAABGAAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAABAAAYAAOCfXJIiOK5e55035qmnYq93/PnPL33uc8rkXVNN7+LKbdeincxyOPllPvb11xN79AiCYP+OHU+/732n13agS2beNu2fc6n/qRa55znnnDNtWmpOTo+BAxOSkoIgqHnuuRcmTrRzPKU2PqfjitDq19s7zRO3MjpG5XTfd7wjh6CdDcA9MzNzli2Lf2flhz+897XXtJ5Oyt2wIaFbt2N84Nnrrtvz6qun+2KmvO99l/zud7HXVc88U3rzzeF/JSQlfeDll7v17Bn7c9VNN1WvXBn+b8bdd597772x1+vvv/+Nn/70FDoOa/NK0Wot10ej+3fufPullyqXLNleVHS0z6+45pp969dbU+Cdl5DQZ+TIMz7wgdQrruh9/vk9zjwzISnpQFXV26+8UrlkSeVjjwUNDUd+6YwPfnDIzTf3u+SS7gMGHNqzZ+/rr29//PG3fvWrhoMHlWh7JaelvW/Jku79+ysKIAiCc7785cxp06KbNy+/8srYO0n9+g297bYB117b+7zzuvXpUx+NHtq790BVVe0bb9S+8cYbDz20f8eOIAguLigYcPXVsa+s++533/z//r8jJz70ttve893vHj52/cc/Sj/1qfj/jQwbln7jjamXX97rvPO6p6YGCQkHa2oO1NRE33xz96pV1StXVpeUqKB3XGcDcPqNN7Z8Z+LE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sf7PO/7yl9gV1/geIkfedHCotnbd974X/07Fo482BeAJEzb84Afx4zikNx42B0FQ8dvfxl70vfjiQR//eOx1w8GDr95zT/xtL/FnK8q+9rWu3V2e7NzYntW2M+v4MQ4Lu6TQOh6Au/XqNfC662Kvo1u2vPnww0NvvbVnZmYQBAPHjUvq2zd2tjumz8iRox99NLxqFwRB8pAhyUOGpFx66Vmf+9yqSZNid4S38WOxpnbRT3+aPGRI05KkpKSOGZM6ZsyQW2558Y47wk6kzea5b99LfvvbWL+Izku55JL3/vSnPQYNiq/pvhdf3Pfii4feccea6dPjj6Wa5qF37+xFi8IIl9ijx4Crr+5/5ZUvfOITb7/8cidn6bgLeLQPdHBZuqI8a55/vuHQodhRZspllwUJCUFDQ6/zz+9+xhlBENS88EL1ihX9r7wyCILUyy47MgDXHO8G4HaUXqerpl0rxTETSUKzP1sbQad9i9anz+hf/7pfdvbhI/szz0yfOHHAtdeW3nzzcfvSt6tt9Bk58r0LFsQW+XAxDhiQMmBAyvve1/Oss17/zneOupnLz8+aMye24LWbNpXeckvs0KFda/rgSZOyHnggLL1+o0df+H/+T79Ro7p8B9DG8mxX0bVx5rf88pdnT5kSW1+G3HJL/BQGXn992HW2onFsua5q9mOWLm3xxR4DBvQYMCB1zJiht976wo03Rt96q11b+1Nk09ol5bnnlVf2vPJKizcb6usPvv12jwEDWqzUKXGbr9ry8vB1dPPmhoMHY9m4b3Z2Yvfu9QcOHONH27uudXlFH3df0MmW0LFm0IXauPGp3bRp7cyZsT47yWlp7/ne91754heDIMj4/OcPp98g2PTQQ7v+9rdhd9zR4ZnpYL20rdK7dsvZxh/tZP1u/fWvz7nnntj6knbDDfEBeOD118fSbxAEW/7v/z32StTJjVXn97AdPqDtzMFhr/PPP/+b3+wzcmRdRUXGF74QfixW9d379Xvrf/+3Y20v/aabsr7//YTExHCCF4we3fcobantC96umuo+YEDsCsqOxiu9DXEHUWffddfetWtrnn/+WMelL7ywb8OGXueeGwRBZOjQ1Msvr16xIlyinuecE260w/fT/uVfms5m/uMf0TffbEu9dFULPGnatdp2ch0/2mFhVxVax+8BHnjddd1694693vb73wcNDZV/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giB4z3e/+564MaL3lpW99NnPNuvu1eoq09F1rQsr+rg60xJOTjM4xq6hXRufc7/+9X6Nz/jZ+J//GXuyfdlXvnJxQUEQBD3OPPOCH/949ac/HbtbtQP7o66tl5bnmk/ilvNE1G/DwYMVv/nN2XfdFb5T+8YbTSezTlgT7ZI97Ik4oH0HN/77NmxY+2//lvX97yckJh61LTVeRm7XgrepphISYgG4xeXfpon17j301ltb3KdweC1Yu/a1b36ztebVUPG737U4GVS5ZEmrm+hDe/e+cOONw7/zncE33RQkJPR973sv+tnPTk4LPDnatdp2ch0/2mFhFxZauwNw/E9WHeVYv3r58vBpioNvuqlyyZKyr31t2x//OCA3t88FF/RIS+uemlofjUbffLOqpGTzwoW15eXh6ZO2fCx2gmfFhz40+KabzvzIR3pnZXVPSTlUW7t/+/a6rVurS0p2/f3v8Y+9Pq7tTz655t57h376072HD4+N198WNS+8sOLaa4fccsuZ117ba/jwpD59DtXW1paX71q27K1f/KKusjI4fZwKy1KzcmV8l+kWPZxrmufh/XHjZp2g+j3RK8XJrN9De/a8OHny2XfdlTZ+fOSssw7t3r3rb3/b+KMf1R7R4aeTbWPPq6+u/PCH0ydOPHPcuD4jRyalph56++19Gzdu/+Mft/7mN8c6A7J5c+mnPnXJb34TGxZo6G231e/fv+67323Xmr7l//7f2vLyjC9+sV92dpCQsHft2s0LF1Y+9lirO7zYKe3Du+116w7EDZLZVeXZrqJr78zHLn3UbdkS3otVvWJFtCseuNLK4d3y5atuuilz+vSUSy9NSEqKvvlmZWHhGwsWZDcmuhZnwdu4GT/VNkcnrTwb6utjpTTklltSLrmk+xlnHNq7d+9rr217/PEtv/rVMe7+7ZJ1rasq+rg62RJOQjM49q6hjRufMz/0ofCRV9UlJW82HvLuXLp0889/Puz224Mg6H/llRlf/GL5gw92bH/UtfVypA5sfE6po44tixefPXVqeIFo6yOPtHG4r85vrDq/h+3yA9p3cOMfBEHFb34TfeONjLvv7jd6dEJiYqwtbXv88abHwsVdZW37grelpvplZ8c6Zrd4AFIQBG+XlpZ99at9Lrywz8iRyenpSX37JvXr11Bff6Cqau+aNdv//OeKX//6aBveikcfbRGA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BgAAAAEYAAAABGAAAAAQgAEAABCAFQEAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAACAAAwAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAACAAAwAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAACAAAwAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAACAAAwAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAACAAAwAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAACAAAwAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAAAIwAAAACMAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAACMAAAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAAAIwAAAACMAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAACMAAAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAAAIwAAAACMAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAACMAAAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAAAIwAAAAArAiAAAAQAAGAAAAARgAAAAEYAAAABCAAQAAQAAGAAAAARgAAAAEYAAAABCAAQAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAAAQgAEAAEAABgAAAAEYAAAABGAAAAAQgAEAAEAABgAAAAEYAAAABGAAAAAQgAEAABCAAQAAQAAGAAAAARgAAAAEYAAAABCAAQAAQAAGAAAAARgAAAAEYAAAABCAAQAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAAAQgAEAAEAABgAAAAEYAAAABGAAAAAQgAEAAEAABgAAAAEYAAAABGAAAAAQgAEAABCAAQAAQAAGAAAAARgAAAAEYAAAABCAAQAAQAAGAAAAARgAAAAEYAAAABCAAQAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAAAQgAEAAEAABgAAAAEYAAAABGAAAAAQgAEAAEAABgAAAAEYAAAABGAAAAAQgAEAABCAAQAAQAAGAAAAARgAAAAEYAAAABCAAQAAQAAGAAAAARgAAAAEYAAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAABGAAAAAQgAEAAEAABgAAAAEYAAAABGAAAAAQgAEAAEAABgAAAAEYAAAABGAAAAAEYAAAABCAAQAAQAAGAAAAARgAAAAEYAAAABCAAQAAQAAGAAAAARgAAAAEYAAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAABGAAAAAQgAEAAEAABgAAAAEYAAAABGAAAAAQgAEAAEAABgAAAAEYAAAABGAAAAAEYAAAABCAAQAAQAAGAAAAARgAAAAEYAAAABCAAQAAQAAGAAAAARgAAAAEYAAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAABGAAAAAQgAEAAEAABgAAAAEYAAAABGAAAAAQgAEAAEAABgAAAAEYAAAABGAAAAAEYAAAABCAAQAAQAAGAAAAARgAAAAEYAAAABCAAQAAQAAGAAAAARgAAAAEYAAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAABAAAYAAAABGAAAAAEYAAAABGAAAAAQgAEAAEAABgAAAAEYAAAABGAAAAAQgAEAAEAABgAAAAEYAAAAARgAAAAEYAAAABCAAQAAQAAGAAAAARgAAAAEYAAAABCAAQAAQAAGAAAAARgAAAABGAAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAABAAAYAAAABGAAAAAEYAAAABGAAAAAQgAEAAEAABgAAAAEYAAAABGAAAAAQgAEAAEAABgAAAAEYAAAAARgAAAAEYAAAABCAAQAAQAAGAAAAARgAAAAEYAAAABCAAQAAQAAGAAAAARgAAAABGAAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAABAAAYAAAABGAAAAAEYAAAABGAAAAAQgAEAAEAABgAAAAEYAAAABGAAAAAQgAEAAEAABgAAAAEYAAAAARgAAAAEYAAAABCAAQAAQAAGAAAAARgAAAAEYAAAABCAAQAAQAAGAAAAARgAAAABGAAAAARgAAAAEIABAABAAAYAAAABGAAAAARgAAAAEIABAABAAAYAAEAAVgQAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAIwAAAACMAAAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAAAIwAAAAAjAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAIwAAAACMAAAAAgAAMAAIAADAAAAAIwAAAACMAAAAAgAAMAAIAADAAAAAIwAAAAAjAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAAIwAAAACAAAwAAgAAMAAAAAjAAAAACMAAAAAjAAAAAIAADAACAAAwAAAACMAAAAAjAAAAAIAADAADAcf3/9WebKNP/3rwAAAAASUVORK5CYII=" alt="Test failure screenshot"
+       onclick="openShot(this.src)" title="Click to enlarge"/>
+</div>
+    
+<div class="video-wrap">
+  <div class="video-label">Proof of Concept — Screen Recording</div>
+  <video class="poc-video" controls preload="metadata"
+         src="videos-embed/test_qa18_blocked_api_shows_no_white_screen.webm" type="video/webm">
+    Your browser does not support embedded video.
+  </video>
+  <div><a class="video-cta" href="videos-embed/test_qa18_blocked_api_shows_no_white_screen.webm" download>⬇ Download .webm</a></div>
+</div>
+    
+<button class="err-toggle" onclick="toggleErr('err-1')">
+  <span>▶ Show error details</span>
+  <span style="font-size:11px;color:var(--muted)">AssertionError / Traceback</span>
+</button>
+<div class="err-body" id="err-1">
+  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">    assert len(body_text) &gt; 20 or &quot;&lt;img&quot; in body_html or &quot;&lt;svg&quot; in body_html, (
+E   AssertionError: With API blocked, body has only 20 chars of text and no visible images/SVGs — looks like a white-screen failure.
+E   assert (20 &gt; 20 or '&lt;img' in '\n&lt;center&gt;&lt;h1&gt;504 Gateway Time-out&lt;/h1&gt;&lt;/center&gt;\n\n\n\n\n\n\n\n\n' or '&lt;svg' in '\n&lt;center&gt;&lt;h1&gt;504 Gateway Time-out&lt;/h1&gt;&lt;/center&gt;\n\n\n\n\n\n\n\n\n')
+E    +  where 20 = len('504 Gateway Time-out')</strong>
+
+tests/test_qa_comprehensive.py:3201: in test_qa18_blocked_api_shows_no_white_screen
+    assert len(body_text) &gt; 20 or &quot;&lt;img&quot; in body_html or &quot;&lt;svg&quot; in body_html, (
+E   AssertionError: With API blocked, body has only 20 chars of text and no visible images/SVGs — looks like a white-screen failure.
+E   assert (20 &gt; 20 or '&lt;img' in '\n&lt;center&gt;&lt;h1&gt;504 Gateway Time-out&lt;/h1&gt;&lt;/center&gt;\n\n\n\n\n\n\n\n\n' or '&lt;svg' in '\n&lt;center&gt;&lt;h1&gt;504 Gateway Time-out&lt;/h1&gt;&lt;/center&gt;\n\n\n\n\n\n\n\n\n')
+E    +  where 20 = len('504 Gateway Time-out')</pre>
+</div>
+    
+    <div style="margin-top:16px"></div>
+    <div class="env-strip">
+      <span><b>Browser:</b> Chromium</span>
+      <span><b>Viewport:</b> 1280x720</span>
+      <span><b>Env:</b> Staging</span>
+      <span><b>Spec:</b> <a href="" target="_blank">View page</a></span>
+    </div>
+  </div>
+</div>
 </div>
 
 <!-- Summary Table -->
@@ -684,11 +800,11 @@ tr:hover td{background:#1c2333}
   <tbody>
     <tr>
       <td><strong>qa18_network</strong></td>
-      <td><span class="badge PASS">PASSED</span></td>
-      <td style="color:var(--c-pass)">4</td>
-      <td style="color:var(--c-critical)">0</td>
+      <td><span class="badge FAIL">FAILED</span></td>
+      <td style="color:var(--c-pass)">3</td>
+      <td style="color:var(--c-critical)">1</td>
       <td>4</td>
-      <td><span style="color:var(--muted)">—</span></td>
+      <td><a href="#QA-18 -001" class="badge MEDIUM">QA-18 -001</a></td>
     </tr>
   </tbody>
 </table>
@@ -701,8 +817,8 @@ tr:hover td{background:#1c2333}
 <div class="filter-bar test-filter-bar">
   <span class="filter-lbl">Show:</span>
   <button class="fbtn active" data-test-filter="all">All (4)</button>
-  <button class="fbtn fbtn-pass" data-test-filter="passed">✅ Passed (4)</button>
-  <button class="fbtn fbtn-fail" data-test-filter="failed">❌ Failed (0)</button>
+  <button class="fbtn fbtn-pass" data-test-filter="passed">✅ Passed (3)</button>
+  <button class="fbtn fbtn-fail" data-test-filter="failed">❌ Failed (1)</button>
   <input type="text" class="fbtn-search" placeholder="🔍 Search by test name..." data-search="">
   <button class="fbtn-action" data-action="expand-all">⬇ Expand all</button>
   <button class="fbtn-action" data-action="collapse-all">⬆ Collapse all</button>
@@ -711,7 +827,7 @@ tr:hover td{background:#1c2333}
 
 <div class="spec-blk">
   <div class="spec-blk-hdr" onclick="toggleSpec('spec-detail-0')">
-    <span class="spec-blk-title">✅ <code>qa18_network</code> — <span style='color:var(--c-pass)'>4 passed</span> · <span style='color:var(--c-critical)'>0 failed</span> · 4 total</span>
+    <span class="spec-blk-title">❌ <code>qa18_network</code> — <span style='color:var(--c-pass)'>3 passed</span> · <span style='color:var(--c-critical)'>1 failed</span> · 4 total</span>
     <span class="spec-blk-toggle">▶ Show tests</span>
   </div>
   <div class="spec-blk-body" id="spec-detail-0">
@@ -725,24 +841,10 @@ tr:hover td{background:#1c2333}
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa18_offline_does_not_crash_page</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">5.92s</span>
+    <span class="trow-dur">13.51s</span>
   </summary>
   <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Going offline mid-session must not produce uncaught JS errors.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">5.92s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_offline_does_not_crash_page</code></span></div>
-  </div>
-</details>
-
-<details class="trow pass">
-  <summary>
-    <span class="t-chip pass">✅ PASSED</span>
-    <span class="trow-name">test_qa18_blocked_api_shows_no_white_screen</span>
-    <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">6.12s</span>
-  </summary>
-  <div class="trow-details">
-    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">If the main API is unreachable, the page must still render
-SOMETHING (loader, error message, fallback content) — never a
-completely blank white page.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">6.12s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_blocked_api_shows_no_white_screen</code></span></div>
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">Going offline mid-session must not produce uncaught JS errors.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">13.51s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_offline_does_not_crash_page</code></span></div>
   </div>
 </details>
 
@@ -751,11 +853,11 @@ completely blank white page.</span></div><div class="td-row"><span class="td-lbl
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa18_slow_network_does_not_show_partial_data</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">6.69s</span>
+    <span class="trow-dur">13.86s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">3G-throttled load must not display half-rendered components
-(e.g., 'undefined' user names from partial data).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">6.69s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_slow_network_does_not_show_partial_data</code></span></div>
+(e.g., 'undefined' user names from partial data).</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">13.86s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_slow_network_does_not_show_partial_data</code></span></div>
   </div>
 </details>
 
@@ -764,11 +866,25 @@ completely blank white page.</span></div><div class="td-row"><span class="td-lbl
     <span class="t-chip pass">✅ PASSED</span>
     <span class="trow-name">test_qa18_5xx_response_shown_friendly</span>
     <span class="trow-params">BASE_URL</span>
-    <span class="trow-dur">5.33s</span>
+    <span class="trow-dur">12.65s</span>
   </summary>
   <div class="trow-details">
     <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">If a backend route returns 500, the user-facing page should
-not display a raw stacktrace or framework debug page.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">5.33s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_5xx_response_shown_friendly</code></span></div>
+not display a raw stacktrace or framework debug page.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">12.65s</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_5xx_response_shown_friendly</code></span></div>
+  </div>
+</details>
+
+<details class="trow fail">
+  <summary>
+    <span class="t-chip fail">❌ FAILED</span>
+    <span class="trow-name">test_qa18_blocked_api_shows_no_white_screen</span>
+    <span class="trow-params">BASE_URL</span>
+    <span class="trow-dur">—</span>
+  </summary>
+  <div class="trow-details">
+    <div class="td-row"><span class="td-lbl">What this test checks:</span><span class="td-val">If the main API is unreachable, the page must still render
+SOMETHING (loader, error message, fallback content) — never a
+completely blank white page.</span></div><div class="td-row"><span class="td-lbl">Test data used:</span><span class="td-val td-data">BASE_URL</span></div><div class="td-row"><span class="td-lbl">Duration:</span><span class="td-val">—</span></div><div class="td-row"><span class="td-lbl">Test function:</span><span class="td-val"><code>test_qa18_blocked_api_shows_no_white_screen</code></span></div><div class="td-row"><span class="td-lbl exp">Expected:</span><span class="td-val">If the main API is unreachable, the page must still render</span></div><div class="td-row"><span class="td-lbl act">What happened:</span><span class="td-val">With API blocked, body has only 20 chars of text and no visible images/SVGs — looks like a white-screen failure.</span></div><div class="td-row"><span class="td-lbl">Bug ticket:</span><span class="td-val"><a href="#QA-18 -001">QA-18 -001</a> — see full details below</span></div>
   </div>
 </details>
   </div>
