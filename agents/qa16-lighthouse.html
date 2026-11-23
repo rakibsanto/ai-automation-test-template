@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>QA Bug Report — 2026-11-22 09:48:16</title>
+<title>QA Bug Report — 2026-11-23 10:44:42</title>
 <style>
 /* ── Reset & base ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -590,7 +590,7 @@ tr:hover td{background:#1c2333}
       </div>
     </div>
     <div class="hdr-meta">
-      <div><b>Date:</b> 2026-11-22 09:48:16</div>
+      <div><b>Date:</b> 2026-11-23 10:44:42</div>
       <div><b>Target:</b> </div>
       <div><b>AI Model:</b> unknown (local · no API key)</div>
       <div><b>Browser:</b> Chromium (headless)</div>
@@ -654,7 +654,7 @@ tr:hover td{background:#1c2333}
     <span class="badge MEDIUM">MEDIUM</span>
     <span class="badge P2">P2</span>
     <span class="cluster-count">3× affected</span>
-    <span class="recurrence-badge">13× consecutive runs</span>
+    <span class="recurrence-badge">14× consecutive runs</span>
   </div>
   <div class="cluster-title">Performance: TTFB over budget</div>
   <div class="cluster-tickets"><a href="#QA-16 -001" class="cluster-bug-link">QA-16 -001</a> <a href="#QA-16 -002" class="cluster-bug-link">QA-16 -002</a> <a href="#QA-16 -003" class="cluster-bug-link">QA-16 -003</a></div>
@@ -705,8 +705,8 @@ tr:hover td{background:#1c2333}
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa16_core_web_vitals</code></span>
-        <span>🕐 2026-11-22 09:48:16</span>
-        <span>⏱ 13.68s</span>
+        <span>🕐 2026-11-23 10:44:41</span>
+        <span>⏱ 13.40s</span>
         
         
       </div>
@@ -765,19 +765,19 @@ experience. Logs all values so the team sees actuals even on pass — verified a
   <span style="font-size:11px;color:var(--muted)">AssertionError / Traceback</span>
 </button>
 <div class="err-body" id="err-1">
-  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">E       DOM-ready 11162ms &gt; budget 3500ms
-E       Page-load 11162ms &gt; budget 6000ms
-E       LCP 11180ms &gt; budget 4000ms
-E   assert not ['TTFB 11153ms &gt; budget 1500ms', 'DOM-ready 11162ms &gt; budget 3500ms', 'Page-load 11162ms &gt; budget 6000ms', 'LCP 11180ms &gt; budget 4000ms']</strong>
+  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">E       DOM-ready 10884ms &gt; budget 3500ms
+E       Page-load 10885ms &gt; budget 6000ms
+E       LCP 10904ms &gt; budget 4000ms
+E   assert not ['TTFB 10875ms &gt; budget 1500ms', 'DOM-ready 10884ms &gt; budget 3500ms', 'Page-load 10885ms &gt; budget 6000ms', 'LCP 10904ms &gt; budget 4000ms']</strong>
 
 tests/test_qa_comprehensive.py:3072: in test_qa16_core_web_vitals
     assert not violations, (
 E   AssertionError: homepage_en: 4 Core Web Vitals violation(s):
-E       TTFB 11153ms &gt; budget 1500ms
-E       DOM-ready 11162ms &gt; budget 3500ms
-E       Page-load 11162ms &gt; budget 6000ms
-E       LCP 11180ms &gt; budget 4000ms
-E   assert not ['TTFB 11153ms &gt; budget 1500ms', 'DOM-ready 11162ms &gt; budget 3500ms', 'Page-load 11162ms &gt; budget 6000ms', 'LCP 11180ms &gt; budget 4000ms']</pre>
+E       TTFB 10875ms &gt; budget 1500ms
+E       DOM-ready 10884ms &gt; budget 3500ms
+E       Page-load 10885ms &gt; budget 6000ms
+E       LCP 10904ms &gt; budget 4000ms
+E   assert not ['TTFB 10875ms &gt; budget 1500ms', 'DOM-ready 10884ms &gt; budget 3500ms', 'Page-load 10885ms &gt; budget 6000ms', 'LCP 10904ms &gt; budget 4000ms']</pre>
 </div>
     
     <div style="margin-top:16px"></div>
@@ -802,8 +802,8 @@ E   assert not ['TTFB 11153ms &gt; budget 1500ms', 'DOM-ready 11162ms &gt; budge
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa16_core_web_vitals</code></span>
-        <span>🕐 2026-11-22 09:48:16</span>
-        <span>⏱ 13.64s</span>
+        <span>🕐 2026-11-23 10:44:41</span>
+        <span>⏱ 13.34s</span>
         
         
       </div>
@@ -862,19 +862,19 @@ experience. Logs all values so the team sees actuals even on pass — verified a
   <span style="font-size:11px;color:var(--muted)">AssertionError / Traceback</span>
 </button>
 <div class="err-body" id="err-2">
-  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">E       DOM-ready 11127ms &gt; budget 3500ms
-E       Page-load 11127ms &gt; budget 6000ms
-E       LCP 11144ms &gt; budget 4000ms
-E   assert not ['TTFB 11120ms &gt; budget 1500ms', 'DOM-ready 11127ms &gt; budget 3500ms', 'Page-load 11127ms &gt; budget 6000ms', 'LCP 11144ms &gt; budget 4000ms']</strong>
+  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">E       DOM-ready 10827ms &gt; budget 3500ms
+E       Page-load 10827ms &gt; budget 6000ms
+E       LCP 10844ms &gt; budget 4000ms
+E   assert not ['TTFB 10819ms &gt; budget 1500ms', 'DOM-ready 10827ms &gt; budget 3500ms', 'Page-load 10827ms &gt; budget 6000ms', 'LCP 10844ms &gt; budget 4000ms']</strong>
 
 tests/test_qa_comprehensive.py:3072: in test_qa16_core_web_vitals
     assert not violations, (
 E   AssertionError: find_tutors: 4 Core Web Vitals violation(s):
-E       TTFB 11120ms &gt; budget 1500ms
-E       DOM-ready 11127ms &gt; budget 3500ms
-E       Page-load 11127ms &gt; budget 6000ms
-E       LCP 11144ms &gt; budget 4000ms
-E   assert not ['TTFB 11120ms &gt; budget 1500ms', 'DOM-ready 11127ms &gt; budget 3500ms', 'Page-load 11127ms &gt; budget 6000ms', 'LCP 11144ms &gt; budget 4000ms']</pre>
+E       TTFB 10819ms &gt; budget 1500ms
+E       DOM-ready 10827ms &gt; budget 3500ms
+E       Page-load 10827ms &gt; budget 6000ms
+E       LCP 10844ms &gt; budget 4000ms
+E   assert not ['TTFB 10819ms &gt; budget 1500ms', 'DOM-ready 10827ms &gt; budget 3500ms', 'Page-load 10827ms &gt; budget 6000ms', 'LCP 10844ms &gt; budget 4000ms']</pre>
 </div>
     
     <div style="margin-top:16px"></div>
@@ -899,8 +899,8 @@ E   assert not ['TTFB 11120ms &gt; budget 1500ms', 'DOM-ready 11127ms &gt; budge
       <div class="bug-meta">
         <span>🔗 <a href="" target="_blank"></a></span>
         <span>🧪 <code>test_qa16_core_web_vitals</code></span>
-        <span>🕐 2026-11-22 09:48:16</span>
-        <span>⏱ 13.64s</span>
+        <span>🕐 2026-11-23 10:44:41</span>
+        <span>⏱ 13.34s</span>
         
         
       </div>
@@ -959,19 +959,19 @@ experience. Logs all values so the team sees actuals even on pass — verified a
   <span style="font-size:11px;color:var(--muted)">AssertionError / Traceback</span>
 </button>
 <div class="err-body" id="err-3">
-  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">E       DOM-ready 11131ms &gt; budget 3500ms
-E       Page-load 11131ms &gt; budget 6000ms
-E       LCP 11148ms &gt; budget 4000ms
-E   assert not ['TTFB 11122ms &gt; budget 1500ms', 'DOM-ready 11131ms &gt; budget 3500ms', 'Page-load 11131ms &gt; budget 6000ms', 'LCP 11148ms &gt; budget 4000ms']</strong>
+  <pre style="margin-top:8px"><strong style="color:var(--c-critical)">E       DOM-ready 10829ms &gt; budget 3500ms
+E       Page-load 10829ms &gt; budget 6000ms
+E       LCP 10844ms &gt; budget 4000ms
+E   assert not ['TTFB 10822ms &gt; budget 1500ms', 'DOM-ready 10829ms &gt; budget 3500ms', 'Page-load 10829ms &gt; budget 6000ms', 'LCP 10844ms &gt; budget 4000ms']</strong>
 
 tests/test_qa_comprehensive.py:3072: in test_qa16_core_web_vitals
     assert not violations, (
 E   AssertionError: become_tutor: 4 Core Web Vitals violation(s):
-E       TTFB 11122ms &gt; budget 1500ms
-E       DOM-ready 11131ms &gt; budget 3500ms
-E       Page-load 11131ms &gt; budget 6000ms
-E       LCP 11148ms &gt; budget 4000ms
-E   assert not ['TTFB 11122ms &gt; budget 1500ms', 'DOM-ready 11131ms &gt; budget 3500ms', 'Page-load 11131ms &gt; budget 6000ms', 'LCP 11148ms &gt; budget 4000ms']</pre>
+E       TTFB 10822ms &gt; budget 1500ms
+E       DOM-ready 10829ms &gt; budget 3500ms
+E       Page-load 10829ms &gt; budget 6000ms
+E       LCP 10844ms &gt; budget 4000ms
+E   assert not ['TTFB 10822ms &gt; budget 1500ms', 'DOM-ready 10829ms &gt; budget 3500ms', 'Page-load 10829ms &gt; budget 6000ms', 'LCP 10844ms &gt; budget 4000ms']</pre>
 </div>
     
     <div style="margin-top:16px"></div>
